@@ -1,7 +1,7 @@
 {
  "prices": {
   "ok": true,
-  "at": "2026-11-15T15:46:19+05:30",
+  "at": "2026-11-15T16:32:11+05:30",
   "note": "19/19 symbols"
  },
  "filings": {
@@ -29,9 +29,9 @@
   "at": "2026-11-15T15:50:19+05:30",
   "note": "INFY:4 KPITTECH:4 POLYCAB:4 TATAPOWER:4 DMART:4"
  },
- "research": {
-  "ok": false,
-  "at": "2026-11-15T16:31:42+05:30",
-  "note": "built none of INFY,KPITTECH,POLYCAB,TATAPOWER,DMART"
+ "backfill": {
+  "ok": true,
+  "at": "2026-11-15T16:34:04+05:30",
+  "note": "3004 filings fetched over 12 months"
  }
 }
