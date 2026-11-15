@@ -81,7 +81,7 @@ def resolve_models():
     def rank(n):  # newest first, stable before preview, plain alias before dated
         return (-_version(n), "preview" in n, "latest" in n, len(n))
 
-    _models = {k: sorted(v, key=rank)[:2] for k, v in fam.items()}
+    _models = {k: sorted(v, key=rank)[:3] for k, v in fam.items()}  # each model has its own free quota
     return _models
 
 

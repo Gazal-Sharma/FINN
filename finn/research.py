@@ -175,6 +175,28 @@ def parse_horizon(h):
     return None
 
 
+def horizon_end(h):
+    """(year, month) when a horizon ends, or None for 'long term' etc."""
+    hz = parse_horizon(h)
+    if not hz:
+        return None
+    kind, val = hz
+    if kind == "fy":
+        return (val, 3)
+    if kind == "q":
+        return (int(val[-4:]), MONTHS[val[:3]])
+    fy, half = val
+    return (fy - 1, 9) if half == 1 else (fy, 3)
+
+
+def horizon_passed(h, today=None):
+    end = horizon_end(h)
+    if not end:
+        return False
+    today = today or now_ist().date()
+    return (today.year, today.month) > end
+
+
 def _period_done(labels, fin):
     return all(l in fin.qp for l in labels)
 
@@ -199,6 +221,14 @@ def evaluate(thread_items, fin, today=None):
         res["moved"] = "raised" if b > a else ("lowered" if b < a else "changed")
 
     measurable = metric in ("revenue_growth", "revenue", "margin", "profit_growth") and lo is not None and hz
+    if measurable and metric in ("revenue_growth", "profit_growth", "margin") and unit not in ("%", ""):
+        measurable = False
+        res["note"] = "Guided relative to the market or in other units; can't check from company totals"
+    if measurable and metric == "revenue":
+        annual = [x for x in fin.aser("Sales", "Revenue") if x]
+        if unit.lower() not in ("cr", "crore", "₹ cr", "rs cr", "inr") or not annual or lo < 0.5 * annual[-1]:
+            measurable = False
+            res["note"] = "Segment or product-level target; segment numbers aren't in the reported tables"
     if fin.lender and metric == "margin" and latest.get("margin_type") != "pat":
         measurable = False
         res["note"] = "Lender margins (NIM) aren't in the tables we use"
@@ -257,15 +287,18 @@ def evaluate(thread_items, fin, today=None):
         tol = lo * 0.02
         res["actual"] = {"value": round(actual), "unit": "cr", "label": "Revenue", "period": period_label}
 
+    if approx and metric in ("revenue_growth", "profit_growth"):
+        # Constant-currency guidance vs INR reported growth: currency moves can swing this by
+        # several points, so show the number as context but don't give a verdict.
+        res["verdict"] = "unverifiable"
+        res["note"] = (f"Guided in constant currency; reported INR growth is {actual}% ({period_label}), "
+                       "which includes currency moves, so no verdict")
+        return res
     ok = actual >= lo - tol
-    if metric == "margin" and hi is not None and lo == hi:
-        ok = actual >= lo - tol
     if complete:
         res["verdict"] = "kept" if ok else "missed"
     else:
         res["verdict"] = "on_track" if ok else "off_track"
-    if approx:
-        res["note"] = "Guided in constant currency / USD; checked against INR reported numbers, so approximate"
     return res
 
 
@@ -329,11 +362,25 @@ def synthesise(ticker, threads, snap):
 
 
 def template_synthesis(threads):
-    kept = [t for t in threads if t["verdict"] == "kept"]
-    missed = [t for t in threads if t["verdict"] in ("missed", "off_track")]
-    pts = [{"text": f"{t['title']}: {t['verdict'].replace('_', ' ')}.", "refs": [t["id"]]} for t in (missed + kept)[:4]]
-    return {"headline": f"{len(kept)} promises kept, {len(missed)} missed or off track.", "points": pts,
-            "bull": [], "bear": [], "fallback": True}
+    """Plain, code-written summary used when no model is available."""
+    c = {k: [t for t in threads if t["verdict"] == k] for k in ("kept", "missed", "on_track", "off_track", "dropped", "unverifiable", "pending")}
+    moved = [t for t in threads if t.get("moved")]
+    parts = [f"{len(threads)} verified promises"]
+    for k, label in (("kept", "kept"), ("missed", "missed"), ("on_track", "on track"), ("off_track", "off track"),
+                     ("dropped", "quietly dropped"), ("unverifiable", "not checkable from reported numbers")):
+        if c[k]:
+            parts.append(f"{len(c[k])} {label}")
+    pts = []
+    for t in (c["missed"] + c["off_track"] + c["dropped"] + moved + c["kept"] + c["on_track"])[:4]:
+        a = t.get("actual")
+        txt = f"{t['title']}: {t['verdict'].replace('_', ' ')}"
+        if t.get("moved"):
+            txt += f", goalposts {t['moved']}"
+        if a:
+            txt += f" ({a['label']} {a['value']}{'%' if a['unit'] == '%' else ' cr'}, {a['period']})"
+        if t not in [p for p in []]:
+            pts.append({"text": txt + ".", "refs": [t["id"]]})
+    return {"headline": ", ".join(parts) + ".", "points": pts, "bull": [], "bear": [], "fallback": True}
 
 
 # -------------------------------------------------------------------- build
@@ -379,9 +426,18 @@ def build(ticker, offline_raw=False):
         its = sorted((items[i] for i in g["items"]), key=lambda it: it["call_idx"])
         ev = evaluate(its, fin)
         last_idx = its[-1]["call_idx"]
-        if len(calls) >= 3 and last_idx <= len(calls) - 3 and ev["verdict"] in ("pending", "unverifiable", "on_track", "off_track"):
-            ev["verdict"] = "dropped"
-            ev["note"] = f"Last mentioned {call_labels[last_idx]}; not repeated on the {len(calls) - 1 - last_idx} calls since"
+        silent = len(calls) >= 3 and last_idx <= len(calls) - 3
+        passed = horizon_passed(its[-1].get("horizon"))
+        since = f"Last mentioned {call_labels[last_idx]}; not repeated on the {len(calls) - 1 - last_idx} calls since"
+        if silent and not passed and ev["verdict"] in ("pending", "unverifiable"):
+            ev["verdict"] = "dropped"  # still in the future, but management stopped talking about it
+            ev["note"] = since
+        elif silent and ev["verdict"] in ("on_track", "off_track"):
+            ev["note"] = (ev["note"] + ". " if ev["note"] else "") + since
+        elif passed and ev["verdict"] in ("pending", "unverifiable"):
+            ev["verdict"] = "unverifiable"
+            ev["note"] = f"Came due ({its[-1].get('horizon')}); the reported numbers can't confirm it" + (
+                f". {since}" if silent else "")
         threads.append({
             "id": f"T{n}", "title": g["title"] or its[-1].get("topic", ""), "metric": its[-1].get("metric"),
             "horizon": its[-1].get("horizon"), **ev,
