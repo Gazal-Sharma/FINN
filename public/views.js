@@ -31,7 +31,7 @@ export function todayEvents(state) {
     for (const w of ["session", "7d"]) {
       const alt = pick(w);
       if (alt.some((e) => e.tier !== "hidden")) {
-        note = `Nothing material in the last 24 hours${new Date().getDay() % 6 === 0 ? " (markets are shut today)" : ""}. Showing ${windowLabel(state, w).replace(/^L/, "l")} instead.`;
+        note = `Nothing material in the last 24 hours${new Date().getDay() % 6 === 0 ? " (markets are shut today)" : ""}. Showing ${windowLabel(state, w).replace(/^./, (c) => c.toLowerCase())} instead.`;
         win = w; evs = alt; break;
       }
     }
@@ -54,7 +54,7 @@ export function today(state, ctx) {
 
   return html`
   <div class="strip">
-    <div class="lede">${windowLabel(state, win)}<br><span class="small muted">${nFilings} filings · <b style="color:var(--act)">${act.length} need you</b> · ${know.length} worth knowing</span></div>
+    <div class="lede">${windowLabel(state, win)}<br><span class="small muted">${nFilings} filings · <b style="color:${act.length ? "var(--act)" : "inherit"}">${act.length} need you</b> · ${know.length} worth knowing</span></div>
     <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
   </div>
   <div class="chips">${["24h", "session", "7d", "30d"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${w === "session" ? "Last session" : w}</button>`)}</div>
