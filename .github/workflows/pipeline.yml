@@ -15,6 +15,12 @@ on:
       days:
         description: "Filings look-back in days"
         default: "30"
+      only_models:
+        description: "Restrict AI to these model families (e.g. groq to test the fallback)"
+        default: ""
+      force:
+        description: "Rebuild research even if unchanged (true/false)"
+        default: "false"
   schedule:
     - cron: "45 11 * * 1-5"   # 17:15 IST, after market close
     - cron: "15 3 * * *"      # 08:45 IST daily, overnight filings
@@ -30,6 +36,7 @@ env:
   PYTHONUNBUFFERED: "1"          # print progress live in the Actions log
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
   GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+  FINN_ONLY_FAMILIES: ${{ github.event.inputs.only_models }}
 
 jobs:
   run:
@@ -76,7 +83,7 @@ jobs:
       - name: 3 · Research (promise ledgers)
         if: steps.s.outputs.research == 'true'
         continue-on-error: true
-        run: python pipeline/run.py --stage research --research "${{ github.event.inputs.research }}"
+        run: python pipeline/run.py --stage research --research "${{ github.event.inputs.research }}" ${{ github.event.inputs.force == 'true' && '--force' || '' }}
 
       - name: Commit research
         if: always()

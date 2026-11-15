@@ -265,8 +265,12 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
 
     errors = []
     models = resolve_models()
-    chain = [m for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])]
-    fam_of = {m: fam for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])}
+    fams = config.TASK_CHAINS[task]
+    only = [f.strip() for f in os.environ.get("FINN_ONLY_FAMILIES", "").split(",") if f.strip()]
+    if only:  # e.g. FINN_ONLY_FAMILIES=groq to test the fallback on its own
+        fams = [f for f in fams if f in only] or fams
+    chain = [m for fam in fams for m in models.get(fam, [])]
+    fam_of = {m: fam for fam in fams for m in models.get(fam, [])}
     tried_ok = set()          # models that answered but failed validation: don't ask them again
     waited = 0.0
     while True:

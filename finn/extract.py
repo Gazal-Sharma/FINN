@@ -179,7 +179,7 @@ def guidance_from_transcript(text, call_label, ticker=""):
     except llm.LLMError as e:
         # Gemini out of quota (or every model refused the whole transcript): read it in
         # ~5k-token pieces with the fallback provider and merge. Checks below are identical.
-        if not llm.resolve_models().get("groq"):
+        if not llm.resolve_models().get("groq") or isinstance(e, llm.QuotaExhausted) and "groq" in str(e):
             raise
         print(f"    extract {ticker} {call_label}: falling back to chunked reading ({str(e)[:80]})", flush=True)
         o = {"items": []}
