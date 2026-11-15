@@ -37,8 +37,14 @@ export function windowLabel(state, win) {
   return { "24h": "Last 24 hours", "7d": "Last 7 days", "30d": "Last 30 days" }[win];
 }
 
+export function followedPrices(state) {
+  const p = state.prices;
+  if (!p || !state.isFollowed) return p;
+  return { ...p, t: Object.fromEntries(Object.entries(p.t).filter(([t]) => state.isFollowed(t))) };
+}
+
 export function todayEvents(state) {
-  const all = state.events || [];
+  const all = (state.events || []).filter((e) => !state.isFollowed || state.isFollowed(e.ticker));
   let win = state.viewWindow || state.settings.window, note = "";
   const pick = (w) => all.filter((e) => { const t = new Date(e.ts).getTime(); return t >= windowStart(state, w) && t <= windowEnd(state, w); });
   let evs = pick(win);
@@ -64,7 +70,7 @@ export function today(state, ctx) {
   const hidByCat = {};
   hid.forEach((e) => (hidByCat[e.category] = (hidByCat[e.category] || 0) + e.filings.length));
   const hidFilings = Object.values(hidByCat).reduce((a, b) => a + b, 0);
-  const moves = state.prices ? scanAlerts(state.prices, state.settings, state.prices.dates.length - 1) : [];
+  const moves = state.prices ? scanAlerts(followedPrices(state), state.settings, state.prices.dates.length - 1) : [];
   const firstOld = know.findIndex((e) => !ctx.isNew(e));
 
   const [lo, hi] = dataRange(state);
@@ -99,7 +105,7 @@ export function today(state, ctx) {
 }
 
 function pulse(state) {
-  const p = state.prices;
+  const p = followedPrices(state);
   if (!p || !p.dates.length) return "";
   const i = p.dates.length - 1;
   const nr = p.nifty[i] && p.nifty[i - 1] ? (p.nifty[i] / p.nifty[i - 1] - 1) * 100 : 0;
@@ -114,7 +120,7 @@ function pulse(state) {
 
 // ------------------------------------------------------------------ Alerts
 export function alerts(state) {
-  const s = state.settings, p = state.prices;
+  const s = state.settings, p = followedPrices(state);
   if (!p) return html`<div class="skel"></div>`;
   const n = p.dates.length, from = Math.max(21, n - 60);
   const all = scanAlerts(p, s, from);
@@ -126,7 +132,7 @@ export function alerts(state) {
   const top = Object.entries(byT).sort((a, b) => b[1] - a[1]).slice(0, 3);
   const perWeek = (all.length / days) * 5;
   const recent = all.filter((a) => a.i >= n - 10).sort((a, b) => b.i - a.i || Math.abs(b.ret) - Math.abs(a.ret));
-  const fil = (state.events || []).filter((e) => e.tier !== "hidden" && s.cats.includes(e.category) && new Date(e.ts) > Date.now() - 7 * 864e5);
+  const fil = (state.events || []).filter((e) => state.isFollowed(e.ticker) && e.tier !== "hidden" && s.cats.includes(e.category) && new Date(e.ts) > Date.now() - 7 * 864e5);
   const maxDay = Math.max(1, ...perDay.map((d) => d.p + d.v));
 
   return html`
