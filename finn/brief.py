@@ -155,7 +155,15 @@ def compose(prefs):
     know = [e for e in recent if e["tier"] == "know"]
     alerts = _alerts(prices, followed, prefs.get("settings") or prefs)
     changed, steady = _watch_changes(prefs.get("watched"))
-    nm = lambda t: names.get(t, t)  # noqa: E731
+    nm = lambda t: re.sub(r"\s+(Ltd\.?|Limited)$", "", names.get(t, t))  # noqa: E731
+    LEGAL = re.compile(r"regulation|schedule|pursuant|read with|disclosure under|intimation", re.I)
+
+    def plain(e):  # a filing's own subject is often legal boilerplate; say what it is instead
+        one = (e.get("oneliner") or e.get("title") or "").strip()
+        if not one or LEGAL.search(one) or len(one) > 140:
+            w = (e.get("why") or [e.get("category", "").replace("_", " ")])[0]
+            return w[:1].upper() + w[1:]
+        return one
     pct = lambda v: f"{'+' if v > 0 else '−' if v < 0 else ''}{abs(v):.1f}%"  # noqa: E731
 
     lines = []  # (heading, [items]) -> rendered as both html and text
@@ -171,7 +179,7 @@ def compose(prefs):
                 p = c["people"][0]
                 txt = f"{p['name']}, {p.get('role') or ''}: {p.get('change') or 'change'}"
             else:
-                txt = e.get("oneliner") or e.get("title")
+                txt = plain(e)
             items.append((nm(e["ticker"]), txt))
         lines.append(("Needs you", items))
     if changed:
@@ -180,7 +188,7 @@ def compose(prefs):
         lines.append(("Your alerts, last session", [(nm(a["t"]), ", ".join(filter(None, [f"moved {pct(a['ret'])}" if a["price"] else "",
                                                                                       f"{a['volx']:.1f}× normal volume" if a["vol"] else ""]))) for a in alerts]))
     if know:
-        lines.append(("Worth knowing", [(nm(e["ticker"]), (e.get("oneliner") or e.get("title") or "")[:160]) for e in know[:5]]))
+        lines.append(("Worth knowing", [(nm(e["ticker"]), plain(e)) for e in know[:5]]))
     if steady and not changed:
         lines.append(("Promises you watch", [(nm(w["t"]), f"{w['title']}: still {VLABEL.get(w['now'], w['now'])}") for w in steady[:5]]))
 
@@ -200,8 +208,9 @@ def compose(prefs):
             f'<div style="font:700 26px Arial,sans-serif;color:#14213D">FINN</div>'
             f'<div style="border-top:2px solid #14213D;border-bottom:1px solid #14213D;height:3px;margin:10px 0 16px"></div>'
             f'<div style="font:600 18px Arial,sans-serif;color:#14213D">{esc(day)}</div>'
-            + (f'<p style="font:16px/1.5 Arial,sans-serif;color:#22314F">Nothing needs you since the last session. '
-               f'{len(recent)} filing{"s" if len(recent) != 1 else ""} from your stocks, all routine.</p>' if calm else "")
+            + (f'<p style="font:16px/1.5 Arial,sans-serif;color:#22314F">Nothing needs you since the last session.'
+               + (f' {len(recent)} filing{"s" if len(recent) != 1 else ""} from your stocks, all routine.' if not know else
+                  f' {len(know)} thing{"s" if len(know) != 1 else ""} worth knowing below.') + '</p>' if calm else "")
             + sec_html
             + (f'<p style="font:13px/1.5 Arial,sans-serif;color:#66717F;margin-top:16px">Filings and prices for {esc(", ".join(pending))} start with the next nightly run.</p>' if pending else "")
             + f'<p style="margin-top:22px"><a href="{config.APP_URL}" style="font:600 15px Arial,sans-serif;color:#2B4C7E">Open FINN ›</a></p>'
