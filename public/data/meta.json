@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T19:26:51+05:30",
+ "generated_at": "2026-11-15T19:30:54+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
@@ -16,8 +16,8 @@
   },
   "docs": {
    "ok": true,
-   "at": "2026-11-15T19:26:31+05:30",
-   "note": "21/24 PDFs extracted (24 wanted)"
+   "at": "2026-11-15T19:30:47+05:30",
+   "note": "26/30 PDFs extracted (30 wanted)"
   },
   "screener": {
    "ok": true,
