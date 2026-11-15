@@ -44,8 +44,17 @@ FINN is a phone-first app with one point of view: **an investor's scarce resourc
 - **Real phone push notifications.** That would need VAPID keys, a server and an installed app on iOS. Alerts live in an in-app inbox.
 - **News and broker notes,** per the brief.
 
+## Why there's no login (yet)
+
+FINN shows "my" portfolio, but everything in it comes from public filings, and a reviewer should be able to open the link and see the app straight away. Settings (theme, voice, text size, default window) are saved on the device. Accounts are the first next step: saved portfolios, settings and alert rules per user. That's a small database and a hosted sign-in, and it's deliberately out of scope for a prototype people open cold.
+
+## Research that feels instant
+
+Dossiers for the whole portfolio plus the demo set are pre-built. The evening job only rebuilds a company when a **new earnings-call transcript** appears (the feed already detects those), so it costs almost nothing. For any other NSE symbol, the page shows the reported numbers in ~2 seconds, then the promise ledger fills in. Transcripts are read four at a time. Each Gemini model is paced below its free-tier rate, a rate limit means *wait and retry*, and a used-up daily quota stops cleanly so the next run carries on.
+
 ## Where I'd take it next
 
+- Accounts: saved portfolios, settings and alert rules per user.
 - Use NSE's XBRL results files for the results card, so it's ready the minute results are filed.
 - Calibrate rule weights from 12 months of per-category market reactions.
 - Per-stock alert overrides.
