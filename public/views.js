@@ -31,7 +31,7 @@ export function todayEvents(state) {
     for (const w of ["session", "7d"]) {
       const alt = pick(w);
       if (alt.some((e) => e.tier !== "hidden")) {
-        note = `Nothing material in the last 24 hours${new Date().getDay() % 6 === 0 ? " (markets are shut today)" : ""}. Showing ${windowLabel(state, w).toLowerCase()} instead.`;
+        note = `Nothing material in the last 24 hours${new Date().getDay() % 6 === 0 ? " (markets are shut today)" : ""}. Showing ${windowLabel(state, w).replace(/^L/, "l")} instead.`;
         win = w; evs = alt; break;
       }
     }
@@ -182,6 +182,18 @@ export function recentFor(t, state) {
     <div class="tiny muted">${fmtWhen(e.ts)}</div><div class="l">${e.card?.type === "results" ? `Results · ${e.card.period}` : e.oneliner || e.title} ${reactionChip(e.reaction)}</div></button>`)}`;
 }
 
+function credLine(cr) {
+  const bits = [];
+  if (cr.resolved) bits.push(html`Kept <b>${cr.kept}</b> of ${cr.resolved} that came due`);
+  if (cr.missed) bits.push(html`<span class="down">${cr.missed} missed</span>`);
+  if (cr.on_track) bits.push(html`<span class="up">${cr.on_track} on track</span>`);
+  if (cr.off_track) bits.push(html`<span class="down">${cr.off_track} off track</span>`);
+  if (cr.dropped) bits.push(html`<span class="muted">${cr.dropped} quietly dropped</span>`);
+  if (cr.moved) bits.push(html`<span class="warn">goalposts moved ${cr.moved === 1 ? "once" : `${cr.moved}×`}</span>`);
+  if (cr.unverifiable) bits.push(html`<span class="muted">${cr.unverifiable} not checkable</span>`);
+  return bits.length ? html`${bits.map((b, i) => html`${i ? " · " : ""}${b}`)}` : "No measurable promises in these calls.";
+}
+
 export function dossier(d, state) {
   const cr = d.credibility, st = d.stats, syn = d.synthesis, nb = d.numbers;
   const threads = d.threads || [];
@@ -195,7 +207,7 @@ export function dossier(d, state) {
 
   <div class="sec"><h2>Promised vs delivered</h2><span class="tiny muted">last ${d.calls.length} calls</span></div>
   ${d.no_transcripts ? html`<div class="note">No earnings-call transcripts found for ${d.ticker} in the last year. Without management's own words FINN won't guess what they promised. The numbers below are still real.</div>` : html`
-   <div class="cred">${cr.line}${cr.missed + cr.off_track ? html`, <span class="down">${cr.missed} missed</span>` : ""}${cr.moved ? html`, <span class="warn">goalposts moved ${cr.moved}×</span>` : ""}${cr.dropped ? html`, <span class="muted">${cr.dropped} quietly dropped</span>` : ""}.</div>
+   <div class="cred">${credLine(cr)}</div>
    <span class="verified">✓ ${st.verified} quotes verified in source · ${st.dropped_quote + st.dropped_number} dropped</span>
    ${syn ? html`<p class="serif" style="font-size:17px;margin:12px 0 4px">${syn.headline}</p>
      <div class="pts">${syn.points.map((p) => html`<p>${p.text}${p.refs.map((r) => html`<a class="ref" href="#/research/${d.ticker}/${r}">${r}</a>`)}</p>`)}</div>` : ""}

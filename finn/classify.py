@@ -39,6 +39,7 @@ RULES = [
     ("investor_presentation", "results", "know", "Investor / analyst presentation", r"investor presentation|analyst presentation|shareholders'? letter"),
 
     # --- management change
+    ("mgmt_reappoint", "management_change", "know", "Re-appointment (continuity)", r"re-?appoint|continuation of|reappointment"),
     ("mgmt_top_exit", "management_change", "act", "Top executive leaving",
      TOP_ROLES + r".{0,120}(resign|cessation|step(s|ping)? down|retire)|(resign|cessation|step(s|ping)? down|retire).{0,120}" + TOP_ROLES),
     ("mgmt_top_join", "management_change", "act", "New top executive",

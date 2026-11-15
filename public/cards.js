@@ -27,6 +27,8 @@ function mgmtBody(c) {
   return html`${ppl}<div class="tiny muted" style="margin-top:6px">Profile from ${c.source}.</div>`;
 }
 
+const clip = (t, n) => (t && t.length > n ? t.slice(0, n).replace(/\s+\S*$/, "") + "…" : t);
+
 export function eventCard(e, ctx) {
   const c = e.card;
   return html`<article class="card act">
@@ -49,7 +51,7 @@ export function eventCard(e, ctx) {
 export function knowRow(e, ctx) {
   return html`<button class="row" data-act="event" data-id="${e.id}">
     <div><div class="t">${ctx.nameOf(e.ticker)}</div><div class="tiny muted">${fmtWhen(e.ts)}</div></div>
-    <div><div class="l">${ctx.isNew(e) ? html`<span class="pill new">New</span> ` : ""}${e.card?.type === "results" ? `Results · ${e.card.period}` : e.oneliner || e.title}</div>
+    <div><div class="l">${ctx.isNew(e) ? html`<span class="pill new">New</span> ` : ""}${e.card?.type === "results" ? `Results · ${e.card.period}` : clip(e.oneliner || e.title, 150)}</div>
     <div class="w">${e.why.join(" · ")}</div></div>
   </button>`;
 }

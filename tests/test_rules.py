@@ -20,6 +20,7 @@ CASES = [
     (DIR, "Resignation of Mr. A as Chief Financial Officer with immediate effect", "management_change", "act"),
     (DIR, "Appointment of Mr. B as Managing Director and CEO", "management_change", "act"),
     (DIR, "Appointment of Ms. C as Independent Director", "management_change", "know"),
+    ("General Updates", "Approval from RBI for re-appointment of Mr. X as Whole-time Director", "management_change", "know"),
     (DIR, "Change in Company Secretary and Compliance Officer", "management_change", "know"),
     (DIR, "Re-appointment of Statutory Auditors", "unclassified", "hidden"),
     ("Acquisition", "acquisition of 100% stake in XYZ GmbH", "M&A", "act"),
