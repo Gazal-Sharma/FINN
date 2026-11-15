@@ -197,6 +197,7 @@ def compose(prefs):
     subject = f"FINN · {day}: " + (f"{n_act} thing{'s' if n_act != 1 else ''} need{'' if n_act != 1 else 's'} you" if n_act else
                                    ("a promise you watch changed" if changed else "nothing needs you"))
     calm = not act and not changed and not alerts
+    n_follow = len(followed) if prefs.get("followed") else 0  # 0 = all holdings
     pending = [t for t in prefs.get("extra", []) if t not in prices.get("t", {})]
 
     esc = html.escape
@@ -208,6 +209,7 @@ def compose(prefs):
             f'<div style="font:700 26px Arial,sans-serif;color:#14213D">FINN</div>'
             f'<div style="border-top:2px solid #14213D;border-bottom:1px solid #14213D;height:3px;margin:10px 0 16px"></div>'
             f'<div style="font:600 18px Arial,sans-serif;color:#14213D">{esc(day)}</div>'
+            + (f'<div style="font:13px Arial,sans-serif;color:#46546E;margin-top:4px">For the {n_follow} stock{"s" if n_follow != 1 else ""} you follow</div>' if n_follow else "")
             + (f'<p style="font:16px/1.5 Arial,sans-serif;color:#22314F">Nothing needs you since the last session.'
                + (f' {len(recent)} filing{"s" if len(recent) != 1 else ""} from your stocks, all routine.' if not know else
                   f' {len(know)} thing{"s" if len(know) != 1 else ""} worth knowing below.') + '</p>' if calm else "")
@@ -216,7 +218,7 @@ def compose(prefs):
             + f'<p style="margin-top:22px"><a href="{config.APP_URL}" style="font:600 15px Arial,sans-serif;color:#2B4C7E">Open FINN ›</a></p>'
             f'<p style="font:12px/1.5 Arial,sans-serif;color:#66717F;margin-top:18px">You get this because you turned on the morning brief in FINN → Settings. '
             f'Turn it off there any time. FINN organises public filings; it doesn\'t tell you what to buy or sell.</p></div></div>')
-    text = f"FINN · {day}\n\n" + ("Nothing needs you since the last session.\n" if calm else "") + "\n".join(
+    text = f"FINN · {day}\n" + (f"For the {n_follow} stocks you follow\n" if n_follow else "") + "\n" + ("Nothing needs you since the last session.\n" if calm else "") + "\n".join(
         f"\n{h.upper()}\n" + "\n".join(f"- {a}: {b}" for a, b in items) for h, items in lines) + f"\n\nOpen FINN: {config.APP_URL}\n"
     return subject, body, text
 

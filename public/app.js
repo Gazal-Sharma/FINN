@@ -124,7 +124,7 @@ function render() {
   else if (r.tab === "learn") body = learn(state);
   else body = V.today(state, ctx);
   const d = new Date();
-  const nAct = (state.events || []).filter((e) => e.tier === "act" && ctx.isNew(e)).length;
+  const nAct = (state.events || []).filter((e) => e.tier === "act" && ctx.isNew(e) && state.isFollowed(e.ticker)).length;
   $("#app").innerHTML = html`
     <header class="mast"><h1>FINN</h1>
       <div class="mast-actions"><button class="gear" data-act="ask" aria-label="Ask about anything on this screen"><span class="qmark">?</span></button>
@@ -148,6 +148,7 @@ function renderSheet() {
   if (!el) { el = document.createElement("div"); el.id = "sheet"; document.body.appendChild(el); }
   const e = [...(state.events || []), ...(state.archive || [])].find((x) => x.id === state.sheet);
   const body = state.sheet === "ranking" ? rankingSheet(state.calibration) : state.sheet === "settings" ? settingsSheet() : e ? eventSheet(e, ctx) : null;
+  if (!body) { state.sheet = null; el.remove(); document.body.style.overflow = ""; return; }
   el.innerHTML = body ? html`<div class="scrim" data-act="closeSheet"><div class="sheet" data-stop="1"><div class="grab"></div>
     <button class="close" data-act="closeSheet">Close</button>${body}</div></div>`.toString() : "";
   document.body.style.overflow = "hidden";
@@ -358,7 +359,8 @@ function briefScript() {
     const legal = /regulation|schedule|pursuant|read with|disclosure under|intimation/i.test(one);
     return !one || legal || one.length > 140 ? lc(e.why[0] || e.category.replace("_", " ")) : one.split(/(?<=[a-z])\. /)[0];
   };
-  const lines = [`${V.windowLabel(state, win)}. ${act.length ? `${act.length === 1 ? "One thing needs" : `${act.length} things need`} your attention.` : "Nothing needs your attention."}`];
+  const nf = V.nFollow(state);
+  const lines = [`${V.windowLabel(state, win)}${nf ? `, for the ${nf} stock${nf === 1 ? "" : "s"} you follow` : ""}. ${act.length ? `${act.length === 1 ? "One thing needs" : `${act.length} things need`} your attention.` : "Nothing needs your attention."}`];
   for (const e of act.slice(0, 5)) {
     const c = e.card;
     if (c?.type === "results") {

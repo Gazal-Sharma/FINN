@@ -47,6 +47,15 @@ export function windowLabel(state, win) {
   return { "24h": "Last 24 hours", "7d": "Last 7 days", "30d": "Last 30 days" }[win];
 }
 
+// How many stocks the person follows when they've narrowed the list (0 = all of them).
+export const nFollow = (state) => (state.followed?.length ? state.followed.length + (state.extra?.length || 0) : 0);
+
+function followNote(state) {
+  const n = nFollow(state);
+  if (!n) return "";
+  return html`<div class="tiny" style="margin-top:4px;color:var(--ink-2)">Showing the ${n} stock${n === 1 ? "" : "s"} you follow · <button style="color:var(--link)" data-act="followAll">Show all ${(state.meta?.portfolio?.length || 18) + (state.extra?.length || 0)}</button></div>`;
+}
+
 export function followedPrices(state) {
   const p = state.prices;
   if (!p || !state.isFollowed) return p;
@@ -88,7 +97,8 @@ export function today(state, ctx) {
   return html`
   <div class="strip">
     <div class="lede">${windowLabel(state, win)}
-      <div class="counts">${act.length ? html`<mark>${act.length} need${act.length === 1 ? "s" : ""} you</mark>` : html`<b>Nothing needs you</b>`} · ${know.length} worth knowing</div></div>
+      <div class="counts">${act.length ? html`<mark>${act.length} need${act.length === 1 ? "s" : ""} you</mark>` : html`<b>Nothing needs you</b>`} · ${know.length} worth knowing</div>
+      ${followNote(state)}</div>
     <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
   </div>
   <div class="chips">${["24h", "session", "7d", "30d", "custom"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${{ session: "Last session", custom: "Custom" }[w] || w}</button>`)}</div>
@@ -107,7 +117,7 @@ export function today(state, ctx) {
      <b>Unusual moves, ${fmtDay(state.prices.dates.at(-1))}:</b> ${moves.slice(0, 4).map((m, i) => html`${i ? " · " : ""}${m.t} ${m.price ? fmtPct(m.ret) : ""}${m.vol ? ` ${m.volx.toFixed(1)}× vol` : ""}`)}${moves.length > 4 ? ` +${moves.length - 4} more` : ""} ›</a>` : ""}
 
   ${!act.length && !know.length ? html`<div class="allclear"><div class="big">Nothing needs you.</div>
-     <p class="small muted">${hidFilings} routine filing${hidFilings === 1 ? "" : "s"} filed and hidden. FINN will tell you when something matters.</p></div>` : ""}
+     <p class="small muted">${hidFilings ? `${hidFilings} routine filing${hidFilings === 1 ? "" : "s"} filed and hidden.` : `No filings from ${nFollow(state) ? `your ${nFollow(state)} stock${nFollow(state) === 1 ? "" : "s"}` : "your stocks"} in this window.`} FINN will tell you when something matters.</p></div>` : ""}
 
   ${act.length ? html`<div class="sec"><h2 class="act">Act</h2></div>${act.map((e) => eventCard(e, ctx))}` : ""}
   ${know.length ? html`<div class="sec"><h2>Know</h2></div>
@@ -131,7 +141,7 @@ function watchedSection(state) {
     <div class="ruled">${w.map((x) => html`<a class="row" href="#/research/${x.t}/${x.id || ""}" data-act="seenWatch" data-k="${x.key}" style="text-decoration:none;color:inherit">
       <div><div class="t">${state.nameOf(x.t)}</div></div>
       <div><div class="l">${x.title}</div>
-        <div class="w">${x.changed ? html`<mark>${VL[x.was] || x.was} → ${VL[x.now] || x.now}</mark>` : html`${VL[x.now] || x.now || "Loading…"}`}${x.actual ? ` · ${x.actual.label} ${x.actual.unit === "%" ? `${(+x.actual.value).toFixed(1)}%` : `₹${x.actual.value} cr`}` : ""}</div></div></a>`)}</div>`;
+        <div class="w">${x.changed ? html`<mark>${VL[x.was] || x.was} → ${VL[x.now] || x.now}</mark>` : html`${VL[x.now] || x.now || "Open to check"}`}${x.actual ? ` · ${x.actual.label} ${x.actual.unit === "%" ? `${(+x.actual.value).toFixed(1)}%` : `₹${x.actual.value} cr`}` : ""}</div></div></a>`)}</div>`;
 }
 
 function pendingNote(state) {
