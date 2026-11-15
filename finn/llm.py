@@ -127,6 +127,7 @@ def _call(model, system, prompt, max_out):
             delay = min(int(m.group(1)) if m else 8, 30)
             if r.status_code == 429 and delay > 25:
                 break  # daily quota exhausted -> next model in chain
+            print(f"    llm {model}: {r.status_code}, waiting {delay}s", flush=True)
             time.sleep(delay)
             continue
         if r.status_code != 200:
@@ -171,12 +172,16 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
     for family in config.TASK_CHAINS[task]:
         for model in models.get(family, []):
             try:
+                t0 = time.time()
                 text, usage = _call(model, system, prompt, max_out)
+                print(f"    llm {task} {model} {time.time() - t0:.1f}s in={usage.get('promptTokenCount', 0)} "
+                      f"out={usage.get('candidatesTokenCount', 0)}", flush=True)
                 obj = parse_json(text)
                 if validate:
                     obj = validate(obj)
             except (LLMError, ValueError, json.JSONDecodeError, requests.RequestException) as e:
                 errors.append(f"{model}: {str(e)[:160]}")
+                print(f"    llm {task} {model} failed: {str(e)[:120]}", flush=True)
                 continue
             tin = usage.get("promptTokenCount", 0)
             tout = usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)

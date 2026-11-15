@@ -4,6 +4,7 @@ No network except LLM calls (all cached). Safe to re-run any time.
 """
 import os
 import re
+import time
 from datetime import timedelta
 from pathlib import Path
 
@@ -173,8 +174,13 @@ def build_all(args=None):
         r = e["reaction"]
         if r.get("status") == "ok" and e["tier"] == "hidden" and abs(r["abn"]) >= 4:
             e["undergraded"] = True  # FINN hid it but the market moved: say so
-        if e["tier"] == "hidden":
-            continue
+    write_meta(events, sessions)
+    _write_events(events)  # usable feed now; cards and one-liners are added below
+    todo = [e for e in events if e["tier"] != "hidden"]
+    print(f"[build] feed written: {len(events)} events; enriching {len(todo)} Act/Know events", flush=True)
+    t0 = time.time()
+    for n, e in enumerate(todo, 1):
+        print(f"[build] enrich {n}/{len(todo)} {e['ticker']} {e['category']} ({time.time() - t0:.0f}s)", flush=True)
         if e["category"] == "results" and e["rule"] == "results_outcome":
             e["card"] = screener_results(e["ticker"], e["session"])
             if e["card"] is None and use_ai:
@@ -190,8 +196,17 @@ def build_all(args=None):
             except Exception as ex:
                 print("one-liner failed", e["id"], ex)
 
+        if n % 5 == 0:
+            _write_events(events)
+    _write_events(events)
+    write_meta(events, sessions)
+
+
+def _write_events(events):
     write_json(OUT / "events.json", {"generated_at": now_ist().isoformat(timespec="seconds"), "events": events})
 
+
+def write_meta(events, sessions):
     research = sorted(p.stem for p in (OUT / "research").glob("*.json")) if (OUT / "research").exists() else []
     status = read_json(RAW / "status.json", {})
     meta = {
@@ -206,4 +221,4 @@ def build_all(args=None):
         "counts": {k: sum(1 for e in events if e["tier"] == k) for k in ("act", "know", "hidden")},
     }
     write_json(OUT / "meta.json", meta, indent=1)
-    print(f"built {len(events)} events from {len(filings)} filings; tiers {meta['counts']}")
+    print(f"[build] meta: {len(events)} events; tiers {meta['counts']}", flush=True)

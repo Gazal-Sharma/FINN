@@ -9,6 +9,7 @@ Order of trust:
               writes must exist in its input, every claim must cite a record
 """
 import re
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 
@@ -347,8 +348,14 @@ def build(ticker, offline_raw=False):
     stats = {"transcripts": len(calls), "found": 0, "dropped_quote": 0, "dropped_number": 0}
     items = []
 
+    print(f"[research {ticker}] {len(calls)} transcripts: {', '.join(call_labels)}", flush=True)
+    t0 = time.time()
+
     def run(c):
-        return extract.guidance_from_transcript(c["text"], c["when"], ticker=ticker)
+        r = extract.guidance_from_transcript(c["text"], c["when"], ticker=ticker)
+        print(f"[research {ticker}] {c['when']}: {r[1]['found']} promises found, {len(r[0])} verified "
+              f"({time.time() - t0:.0f}s)", flush=True)
+        return r
     with ThreadPoolExecutor(2) as ex:
         results = list(ex.map(run, calls))
     for c, (kept, st) in zip(calls, results):
@@ -384,6 +391,7 @@ def build(ticker, offline_raw=False):
     resolved = cnt["kept"] + cnt["missed"]
     snap = fin.snapshot()
 
+    print(f"[research {ticker}] {len(threads)} promise threads scored; writing verdict ({time.time() - t0:.0f}s)", flush=True)
     synthesis = None
     if threads:
         try:

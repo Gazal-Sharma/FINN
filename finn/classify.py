@@ -119,6 +119,10 @@ def classify(filings, docs_text=None, use_ai=True):
     cache_path = config.CACHE / "verdicts.json"
     cached = read_json(cache_path, {})
     out, dirty = {}, False
+    need_ai = [f["id"] for f in filings if rule_verdict(f) is None and f["id"] not in cached]
+    print(f"[build] classify: {len(filings)} filings, {len(filings) - len(need_ai)} decided by rules/cache, "
+          f"{len(need_ai)} need AI{'' if use_ai else ' (no key: skipped)'}", flush=True)
+    done_ai = 0
     for f in filings:
         v = rule_verdict(f)
         if v is None:
@@ -126,6 +130,8 @@ def classify(filings, docs_text=None, use_ai=True):
             if c:
                 v = c
             elif use_ai:
+                done_ai += 1
+                print(f"[build] AI triage {done_ai}/{len(need_ai)}: {f['ticker']} {f.get('subject', '')[:50]}", flush=True)
                 body = (f.get("text") or "")[:600]
                 if docs_text and docs_text.get(f["id"]):
                     body += "\n" + docs_text[f["id"]][:1500]
@@ -135,6 +141,8 @@ def classify(filings, docs_text=None, use_ai=True):
                     v = {**a, "rule": "ai", "source": "ai"}
                     cached[f["id"]] = v
                     dirty = True
+                    if done_ai % 10 == 0:  # save as we go, so a timeout never loses paid work
+                        write_json(cache_path, cached, indent=1)
                 except Exception as e:
                     print("ai classify failed", f["id"], e)
             if v is None:

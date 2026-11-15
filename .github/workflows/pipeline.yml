@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "Stages (all, or comma list: smoke,prices,filings,docs,screener,symbols,transcripts,build,research)"
+        description: "all, or comma list: smoke,prices,filings,docs,screener,symbols,transcripts,build,research"
         default: "all"
       tickers:
         description: "Portfolio tickers override (comma list, blank = all)"
@@ -16,8 +16,8 @@ on:
         description: "Filings look-back in days"
         default: "30"
   schedule:
-    - cron: "45 11 * * 1-5"   # 17:15 IST, after market close: prices + filings + build
-    - cron: "15 3 * * *"      # 08:45 IST daily: overnight filings + build
+    - cron: "45 11 * * 1-5"   # 17:15 IST, after market close
+    - cron: "15 3 * * *"      # 08:45 IST daily, overnight filings
 
 permissions:
   contents: write
@@ -26,10 +26,14 @@ concurrency:
   group: pipeline
   cancel-in-progress: false
 
+env:
+  PYTHONUNBUFFERED: "1"          # print progress live in the Actions log
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,27 +42,38 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-pipeline.txt
       - run: pip install -r requirements-pipeline.txt
-      - name: Smoke check (which sources are reachable)
-        run: python pipeline/run.py --stage smoke
+
+      - name: Decide stages
+        id: s
+        run: |
+          S="${{ github.event.inputs.stage || 'all' }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then S="prices,filings,build"; fi
+          if [ "$S" = "all" ]; then S="smoke,prices,filings,screener,symbols,transcripts,build,research"; fi
+          has() { case ",$S," in *",$1,"*) echo true;; *) echo false;; esac; }
+          FETCH=$(echo "$S" | tr ',' '\n' | grep -vE '^(build|research)$' | paste -sd, -)
+          echo "fetch=$FETCH" >> $GITHUB_OUTPUT
+          echo "build=$(has build)" >> $GITHUB_OUTPUT
+          echo "research=$(has research)" >> $GITHUB_OUTPUT
+
+      - name: 1 · Fetch (raw data)
+        if: steps.s.outputs.fetch != ''
         continue-on-error: true
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      - name: Run pipeline
-        run: |
-          STAGE="${{ github.event.inputs.stage || 'all' }}"
-          if [ "${{ github.event_name }}" = "schedule" ]; then STAGE="prices,filings,build"; fi
-          python pipeline/run.py --stage "$STAGE" \
-            --tickers "${{ github.event.inputs.tickers }}" \
-            --research "${{ github.event.inputs.research }}" \
-            --days "${{ github.event.inputs.days || '30' }}"
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      - name: Commit data
+        run: python pipeline/run.py --stage "${{ steps.s.outputs.fetch }}" --tickers "${{ github.event.inputs.tickers }}" --research "${{ github.event.inputs.research }}" --days "${{ github.event.inputs.days || '30' }}"
+
+      - name: 2 · Build feed (filings → events, cards)
+        if: steps.s.outputs.build == 'true'
+        continue-on-error: true
+        run: python pipeline/run.py --stage build --tickers "${{ github.event.inputs.tickers }}" --days "${{ github.event.inputs.days || '30' }}"
+
+      - name: Commit feed
         if: always()
-        run: |
-          git config user.name "finn-bot"
-          git config user.email "finn-bot@users.noreply.github.com"
-          for p in raw public/data cache logs; do if [ -e "$p" ]; then git add "$p"; fi; done
-          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git commit -m "data: pipeline run $(date -u +%Y-%m-%dT%H:%MZ)"
-          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
+        run: pipeline/commit.sh "fetch+build"
+
+      - name: 3 · Research (promise ledgers)
+        if: steps.s.outputs.research == 'true'
+        continue-on-error: true
+        run: python pipeline/run.py --stage research --research "${{ github.event.inputs.research }}"
+
+      - name: Commit research
+        if: always()
+        run: pipeline/commit.sh "research"
