@@ -15,7 +15,7 @@ The look follows the same idea: an accountant's ledger rather than a trading ter
 
 | Brief | FINN |
 |---|---|
-| Digest of filings for a window, ranked, routine collapsed | Today: Act / Know / Hidden ("the drawer"), each with a *why*. Windows: 24h (default), last session, 7d, 30d, or a custom date range limited to the data available. On a weekend, an empty 24h widens to the last session and says so. |
+| Digest of filings for a window, ranked, routine collapsed | Today: Act / Know / Hidden ("the drawer"), each with a *why*. Windows: 24h (default), last session, 7d, 30d, or a custom date range reaching back 12 months. On a weekend, an empty 24h widens to the last session and says so. Filings older than 30 days come from a separate archive file, loaded only when a custom range needs it (about 240 KB compressed), and ranked by the same rules and evidence, without results tables. |
 | Alerts: volume ×, price ±%, material filing types | Alerts: sliders, plus how many alerts those settings *would have fired* over the last 60 sessions. The default mode measures moves against each stock's usual daily move, because ±3% is noise for DIXON and news for HDFCBANK. Filing-type alerts are chips. |
 | Results cards: Revenue, EBITDA, PBT, PAT, QoQ and YoY | One card per results day; the 4–6 related filings are grouped into it. Numbers come from reported tables; EBITDA = operating profit excluding other income (labelled on the card). Lenders show financing profit, since EBITDA doesn't apply to banks. |
 | Management-change card with a bio | Names the incoming person first, with the profile the company must file under SEBI Reg 30. When the start-date notice says the profile was "already provided in an earlier intimation", FINN fetches that earlier filing (HDFC Bank: Anup Bagchi, profile from the 1 Oct filing). |
@@ -93,11 +93,24 @@ Brevo: sends the morning brief (sign-in emails also go through it, avoiding Supa
 
   Actual spend on the free tiers: $0. Per-call detail is in `logs/usage.jsonl`.
 
+## Last changes tonight (from testing on a phone)
+
+- **Custom dates back 12 months**, via the lazily loaded archive. The picker keeps valid dates exactly as chosen and snaps only dates outside the data. You pick From and To, then tap **Show**, because iPhone Safari fires change events while its date wheels are still spinning.
+- **"Show all" is a temporary view.** Following a few stocks narrows Today, Alerts, Listen and the badge. Today says so ("Showing the 2 stocks you follow · Show all 18"), and "Show all" never changes the saved list or the account; "Show only my 2 stocks" goes back.
+- **The morning brief and Listen** start with "for the N stocks you follow" when the list is narrowed.
+- **A final code review** found and fixed:
+  - the tab badge counting stocks you don't follow
+  - a page that could stay scroll-locked
+  - unclear wording when a window is empty
+  - a watched promise stuck on "Loading…"
+
+  After the fixes, every screen was compared text-for-text against the previous version for someone following all stocks: identical.
+
 ## Known limits
 
 - **Transcript gaps:** TRENT has no transcripts we could find, CDSL's calls contain no measurable promises, and MARUTI has only one transcript. Each dossier says so plainly rather than guessing.
 - **Where the numbers come from:** standardised tables on screener.in, which are derived from company filings. Annual reports are linked as sources but not read in full; reading 300-page PDFs live would blow the time budget.
-- **Prices are end-of-day** (Yahoo), so reactions are per session, not intraday.
+- **Not real-time.** Prices are end-of-day (Yahoo) and filings are checked twice a day, so alerts and the morning brief can arrive hours after a filing.
 - **Email:** the brief comes from a verified Gmail address through Brevo's free plan (300 a day), so some inboxes may file it as spam. A real launch needs its own domain. Added stocks are capped at 10 per user and 40 overall, to keep the free nightly job small.
 
 ## Next
