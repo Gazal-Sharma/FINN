@@ -63,13 +63,20 @@ TIER_BASE = {"act": 100, "know": 50, "hidden": 0}
 
 # Gemini only. Families are resolved to concrete model names at runtime by
 # listing models, so the code survives Google renaming/retiring versions.
+# "groq" is the fallback when Gemini's free quota runs out: same prompts, same
+# JSON shape, same checks on the answer. Long transcripts go to it in chunks
+# (its free tier allows only a few thousand tokens a minute).
 TASK_CHAINS = {
-    "classify":  ["flash-lite", "flash"],
-    "summarize": ["flash-lite", "flash"],
-    "extract":   ["flash", "flash-lite"],
-    "synthesis": ["pro", "flash", "flash-lite"],
-    "explain": ["flash-lite", "flash"],  # the Ask helper: short plain-language answers  # every number is checked, so lite is a safe last resort
+    "classify":  ["flash-lite", "flash", "groq"],
+    "summarize": ["flash-lite", "flash", "groq"],
+    "extract":   ["flash", "flash-lite", "groq"],
+    "extract_chunk": ["groq"],
+    "synthesis": ["pro", "flash", "flash-lite", "groq"],  # every number is checked, so a fallback is safe
+    "explain": ["flash-lite", "flash", "groq"],           # the Ask helper: short plain-language answers
 }
+GROQ_PREFERRED = ["llama-3.3-70b-versatile", "openai/gpt-oss-120b", "meta-llama/llama-4-maverick-17b-128e-instruct",
+                  "meta-llama/llama-4-scout-17b-16e-instruct", "qwen/qwen3-32b", "openai/gpt-oss-20b",
+                  "llama-3.1-8b-instant"]
 
 # Approximate paid list prices (USD per 1M tokens, input/output) used only to
 # report what the run *would* have cost; we run on the free tier.
@@ -77,6 +84,7 @@ LIST_PRICE = {
     "flash-lite": (0.10, 0.40),
     "flash": (0.30, 2.50),
     "pro": (1.25, 10.00),
+    "groq": (0.59, 0.79),
 }
 
 

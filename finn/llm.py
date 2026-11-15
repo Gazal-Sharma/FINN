@@ -18,6 +18,7 @@ import requests
 from . import config, now_ist
 
 API = "https://generativelanguage.googleapis.com/v1beta"
+GROQ_API = "https://api.groq.com/openai/v1"
 _EXCLUDE = ("image", "tts", "audio", "live", "embedding", "vision", "exp", "robotics", "computer",
             "native", "learnlm", "gemma", "aqa", "veo", "imagen", "banana", "customtools", "thinking")
 _models = None
@@ -94,7 +95,27 @@ def resolve_models():
         return (-_version(n), "preview" in n, "latest" in n, len(n))
 
     _models = {k: sorted(v, key=rank)[:3] for k, v in fam.items()}  # each model has its own free quota
+    _models["groq"] = _groq_models()
     return _models
+
+
+def _groq_models():
+    """Groq chat models this key can use, best first; [] when there's no key."""
+    key = os.environ.get("GROQ_API_KEY")
+    if not key:
+        return []
+    try:
+        r = requests.get(f"{GROQ_API}/models", headers={"Authorization": f"Bearer {key}"}, timeout=20)
+        r.raise_for_status()
+        avail = {m["id"]: m for m in r.json().get("data", []) if m.get("active", True)}
+    except Exception as e:
+        print("groq model list failed:", str(e)[:120], flush=True)
+        return []
+    skip = ("whisper", "tts", "guard", "compound", "playai", "orpheus", "prompt")
+    pref = [m for m in config.GROQ_PREFERRED if m in avail]
+    rest = sorted((m for m, d in avail.items() if m not in pref and not any(x in m for x in skip)
+                   and (d.get("context_window") or 0) >= 32000), key=lambda m: -(avail[m].get("context_window") or 0))
+    return ["groq:" + m for m in (pref + rest)[:3]]
 
 
 def _cache_path():
@@ -123,6 +144,8 @@ def _log(row):
 
 
 def _call(model, system, prompt, max_out):
+    if model.startswith("groq:"):
+        return _call_groq(model, system, prompt, max_out)
     gap = 12.0 if "pro" in model else 4.5  # ~5 / ~13 requests a minute: under free-tier limits
     with _lock:
         lk = _model_locks.setdefault(model, threading.Lock())
@@ -166,6 +189,52 @@ def _call(model, system, prompt, max_out):
             raise LLMError(f"{model}: empty response {str(data)[:200]}")
         return text, data.get("usageMetadata", {})
     raise LLMError(f"{model}: server errors")
+
+
+class TooLarge(LLMError):
+    pass
+
+
+def _call_groq(model, system, prompt, max_out):
+    """OpenAI-compatible chat call; same JSON-only contract as Gemini."""
+    name = model.split(":", 1)[1]
+    with _lock:
+        lk = _model_locks.setdefault(model, threading.Lock())
+    with lk:
+        wait = _last_call.get(model, 0) + 2.5 - time.time()
+        if wait > 0:
+            time.sleep(wait)
+        _last_call[model] = time.time()
+    body = {"model": name, "temperature": 0, "max_tokens": max_out,
+            "response_format": {"type": "json_object"},
+            "messages": [{"role": "system", "content": system + "\nReply with JSON only."},
+                         {"role": "user", "content": prompt}]}
+    if "gpt-oss" in name:
+        body["reasoning_effort"] = "low"
+    r = requests.post(f"{GROQ_API}/chat/completions", json=body, timeout=120,
+                      headers={"Authorization": f"Bearer {os.environ.get('GROQ_API_KEY', '')}"})
+    if r.status_code == 413 or "reduce the length" in r.text or "Request too large" in r.text:
+        raise TooLarge(f"{model}: request too large for its free tier")
+    if r.status_code == 429:
+        ra = r.headers.get("retry-after")
+        m = re.search(r"try again in (?:(\d+)m)?([\d.]+)s", r.text)
+        wait = float(ra) if ra else (float(m.group(1) or 0) * 60 + float(m.group(2)) if m else 30.0)
+        daily = any(x in r.text for x in ("per day", "(TPD)", "(RPD)"))
+        raise RateLimited(f"{model} 429", wait=wait, daily=daily and wait > 120)
+    if r.status_code == 400 and "json" in r.text.lower() and "response_format" in body:
+        body.pop("response_format")  # a few models don't support JSON mode; parse_json copes
+        r = requests.post(f"{GROQ_API}/chat/completions", json=body, timeout=120,
+                          headers={"Authorization": f"Bearer {os.environ.get('GROQ_API_KEY', '')}"})
+    if r.status_code == 404:
+        _cooldown[model] = time.time() + 10 ** 9
+        raise LLMError(f"{model} not available")
+    if r.status_code != 200:
+        raise LLMError(f"{model} {r.status_code}: {r.text[:300]}")
+    d = r.json()
+    text = d["choices"][0]["message"].get("content") or ""
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.S)
+    u = d.get("usage", {})
+    return text, {"promptTokenCount": u.get("prompt_tokens", 0), "candidatesTokenCount": u.get("completion_tokens", 0)}
 
 
 def parse_json(text):
@@ -226,6 +295,11 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
                 obj = parse_json(text)
                 if validate:
                     obj = validate(obj)
+            except TooLarge as e:
+                tried_ok.add(model)
+                errors.append(str(e))
+                print(f"    llm {model}: prompt too large for it, skipping", flush=True)
+                continue
             except RateLimited as e:
                 if e.daily and e.wait > 120:
                     _exhausted.add(model)

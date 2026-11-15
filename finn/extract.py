@@ -173,8 +173,20 @@ def guidance_from_transcript(text, call_label, ticker=""):
             raise ValueError("no items list")
         o["items"] = [x for x in o["items"] if isinstance(x, dict)]
         return o
-    o = llm.ask("extract", GUIDE_SYS, f"Call: {call_label}\n\nTRANSCRIPT:\n{text[:180000]}", ticker=ticker,
-                validate=validate, max_out=6000)
+    try:
+        o = llm.ask("extract", GUIDE_SYS, f"Call: {call_label}\n\nTRANSCRIPT:\n{text[:180000]}", ticker=ticker,
+                    validate=validate, max_out=6000)
+    except llm.LLMError as e:
+        # Gemini out of quota (or every model refused the whole transcript): read it in
+        # ~5k-token pieces with the fallback provider and merge. Checks below are identical.
+        if not llm.resolve_models().get("groq"):
+            raise
+        print(f"    extract {ticker} {call_label}: falling back to chunked reading ({str(e)[:80]})", flush=True)
+        o = {"items": []}
+        for n, chunk in enumerate(_chunks(text[:180000]), 1):
+            part = llm.ask("extract_chunk", GUIDE_SYS, f"Call: {call_label} (part {n})\n\nTRANSCRIPT EXCERPT:\n{chunk}",
+                           ticker=ticker, validate=validate, max_out=2500)
+            o["items"] += part["items"]
     kept = []
     for it in o["items"]:
         stats["found"] += 1
@@ -189,9 +201,26 @@ def guidance_from_transcript(text, call_label, ticker=""):
             continue
         if it.get("metric") not in METRICS:
             it["metric"] = "other"
+        key = norm(q)[:120]
+        if any(norm(k["quote"])[:120] == key for k in kept):
+            continue  # same promise seen twice (chunk overlap)
         it["call"] = call_label
         kept.append(it)
     return kept, stats
+
+
+def _chunks(text, size=18000, overlap=600):
+    """Split on paragraph breaks into ~size-char pieces, overlapping a little so a
+    promise that straddles a boundary is still seen whole in one of them."""
+    out, i = [], 0
+    while i < len(text):
+        j = min(len(text), i + size)
+        if j < len(text):
+            k = text.rfind("\n", i + size // 2, j)
+            j = k if k > 0 else j
+        out.append(text[max(0, i - overlap):j])
+        i = j
+    return out
 
 
 THREAD_SYS = (
