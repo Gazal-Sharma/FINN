@@ -267,8 +267,9 @@ def stage_brief(args):
     prefs, sent, failed = brief.all_prefs(), 0, 0
     for uid, email in brief.all_users():
         p = prefs.get(uid)
-        if not p or not p.get("brief"):
-            continue
+        if not args.force and (not p or not p.get("brief")):
+            continue  # --force: test send to every account, opted in or not
+        p = p or {}
         try:
             brief.send(email, *brief.compose(p))
             sent += 1

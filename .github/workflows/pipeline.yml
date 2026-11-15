@@ -96,4 +96,4 @@ jobs:
       - name: 4 · Morning brief emails
         if: steps.s.outputs.brief == 'true'
         continue-on-error: true
-        run: python pipeline/run.py --stage brief
+        run: python pipeline/run.py --stage brief ${{ github.event.inputs.force == 'true' && '--force' || '' }}
