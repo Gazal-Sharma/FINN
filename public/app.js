@@ -3,13 +3,24 @@ import { html, raw, fmtDay, ago, scanAlerts } from "./lib.js";
 import { eventSheet, rankingSheet } from "./cards.js";
 import * as V from "./views.js";
 import { learn, searchGlossary } from "./learn.js";
+import * as Acc from "./account.js";
 
 const DEFAULTS = { window: "24h", relative: true, sigma: 2.5, pricePct: 3, volX: 2,
   cats: ["results", "management_change", "M&A", "fund_raise", "litigation", "pledging", "credit_rating"] };
+const SYNCED = ["settings", "theme", "textSize", "voice", "voiceRate", "followed"];
 const store = {
   get(k, d) { try { const v = localStorage.getItem("finn." + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
-  set(k, v) { try { localStorage.setItem("finn." + k, JSON.stringify(v)); } catch { /* private mode / full */ } },
+  set(k, v) {
+    try { localStorage.setItem("finn." + k, JSON.stringify(v)); } catch { /* private mode / full */ }
+    if (SYNCED.includes(k)) Acc.save(localPrefs());  // no-op unless signed in
+  },
 };
+function localPrefs() {
+  const o = {};
+  for (const k of SYNCED) { const v = store.get(k, null); if (v != null) o[k] = v; }
+  o.followed = o.followed || [];
+  return o;
+}
 
 const state = {
   settings: { ...DEFAULTS, ...store.get("settings", {}) },
@@ -17,7 +28,10 @@ const state = {
   meta: null, events: null, prices: null, symbols: null,
   dossiers: {}, research: {}, showHidden: false, speaking: false, openThread: null, sheet: null, windowTouched: false,
   theme: store.get("theme", "auto"), glossQ: "", ask: { open: false, q: "", items: [] },
+  followed: store.get("followed", []), acct: { step: "email", email: "", msg: "" },
 };
+// Empty list = follow all 18. Works without an account; signing in only syncs it.
+state.isFollowed = (t) => !state.followed.length || state.followed.includes(t);
 state.nameOf = (t) => state.meta?.portfolio?.find((c) => c.t === t)?.name || state.dossiers[t]?.name || t;
 const seenAtBoot = state.lastSeen;
 const ctx = {
@@ -169,6 +183,10 @@ function settingsSheet() {
   const rate = store.get("voiceRate", 1);
   const size = store.get("textSize", "standard");
   return html`<div class="settings"><h3>Settings</h3><div class="small muted">Saved on this device. No account needed.</div>
+    ${accountGroup()}
+    <div class="grp"><span>Stocks you follow</span>
+      <div class="opts">${(state.meta?.portfolio || []).map((c) => html`<button class="chip ${state.followed.includes(c.t) ? "on" : ""}" data-act="follow" data-t="${c.t}">${c.t}</button>`)}</div>
+      <div class="hint">${state.followed.length ? html`Today, Alerts and Listen show ${state.followed.length} of ${state.meta?.portfolio?.length || 18}. <button style="color:var(--link)" data-act="followAll">Follow all</button>` : "Following all holdings. Tap stocks to show only those."}</div></div>
     <div class="grp"><span>Appearance</span><div class="opts">${opt("setTheme", "auto", state.theme, "Match my phone")}${opt("setTheme", "light", state.theme, "Day")}${opt("setTheme", "dark", state.theme, "Night")}</div></div>
     <div class="grp"><span>Text size</span><div class="opts">${opt("setSize", "standard", size, "Standard")}${opt("setSize", "large", size, "Larger")}</div></div>
     <div class="grp"><span>Listen: voice</span>
@@ -186,6 +204,20 @@ function settingsSheet() {
       ${state.meta?.status?.filings ? html`Filings checked ${ago(state.meta.status.filings.at)}<br>` : ""}
       ${state.meta?.generated_at ? html`Feed built ${ago(state.meta.generated_at)}` : ""}</div></div>
   </div>`;
+}
+
+function accountGroup() {
+  if (!Acc.enabled) return "";
+  const u = Acc.currentUser(), a = state.acct;
+  if (u) return html`<div class="grp"><span>Account</span><div class="small ink2">Signed in as <b>${u.email}</b>. Your followed stocks, alert thresholds and settings sync across devices.</div>
+    <button class="chip" style="margin-top:10px" data-act="signOut">Sign out</button></div>`;
+  return html`<div class="grp"><span>Account (optional)</span>
+    <div class="hint" style="margin:0 0 10px">Everything works without one. Sign in to sync your stocks, alerts and settings across devices.</div>
+    ${a.step === "email"
+      ? html`<form class="askform" data-form="email" style="margin:0"><input name="email" type="email" required placeholder="you@example.com" value="${a.email}" autocomplete="email"><button>Email me a link</button></form>`
+      : html`<div class="small ink2">We've sent a sign-in link to <b>${a.email}</b>. Open it on this device and you'll come straight back here, signed in.</div>
+        <div class="hint"><button style="color:var(--link)" data-act="acctBack">Use a different email</button></div>`}
+    ${a.msg ? html`<div class="hint">${a.msg}</div>` : ""}</div>`;
 }
 
 // ----------------------------------------------------------------- research
@@ -285,7 +317,7 @@ function briefScript() {
   if (know.length) lines.push(`Also worth knowing. ${know.slice(0, 4).map((e) => `${spoken(e.ticker)}: ${plain(e)}`).join(". ")}.`);
   const p = state.prices;
   if (p) {
-    const moves = scanAlerts(p, state.settings, p.dates.length - 1);
+    const moves = scanAlerts(V.followedPrices(state), state.settings, p.dates.length - 1);
     if (moves.length) lines.push(`Unusual moves in the last session. ${moves.slice(0, 3).map((x) => `${spoken(x.t)} ${x.price ? `moved ${pct(x.ret)}` : "traded"}${x.vol ? ` on ${x.volx.toFixed(1)} times its normal volume` : ""}`).join(". ")}.`);
   }
   lines.push(`${hidden ? `${hidden} routine filings were tucked away. ` : ""}That's your brief.`);
@@ -377,6 +409,11 @@ document.addEventListener("click", (ev) => {
     case "setWindow": s.window = a.dataset.v; state.viewWindow = null; state.windowTouched = false; store.set("settings", s); renderSheet(); render(); return;
     case "testVoice": { const v = pickVoice(); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance("This is how your brief will sound."); if (v) { u.voice = v; u.lang = v.lang; } u.rate = +store.get("voiceRate", 1) || 1; speechSynthesis.speak(u); return; }
     case "resetSeen": store.set("lastSeen", Date.now()); location.reload(); return;
+    case "follow": { const t = a.dataset.t; state.followed = state.followed.includes(t) ? state.followed.filter((x) => x !== t) : [...state.followed, t];
+      store.set("followed", state.followed); renderSheet(); render(); return; }
+    case "followAll": state.followed = []; store.set("followed", []); renderSheet(); render(); return;
+    case "signOut": Acc.signOut(); return;
+    case "acctBack": state.acct = { step: "email", email: state.acct.email, msg: "" }; renderSheet(); return;
     case "ask": state.ask.open = true; renderAsk(); setTimeout(() => document.querySelector(".askform input")?.focus(), 50); return;
     case "askClose": state.ask.open = false; renderAsk(); return;
     case "askSuggest": askQuestion(a.dataset.q); return;
@@ -408,7 +445,20 @@ document.addEventListener("input", (ev) => {
   el?.focus();
 });
 
-document.addEventListener("submit", (ev) => {
+document.addEventListener("submit", async (ev) => {
+  const af = ev.target.closest("[data-form=email]");
+  if (af) {
+    ev.preventDefault();
+    const a = state.acct;
+    try {
+      a.email = new FormData(af).get("email").toString().trim();
+      a.msg = "Sending…"; renderSheet();
+      await Acc.sendLink(a.email);
+      Object.assign(a, { step: "sent", msg: "Not there? Check spam. The free email service sends only a few links an hour." });
+    } catch (e) { a.msg = /rate|seconds/i.test(e.message) ? "Too many sign-in emails just now. Try again in a few minutes." : e.message; }
+    renderSheet();
+    return;
+  }
   if (ev.target.closest("[data-form=ask]")) {
     ev.preventDefault();
     askQuestion(new FormData(ev.target).get("q").toString());
@@ -428,3 +478,17 @@ document.addEventListener("visibilitychange", () => document.visibilityState ===
 window.addEventListener("pagehide", markSeen);
 
 load();
+Acc.init({
+  getLocal: localPrefs,
+  applyRemote: (p) => {  // the account's saved prefs win over this device's
+    for (const k of SYNCED) if (p[k] != null) try { localStorage.setItem("finn." + k, JSON.stringify(p[k])); } catch { /* ignore */ }
+    state.settings = { ...DEFAULTS, ...store.get("settings", {}) };
+    state.theme = store.get("theme", "auto");
+    state.followed = store.get("followed", []);
+    applyTheme(); render();
+  },
+  changed: () => {
+    if (state.sheet === "settings") renderSheet();
+    if (Acc.currentUser() && /access_token|type=magiclink/.test(location.hash)) history.replaceState(null, "", location.pathname + "#/today");
+  },
+}).catch((e) => console.warn("accounts unavailable:", e.message));  // sign-in failing never breaks the app
