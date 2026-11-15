@@ -517,7 +517,9 @@ document.addEventListener("submit", async (ev) => {
     ev.preventDefault();
     const [lo, hi] = V.dataRange(state);
     const fd = new FormData(rf);
-    const clamp = (v, dflt) => (!v ? dflt : lo && v < lo ? lo : hi && v > hi ? hi : v);
+    // a browser without a date picker shows a text box: anything that isn't YYYY-MM-DD gets the default
+    const ok = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v || "") && !isNaN(new Date(v + "T12:00:00+05:30"));
+    const clamp = (v, dflt) => (!ok(v) ? dflt : lo && v < lo ? lo : hi && v > hi ? hi : v);
     let from = clamp(fd.get("from"), lo), to = clamp(fd.get("to"), hi);
     const snapped = from !== fd.get("from") || to !== fd.get("to");
     if (from > to) [from, to] = [to, from];
