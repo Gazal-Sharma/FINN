@@ -66,3 +66,15 @@
 {"at": "2026-11-15T16:02:30.498408+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 843, "out": 102, "cache_hit": false, "list_usd": 0.000125}
 {"at": "2026-11-15T16:06:54.727687+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 1421, "out": 152, "cache_hit": false, "list_usd": 0.000203}
 {"at": "2026-11-15T16:10:35.342277+05:30", "ticker": "TITAN", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 1981, "out": 248, "cache_hit": false, "list_usd": 0.000297}
+{"at": "2026-11-15T16:17:27.040411+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 1927, "out": 200, "cache_hit": false, "list_usd": 0.000273}
+{"at": "2026-11-15T16:17:27.040883+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-15T16:17:27.058381+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-15T16:17:42.256415+05:30", "ticker": "TITAN", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 1167, "out": 102, "cache_hit": false, "list_usd": 0.000158}
+{"at": "2026-11-15T16:17:44.550202+05:30", "ticker": "SUNPHARMA", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 80, "out": 28, "cache_hit": false, "list_usd": 1.9e-05}
+{"at": "2026-11-15T16:17:44.558079+05:30", "ticker": "SUNPHARMA", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-15T16:17:48.642815+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 770, "out": 145, "cache_hit": false, "list_usd": 0.000135}
+{"at": "2026-11-15T16:17:54.771706+05:30", "ticker": "LT", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 645, "out": 40, "cache_hit": false, "list_usd": 8.1e-05}
+{"at": "2026-11-15T16:18:22.564975+05:30", "ticker": "CDSL", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 1403, "out": 86, "cache_hit": false, "list_usd": 0.000175}
+{"at": "2026-11-15T16:19:27.733144+05:30", "ticker": "HDFCBANK", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 85, "out": 24, "cache_hit": false, "list_usd": 1.8e-05}
+{"at": "2026-11-15T16:19:36.052483+05:30", "ticker": "TRENT", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 95, "out": 34, "cache_hit": false, "list_usd": 2.3e-05}
+{"at": "2026-11-15T16:23:53.530603+05:30", "ticker": "ICICIBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 143, "out": 83, "cache_hit": false, "list_usd": 4.8e-05}

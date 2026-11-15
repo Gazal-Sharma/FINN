@@ -1,0 +1,197 @@
+{
+ "generated_at": "2026-11-15T16:23:53+05:30",
+ "sample": false,
+ "last_session": "2026-11-13",
+ "rules_version": "2026-11-15.1",
+ "status": {
+  "prices": {
+   "ok": true,
+   "at": "2026-11-15T15:46:19+05:30",
+   "note": "19/19 symbols"
+  },
+  "filings": {
+   "ok": true,
+   "at": "2026-11-15T15:46:42+05:30",
+   "note": "256 filings; sources {'nse': 18}"
+  },
+  "docs": {
+   "ok": true,
+   "at": "2026-11-15T15:48:11+05:30",
+   "note": "60/60 PDFs extracted (99 wanted)"
+  },
+  "screener": {
+   "ok": true,
+   "at": "2026-11-15T15:49:26+05:30",
+   "note": "21/21"
+  },
+  "symbols": {
+   "ok": true,
+   "at": "2026-11-15T15:49:27+05:30",
+   "note": "2391 NSE symbols"
+  },
+  "transcripts": {
+   "ok": true,
+   "at": "2026-11-15T15:50:19+05:30",
+   "note": "INFY:4 KPITTECH:4 POLYCAB:4 TATAPOWER:4 DMART:4"
+  }
+ },
+ "portfolio": [
+  {
+   "t": "INFY",
+   "name": "Infosys",
+   "spoken": "Infosys",
+   "sector": "IT services",
+   "lender": false,
+   "bse": "500209"
+  },
+  {
+   "t": "HCLTECH",
+   "name": "HCL Technologies",
+   "spoken": "H C L Tech",
+   "sector": "IT services",
+   "lender": false,
+   "bse": "532281"
+  },
+  {
+   "t": "PERSISTENT",
+   "name": "Persistent Systems",
+   "spoken": "Persistent",
+   "sector": "IT services",
+   "lender": false,
+   "bse": "533179"
+  },
+  {
+   "t": "HDFCBANK",
+   "name": "HDFC Bank",
+   "spoken": "H D F C Bank",
+   "sector": "Bank",
+   "lender": true,
+   "bse": "500180"
+  },
+  {
+   "t": "ICICIBANK",
+   "name": "ICICI Bank",
+   "spoken": "I C I C I Bank",
+   "sector": "Bank",
+   "lender": true,
+   "bse": "532174"
+  },
+  {
+   "t": "BAJFINANCE",
+   "name": "Bajaj Finance",
+   "spoken": "Bajaj Finance",
+   "sector": "NBFC",
+   "lender": true,
+   "bse": "500034"
+  },
+  {
+   "t": "CDSL",
+   "name": "CDSL",
+   "spoken": "C D S L",
+   "sector": "Market infra",
+   "lender": false,
+   "bse": null
+  },
+  {
+   "t": "TITAN",
+   "name": "Titan Company",
+   "spoken": "Titan",
+   "sector": "Consumer",
+   "lender": false,
+   "bse": "500114"
+  },
+  {
+   "t": "TRENT",
+   "name": "Trent",
+   "spoken": "Trent",
+   "sector": "Retail",
+   "lender": false,
+   "bse": "500251"
+  },
+  {
+   "t": "ETERNAL",
+   "name": "Eternal",
+   "spoken": "Eternal",
+   "sector": "Internet",
+   "lender": false,
+   "bse": "543320"
+  },
+  {
+   "t": "LT",
+   "name": "Larsen & Toubro",
+   "spoken": "L and T",
+   "sector": "Engineering",
+   "lender": false,
+   "bse": "500510"
+  },
+  {
+   "t": "POLYCAB",
+   "name": "Polycab India",
+   "spoken": "Polycab",
+   "sector": "Cables & wires",
+   "lender": false,
+   "bse": "542652"
+  },
+  {
+   "t": "DIXON",
+   "name": "Dixon Technologies",
+   "spoken": "Dixon",
+   "sector": "Electronics mfg",
+   "lender": false,
+   "bse": "540699"
+  },
+  {
+   "t": "RELIANCE",
+   "name": "Reliance Industries",
+   "spoken": "Reliance",
+   "sector": "Conglomerate",
+   "lender": false,
+   "bse": "500325"
+  },
+  {
+   "t": "BHARTIARTL",
+   "name": "Bharti Airtel",
+   "spoken": "Airtel",
+   "sector": "Telecom",
+   "lender": false,
+   "bse": "532454"
+  },
+  {
+   "t": "SUNPHARMA",
+   "name": "Sun Pharma",
+   "spoken": "Sun Pharma",
+   "sector": "Pharma",
+   "lender": false,
+   "bse": "524715"
+  },
+  {
+   "t": "MARUTI",
+   "name": "Maruti Suzuki",
+   "spoken": "Maruti",
+   "sector": "Autos",
+   "lender": false,
+   "bse": "532500"
+  },
+  {
+   "t": "INDIGO",
+   "name": "InterGlobe Aviation",
+   "spoken": "IndiGo",
+   "sector": "Airlines",
+   "lender": false,
+   "bse": "539448"
+  }
+ ],
+ "research_ready": [],
+ "research_set": [
+  "INFY",
+  "KPITTECH",
+  "POLYCAB",
+  "TATAPOWER",
+  "DMART"
+ ],
+ "counts": {
+  "act": 43,
+  "know": 69,
+  "hidden": 93
+ }
+}
