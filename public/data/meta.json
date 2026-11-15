@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T20:45:29+05:30",
+ "generated_at": "2026-11-15T21:16:00+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
@@ -243,7 +243,7 @@
  "counts": {
   "act": 32,
   "know": 64,
-  "hidden": 102
+  "hidden": 101
  },
  "archive": {
   "from": "2025-11-17",

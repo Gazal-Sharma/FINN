@@ -44,17 +44,6 @@
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   },
-  "transcript": {
-   "label": "Concall transcript out (feeds the promise ledger)",
-   "tier": "know",
-   "n": 63,
-   "big_rate": 0.063,
-   "lift": 1.29,
-   "median_z": 0.66,
-   "median_volx": 0.78,
-   "decision": "keep",
-   "why": ""
-  },
   "newspaper": {
    "label": "Newspaper ad copy",
    "tier": "hidden",
@@ -63,6 +52,17 @@
    "lift": 0.95,
    "median_z": 0.6,
    "median_volx": 0.81,
+   "decision": "keep",
+   "why": ""
+  },
+  "transcript": {
+   "label": "Concall transcript out (feeds the promise ledger)",
+   "tier": "know",
+   "n": 63,
+   "big_rate": 0.063,
+   "lift": 1.29,
+   "median_z": 0.66,
+   "median_volx": 0.78,
    "decision": "keep",
    "why": ""
   },
