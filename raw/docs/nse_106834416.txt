@@ -1,0 +1,394 @@
+
+[[page 1]]
+ 
+ 
+InterGlobe Aviation Limited 
+Registered Office: Upper Ground Floor, Thapar House, Gate No. 2, Western Wing, 124 Janpath, New Delhi – 110 001, India. M +91 9650098905,  
+ F + 91 11 43513200 Email: corporate@goindigo.in 
+Corporate Office: Emaar Capital Tower-II, Sector-26, Sikanderpur Ghosi, MG Road, Gurugram-122002, Haryana, India. T +91 124 435 2500.  
+CIN no.: L62100DL2004PLC129768 
+ 
+ 
+ 
+October 29, 2026                                                                                           IGAL/SECT/10-26/5 
+ 
+To 
+National Stock Exchange of India Limited 
+Exchange Plaza, C-1, Block G 
+Bandra Kurla Complex, Bandra - (E), 
+Mumbai - 400 051 
+Symbol: INDIGO 
+To 
+BSE Limited 
+Phiroze Jeejeebhoy Tower 
+Dalal Street 
+Mumbai - 400 001 
+Scrip Code: 539448 
+ 
+Subject: Compliances under Regulation 30 and 33 of SEBI (Listing Obligations and 
+Disclosure Requirements) Regulations, 2015 (“SEBI Regulations”) – Outcome of the 
+Board Meeting 
+ 
+Dear Sir/ Madam, 
+ 
+The Board of Directors of the Company, in its meeting held on Thursday, October 29, 2026, inter 
+alia, considered and approved the unaudited standalone and consolidated financial results 
+(“Financial Results”) for the quarter and half year ended September 30, 2026. 
+ 
+In this regard, please find enclosed: 
+ 
+i. Unaudited Financial Results along with Limited Review Reports thereon issued by the Statutory 
+Auditors M/s. S.R. Batliboi & Co. LLP, Chartered Accountants. 
+ 
+ii. Investor presentation and press release. 
+ 
+The Board meeting commenced at 1355 hours (IST) and concluded at 1540 hours (IST). 
+ 
+This disclosure is also being made available on the Company’s website at www.goindigo.in. This is 
+for your information and record. 
+ 
+Thanking you,  
+ 
+For InterGlobe Aviation Limited 
+ 
+ 
+ 
+ 
+ 
+Neerja Sharma 
+Company Secretary & Chief Compliance Officer 
+ 
+Encl: a/a 
+[[page 2]]
+1
+Earnings Presentation Q2 FY27
+October 29, 2026
+InterGlobe Aviation Ltd.
+[[page 3]]
+Safe Harbor
+This document may contain some statements on the Company’s business or financials which may 
+be construed as forward looking. The actual results may be materially different from these forward-
+looking statements.
+This document forms part of the quarterly earnings release and should be viewed together with the 
+Earnings Press Release.
+Note: This presentation has been prepared based on consolidated financial statements
+2
+[[page 4]]
+Dubai
+Kuwait
+Dammam
+Bahrain
+Abu Dhabi Muscat
+Doha Sharjah
+Jeddah
+Riyadh
+Tbilisi Baku Tashkent
+Almaty
+Nairobi
+Jakarta
+Maldives 
+Singapore
+Kuala Lumpur 
+Dhaka
+Kathmandu
+Colombo
+Ho Chi Minh City
+Hanoi
+Bangkok
+Phuket
+Istanbul
+Hong Kong
+Guangzhou
+Ras Al Khaimah
+Delhi
+Kolkata
+Chennai
+Bengaluru
+HyderabadMumbai
+Denpasar
+Amsterdam
+Jaffna
+Mauritius
+Penang
+Langkawi
+Madinah
+Krabi
+Seychelles
+Fujairah
+Athens
+London
+Siem Reap
+Shanghai
+Réunion
+3
+New destinations added during the quarter
+Existing domestic stations
+Metros
+International destinations 
+^Includes 3 A321 freighters and 5 B787 Damp leases
+**During Q2’27, provided services to 98 additional international destinations through strategic partnerships 
+* Includes 7 destinations which were non-operational during the quarter
+Note: The image is for reference purpose only 
+IndiGo – Network presence
+40.8 bn
+32.8 bn
+442^
+97
+42*
+ASKs
+RPKs
+Closing Aircraft
+Domestic Destinations
+-1.0%
+-3.7%
++25
++3
++1International Destinations**
+Q2’27 (change vs Q2’26) 
+3
+[[page 5]]
+4
+Fleet Breakup
+4
+Closing Fleet
+Owned
+Finance Lease
+Operating lease
+Damp Lease
+30th Sep 2026 30th Jun 2026 30th Sep 2025
+A320neo
+A320ceo
+A321neo
+A321 XLR
+ATR
+A321 Freighter
+B787
+B737
+A320ceo
+A321neo
+442 432 417
+41
+66
+330
+5
+36
+60
+329
+7
+14
+62
+333
+8
+174
+26
+186
+44
+3
+4
+174
+26
+175
+44
+3
+3
+180
+26
+153
+47
+3
+-
+5
+-
+-
+-
+B777 -
+6
+-
+-
+1
+-
+2
+-
+4
+-
+2
+Damp Lease Owned / Leased Fleet type
+[[page 6]]
+QUARTERLY HIGHLIGHTS : Q2FY27 vs Q2FY26
+5
+[[page 7]]
+Financial Summary
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25 Favorable/ (Adverse)
+ASK (billion) 40.8 41.2 (1.0%)
+Total income 243,119 195,995 24.0% 
+RASK* (INR) 5.76 4.55 26.4% 
+Total expenses 261,884 220,812 (18.6%)
+CASK* (INR) 6.22 5.16 (20.6%)
+CASK ex fuel* (INR) 3.77 3.71 (1.8%)
+EBITDAR 24,599 11,143 120.8% 
+EBITDAR Margin (%) 10.5% 6.0% 4.5 pts
+EBITDAR (ex-forex)# 36,153 38,003 (4.9%)
+EBITDAR Margin (ex-forex)# 15.5% 20.5% (5.0 pts)
+PBT (18,765) (24,817) 24.4% 
+PBT Margin (%) (8.0%) (13.4%) 5.3 pts
+PAT (18,791) (25,821) 27.2% 
+PAT Margin (%) (8.0%) (13.9%) 5.9 pts
+PAT (ex-forex)# (7,237) 1,039 (796.5%)
+PAT Margin (ex-forex)# (3.1%) 0.6% (3.7 pts)
+*  Net of finance income of INR 8,220 million and INR 8,294 million for quarter ended Sep’26 and Sep’25 respectively
+# Net of Forex loss, gain on forex hedging of INR 1,778 million and INR 2,061 million for quarter ended Sep’26 and Sep’25 respectively
+6
+[[page 8]]
+Revenue breakup
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25 Favorable/ (Adverse)
+Revenue from operations 233,638 185,553 25.9% 
+Other income 9,481 10,442 (9.2%)
+Total income 243,119 195,995 24.0% 
+ASK (billion) 40.8 41.2 (1.0%)
+RPK (billion) 32.8 34.0 (3.7%)
+Load factor (%) 80.3% 82.5% (2.2 pts)
+Yield (INR) 6.30 4.69 34.3% 
+RASK* (INR) 5.76 4.55 26.4% 
+* Net of finance income of INR 8,220 million and INR 8,294 million for quarter ended Sep’26 and Sep’25 respectively 
+Note: The above operational metrics includes non-scheduled operations. 
+7
+[[page 9]]
+Non-Ind AS measures - RASK
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25
+Total revenue 243,119 195,995 
+Less: finance income 8,220 8,294 
+Total revenue less finance income (A) 234,899 187,701 
+ASK (millions) (B) 40,797 41,220 
+RASK (INR) (C=A/B) 5.76 4.55 
+8
+[[page 10]]
+Cost breakup
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25 Favorable/ (Adverse)
+Supplementary rentals and aircraft repair 
+and maintenance (net) 35,809 32,630 (9.7%)
+Depreciation and amortization expenses 30,742 26,405 (16.4%)
+Finance costs 16,578 14,649 (13.2%)
+Aircraft and engine rentals (net) 4,264 3,200 (33.3%)
+Airport fees and charges 16,582 15,155 (9.4%)
+Employee costs 22,737 20,448 (11.2%)
+Consumption of stock in trade 1,470 1,127 (30.4%)
+Other expenses 20,702 18,659 (10.9%)
+Total expenses (excl fuel & forex) 148,884 132,273 (12.6%)
+Aircraft fuel expenses 99,668 59,618 (67.2%)
+Foreign exchange (gain)/ loss (net) 13,332 28,921 53.9% 
+Total expenses 261,884 220,812 (18.6%)
+CASK* (INR) 6.22 5.16 (20.6%)
+CASK ex fuel* (INR) 3.77 3.71 (1.8%)
+CASK ex fuel ex forex* (INR) 3.45 3.01 (14.6%)
+Average Exchange Rate (USD/INR) 95.09 87.06 (9.2%)
+Closing Exchange Rate (USD/INR) 95.85 88.79 (8.0%)
+* Net of finance income of INR 8,220 million and INR 8,294 million for quarter ended Sep’26 and Sep’25 respectively
+9
+[[page 11]]
+Non-Ind AS measures - CASK
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25
+Total expenses 261,884 220,812 
+Less: finance income 8,220 8,294 
+Total expense less finance income (A) 253,664 212,518 
+ASK (millions) (B) 40,797 41,220 
+CASK (INR) (C=A/B) 6.22 5.16 
+Fuel cost/ ASK (INR)  (D) 2.44 1.45 
+CASK ex fuel (INR) (E=C-D) 3.77 3.71 
+Forex cost/ ASK (INR)  (F) 0.33 0.70 
+CASK ex fuel ex forex (INR) (G=E-F) 3.45 3.01 
+10
+[[page 12]]
+Non-Ind AS measures - EBITDAR
+Particulars (in INR million)
+Quarter Ended
+Sep’26 Sep’25
+PBT (18,765) (24,817)
+Finance cost 16,578 14,649 
+Less: Finance income 8,220 8,294 
+Depreciation & amortization 30,742 26,405 
+Aircraft and engine rentals 4,264 3,200 
+EBITDAR (A) 24,599 11,143 
+Forex* 11,554 26,860 
+EBITDAR ex-forex (B) 36,153 38,003 
+Revenue from Operations (C) 233,638 185,553 
+EBITDAR Margin (D=A/C) 10.5% 6.0%
+EBITDAR Margin ex-Forex (E=B/C) 15.5% 20.5%
+* including gain on forex hedging of INR 1,778 million and INR 2,061 million for quarter ended Sep’26 and Sep’25 respectively
+11
+[[page 13]]
+Cash and Debt
+399,290 385,167 
+127,564 149,985 
+526,854 535,152 
+Sep-26Sep-25
+Cash (INR mn)
+Free Cash Restricted Cash Total Cash
+551,592 496,514 
+321,439 
+251,624 
+873,031 
+748,138 
+Sep-26Sep-25
+Capitalized operating 
+lease liability
+Debt excluding capitalized 
+operating lease liability
+Total Debt
+Debt (INR mn)
+(1.6%) (16.7%)
+(14.9%)
++3.7%
+(27.7%)
+(11.1%)
+12
+[[page 14]]
+Financial performance indicators – Q2 FY27
+153,138 
+186,661 
+220,812 
+261,884 
+Q2FY24 Q2FY25 Q2FY26 Q2FY27
+10.5%6.0%14.3%16.4% (8.0%)(13.9%)(5.8%)1.3%
+Margin%
+155,029 177,590 195,995 
+243,119 
+Q2FY24 Q2FY25 Q2FY26 Q2FY27
+24,465 24,340 
+11,143 
+24,599 
+Q2FY24 Q2FY25 Q2FY26 Q2FY27
+Total revenue (INR mn)
+EBITDAR (INR mn)
+Total expenses (INR mn)
+PAT (INR mn)
+1,889 
+(9,867)
+(25,821)
+(18,791)
+Q2FY24 Q2FY25 Q2FY26 Q2FY27
+13
+[[page 15]]
+Definitions and Abbreviations
+14
+Term Description
+ASK Available Seat Kilometer
+CASK Total Cost net of finance income per Available Seat Kilometer
+CASK ex fuel Total Cost excluding fuel cost net of finance income per Available Seat Kilometer
+CASK ex fuel ex forex Total Cost excluding forex and fuel cost net of finance income per Available Seat Kilometer
+EBITDAR Earnings before finance income and cost, tax, depreciation & amortization, aircraft & engine rentals and exceptional items
+EBITDAR margin EBITDAR / Revenue from Operations
+Load Factor Revenue Passenger Kilometer /  Available Seat Kilometer
+PAT margin PAT / Revenue from Operations
+RASK Total Revenue net of finance income per Available Seat Kilometer 
+RPK Revenue Passenger Kilometer
+Yield Passenger Ticket Revenue / Revenue Passenger Kilometer
