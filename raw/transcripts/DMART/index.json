@@ -1,0 +1,26 @@
+[
+ {
+  "when": "Aug 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=deef7a97-c6ee-4727-804d-f00f23f54f71.pdf",
+  "file": "Aug_2026.txt",
+  "chars": 112294
+ },
+ {
+  "when": "Aug 2025",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=e4cebd20-3888-45ae-8c70-85fd68d60a74.pdf",
+  "file": "Aug_2025.txt",
+  "chars": 132735
+ },
+ {
+  "when": "Aug 2024",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=665e24d3-eb58-4e20-b8aa-7a32f9aa70c3.pdf",
+  "file": "Aug_2024.txt",
+  "chars": 125376
+ },
+ {
+  "when": "Jul 2024",
+  "url": "https://api.dmartindia.com/corporate/content/file/v1/2/nxWmnRKchjDixyjyLNUUq0wp1722949766/Transcript%20of%20Analyst%20Institutional%20Investor%20Call%20-%2030.07.2024.pdf",
+  "file": "Jul_2024.txt",
+  "chars": 125376
+ }
+]

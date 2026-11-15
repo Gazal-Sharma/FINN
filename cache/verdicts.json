@@ -1,0 +1,457 @@
+{
+ "nse:106856189": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine corporate social responsibility announcement.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106837197": {
+  "category": "capex",
+  "tier": "know",
+  "why": "Expansion of development center in Hyderabad.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106834219": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine announcement of industry award winners.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106832566": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Routine client win announcement for Infosys.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106830354": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Routine business update on project delivery.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106826996": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine auditor report filing.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106821945": {
+  "category": "earnings_call",
+  "tier": "know",
+  "why": "Scheduled announcement of quarterly financial results.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106857553": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine corporate recognition announcement.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106828619": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Corporate social responsibility initiative announcement.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106849153": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Company raised 6 billion via commercial paper.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106844222": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Allotment of 70 billion INR in NCDs.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106844210": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Allotment of INR 70 billion in NCDs.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106829445": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "QIP allotment increases equity and capital base",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106829444": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Vague filing lacks specific material information.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106829106": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Vague filing lacks specific material information.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823907": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Vague filing lacks specific material information.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823873": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Issuance of securities impacts equity dilution.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823856": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Vague filing lacks specific material information.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106829496": {
+  "category": "management_change",
+  "tier": "act",
+  "why": "Change in MD and CEO is significant.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106821168": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Generic regulatory filing without specific details.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106857193": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine disclosure of scheduled investor meetings.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106853322": {
+  "category": "investor_meetings",
+  "tier": "hidden",
+  "why": "Routine disclosure of scheduled investor meetings.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106838744": {
+  "category": "litigation",
+  "tier": "know",
+  "why": "Tax penalty appeal update for ICICI Bank.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106821131": {
+  "category": "management_change",
+  "tier": "know",
+  "why": "Board seeks RBI approval for Chairperson extension.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106854034": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Preferential issue of warrants to promoter.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106852542": {
+  "category": "results",
+  "tier": "act",
+  "why": "Submission of half yearly financial performance report.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106836343": {
+  "category": "fund_raise",
+  "tier": "know",
+  "why": "Company raised 2069.5 crore via NCDs.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823197": {
+  "category": "fund_raise",
+  "tier": "know",
+  "why": "Allotment of non-convertible securities.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106822208": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Issuance of securities impacts equity dilution.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106837294": {
+  "category": "litigation",
+  "tier": "act",
+  "why": "SEBI imposed one crore penalty on CDSL.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106832707": {
+  "category": "management_change",
+  "tier": "know",
+  "why": "Retirement of Senior Vice President, Operations.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106848291": {
+  "category": "management_change",
+  "tier": "know",
+  "why": "Appointment of new statutory auditor.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106848049": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine compliance certificate for commercial paper.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106858223": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine shareholder communication regarding share dematerialization.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106834504": {
+  "category": "management_change",
+  "tier": "act",
+  "why": "Chairman Noel Tata retiring from Trent Limited.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106834506": {
+  "category": "management_change",
+  "tier": "act",
+  "why": "Retirement of Chairman Noel Tata.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106834418": {
+  "category": "results",
+  "tier": "act",
+  "why": "Company released quarterly financial results.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106826524": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine transfer of shares to IEPF.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823642": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine regulatory compliance filing.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823380": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine shareholder communication without specific material impact.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823374": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Vague filing lacks specific material information.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106837941": {
+  "category": "M&A",
+  "tier": "know",
+  "why": "Extension of timeline for business transfer transaction.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106830809": {
+  "category": "earnings_call",
+  "tier": "know",
+  "why": "Analyst presentation for Q2/H1 FY27 results.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106851763": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine disclosure of scheduled investor meetings.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106832611": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine disclosure of upcoming investor meeting.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106830897": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine analyst and investor meeting notification.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106826247": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine analyst and investor meeting notification.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106822031": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Routine analyst and investor meeting notification.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106842234": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine RTA office address change.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823800": {
+  "category": "unclassified",
+  "tier": "know",
+  "why": "Corporate guarantee disclosure for third party.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106833561": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Minor subsidiary dissolution has negligible financial impact.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106827783": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "Potential IPO of major subsidiary Jio Platforms.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106823997": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Company issued a media statement.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106850251": {
+  "category": "litigation",
+  "tier": "act",
+  "why": "Receipt of notices from Department of Telecommunications.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106848593": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine compliance filing confirming no fund deviation.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106848587": {
+  "category": "fund_raise",
+  "tier": "hidden",
+  "why": "Routine monitoring report for share proceeds.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106847413": {
+  "category": "results",
+  "tier": "act",
+  "why": "Quarterly financial results filing.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106844705": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine RTA office address change.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106844634": {
+  "category": "litigation",
+  "tier": "act",
+  "why": "Regulatory notice received from Department of Telecommunications.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106843083": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine reminder for partly paid-up shares.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106837634": {
+  "category": "litigation",
+  "tier": "act",
+  "why": "Regulatory order received from TRAI.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106834064": {
+  "category": "litigation",
+  "tier": "act",
+  "why": "Regulatory notice received from Department of Telecommunications.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106828196": {
+  "category": "fund_raise",
+  "tier": "know",
+  "why": "Allotment of non-convertible securities.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106854012": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "Routine disclosure of parent company financial results.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106838789": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Monthly production volume data for Maruti Suzuki.",
+  "rule": "ai",
+  "source": "ai"
+ }
+}

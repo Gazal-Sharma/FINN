@@ -1,0 +1,1721 @@
+
+[[page 1]]
+bhartl 
+November 5, 2026 
+National Stock Exchange of India Limited 
+Exchange Plaza, C-1 Block G 
+Sandra Kurla Complex, Sandra (E) 
+Mumbai - 400051, India 
+Symbol: BHARTIARTL/ AIRTELPP 
+BSE Limited 
+Phiroze Jeejeebhoy Towers 
+Dalal Street, Mumbai - 400001, India 
+Scrip Code: 532454/ 890157 
+Sub: Quarterly report for the second quarter (Q2) and six months ended 
+September 301 2026 
+Dear Sir/ Madam, 
+Pursuant to the applicable provisions of SEBI (Listing Obligations and Disclosure 
+Requirements) Regulations, 2015, we are enclosing herewith the quarterly report for the 
+second quarter {Q2) and six months ended September 30, 2026 being released by the 
+Company. 
+Kindly take the same on record. 
+Thanking you, 
+Sincerely Yours, ~wte/ !.. 
+For Bharti Airtel Limited Jo··, \ 
+0) 0. 
+\.MA. ** * ')}/Rohit K\_"'1~s-n-a"""n.,.P..-cu-:-:r'.'!"1 • 
+Company Secretary & Compliance Officer 
+Encl: As above 
+Bharti Airtel Limited 
+(a Bharti Enterprise) 
+Regel. Office: Airtel Center, Plot No. 16, Udyog Vihar, Phase-IV Gurugram - 122015, India 
+Corporate Office: Bharti Crescent, 1, Nelson Mandela Road, Vasan1 Kunj, Phase II, New Delhi• 110070, India 
+T.: +91-124-4222222, F.: +91-124-4248063, Email: compkooce offlc:ei@bharti.in. Website: www.airtel in 
+-··· · - ·---··-···--· --- --·-
+[[page 2]]
+
+[[page 3]]
+                                                                                                                                             
+ 
+ 
+Page 1 of 58 
+ 
+Supplemental Disclosures 
+ 
+Safe Harbor: - Some information in this report may contain forward-looking 
+statements. We have based these forward-looking statements on our current 
+beliefs, expectations and intentions as to facts, actions and events that will or 
+may occur in the future. Such statements generally are identified by forward-
+looking words such as “believe,” “plan,” “anticipate,” “continue,” “estimate,” 
+“expect,” “may,” “will” or other similar words. 
+ 
+A forward-looking statement may include a statement of the assumptions or 
+basis underlying the forward-looking statement. We have chosen these 
+assumptions or basis in good faith, and we believe that they are reasonable 
+in all material respects. However, we caution you that forward-looking 
+statements and assumed facts or basis almost always vary from actual results, 
+and the differences between the results implied by the forward-looking 
+statements and assumed facts or basis and actual results can be material, 
+depending on the circumstances. You should also keep in mind that any 
+forward-looking statement made by us in this report or elsewhere speaks only 
+as of the date on which we made it. New risks and uncertainties come up from 
+time to time, and it is impossible for us to predict these events or how they 
+may affect us. We have no duty to, and do not intend to, update or revise the 
+forward-looking statements in this report after the date hereof. In light of these 
+risks and uncertainties, any forward-looking statement made in this report or 
+elsewhere may or may not occur and has to be understood and read along 
+with this supplemental disclosure. 
+ 
+General Risk: - Investment in equity and equity related securities involve a 
+degree of risk and investors should not invest any funds in this Company 
+without necessary diligence and relying on their own examination of Bharti 
+Airtel, along with the equity investment risk which doesn't guarantee capital 
+protection.  
+ 
+Convenience translation: - We publish our financial statements in Indian 
+Rupees. All references herein to “Indian Rupees” and “Rs” are to Indian 
+Rupees and all references herein to “US dollars” and “US$” are to United 
+States dollars. Translation of income statement items have been made from 
+Indian Rupees to United States dollars (unless otherwise indicated) using the 
+respective quarter average rate. Translation of Statement of financial position 
+items have been made from Indian Rupees to United States dollars (unless 
+otherwise indicated) using the closing rate. The rates announced by the 
+Reserve Bank of India are being used as the Reference rate for respective 
+translations. All amounts translated into United States dollars as described 
+above are provided solely for the convenience of the reader, and no 
+representation is made that the Indian Rupees or United States dollar amounts 
+referred to herein could have been or could be converted into United States 
+dollars or Indian Rupees respectively, as the case may be, at any particular 
+rate, the above rates or at all. Any discrepancies in any table between totals 
+and sums of the amounts listed are due to rounding off. 
+ 
+Functional Translation: - Africa financials reported in the quarterly report are 
+in its functional currency i.e. US$ (Refer “Section 10 Key Accounting Policies 
+as per Ind-AS”). South Asia financials reported in the quarterly report are in its 
+presentation currency i.e. Rs. 
+ 
+Use of Certain Non-GAAP measures: - This result announcement contains 
+certain information on the Company’s results of operations and cash flows that 
+have been derived from amounts calculated in accordance with Indian 
+Accounting Standards (Ind-AS), but are not in themselves Ind-AS measures. 
+They should not be viewed in isolation as alternatives to the equivalent Ind-
+AS measures and should be read in conjunction with the equivalent Ind-AS 
+measures.  
+ 
+Further, disclosures are also provided under “7.3 Use of Non - GAAP 
+Financial Information” on page 34 
+Others: In this report, the terms “we”, “us”, “our”, “Bharti”, or “the Company”, 
+unless otherwise specified or the context otherwise implies, refer to Bharti 
+Airtel Limited (“Bharti Airtel”) and its subsidiaries, joint venture and associates 
+Bharti Airtel Services Limited, Bharti Hexacom Limited, Bharti Telemedia 
+Limited, Airtel Limited, Nxtra Data Limited, Nxtra Africa Data RDC S.A.,Xtelify 
+Limited (formerly known as Airtel Digital Limited), Indus Towers Limited, Airtel 
+Payments Bank Limited, Indus Towers Employees Welfare Trust, Hughes 
+Communications India Private Limited,Indo Teleports Limited (formerly known 
+as Bharti Teleports Limited),Lavelle Networks Private Limited, Seychelles 
+Cable Systems Company Limited, One web India Communications Private. 
+Ltd, Bharti Airtel (France) SAS, Bharti Airtel (Hong Kong) Limited, Bharti Airtel 
+(UK) Limited , Bharti Airtel (USA) Limited, Bharti Airtel International 
+(Netherlands) B.V., Bharti International (Singapore) Pte Ltd , Network i2i 
+Limited., Airtel (Seychelles) Limited, Airtel Congo S.A, Airtel Gabon S.A., Airtel 
+Madagascar S.A., Airtel Malawi Public Limited Company, Airtel Mobile 
+Commerce B.V., Airtel Mobile Commerce Holdings B.V., Airtel Mobile 
+Commerce (Kenya) Limited, Airtel Mobile Commerce Limited, Airtel Mobile 
+Commerce Madagascar S.A., Airtel Mobile Commerce (Rwanda) Limited, 
+Airtel Mobile Commerce (Seychelles) Limited, Airtel Mobile 
+Commerce(Tanzania )Limited, Airtel Mobile Commerce Tchad S.A, Airtel 
+Mobile Commerce Uganda Limited, Airtel Mobile Commerce Zambia Limited 
+, Airtel Money (RDC) S.A., Airtel Money Niger S.A., Airtel Money S.A. , Airtel 
+Networks Kenya Limited, Airtel Networks Limited, Airtel Networks Zambia plc, 
+Airtel Rwanda Limited, Airtel Tanzania Public Limited Company, Airtel Tchad 
+S.A., Airtel Uganda Limited, Bharti Airtel Africa B.V., Bharti Airtel Chad 
+Holdings B.V. , Bharti Airtel Congo Holdings B.V., Bharti Airtel Developers 
+Forum Limited, Bharti Airtel Gabon Holdings B.V. , Bharti Airtel Kenya B.V., 
+Bharti Airtel Madagascar Holdings B.V. , Bharti Airtel Malawi Holdings B.V. , 
+Bharti Airtel Mali Holdings B.V., Bharti Airtel Niger Holdings B.V. , Bharti Airtel 
+Nigeria B.V. , Bharti Airtel RDC Holdings B.V. , Bharti Airtel Services B.V. , 
+Bharti Airtel Tanzania B.V., Bharti Airtel Uganda Holdings B.V., Bharti Airtel 
+Zambia Holdings B.V., Celtel (Mauritius) Holdings Limited, Airtel Congo (RDC) 
+S.A., Celtel Niger S.A., Channel Sea Management Company (Mauritius) 
+Limited, Congo RDC Towers S.A., Gabon Towers S.A. Indian Ocean Telecom 
+Limited, Millicom Ghana Company Limited, Mobile Commerce Congo S.A., 
+Montana International, Partnership Investments Sarlu, Bharti Airtel Rwanda 
+Holdings Limited , Airtel Money Transfer Limited, Airtel Money Tanzania 
+Limited , Airtel Mobile Commerce (Nigeria) Limited , Airtel Mobile 
+Management Services FZ-LLC, Airtel Africa Mauritius Limited, Airtel Africa 
+Plc, Airtel Mobile Commerce Nigeria B.V., Bharti Airtel Employees Welfare 
+Trust, Airtel Mobile Commerce (Seychelles) B.V. , Airtel Mobile Commerce 
+Congo B.V., Airtel Mobile Commerce Kenya B.V., Airtel Mobile Commerce 
+Madagascar B.V., Airtel Mobile Commerce Malawi B.V. , Airtel Mobile 
+Commerce Rwanda B.V. , Airtel Mobile Commerce Tchad B.V., Airtel Mobile 
+Commerce Uganda B.V. , Airtel Mobile Commerce Zambia B.V., Airtel 
+International LLP , Airtel Mobile Commerce DRC B.V., Airtel Mobile 
+Commerce Gabon B.V., Airtel Mobile Commerce Niger B.V., Airtel Money 
+Kenya Limited, Network I2I (UK) Limited, The Airtel Africa Employee Benefit 
+Trust, Airtel Africa Services (UK) Limited, Airtel Mobile Commerce Services 
+Limited, SmartCash Payment Service Bank Limited, Airtel Africa Telesonic 
+Holdings Limited, Airtel Africa Telesonic Limited, Airtel Congo Telesonic 
+Holdings (UK) Limited, Airtel DRC Telesonic Holdings (UK) Limited , Airtel 
+Gabon Telesonic Holdings (UK) Limited , Airtel Kenya Telesonic Holdings 
+(UK) Limited , Airtel Madagascar Telesonic Holdings (UK) Limited, Airtel (M) 
+Telesonic Holdings (UK) Limited , Airtel Niger Telesonic Holdings (UK) Limited 
+, Airtel Nigeria Telesonic Holdings (UK) Limited, Airtel Rwanda Telesonic 
+Holdings (UK) Limited , Bharti Airtel Ghana Holdings B.V., Airtel Seychelles 
+Telesonic Holdings (UK) Limited , Airtel Tanzania Telesonic Holdings (UK) 
+Limited, Airtel Uganda Telesonic Holdings (UK) Limited , Airtel Zambia 
+Telesonic Holdings (UK) Limited , Airtel Tchad Telesonic Holdings (UK) 
+Limited, Airtel (M) Telesonic Limited, Airtel Kenya Telesonic Limited, Airtel 
+Nigeria Telesonic Limited, Airtel Rwanda Telesonic Limited, Airtel Telesonic 
+Uganda Limited, Airtel Zambia Telesonic Limited, Airtel (Seychelles) 
+Telesonic Limited, Nxtra Africa Data Holdings Limited, Nxtra Congo Data 
+Holdings (UK) Limited, Nxtra DRC Data Holdings (UK) Limited, Nxtra Gabon 
+Data Holdings (UK) Limited, Nxtra Kenya Data Holdings (UK) Limited, Airtel 
+Mobile Commerce Tanzania B.V., Nxtra Nigeria Data Holdings (UK) Limited, 
+Airtel Congo RDC Telesonic S.A.U., Nxtra Africa Data (Nigeria) Limited, 
+Mawezi RDC S.A., HCIL Netcom India Private Ltd, HCIL Comtel Private 
+Limited, Airtel Gabon Telesonic S.A., Nxtra Africa Data (Kenya) Limited, Airtel 
+Money Trust Fund , The Registered Trustees of Airtel Money Trust Fund, 
+Nxtra Africa Data (Nigeria) FZE, Beetel Teletech Limited, Beetel Teletech 
+Singapore Private Limited, Dixon Electro Appliances Private Limited, Robi 
+Axiata PLC, Reddot Digital Limited, Rventures PLC, SmartPay Limited, 
+AxEnTec PLC, Nxtra Africa Data (Kenya) SEZ Limited, SmarTx Services 
+Limited, Airtel Money Limited ,Indus Towers FZE, Indus Towers Investment 
+FZE, Indus Towers Management FZE, Indus Towers Ventures FZE, Nxtra 
+Vizag Limited, Bridge Mobile Pte Limited, Indus Infra Uganda Limited, Indus 
+Towers Infra Zambia Limited, Indus Towers Nigeria Limited, Airtel Global IFSC 
+Limited, Indus Towers Global Ventures IFSC Limited, Rochak Systems 
+Private Limited, Rovision Tech Hub Private Limited 
+ 
+Disclaimer: - This communication does not constitute an offer of securities 
+for sale in the United States. Securities may not be sold in the United States 
+absent registration or an exemption from registration under the U.S. 
+Securities Act of 1933, as amended.  Any public offering of securities to be 
+made in the United States will be made by means of a prospectus and will 
+contain detailed information about the Company and its management, as 
+well as financial statemen
+[[page 4]]
+        
+ 
+ 
+Page 2 of 58 
+ 
+ 
+TABLE OF CONTENTS  
+ 
+  
+Section 1 Bharti Airtel – Performance at a glance 3 
+Section 2 Bharti Airtel - An Introduction 6 
+Section 3 Financial Highlights as per Ind-AS  
+3.1 Consolidated - Summary of Consolidated Financial Statements 7 
+3.2 Region wise  - Summary of Statement of Operations 9 
+3.3 Segment wise  - Summary of Statement of Operations 12 
+3.4 Region wise & Segment wise  - Investment & Contribution 15 
+Section 4 Operating Highlights 17 
+Section 5 Management Discussion & Analysis 20 
+5.1 Reporting Changes 20 
+5.2 India 20 
+5.3 Africa 21 
+5.4 Share of Associates / Joint Ventures 22 
+5.5 Result of Operation 23 
+5.6 Three Line Graph 26 
+Section 6 Stock Market Highlights 27 
+Section 7 Detailed Financial and Related Information 29 
+Section 8 Region wise Cost Schedules 35 
+Section 9 
+Section 10 
+Section 11 
+Trends and Ratio Analysis 
+Key Accounting Policies as per Ind-AS 
+Glossary 
+37 
+48 
+52 
+   
+ 
+ 
+[[page 5]]
+        
+ 
+ 
+Page 3 of 58 
+ 
+ 
+SECTION 1- PERFORMANCE AT A GLANCE 
+ 
+Consolidated 
+ 
+Full Year Ended Quarter Ended
+2024 2025 2026 Sep-25 Dec-25 Mar-26 Jun-26 Sep-26
+Operating Highlights
+Total Customer Base 000’s 561,970 590,514 665,966 623,554 645,307 665,966 680,889 692,579
+Total Minutes on Network Mn Min 5,199,438 5,468,824 5,657,617 1,404,552 1,424,105 1,435,875 1,439,782 1,445,730
+Network Towers Nos 355,150 375,146 386,290 380,653 382,613 386,290 388,791 390,478
+Total Employees Nos 27,182 28,673 28,730 28,701 28,567 28,730 28,743 28,884
+No. of countries of operation Nos 17 17 17 17 17 17 17 17
+Population Covered Bn 2 2 2 2 2 2 2 2
+Consolidated Financials (Rs Mn)
+Total revenues Rs Mn 1,643,643 1,815,110 2,109,728 521,454 539,816 553,832 585,391 608,775
+EBITDA Rs Mn 889,064 1,049,994 1,212,676 299,190 311,436 320,382 335,986 352,395
+EBITDAaL Rs Mn 782,065 932,961 1,079,460 266,003 277,046 286,466 298,396 314,884
+EBIT Rs Mn 452,044 569,567 680,996 166,691 176,537 181,560 192,816 205,560
+Cash profit from operations before Derivative & 
+Exchange Fluctuations Rs Mn 720,012 851,384 994,871 246,595 257,229 263,176 283,440 300,273
+Profit before tax Rs Mn 250,532 369,712 485,902 123,223 125,581 132,054 141,262 156,082
+Net income (before exceptional items) Rs Mn 116,201 177,611 269,042 67,916 69,199 72,449 80,572 90,151
+Net income (after exceptional items) Rs Mn 77,820 337,440 266,952 67,916 66,305 73,251 81,674 88,875
+Capex Rs Mn 489,268 422,904 475,218 113,623 117,869 160,656 133,860 124,668
+Operating Free Cash Flow (EBITDA - Capex) Rs Mn 399,796 627,090 737,458 185,567 193,567 159,726 202,126 227,727
+Operating Free Cash Flow (EBITDAaL - Capex) Rs Mn 292,798 510,057 604,242 152,379 159,178 125,810 164,536 190,216
+Net Debt Rs Mn 1,943,799 2,038,384 1,647,888 1,947,131 1,826,206 1,647,888 1,572,396 1,665,805
+Net Debt (excluding Lease obligations) Rs Mn 1,452,207 1,385,086 910,485 1,266,513 1,124,912 910,485 818,521 882,771
+Shareholder's Equity Rs Mn 820,188 1,136,718 1,490,565 1,177,959 1,247,950 1,490,565 1,618,151 1,580,470
+Consolidated Financials (US$ Mn)
+Total Revenue 1 US$ Mn 19,865 21,491 23,875 5,974 6,063 6,038 6,175 6,375
+EBITDA 1 US$ Mn 10,745 12,432 13,724 3,428 3,498 3,493 3,544 3,690
+EBITDAaL1 US$ Mn 9,452 11,046 12,216 3,048 3,112 3,123 3,148 3,298
+EBIT 1 US$ Mn 5,463 6,744 7,707 1,910 1,983 1,979 2,034 2,153
+Cash profit from operations before Derivative & 
+Exchange Fluctuations 1 US$ Mn 8,702 10,080 11,259 2,825 2,889 2,869 2,990 3,145
+Profit before Tax 1 US$ Mn 3,028 4,377 5,499 1,412 1,411 1,440 1,490 1,635
+Net income (before exceptional items)1 US$ Mn 1,404 2,103 3,045 778 777 790 850 944
+Net income (after exceptional items)1 US$ Mn 941 3,995 3,021 778 745 799 862 931
+Capex 1 US$ Mn 5,913 5,007 5,378 1,302 1,324 1,752 1,412 1,306
+Operating Free Cash Flow (EBITDA - Capex) US$ Mn 4,832 7,425 8,346 2,126 2,174 1,741 2,132 2,385
+Operating Free Cash Flow (EBITDAaL - Capex) US$ Mn 3,539 6,039 6,838 1,746 1,788 1,372 1,736 1,992
+Net Debt 2 US$ Mn 23,314 23,818 17,410 21,938 20,304 17,410 16,665 17,346
+Net Debt (excluding Lease obligations)2 US$ Mn 17,418 16,184 9,619 14,270 12,507 9,619 8,675 9,192
+Shareholder's Equity 2 US$ Mn 9,837 13,282 15,747 13,272 13,875 15,747 17,150 16,458
+Key Ratios
+EBITDA Margin % 54.1% 57.8% 57.5% 57.4% 57.7% 57.8% 57.4% 57.9%
+EBITDAaL Margin % 47.6% 51.4% 51.2% 51.0% 51.3% 51.7% 51.0% 51.7%
+EBIT Margin % 27.5% 31.4% 32.3% 32.0% 32.7% 32.8% 32.9% 33.8%
+Net Profit (before exceptional items) Margin % 7.1% 9.8% 12.8% 13.0% 12.8% 13.1% 13.8% 14.8%
+Net Debt to Funded Equity Ratio Times 2.37 1.79 1.11 1.65 1.46 1.11 0.97 1.05
+Net Debt to EBITDA (Annualised) Times 2.19 1.94 1.36 1.63 1.47 1.29 1.17 1.18
+Net Debt (excluding Lease obligations) to EBITDAaL 
+(Annualised) Times 1.86 1.48 0.84 1.19 1.02 0.79 0.69 0.70
+Interest Coverage ratio Times 5.79 6.21 6.80 6.62 6.98 7.31 7.64 7.90
+Return on Shareholder's Equity (Post Tax) % 19.0% 34.5% 20.3% 32.4% 25.1% 19.5% 18.6% 19.4%
+Return on Shareholder's Equity (Pre Tax) % 16.5% 34.2% 25.9% 32.2% 27.2% 24.8% 24.4% 25.8%
+Return on Capital employed (Annualised) % 14.8% 17.3% 19.0% 18.9% 20.0% 20.4% 21.5% 22.7%
+Valuation Indicators
+Market Capitalization Rs Bn 7,273 10,378 10,874 11,262 12,671 10,874 11,559 10,973
+Market Capitalization US$ Bn 87.2 121.3 114.9 126.9 140.9 114.9 122.5 114.3
+Enterprise Value Rs Bn 9,216 12,416 12,522 13,209 14,497 12,522 13,131 12,639
+EV / EBITDA Times 10.37 11.83 10.33 11.04 11.64 9.77 9.77 8.97
+PE Ratio Times 91.89 29.37 38.83 27.77 39.65 38.83 37.75 34.08
+Particulars Unit
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+FY24 and FY25 have been re-casted for P&L, capex, Net debt, Enterprise value, cumulative investments, total employees and related key ratios to make it comparable. The impact of the 
+business combination and purchase price allocation has been considered from the effective date of consolidation (i.e. November 19, 2024), while the relative impact of depreciation, amortization 
+and tax has been reflected across all periods presented. 
+Note 1: Average exchange rates used for Rupee conversion to US$ is (a) Rs 82.74 for the financial year ended March 31, 2024, (b) Rs 84.46 for the financial year ended March 31, 2025, (c) 
+Rs 88.36 for the financial year ended March 31, 2026, (d) Rs 87.28 for the quarter ended September 30, 2025, (e) Rs 89.03  for the quarter ended December 31, 2025, (f) Rs 91.72  for the 
+quarter ended March 31, 2026, (g) Rs 94.80 for the quarter ended June 30, 2026, (h) Rs 95.49  for the quarter ended September 30, 2026 based on the RBI Reference rate.  
+Note 2: Closing exchange rates used for Rupee conversion to US$ is (a) Rs 83.37 for the financial year ended March 31, 2024, (b) Rs 85.58 for the financial year ended March 31, 2025, (c) 
+Rs 94.65 for the financial year ended March 31, 2026, (d) Rs 88.76 for the quarter ended September 30, 2025, (e) Rs 89.94 for the quarter ended December 31, 2025, (f) Rs 94.65 for the 
+quarter ended March 31, 2026, (g) Rs 94.35 for the quarter ended June 30, 2026, (h) Rs 96.03 for the quarter ended September 30, 2026 being the RBI Reference rate. 
+[[page 6]]
+        
+ 
+ 
+Page 4 of 58 
+ 
+ 
+India SA (includes Passive infrastructure services) 
+Full Year Ended Quarter Ended
+2024 2025 2026 Sep-25 Dec-25 Mar-26 Jun-26 Sep-26
+Operating Highlights
+Total Customer Base 000’s 409,252 424,461 482,421 449,738 465,918 482,421 491,890 498,685
+Total Minutes on Network Mn Min 4,694,994 4,898,637 5,056,945 1,254,914 1,271,587 1,285,691 1,282,960 1,287,540
+Network Towers Nos 320,616 338,029 345,912 342,339 343,486 345,912 347,491 347,988
+Total Employees Nos 23,050 24,420 24,218 24,391 24,186 24,218 24,202 24,372
+No. of countries of operation Nos 3 3 3 3 3 3 3 3
+India SA Financials (Rs Mn)
+Total revenues Rs Mn 1,244,083 1,406,052 1,550,658 386,901 392,255 395,656 412,140 423,079
+EBITDA Rs Mn 688,048 855,015 931,966 232,039 236,759 239,653 247,810 257,294
+EBITDAaL Rs Mn 622,240 783,746 857,295 212,977 217,303 221,624 227,875 237,780
+EBIT Rs Mn 316,417 445,076 493,605 121,919 125,920 127,620 133,346 140,866
+Cash profit from operations before Derivative & 
+Exchange Fluctuations Rs Mn 565,267 721,472 802,625 204,653 207,364 204,160 216,859 235,307
+Profit before tax Rs Mn 194,952 313,683 373,777 97,423 98,639 95,601 103,673 120,001
+Net income (before exceptional items) Rs Mn 106,107 172,019 244,844 65,922 65,115 60,887 68,717 82,037
+Net income (after exceptional items) Rs Mn 90,805 335,326 242,770 65,922 62,238 61,690 72,615 82,037
+Capex Rs Mn 428,239 366,204 396,539 96,429 92,495 134,882 96,982 99,077
+Operating Free Cash Flow (EBITDA - Capex) Rs Mn 259,809 488,811 535,427 135,610 144,264 104,771 150,828 158,217
+Operating Free Cash Flow (EBITDAaL - Capex) Rs Mn 194,001 417,543 460,756 116,548 124,809 86,742 130,894 138,704
+Net Debt Rs Mn 1,651,759 1,579,422 1,121,135 1,457,913 1,317,844 1,121,135 1,034,772 1,102,036
+Net Debt (excluding Lease obligations) Rs Mn 1,334,349 1,239,418 783,543 1,121,567 982,384 783,543 693,145 750,841
+Shareholder's Equity Rs Mn 876,452 1,189,423 1,489,369 1,184,600 1,272,091 1,489,369 1,846,943 1,799,932
+India SA Financials (US$ Mn)
+Total Revenue 1 US$ Mn 15,036 16,648 17,548 4,433 4,406 4,314 4,347 4,431
+EBITDA 1 US$ Mn 8,316 10,123 10,547 2,658 2,659 2,613 2,614 2,694
+EBITDAaL1 US$ Mn 7,520 9,280 9,702 2,440 2,441 2,416 2,404 2,490
+EBIT 1 US$ Mn 3,824 5,270 5,586 1,397 1,414 1,391 1,407 1,475
+Cash profit from operations before Derivative & 
+Exchange Fluctuations 1 US$ Mn 6,832 8,542 9,083 2,345 2,329 2,226 2,287 2,464
+Profit before Tax 1 US$ Mn 2,356 3,714 4,230 1,116 1,108 1,042 1,094 1,257
+Net income (before exceptional items)1 US$ Mn 1,282 2,037 2,771 755 731 664 725 859
+Net income (after exceptional items)1 US$ Mn 1,097 3,970 2,747 755 699 673 766 859
+Capex 1 US$ Mn 5,176 4,336 4,488 1,105 1,039 1,471 1,023 1,038
+Operating Free Cash Flow (EBITDA - Capex) US$ Mn 3,140 5,788 6,059 1,554 1,620 1,142 1,591 1,657
+Operating Free Cash Flow (EBITDAaL - Capex) US$ Mn 2,345 4,944 5,214 1,335 1,402 946 1,381 1,453
+Net Debt 2 US$ Mn 19,811 18,455 11,845 16,426 14,652 11,845 10,967 11,476
+Net Debt (excluding Lease obligations)2 US$ Mn 16,004 14,482 8,278 12,637 10,922 8,278 7,346 7,819
+Shareholder's Equity 2 US$ Mn 10,512 13,898 15,735 13,347 14,143 15,735 19,575 18,743
+Key Ratios
+EBITDA Margin % 55.3% 60.8% 60.1% 60.0% 60.4% 60.6% 60.1% 60.8%
+EBITDAaL Margin % 50.0% 55.7% 55.3% 55.0% 55.4% 56.0% 55.3% 56.2%
+EBIT Margin % 25.4% 31.7% 31.8% 31.5% 32.1% 32.3% 32.4% 33.3%
+Net Profit (before exceptional items) Margin % 8.5% 12.2% 15.8% 17.0% 16.6% 15.4% 16.7% 19.4%
+Net Debt to EBITDA (Annualised) Times 2.40 1.85 1.20 1.57 1.39 1.17 1.04 1.07
+Net Debt (excluding Lease obligations) to 
+EBITDAaL (Annualised) Times 2.14 1.58 0.91 1.32 1.13 0.88 0.76 0.79
+Interest Coverage ratio Times 5.86 7.42 8.59 8.35 8.79 9.32 9.94 10.33
+Return on Shareholder's Equity (Post Tax) % 11.0% 32.5% 18.1% 30.5% 23.5% 17.6% 15.7% 15.3%
+Return on Shareholder's Equity (Pre Tax) % 18.6% 31.5% 20.6% 28.4% 23.2% 20.0% 18.3% 18.0%
+Return on Capital employed (Annualised) % 11.8% 15.5% 16.5% 16.4% 17.2% 17.5% 17.5% 17.6%
+Particulars Unit
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+FY24 and FY25 have been re-casted for P&L, capex, Net debt, Enterprise value, cumulative investments, total employees and related key ratios to make it comparable. The impact of the 
+business combination and purchase price allocation has been considered from the effective date of consolidation (i.e. November 19, 2024), while the relative impact of depreciation, amortization 
+and tax has been reflected across all periods presented. 
+Note 1: Average exchange rates used for Rupee conversion to US$ is (a) Rs 82.74 for the financial year ended March 31, 2024, (b) Rs 84.46 for the financial year ended March 31, 2025, (c) 
+Rs 88.36 for the financial year ended March 31, 2026, (d) Rs 87.28 for the quarter ended September 30, 2025, (e) Rs 89.03  for the quarter ended December 31, 2025, (f) Rs 91.72  for the 
+quarter ended March 31, 2026, (g) Rs 94.80 for the quarter ended June 30, 2026, (h) Rs 95.49 for the quarter ended September 30, 2026 based on the RBI Reference rate.  
+Note 2: Closing exchange rates used for Rupee conversion to US$ is (a) Rs 83.37 for the financial year ended March 31, 2024, (b) Rs 85.58 for the financial year ended March 31, 2025, (c) 
+Rs 94.65 for the financial year ended March 31, 2026, (d) Rs 88.76 for the quarter ended September 30, 2025, (e) Rs 89.94 for the quarter ended December 31, 2025, (f) Rs 94.65 for the 
+quarter ended March 31, 2026, (g) Rs 94.35 for the quarter ended June 30, 2026, (h) Rs 96.03 for the quarter ended September 30, 2026 being the RBI Reference rate. 
+[[page 7]]
+        
+ 
+ 
+Page 5 of 58 
+ 
+ 
+Africa 
+ 
+Full Year Ended Quarter Ended
+2024 2025 2026 Sep-25 Dec-25 Mar-26 Jun-26 Sep-26
+Operating Highlights
+Total Customer Base 000’s 152,719 166,053 183,545 173,816 179,389 183,545 188,999 193,893
+Total Minutes on Network Mn Min 504,444 570,187 600,673 149,638 152,518 150,185 156,822 158,190
+Network Towers Nos 34,534 37,117 40,378 38,314 39,127 40,378 41,300 42,490
+Total Employees Nos 4,132 4,253 4,512 4,310 4,381 4,512 4,541 4,512
+No. of countries of operation Nos 14 14 14 14 14 14 14 14
+Africa Financials (Rs Mn)
+Total revenues Rs Mn 411,841 418,795 568,064 136,795 150,100 160,335 175,657 188,165
+EBITDA Rs Mn 201,016 194,978 280,713 67,150 74,678 80,729 88,177 95,100
+EBITDAaL Rs Mn 159,825 149,215 222,165 53,026 59,743 64,842 70,520 77,103
+EBIT Rs Mn 135,627 124,491 187,398 44,773 50,619 53,941 59,470 64,692
+Cash profit from operations before Derivative & 
+Exchange Fluctuations Rs Mn 163,843 140,273 205,774 49,636 55,697 59,016 66,581 74,231
+Profit before tax Rs Mn 61,197 64,504 125,705 33,496 32,754 36,166 37,643 45,193
+Net Income Reported Rs Mn (13,612) 18,623 60,013 15,460 15,797 18,253 15,128 20,162
+Less: NCI And Others Rs Mn (5,841) 7,955 22,389 5,768 5,913 6,907 6,028 4,173
+Net income Rs Mn (7,771) 10,668 37,624 9,692 9,885 11,346 9,100 15,989
+Capex Rs Mn 61,028 56,700 78,679 17,195 25,373 25,774 36,878 25,591
+Operating Free Cash Flow (EBITDA - Capex) Rs Mn 139,987 138,278 202,034 49,955 49,305 54,955 51,299 69,509
+Operating Free Cash Flow (EBITDAaL - Capex) Rs Mn 98,797 92,515 143,486 35,831 34,370 39,067 33,642 51,512
+Net Debt Rs Mn 292,040 458,962 526,751 489,218 508,362 526,751 537,622 563,767
+Net Debt (excluding Lease obligations) Rs Mn 117,858 145,667 126,939 144,946 142,528 126,939 125,374 131,929
+Shareholder's Equity Rs Mn 102,107 132,475 186,376 152,583 161,039 186,376 239,885 249,214
+Africa Financials (US$ Mn)
+Total Revenue 1 US$ Mn 4,977 4,959 6,429 1,567 1,685 1,748 1,853 1,970
+EBITDA 1 US$ Mn 2,429 2,309 3,177 770 838 880 930 996
+EBITDAaL1 US$ Mn 1,932 1,765 2,514 606 670 707 744 807
+EBIT 1 US$ Mn 1,639 1,474 2,121 513 567 588 627 677
+Cash profit from operations before Derivative & 
+Exchange Fluctuations 1 US$ Mn 1,980 1,661 2,329 569 623 644 702 777
+Profit before Tax 1 US$ Mn 740 764 1,423 383 367 396 397 473
+Net Income Reported US$ Mn (165) 220 679 177 177 199 160 211
+Less: NCI And Others US$ Mn (71) 94 253 66 67 74 64 44
+Net income 1 US$ Mn (94) 126 426 111 110 125 96 167
+Capex 1 US$ Mn 738 671 890 197 285 281 389 268
+Operating Free Cash Flow (EBITDA - Capex) US$ Mn 1,692 1,637 2,286 573 553 599 541 728
+Operating Free Cash Flow (EBITDAaL - Capex) US$ Mn 1,194 1,094 1,624 409 385 426 355 539
+Net Debt 2 US$ Mn 3,503 5,363 5,565 5,512 5,652 5,565 5,698 5,871
+Net Debt (excluding Lease obligations)2 US$ Mn 1,414 1,702 1,341 1,633 1,585 1,341 1,329 1,374
+Shareholder's Equity 2 US$ Mn 1,225 1,548 1,969 1,719 1,790 1,969 2,542 2,595
+Key Ratios
+EBITDA Margin % 48.8% 46.6% 49.4% 49.1% 49.8% 50.4% 50.2% 50.5%
+EBITDAaL Margin % 38.8% 35.6% 39.1% 38.8% 39.8% 40.4% 40.1% 41.0%
+EBIT Margin % 32.9% 29.7% 33.0% 32.7% 33.7% 33.6% 33.9% 34.4%
+Net Profit Margin % -1.9% 2.5% 6.6% 7.1% 6.6% 7.1% 5.2% 8.5%
+Net Debt to EBITDA (Annualised) Times 1.45 2.35 1.88 1.82 1.70 1.63 1.52 1.48
+Net Debt (excluding Lease obligations) to 
+EBITDAaL (Annualised) Times 0.74 0.98 0.57 0.68 0.60 0.49 0.44 0.43
+Interest Coverage ratio Times 5.58 3.62 4.03 3.86 4.21 4.46 4.63 4.83
+Return on Shareholder's Equity (Post Tax) % -5.7% 9.1% 23.6% 17.6% 18.5% 21.7% 18.8% 18.9%
+Return on Shareholder's Equity (Pre Tax) % -2.2% 26.1% 44.3% 37.5% 36.9% 40.6% 40.9% 42.8%
+Return on Capital employed (Annualised) % 24.9% 21.1% 24.1% 24.2% 26.0% 26.1% 27.5% 29.0%
+Particulars Unit
+ 
+ 
+Note 1: Average exchange rates used for Rupee conversion to US$ is (a) Rs 82.74 for the financial year ended March 31, 2024, (b) Rs 84.46 for the financial year ended March 31, 2025, (c) 
+Rs 88.36 for the financial year ended March 31, 2026, (d) Rs 87.28 for the quarter ended September 30, 2025, (e) Rs 89.03  for the quarter ended December 31, 2025, (f) Rs 91.72  for the 
+quarter ended March 31, 2026, (g) Rs 94.80 for the quarter ended June 30, 2026, (h) Rs 95.49 for the quarter ended September 30, 2026 based on the RBI Reference rate.  
+Note 2: Closing exchange rates used for Rupee conversion to US$ is (a) Rs 83.37 for the financial year ended March 31, 2024, (b) Rs 85.58 for the financial year ended March 31, 2025, (c) 
+Rs 94.65 for the financial year ended March 31, 2026, (d) Rs 88.76 for the quarter ended September 30, 2025, (e) Rs 89.94 for the quarter ended December 31, 2025, (f) Rs 94.65 for the 
+quarter ended March 31, 2026, (g) Rs 94.35 for the quarter ended June 30, 2026 , (h) Rs 96.03 for the quarter ended September 30, 2026 being the RBI Reference rate. 
+[[page 8]]
+        
+ 
+ 
+Page 6 of 58 
+ 
+ 
+SECTION 2 
+ 
+BHARTI AIRTEL - AN INTRODUCTION 
+ 
+2.1 Introduction  
+ 
+We are one of the world’s leading providers of telecommunication 
+services with presence in 17 countries representing India, 14 
+countries in Africa and presence in Bangladesh and Srilanka 
+through associate entities. As per United Nations data published 
+on January 01, 2013, the population of these 17 countries 
+represents around 24% of the world’s population.  
+ 
+We provide telecom services under wireless and fixed line 
+technology, national and international long distance connectivity 
+and Digital TV; and complete integrated telecom solutions to our 
+enterprise customers. All these services are rendered under a 
+unified brand “airtel”. ‘Airtel Money’ (known as ‘Airtel Payments 
+Bank’ in India) extends our product portfolio to further our financial 
+inclusion agenda and offers convenience of payments and money 
+transfers on mobile phones over secure and stable platforms in 
+India, and across all 14 countries in Africa. The Company also has 
+investments in Tower Infrastructure pertaining to telecom 
+operations through its subsidiary entity. 
+ 
+The shares of Bharti Airtel Ltd are listed on the Indian Stock 
+Exchanges, NSE & BSE. 
+ 
+2.2      Business Divisions 
+ 
+2.2.1   India & South Asia – We follow a segmented approach for 
+our operations in India with clear focus on retail and corporate 
+customers.  
+ 
+B2C Services: 
+ 
+Mobile Services (India) –We offer postpaid, pre-paid, roaming, 
+internet and other value added services. Our distribution channel 
+is spread across 0.9 Mn outlets with network presence in  7,905 
+census and  835,075  non-census towns and villages in India 
+covering approximately 97.5% of the country’s population. 
+ 
+Our services are spread across the country offering high-speed 
+internet access and a host of innovative services like Mobile TV, 
+video calls, live-streaming videos, gaming, buffer-less HD video 
+streaming and multi-tasking capabilities to our customers. 
+ 
+Our national long distance infrastructure provides a pan-India 
+reach with  552,373  R Kms of optical fiber. 
+ 
+Homes Services – The Company provides fixed-line telephone 
+and broadband services for homes in  1,669  cities (including 
+LCOs) pan-India. The product offerings includes high-speed 
+broadband on copper and fiber and voice connectivity, up to the 
+speeds of 1 Gbps for the home segment. 
+ 
+Digital TV Services – Our Direct-To-Home (DTH) platform offers 
+both standard and high definition (HD) digital TV services with 3D 
+capabilities and Dolby surround sound. We currently offer a total of 
+700 channels including 98 HD channels, 69 SVOD services, 4 
+international channels and 5 interactive services. 
+IPTV services were launched in Q4’25 covering more than 2000 
+cities. 
+B2B Services: 
+ 
+Airtel Business – We stand tall as India’s premier and among the 
+most trusted ICT services provider, offering a comprehensive 
+portfolio of cutting-edge solutions for enterprises, governments, 
+global carriers, OTT platforms and SMEs. Renowned for its 
+innovative integrated approach, superior customer experience and 
+unparalleled global reach, We continue to redefine the digital 
+landscape. With an exceptional network backbone, we serve 
+businesses of all sizes across India, the US, Europe, Africa, the 
+Middle East, Asia-Pacific and SAARC nations.  
+Our core offerings include robust fixed-line voice solutions such as 
+Primary Rate Interfaces (PRIs), comprehensive data connectivity 
+services like Multiprotocol Label Switching (MPLS), Voice over 
+Internet Protocol (VoIP) and Session Initiation Protocol (SIP) 
+trunking, alongside advanced conferencing tools for voice, video 
+and web conferencing. Airtel Business drives digital transformation 
+through cutting-edge network integration, Communications 
+Platform as a Service (CPaaS), Internet of Things (IoT), managed 
+services, enterprise mobility applications and cloud and 
+cybersecurity – all designed to enhance operational efficiency and 
+customer engagement. 
+Our global services portfolio ensures uninterrupted voice and data 
+connectivity worldwide, including international toll-free services 
+and SMS hubbing. Our expansive global network spans over 
+421,000 Rkms, covering more than 50 countries and five 
+continents, underscoring our commitment to ubiquitous, high-
+speed connectivity. We deliver a seamless customer experience 
+through a unified approach that streamlines billing systems, offers 
+intuitive interfaces and ensure personalized support. 
+ 
+Passive Infrastructure Services- We offer passive infrastructure 
+service through our subsidiary, Indus Towers Limited (Indus), 
+which is one of the largest tower infrastructure providers in the 
+country as well as globally. The business of Indus is to acquire, 
+build, own, operate and maintain tower and related infrastructure. 
+The Company provides access to their towers primarily to wireless 
+telecommunications service providers on a shared basis, under 
+long -term contracts. It caters to all wireless telecommunication 
+service providers in India. Indus has a nationwide presence with 
+operations in all 22 telecommunications Circles in India. Indus 
+Towers Limited is listed on NSE and BSE. 
+ 
+South Asia – South Asia represents operations in Sri Lanka and 
+Bangladesh. In Sri Lanka, post our stakeholding sale, we are now 
+operating through our associate entity Dialog Axiata Plc. Our 
+shareholding in Dialog is 10.355% w.e.f June 26,2024. 
+ 
+In Bangladesh, we operate through our joint venture entity Robi 
+Axiata Ltd. Robi Axiata Limited is a joint venture between Axiata 
+Group Berhad, of Malaysia and  Bharti Airtel Limited. Pursuant to 
+IPO of Robi Axiata Limited, our shareholding is 28.18% w.e.f. 
+December 10, 2020. 
+ 
+2.2.2      Africa 
+Our subsidiary, Airtel Africa plc is a leading provider of 
+telecommunications and mobile money services, with operations in 
+14 countries in sub-Saharan Africa, namely: Nigeria, Chad, Congo 
+B, Democratic Republic of Congo, Gabon, Madagascar, Niger, 
+Kenya, Malawi, Seychelles, Tanzania, Uganda, Zambia and 
+Rwanda. Airtel Africa plc is listed on London Stock Exchange (LSE) 
+and Nigeria Stock Exchange (NSE). 
+Airtel Africa provides an integrated offer to their customers, 
+including mobile voice, data services and mobile money services 
+both nationally and internationally. 
+ 
+2.3     Partners 
+SingTel, our strategic equity partner, has made one of their largest 
+investments outside Singapore with us. This partnership has 
+enabled us to expand and further enhance the quality of services 
+to our customers. We also pioneered the outsourcing business 
+model with long term strategic partnership in all areas including 
+network equipment, information technology and call center. We 
+partnered with global leaders who share our drive for co-creating 
+innovative and tailor made solutions. To name a few, our strategic 
+partners include Ericsson, Nokia Siemens Networks (NSN), 
+Huawei, Cisco, IBM, Avaya, ZTE, Google, Apple, etc
+[[page 9]]
+        
+ 
+ 
+Page 7 of 58 
+ 
+ 
+SECTION 3 
+FINANCIAL HIGHLIGHTS 
+ 
+The financial results presented in this section are compiled based on the audited consolidated financial statements prepared in accordance with 
+Indian Accounting Standards (Ind-AS) and the underlying information. 
+ 
+Detailed financial statements, analysis & other related information is attached to this report (page 29 - 33). Also, kindly refer to Section 7.3 - use of Non - GAAP 
+financial information (page 34) and Glossary (page 52) for detailed definitions. 
+ 
+ 
+3.1 Consolidated - Summary of Consolidated Financial Statements 
+ 
+3.1.1 Consolidated Summarized Statement of Operations (net of inter segment eliminations)  
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 608,775 521,454 17% 1,194,166 1,016,080 18%
+EBITDA 352,395 299,190 18% 688,381 580,858 19%
+EBITDA / Total revenues 57.9% 57.4% 0.5  pp 57.6% 57.2% 0.5  pp
+EBIT 205,560 166,691 23% 398,376 322,900 23%
+Finance cost (net) 50,576 44,278 14% 103,210 96,271 7%
+Share of results of Joint Ventures/Associates 1,099 810 36% 2,181 1,638 33%
+Profit before tax 156,082 123,223 27% 297,344 228,267 30%
+Income tax expense 47,245 36,716 29% 88,755 67,542 31%
+Profit after tax (before exceptional items) 108,837 86,507 26% 208,589 160,725 30%
+Non Controlling Interest (NCI) 18,687 18,591 1% 37,867 33,330 14%
+Net income (before exceptional items) 90,151 67,916 33% 170,724 127,395 34%
+Exceptional Items (net of tax & NCI) 1,274 0  172 0  
+Net income (after exceptional items) 88,875 67,916 31% 170,549 127,395 34%
+Capex 124,668 113,623 10% 258,528 196,693 31%
+Operating Free Cash Flow (EBITDA - Capex) 227,727 185,567 23% 429,853 384,165 12%
+Net Debt 1,665,805 1,947,131 -14% 1,665,805 1,947,131 -14%
+Cumulative Investments 6,952,572 6,448,863 8% 6,952,572 6,448,863 8%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+ 
+  Consolidated Summarized Statement of Operations (Pre Ind AS 116)  
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+EBITDAaL 314,884 266,003 18% 613,279 515,948 19%
+EBITDAaL / Total revenues 51.7% 51.0% 0.7  pp 51.4% 50.8% 0.6  pp
+Net Debt (excluding Lease obligations) 882,771 1,266,513 -30% 882,771 1,266,513 -30%
+Amount in Rs Mn, except ratios
+Particulars
+ 
+[[page 10]]
+        
+ 
+ 
+Page 8 of 58 
+ 
+ 
+3.1.2 Consolidated Summarized Statement of Financial Position  
+ 
+As at As at
+Sep 30, 2026 Sep 30, 2025
+Assets
+Non-current assets 4,718,077 4,499,407
+Current assets 965,519 739,222
+Total assets 5,683,596 5,238,629
+Liabilities
+Non-current liabilities 1,831,941 1,847,222
+Current liabilities 1,857,738 1,787,867
+Total liabilities 3,689,679 3,635,089
+Equity & Non Controlling Interests
+Equity 1,580,470 1,177,960
+Non controlling interests 413,447 425,580
+Total Equity & Non Controlling Interests 1,993,917 1,603,540
+Total Equity and liabilities 5,683,596 5,238,629
+Particulars
+Amount in Rs Mn
+ 
+ 
+Note: Balance Sheet is on reported basis
+[[page 11]]
+                         
+ 
+ 
+Page 9 of 58 
+ 
+ 
+3.2     Region wise - Summary of Consolidated Financial Statements 
+ 
+3.2.1 Summarized Statement of Operations (net of inter segment eliminations) 
+ 
+Quarter Ended: 
+ 
+Quarter Ended Sep 2026 Quarter Ended Sep 2025
+India SA Africa Eliminations/Others Total India SA Africa Eliminations/Others Total
+Total revenues 423,079 188,165 (2,469) 608,775 386,901 136,795 (2,242) 521,454
+EBITDA 257,294 95,100 1 352,395 232,039 67,150 1 299,190
+EBITDA / Total revenues 60.8% 50.5% 57.9% 60.0% 49.1% 57.4%
+EBIT 140,866 64,692 3 205,560 121,919 44,773 (1) 166,691
+Profit before tax 120,001 45,193 (9,111) 156,082 97,423 33,496 (7,696) 123,223
+Income tax expense 28,044 19,163 38 47,245 22,384 14,330 2 36,716
+Profit after tax (before exceptional items) 91,957 26,030 (9,149) 108,837 75,039 19,166 (7,698) 86,507
+Non Controlling Interest (NCI) 9,920 8,767 0 18,687 9,117 9,474 0 18,591
+Net income (before exceptional items) 82,037 17,263 (9,148) 90,151 65,922 9,692 (7,698) 67,916
+Exceptional Items (net of tax & NCI) 0 1,274 0 1,274 0 0 0 0
+Net income (after exceptional items) 82,037 15,989 (9,150) 88,875 65,922 9,692 (7,698) 67,916
+Capex 99,077 25,591 0 124,668 96,429 17,195 0 113,623
+Operating Free Cash Flow (EBITDA - Capex) 158,217 69,509 1 227,727 135,610 49,955 1 185,567
+Cumulative Investments 5,944,267 1,008,306 0 6,952,572 5,643,297 805,566 0 6,448,863
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India.
+[[page 12]]
+                         
+ 
+ 
+Page 10 of 58 
+ 
+ 
+Six Month Ended: 
+ 
+Amount in Rs Mn, except ratios
+Six Months Ended Sep 2026 Six Months Ended Sep 2025
+India SA Africa Eliminations/Others Total India SA Africa Eliminations/Others Total
+Total revenues 835,219 363,822 (4,875) 1,194,166 762,747 257,629 (4,296) 1,016,080
+EBITDA 505,104 183,277 0 688,381 455,554 125,306 (4) 580,858
+EBITDA / Total revenues 60.5% 50.4% 57.6% 59.7% 48.6% 57.2%
+EBIT 274,212 124,162 3 398,376 240,065 82,838 (4) 322,900
+Profit before tax 223,674 82,836 (9,165) 297,344 179,537 56,785 (8,056) 228,267
+Income tax expense 54,215 34,516 24 88,755 43,356 24,290 (104) 67,542
+Profit after tax (before exceptional items) 169,459 48,320 (9,189) 208,589 136,181 32,495 (7,952) 160,725
+Non Controlling Interest 18,705 19,161 1 37,867 17,339 16,102 (111) 33,330
+Net income (before exceptional items) 150,754 29,159 (9,189) 170,724 118,842 16,393 (7,841) 127,395
+Exceptional Items (net of tax and NCI) (3,898) 4,070 0 172 0 0 0 0
+Net income (after exceptional items) 154,652 25,089 (9,191) 170,549 118,842 16,393 (7,841) 127,395
+Capex 196,058 62,470 0 258,528 169,162 27,531 0 196,693
+Operating Free Cash Flow (EBITDA - 
+Capex) 309,046 120,807 0 429,853 286,392 97,775 (4) 384,165
+Cumulative Investments 5,944,267 1,008,306 0 6,952,572 5,643,297 805,566 0 6,448,863
+Particulars
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+ 
+ 
+ 
+ 
+ 
+[[page 13]]
+                                                                                                                                      
+ 
+ 
+Page 11 of 58 
+ 
+ 
+ 
+3.2.2 Region wise Summarized Statement of Financial Position 
+ 
+India SA Africa Eliminations/Others Total
+Assets
+Non-current assets 4,072,830 1,113,498 (468,251) 4,718,077
+Current assets 685,893 293,799 (14,173) 965,519
+Total assets 4,758,723 1,407,297 (482,424) 5,683,596
+Liabilities
+Non-current liabilities 1,282,104 549,837 (0) 1,831,941
+Current liabilities 1,361,288 510,199 (13,748) 1,857,738
+Total liabilities 2,643,391 1,060,036 (13,748) 3,689,679
+Equity & Non Controlling Interests
+Equity 1,799,932 249,214 (468,676) 1,580,470
+Non controlling interests 315,400 98,047 0 413,447
+Total Equity & Non Controlling Interests 2,115,332 347,261 (468,676) 1,993,917
+Total Equity and liabilities 4,758,723 1,407,297 (482,424) 5,683,596
+Particulars As at Sep 30, 2026
+Amount in Rs Mn
+ 
+[[page 14]]
+                                                                                                                                      
+ 
+ 
+Page 12 of 58 
+ 
+ 
+ 
+ 
+3.3    Segment wise Summarized Statement of Operations  
+ 
+3.3.1   India (with Passive infrastructure services) 
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 423,079 386,901 9% 835,219 762,747 10%
+EBITDA 257,294 232,039 11% 505,104 455,554 11%
+EBITDA / Total revenues 60.8% 60.0% 0.8  pp 60.5% 59.7% 0.8  pp
+EBIT 140,866 121,919 16% 274,212 240,065 14%
+Capex 99,077 96,429 3% 196,058 169,162 16%
+Operating Free Cash Flow (EBITDA - Capex) 158,217 135,610 17% 309,046 286,392 8%
+Cumulative Investments 5,921,747 5,622,674 5% 5,921,747 5,622,674 5%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+Note1: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+Note2: Pursuant to reporting changes on account of consolidation of Indus Towers Ltd., the definition of India geography has changed. Refer Glossary for more details. 
+ 
+3.3.2   India (without Passive Infrastructure Services) 
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 385,985 348,639 11% 759,873 686,846 11%
+EBITDA 228,580 204,058 12% 449,714 400,493 12%
+EBITDA / Total revenues 59.2% 58.5% 0.7  pp 59.2% 58.3% 0.9  pp
+EBIT 124,333 105,202 18% 243,030 207,052 17%
+Capex 74,307 72,033 3% 154,420 126,540 22%
+Operating Free Cash Flow (EBITDA - Capex) 154,273 132,025 17% 295,294 273,953 8%
+Cumulative Investments 4,744,220 4,504,112 5% 4,744,220 4,504,112 5%
+Amount in Rs Mn, except ratios
+Particulars
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+ B2C Services 
+ 
+ 3.3.3   Mobile Services (India) – comprises of Mobile Services and Network Groups building / providing fiber connectivity.
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 309,431 281,167 10% 608,720 555,133 10%
+EBITDA 188,735 169,515 11% 370,606 332,258 12%
+EBITDA / Total revenues 61.0% 60.3% 0.7  pp 60.9% 59.9% 1  pp
+EBIT 106,756 88,124 21% 206,148 172,251 20%
+Capex 35,999 42,707 -16% 81,764 72,295 13%
+Operating Free Cash Flow (EBITDA - Capex) 152,736 126,808 20% 288,842 259,963 11%
+Cumulative Investments 3,844,126 3,724,990 3% 3,844,126 3,724,990 3%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+[[page 15]]
+                                                                                                                                      
+ 
+ 
+Page 13 of 58 
+ 
+ 
+ 
+ 
+3.3.4 Homes Services    
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 23,360 18,646 25% 46,235 35,825 29%
+EBITDA 11,401 9,335 22% 22,640 17,924 26%
+EBITDA / Total revenues 48.8% 50.1% -1.3  pp 49.0% 50.0% -1.1  pp
+EBIT 1,570 3,012 -48% 4,097 5,969 -31%
+Capex 21,814 18,606 17% 40,810 33,178 23%
+Operating Free Cash Flow (EBITDA - Capex) (10,413) (9,271) -12% (18,170) (15,254) -19%
+Cumulative Investments 292,229 234,863 24% 292,229 234,863 24%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+3.3.5 Digital TV Services 
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 7,713 7,532 2% 15,447 15,160 2%
+EBITDA 3,341 3,663 -9% 6,662 7,545 -12%
+EBITDA / Total revenues 43.3% 48.6% -5.3  pp 43.1% 49.8% -6.6  pp
+EBIT (1,318) (606) -117% (2,103) (582) -261%
+Capex 4,765 3,063 56% 10,648 6,120 74%
+Operating Free Cash Flow (EBITDA - Capex) (1,424) 600 -337% (3,986) 1,425 -380%
+Cumulative Investments 161,287 140,723 14.6% 161,287 140,723 14.6%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+ 
+B2B Services 
+ 
+3.3.6 Airtel Business 
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 58,779 52,760 11% 115,433 103,331 12%
+EBITDA 25,257 21,943 15% 50,179 43,478 15%
+EBITDA / Total revenues 43.0% 41.6% 1.4  pp 43.5% 42.1% 1.4  pp
+EBIT 18,080 15,421 17% 36,127 30,828 17%
+Capex 11,710 7,661 53% 21,149 14,973 41%
+Operating Free Cash Flow (EBITDA - Capex) 13,547 14,282 -5% 29,030 28,505 2%
+Cumulative Investments 434,575 392,690 11% 434,575 392,690 11%
+Particulars
+Amount in Rs Mn, except ratios
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+[[page 16]]
+                                                                                                                                      
+ 
+ 
+Page 14 of 58 
+ 
+ 
+ 
+ 
+3.3.7 Passive Infrastructure Services
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 85,156 81,883 4% 169,467 162,459 4%
+EBITDA 47,386 46,952 1% 93,606 91,625 2%
+EBITDA / Total revenues 55.6% 57.3% -1.7  pp 55.2% 56.4% -1.2  pp
+EBIT 27,521 28,538 -4% 54,379 55,762 -2%
+Capex 24,701 25,845 -4% 41,841 45,372 -8%
+Operating Free Cash Flow (EBITDA - Capex) 22,685 21,107 7% 51,765 46,253 12%
+Cumulative Investments 1,177,526 1,118,562 5% 1,177,526 1,118,562 5%
+Particulars
+Amount in Rs Mn, except ratios
+  
+ 
+Note: Financial numbers and associated ratios, for Passive Infrastructure Services are different from reported numbers (by Indus Towers Limited), to ensure alignment with other 
+segments.  
+ 
+3.3.8 Africa  
+ 
+In USD Constant Currency 
+Quarter Ended Six Months Ended
+Sep-26 Sep-25 Y-o-Y Growth Sep-26 Sep-25 Y-o-Y Growth
+Total revenues 1,958 1,624 21% 3,794 3,140 21%
+EBITDA 988 805 23% 1,909 1,545 24%
+EBITDA / Total revenues 50.5% 49.6% 0.9  pp 50.3% 49.2% 1.1  pp
+EBIT 672 542 24% 1,293 1,033 25%
+Capex 268 197 36% 657 318 107%
+Operating Free Cash Flow (EBITDA - Capex) 720 608 18% 1,252 1,227 2%
+Cumulative Investments 10,500 9,076 16% 10,500 9,076 16%
+Particulars
+Amount in US$ Mn, except ratios
+ 
+ 
+Refer ‘Glossary’ for ‘constant currency’ definition. Actual currency rates are taken for Capex & Cumulative Investments. 
+[[page 17]]
+                                                                                                                                      
+ 
+ 
+Page 15 of 58 
+ 
+ 
+ 
+ 
+3.4      Region wise & Segment wise - Investment & Contribution  
+Quarter Ended: 
+Amount in Rs Mn, except ratios
+Quarter Ended Sep 2026
+Revenue % of Total EBITDA % of Total Capex % of Total Cummulative Investments % of Total
+Mobile Services 309,431 73% 188,735 73% 35,999 36% 3,844,126 65%
+Homes Services 23,360 6% 11,401 4% 21,814 22% 292,229 5%
+Digital TV Services 7,713 2% 3,341 1% 4,765 5% 161,287 3%
+Airtel Business 58,779 14% 25,257 9% 11,710 12% 434,575 7%
+Passive Infrastructure Services 85,156 20% 47,386 18% 24,701 25% 1,177,526 20%
+South Asia 0 0% 0 0% 0 0% 22,520 0%
+Sub Total 484,439 115% 276,120 107% 98,990 100% 5,932,264 100%
+Eliminations / Others (61,360) -15% (18,826) -7% 87 0% 12,002 
+Accumulated Depreciation and Amortisation (3,029,061)
+Total (India SA) 423,079 100% 257,294 100% 99,077 100% 2,915,205 
+India SA % of Consolidated 69% 73% 79% 85%
+Africa 188,165 95,100 25,591 1,008,306 
+Accumulated Depreciation and Amortisation (315,043)
+Total (Africa) 188,165 95,100 25,591 693,263 
+Africa % of Consolidated 31% 27% 21% 15%
+Eliminations / Others (2,469) 1 0 (0)
+Eliminations / Others % of Consolidated 0% 0% 0% 0%
+Consolidated 608,775 352,395 124,668 6,952,572 
+Segment
+As at Sep 30, 2026
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+[[page 18]]
+                                                                                                                                      
+ 
+ 
+Page 16 of 58 
+ 
+ 
+ 
+ 
+Six Month Ended: 
+Amount in Rs Mn, except ratios
+Six Months Ended Sep 2026
+Revenue % of Total EBITDA % of Total Capex % of Total Cummulative Investments % of Total
+Mobile Services 608,720 73% 370,606 73% 81,764 42% 3,844,126 65%
+Homes Services 46,235 6% 22,640 4% 40,810 21% 292,229 5%
+Digital TV Services 15,447 2% 6,662 1% 10,648 5% 161,287 3%
+Airtel Business 115,433 14% 50,179 10% 21,149 11% 434,575 7%
+Tower Infrastructure Services 169,467 20% 93,606 19% 41,841 21% 1,177,526 20%
+South Asia 0 0% 0 0% 0 0% 22,520 0%
+Sub Total 955,302 114% 543,693 108% 196,212 100% 5,932,264 100%
+Eliminations / Others (120,083) -14% (38,589) -8% (154) 0% 12,002 
+Accumulated Depreciation and Amortisation (3,029,061)
+Total (India & SA) 835,219 100% 505,104 100% 196,058 100% 2,915,205 
+India SA % of Consolidated 70% 73% 76% 85%
+Africa 363,822 183,277 62,470 1,008,306 
+Accumulated Depreciation and Amortisation (315,043)
+Total (Africa) 363,822 183,277 62,470 693,263 
+Africa % of Consolidated 30% 27% 24% 15%
+Eliminations / Others (4,875) 0 0 (0)
+Eliminations / Others % of Consolidated 0% 0% 0% 0%
+Consolidated 1,194,166 688,381 258,528 6,952,572 
+Segment
+As at Sep 30, 2026
+ 
+ 
+Note: In addition to above, Company has invested Rs 28,258 Mn in strategic land parcel for data center business in India. 
+ 
+[[page 19]]
+                                                                                                                                      
+ 
+ 
+Page 17 of 58 
+ 
+ 
+ 
+ 
+SECTION 4 
+ 
+OPERATING HIGHLIGHTS 
+ 
+ 
+The financial figures used for computing ARPU, Revenue per Site, Gross revenue per employee per month, Personnel cost per employee per 
+month are based on Ind-AS. 
+ 
+ 
+4.1   Customers - Consolidated 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+India  000's 498,685 491,890 1.4% 449,738 10.9%
+Africa  000's 193,893 188,999 2.6% 173,816 11.6%
+Total 000's 692,579 680,889 1.7% 623,554 11.1%
+ 
+ 
+ 
+4.2   Mobile Services India 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Customer Base 000's 377,224 376,508 0.2% 364,192 3.6%
+Net Additions  000's 716 3,265 1,396
+Postpaid Base (reported as part of Mobile Services India 
+segment)
+ 000's 31,238 30,004 4.1% 27,523 13.5%
+Postpaid Base (including IoT / M2M connections reported 
+as part of Airtel Business segment)
+ 000's 119,821 112,774 6.2% 83,850 42.9%
+Pre-Paid (as % of total Customer Base) % 91.7% 92.0% 92.4%
+Monthly Churn % 2.9% 2.6% 2.9%
+Average Revenue Per User (ARPU) Rs 271 264 2.7% 256 5.9%
+Average Revenue Per User (ARPU) US$ 2.8 2.8 1.9% 2.9 -3.2%
+Revenue per tower per month Rs 293,933 285,253 3.0% 272,510 7.9%
+Voice
+Minutes on the network Mn 1,280,001 1,276,131 0.3% 1,248,798 2.5%
+Voice Usage per customer per month min 1,131 1,135 -0.4% 1,145 -1.3%
+Data
+Data Customer Base 000's 305,449 303,195 0.7% 289,433 5.5%
+                Of which 4G/5G data customers 000's 304,630 301,774 0.9% 285,823 6.6%
+As % of Customer Base % 81.0% 80.5% 79.5%
+Total GBs on the network Mn GBs 33,358 31,062 7.4% 24,446 36.5%
+Data Usage per customer per month GBs 36.5 34.4 6.2% 28.3 28.8%
+ 
+ 
+ 
+4.3   Homes Services 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Homes Customers  000's 15,369 14,694 4.6% 11,928 28.9%
+Net additions  000's 676 473 42.9% 951 -29.0%
+Average Revenue Per User (ARPU) Rs 509 523 -2.6% 534 -4.6%
+Average Revenue Per User (ARPU) US$ 5.3 5.5 -3.3% 6.1 -12.8%
+ 
+ 
+ 
+ 
+ 
+[[page 20]]
+                                                                                                                                      
+ 
+ 
+Page 18 of 58 
+ 
+ 
+ 
+ 
+4.4   Digital TV Services 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Digital TV Customers  000's 15,560 16,003 -2.8% 15,354 1.3%
+Net additions  000's (443) 6 -7763.8% (341) -29.9%
+Average Revenue Per User (ARPU) Rs 163 160 1.5% 163 -0.2%
+Average Revenue Per User (ARPU) US$ 1.7 1.7 0.8% 1.9 -8.8%
+Monthly Churn % 3.5% 2.7% 3.1%
+ 
+ 
+Digital TV includes IPTV from Q4’25 onwards. 
+ 
+4.5   Network and Coverage – India 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Mobile Services
+Census Towns Nos 7,905 7,905 0 7,901 4
+Non-Census Towns and Villages Nos 835,075 835,011 64 816,254 18,821
+Population Coverage % 97.5% 97.4% 96.5%
+Optic Fibre Network R Kms 552,373 542,570 9,803 507,655 44,718
+Network towers Nos 347,988 347,491 497 342,339 5,649
+Total Mobile Broadband Base stations Nos 1,214,118 1,202,434 11,684 1,154,810 59,308
+Homes Services- Cities covered Nos 1,669 1,653 16 1,551 118
+Airtel Business - Submarine cable systems Nos 9 9 0 8 1
+Digital TV Services
+Districts Covered* Nos 640 640 0 640 0
+Coverage % 100.0% 100.0% 100.0%
+ 
+ 
+*Districts covered is as per 2011 census. 
+ 
+4.6   Passive Infrastructure Services 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Macro
+Towers Nos 270,480 267,611 2,869 256,074 14,406 
+Co-locations Nos 440,153 432,250 7,903 415,717 24,436 
+Key Indicators
+Average sharing factor Times 1.62 1.62 1.63
+Closing sharing factor Times 1.63 1.62 1.62
+Sharing revenue per tower per month Rs 66,532 66,416 0.2% 67,924 -2.0%
+Sharing revenue per sharing operator per month Rs 41,036 41,082 -0.1% 41,714 -1.6%
+ 
+ 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Lean
+Co-locations Nos 14,037 14,024 13 13,963 74 
+Sharing Revenue per Sharing Operator per month Rs 16,867 16,707 1.0% 16,127 4.6%
+ 
+ 
+Note: Operational KPIs for passive infrastructure services are presented as reported by Indus Tower Limited 
+ 
+ 
+[[page 21]]
+                                                                                                                                      
+ 
+ 
+Page 19 of 58 
+ 
+ 
+ 
+ 
+4.7   Human Resource Analysis – India
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Total Employees Nos 24,372 24,202 170 24,391 (19)
+Number of Customers per employee Nos 20,461 20,324 137 18,439 2,023
+Personnel cost per employee per month Rs 162,577 158,086 2.8% 149,645 8.6%
+Gross Revenue per employee per month Rs 5,786,408 5,676,390 1.9% 5,287,483 9.4%
+ 
+Note: Pursuant to reporting changes on account of consolidation of Indus Towers Ltd., the definition of India geography has changed. Refer Glossary for more details  
+ 
+4.8   Africa  
+4.8.1 Operational Performance (In Constant Currency) 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Mobile Services
+Customer Base  000's 193,893 188,999 2.6% 173,816 11.6%
+Net Additions  000's 4,894 5,454 -10.3% 4,427 -10.5%
+Monthly Churn % 4.8% 4.5% 4.2%
+Average Revenue Per User (ARPU) US$ 2.8 2.7 2.9% 2.6 6.0%
+Voice
+Voice Revenue $ Mn 652 633 3.0% 588 11.0%
+Minutes on the network Mn 158,190 156,822 0.9% 149,638 5.7%
+Voice Average Revenue Per User (ARPU) US$ 1.1 1.1 0.1% 1.1 -0.9%
+Voice Usage per customer per month min 275 281 -1.9% 291 -5.6%
+Data
+Data Revenue $ Mn 815 743 9.7% 633 28.8%
+Data Customer Base 000's 89,885 87,334 2.9% 78,137 15.0%
+As % of Customer Base % 46.4% 46.2% 45.0%
+Total GBs on the network Mn GBs 3,216 2,741 17.4% 1,986 62.0%
+Data Average Revenue Per User (ARPU) US$ 3.1 2.9 6.9% 2.8 11.1%
+Data Usage per customer per month GBs 12.1 10.6 14.4% 8.6 39.8%
+Network & coverage
+Network towers Nos 42,490 41,300 1,190 38,314 4,176
+Owned Towers Nos 2,720 2,598 122 2,126 594
+Leased Towers Nos 39,770 38,702 1,068 36,188 3,582
+Total Mobile Broadband Base stations Nos 165,856 162,020 3,836 143,640 22,216
+Revenue per tower per month US$ 12,744 12,328 3.4% 11,813 7.9%
+Mobile Money
+Transaction Value $ Mn 68,806 60,984 12.8% 50,425 36.5%
+Transaction Value per Sub US$ 388 369 5.3% 351 10.6%
+Airtel Money Revenue $ Mn 437 400 9.3% 348 25.8%
+Active Customers 000's 60,912 56,493 7.8% 49,752 22.4%
+Airtel Money ARPU US$ 2.5 2.4 2.0% 2.4 1.9%
+  
+ 
+4.8.2 Human Resources Analysis 
+Parameters Unit Sep-26 Jun-26 Q-on-Q Growth Sep-25 Y-on-Y Growth
+Total Employees Nos 4,512 4,541 (29) 4,310 202
+Number of Customers per employee Nos 42,973 41,621 1,352 40,329 2,644
+Personnel cost per employee per month US$ 7,564 7,922 -4.5% 6,821 10.9%
+Gross Revenue per employee per month US$ 144,668 134,771 7.3% 125,614 15.2%
+ 
+[[page 22]]
+                                                                                                                                      
+ 
+ 
+Page 20 of 58 
+ 
+ 
+ 
+ 
+SECTION 5 
+ 
+MANAGEMENT DISCUSSION AND ANALYSIS 
+ 
+ 
+5.1 Reporting Changes 
+ 
+• Pursuant to the consolidation of Indus Towers Limited 
+w.e.f November 19 ‘2024, the financial and non-financial 
+information represented in this quarterly report (except 
+for section 7), has been re-casted (basis line-by-line 
+consolidation) for all periods presented to make it 
+comparable. 
+ 
+5.2 India 
+ 
+1. Key Regulatory Developments  
+ 
+A. Telecommunications (Radio Equipment 
+Possession Authorisation) Rules, 2026 dated 
+08.07.2026 
+ 
+• Possession of radio equipment to require authorisation 
+under these rules, and such authorisation can be either 
+for: 
+o Dealing with radio equipment through 
+manufacture, purchase or import for sale, let for 
+hire, repair or testing or demonstration  
+o Import or purchase or hire radio equipment only 
+for the purposes of testing or demonstration 
+ 
+• Following to be exempted from requirement of Radio 
+Equipment Possession Authorisation (but may not 
+manufacture, sell or let for hire the radio equipment in 
+their possession): 
+o Licensees holding valid license/authorisation 
+and/or spectrum assignment 
+o Entities exempted from requirement of 
+license/authorisation and/or spectrum assignment 
+o Users with proof of subscription to a telecom 
+service 
+o Radio equipment that can accommodate upto 4 
+SIMs 
+ 
+ 
+B. Telecommunications (Authorisation for 
+Telecommunication Network) Rules, 2026 dated 
+20.07.2026 
+ 
+• Network-layer entities have been categorized into the 
+following authorisations: 
+o Infrastructure Provider (IP): Establishing & 
+operating passive telecom infrastructure (dark 
+fibre, duct space, tower, battery, air conditioning 
+etc.), RoW and IBS infrastructure 
+o Digital Connectivity Infrastructure Provider 
+(DCIP): Establishing & operating passive telecom 
+infrastructure (dark fibre, duct space, tower, 
+battery, air conditioning etc.), RoW and IBS 
+infrastructure, as well as telecom equipment & 
+systems required for establishing wireline 
+terrestrial network, RAN, WLAN, transmission link 
+and IBS 
+o Internet Exchange Point (IXP) Provider: 
+Establishing & operating IXPs in India; peering & 
+exchange of internet traffic originated & destined 
+within India amongst ISPs & CDNs; and 
+interconnection with other IXPs 
+o Satellite Earth Station Gateway (SESG) Provider: 
+Establishing & operating SESGs and baseband 
+systems for satellite systems authorised by 
+DoS/IN-SPACe 
+o Cloud-hosted Telecommunication Network (CTN) 
+Provider: Establishing & operating CTN, as well 
+as provision of CTN as a Service (CTNaaS) to 
+other Service/Network Providers 
+o Mobile Number Portability (MNP) Provider: 
+Establishing & operating telecom networks for 
+providing MNP as a service to access service 
+providers 
+ 
+ 
+C. Revision of EMF Limits dated 06.08.2026 
+ 
+• EMF norms have been aligned with ICNIRP standards, 
+enabling higher transmission power and optimized 
+network deployment. 
+ 
+ 
+D. Telecommunications (User Identification) Rules, 
+2026 dated 21.08.2026 
+ 
+• Applicability: 
+o Applicable to existing Licensees and Authorised 
+Entities for telecom services notified by the 
+Government. 
+o 3-month implementation period provided for 
+system readiness and rollout. 
+ 
+• Biometric-Based Subscriber Verification: 
+o Mandatory biometric verification for activation, 
+ownership transfer, re-verification, and 
+disconnection of telecom resources. 
+o e-KYC for Aadhaar holders; D-KYC for non-
+Aadhaar subscribers or where biometric 
+authentication is not feasible. 
+ 
+• Licensee Obligations: 
+o Mandatory subscriber awareness on misuse of 
+telecom resources and consequences of 
+furnishing false information. 
+o Mandatory FIR filing and Government reporting in 
+cases involving forged documents or fraudulent 
+subscriber information. 
+ 
+• Disconnection & Subscriber Safeguards: 
+o Biometric authentication required prior to 
+disconnection. 
+o Mandatory subscriber alerts whenever a telecom 
+resource is issued using their KYC credentials. 
+ 
+ 
+E. Telecom Commercial Communications Customer 
+Preference (Third Amendment) Regulations, 2026 
+dated 18.09.2026 
+ 
+[[page 23]]
+                                                                                                                                      
+ 
+ 
+Page 21 of 58 
+ 
+ 
+ 
+ 
+• Key Highlights: 
+o A termination charge of up to ₹0.05 per minute 
+has been prescribed for A2P calls, creating a 
+regulatory deterrent against potential misuse.  
+o Multiple other measures have also been 
+introduced, including formalization of the use of 
+AI/ML for curbing UCC, introduction of an appeal 
+mechanism within the existing complaint-handling 
+process and enabling digital access to DLT for 
+VNOs. 
+ 
+• Implementation timelines for the various provisions 
+range from 30 to 90 days. 
+ 
+ 
+F. Telecom Consumers Protection (Thirteenth 
+Amendment) Regulations, 2026 dated 21.09.2026 
+ 
+• TSPs to offer Voice & SMS-only STVs with appropriate 
+tariff reduction for: 
+o 30 day and less than 30 day validity periods 
+corresponding to bundled Voice+SMS+Data 
+STVs currently offered.  
+o A monthly renewal pack (same-date renewal 
+every month) 
+o At least Voice & SMS-only STV corresponding to 
+existing bundled validity of more than 30 days 
+(longer validity) 
+ 
+• The amendment is to be implemented within 30 days. 
+ 
+ 
+2. Key Company Developments  
+ 
+A. Airtel Business and ITI Limited enter into strategic 
+partnership to accelerate India’s digital 
+transformation 
+ 
+In a significant move, Airtel Business, India's leading provider 
+of secure and reliable connectivity, technology, and 
+communications solutions, and ITI Limited, country’s first 
+PSU post-independence and premier telecom and varied 
+technology segment manufacturer, have entered into a 
+strategic collaboration to help enterprises in India fast-track 
+their digital transformation and unlock new opportunities for 
+growth, resilience, and innovation. 
+ 
+B. Airtel Enhances Postpaid Offering with Apple’s 
+Expanded iCloud+ Alongside Apple TV and Apple 
+Arcade 
+ 
+Bharti Airtel enhanced its ₹999 and above family postpaid 
+plans with Apple’s expanded iCloud+, along with access to 
+Apple TV and Apple Arcade. The proposition brings together 
+connectivity, secure cloud storage, entertainment and 
+gaming under a single plan, enhancing the value offered to 
+families and strengthening Airtel’s differentiated postpaid 
+proposition. 
+ 
+C. Airtel Strengthens Network Readiness Across 
+Odisha Ahead of Puri Rath Yatra 
+ 
+Ahead of the annual Rath Yatra in Odisha, Bharti Airtel 
+strengthened its network infrastructure by deploying over 
+1,500 new 5G sites across the state. The enhanced network 
+infrastructure supported seamless connectivity for millions of 
+devotees, residents and visitors during one of India’s largest 
+religious gatherings, reinforcing Airtel’s commitment to 
+building resilient digital infrastructure for communities. 
+ 
+D. Bharti Airtel Strengthens Connectivity for Amarnath 
+Yatra with Expanded Network Coverage 
+ 
+To support the annual Amarnath Yatra, Bharti Airtel 
+expanded its network coverage along the Pahalgam route by 
+deploying additional mobile sites at key locations. The 
+strengthened network supported reliable connectivity for 
+pilgrims, security personnel and local communities, enabling 
+them to remain connected across challenging terrain 
+throughout the pilgrimage. 
+ 
+ 
+5.3 Africa  
+ 
+Key Company Developments 
+ 
+A. Airtel Mobile Commerce N.V. (‘Airtel Money’) lists 
+on London Stock Exchange 
+ 
+On 14 October 2026, Airtel Money was admitted to the Equity 
+Shares (Commercial Companies) category of the Official List 
+of the FCA and to trading on the Main Market of the London 
+Stock Exchange (‘LSE’). The IPO on the LSE represents a 
+significant milestone in Airtel Money's evolution, establishing 
+an independent listed platform to support its long-term growth 
+ambitions and enhance its profile among global investors. 
+The listing involved the offer of 270 million existing shares 
+(10% of the issued share capital) at a price of £1.96. Airtel 
+Africa did not sell any shares in the secondary offering and 
+has retained its 77.85% shareholding. An over-allotment 
+option of up to 27 million additional shares remains open 
+during the stabilisation period, and its outcome will be 
+announced in due course. 
+Following the IPO, Airtel Africa remains a long-term strategic 
+shareholder and continues to benefit from Airtel Money's 
+attractive growth opportunities, while the listing provides 
+additional financial flexibility to support the business's future 
+development and expansion across Africa. 
+Following the successful listing of Airtel Money on the LSE, 
+the put option previously held by minority shareholders of 
+Airtel Money will no longer be exercisable. However, due to 
+the IPO being a post balance sheet event, the put option 
+liability continues to be recognised as of 30 September 2026. 
+ 
+B. Update on share buyback programme 
+ 
+On 22 May 2026, Airtel Africa announced the launch of a 
+share buyback programme to repurchase up to 1% of its 
+issued share capital, reflecting the strength of its balance 
+sheet and commitment to shareholder returns while 
+maintaining flexibility to invest in growth opportunities across 
+its markets. As an initial tranche, the Company entered into 
+an agreement with Barclays Capital Securities Limited 
+(“Barclays”). This tranche was completed in accordance with 
+its terms on 28 September 2026. 
+As part of the first tranche, the Company returned $108.7m 
+to shareholders through the repurchase of 24.5 million 
+shares, utilising 0.67% of the 1% share repurchase authority 
+approved by the Board. 
+ 
+C. Kenya spectrum acquisition 
+ 
+Airtel Kenya acquired 100 MHz of spectrum in the 3500 MHz 
+band for $65 million for a 25-year term, following the approval 
+[[page 24]]
+                                                                                                                                      
+ 
+ 
+Page 22 of 58 
+ 
+ 
+ 
+ 
+from the Communications Authority of Kenya, subject to 
+standard conditions.. 
+ 
+D. Directorate changes 
+ 
+Following the conclusion of the AGM on 9 July 2026, Sunil 
+Bharti Mittal has retired as chair of the Board and Gopal Vittal 
+was appointed non-executive chair of the Board with effect 
+from the same date. Furthermore, Shravin Bharti Mittal 
+assumed the role of deputy chair, and Annika Poutiainen 
+retired as a non-executive director. 
+On 22 July 2026, the Group announced the appointment of 
+Mr. V.K. Viswanathan as an independent non-executive 
+director with effect from the same date. Mr. Viswanathan will 
+also join the Audit and Risk Committee. 
+ 
+E. Nigeria Licence Renewal 
+ 
+On 15 April 2026, the Group’s subsidiary Airtel Networks 
+Limited (‘Airtel Nigeria’) received confirmation from the 
+Nigerian Communications Commission (NCC) on the terms 
+of its 900MHz spectrum renewal for $37m, payable in local 
+currency. The licence will be valid for a period of ten years, 
+following the expiry of the previous licence. 
+ 
+F. Dividend payment timetable 
+ 
+The board has declared an interim dividend of 3.1 cents for 
+the half year ended 30 September 2026, payable on 11 
+December 2026 to shareholders recorded in the register at 
+the close of business on 13 November 2026. 
+ 
+London Stock Exchange Nigerian Stock Exchange
+Last day to trade shares cum dividend 11-Nov-26 12-Nov-26
+Shares commence trading ex-dividend 12-Nov-26 13-Nov-26
+Record date (NGX Settlement Date) 13-Nov-26 13-Nov-26
+Last date for currency election 23-Nov-26 23-Nov-26
+Payment date 11-Dec-26 11-Dec-26
+ 
+ 
+ 
+ 
+ 
+   
+5.4 Share of Associates/Joint Ventures 
+ 
+A. Airtel Payments Bank Limited 
+ 
+Airtel Payments Bank Limited became an associate of Bharti Airtel 
+Limited w.e.f November 1, 2018. 
+ 
+Key operational and financial performance: 
+ 
+Sep'26 Jun'26 Mar'26 Dec'25
+Operational Performance
+Monthly Transacting Users (MTU) 000's 125,258    119,384         119,562    107,851    
+Total Customers 000's 226,721    211,924         211,087    201,341    
+GMV Rs Mn 1,175,681 1,130,855      1,119,301 1,217,953 
+Financial Highlights 
+Total revenues Rs Mn 8,755         8,305             8,132         8,119         
+EBITDA** Rs Mn 1,245         1,075             986            (1,288)        
+EBITDA / Total revenues % 14.2% 12.9% 12.1% -15.9%
+ Net Income (Proportionate share of 
+Airtel)# Rs Mn 214            148                 111            531            
+Airtel Payments Bank Limited Unit
+Quarter Ended
+ 
+ 
+** Q3 FY26 EBITDA was impacted due to one-offs pertaining to new labour codes and brand investments. 
+#Q3 FY26 Net Income higher on account of recognition of deferred tax assets. 
+ 
+Refer Glossary on Page 52 for definitions 
+ 
+B. Robi Axiata Limited 
+ 
+Robi Axiata Limited is a joint venture between Axiata Group 
+Berhad, of Malaysia and  Bharti Airtel Limited.  
+ 
+Key operational and financial performance:  
+ 
+Jun'26 Mar'26 Dec'25 Sep'25
+Operational Performance
+Customer Base 000's 58,569 57,395 57,401 57,523 
+Data Customer as % of Customer 
+Base % 78.9% 77.6% 77.5% 77.9%
+ARPU BDT 156 147 150 146
+Financial Highlights  
+Total revenues Rs Mn 20,912 18,974 18,837 17,947 
+EBITDA Rs Mn 11,510 10,122 9,435   9,241   
+EBITDA / Total revenues % 55.0% 53.3% 50.1% 51.5%
+Net Income (proportionate share of 
+Airtel) Rs Mn 571       491       640       488       
+Robi Axiata Limited Unit
+Quarter Ended
+ 
+ 
+ 
+ 
+[[page 25]]
+    
+ 
+ 
+Page 23 of 58 
+ 
+ 
+ 
+ 
+5.5 Results of Operations 
+ 
+ 
+Key Highlights – For the quarter ended September 30, 2026 
+• Overall customer base at ~693 Mn across 15 countries (up 11.1% YoY) 
+• Consolidated mobile data traffic at 34,881 PBs (up 38.4% YoY) 
+• Total revenues of Rs 608.8 Bn; up 16.7% YoY  
+• EBITDA at Rs 352.4 Bn; up 17.8% YoY; EBITDA margin is 57.9% 
+• EBIT at Rs 205.6 Bn; up 23.3% YoY; EBIT margin is 33.8% up 1.8% YoY 
+• Consolidated net income (before EI) of Rs 90.2  Bn vis-à-vis Net income of Rs 67.9 Bn in the corresponding quarter last year 
+• Consolidated net income (after EI) of Rs 88.9 Bn vis-à-vis Net income of Rs 67.9 Bn in the corresponding quarter last year 
+ 
+ 
+Results for the quarter ended September 30, 2026 
+ 
+5.5.1 Bharti Airtel Consolidated 
+ 
+As on September 30, 2026, the Company had ~693 Mn customers, 
+an increase of 11.1% as compared to ~624 Mn in the 
+corresponding quarter last year. Total minutes of usage on the 
+network during the quarter were 1,446 Bn, representing a growth 
+of 2.9% as compared to 1,405 Bn in the corresponding quarter last 
+year. Mobile Data traffic grew 38.4% to 34,881 PBs during the 
+quarter as compared to 25,207 PBs in the corresponding quarter 
+last year. 
+ 
+Consolidated revenues for the quarter stood at Rs 608,775 Mn, up 
+by 16.7% vis-à-vis  Rs 521,454 Mn in the corresponding quarter 
+last year.  
+ 
+India revenues for the quarter stood at Rs 423,079 Mn, up 9.4% 
+vis-à-vis Rs 386,901 Mn in the corresponding quarter last year.  
+ 
+Consolidated net revenues, after netting off access costs, license 
+fees and cost of goods sold, stood at Rs 521,935 Mn, up 16.1% as 
+compared to Rs 449,591 Mn in the corresponding quarter last year. 
+ 
+Consolidated opex (excluding access costs, costs of goods sold,  
+license fees and CSR costs) stood at  Rs 171,813 Mn, increased 
+by 1.7% QoQ (up 12.5% as compared to corresponding quarter 
+last year)  
+Consolidated EBITDA was at Rs 352,395 Mn during the quarter, 
+compared to Rs 299,190 Mn in the corresponding quarter last year 
+(up 17.8% YoY) and Rs 335,986 Mn in the previous quarter (up 
+4.9% QoQ). EBITDA margin for the quarter was at 57.9% as 
+compared to 57.4% in the corresponding quarter last year and 
+57.4% in the previous quarter. India EBITDA margin for the quarter 
+was at 60.8% as compared to 60.0% in the corresponding quarter 
+last year and 60.1% in the previous quarter.  
+ 
+Consolidated Depreciation and amortization expenses were at Rs 
+146,171 Mn vis-à-vis Rs  131,823  Mn in the corresponding quarter 
+last year (up 10.9% YoY) and Rs 142,350 Mn in the previous 
+quarter.  
+ 
+Consolidated EBIT for the quarter was at Rs 205,560 Mn as 
+compared to Rs 166,691 Mn in the corresponding quarter last year 
+and Rs  192,816 Mn in the previous quarter. The resultant EBIT 
+margin for the quarter was at 33.8% as compared to 32.0% in the 
+corresponding quarter last year and 32.9% in the previous quarter.  
+ 
+Cash profits from operations (before derivative and exchange 
+fluctuations) for the quarter were at Rs 300,273 Mn as compared 
+to Rs 246,595 Mn in the corresponding quarter last year and Rs  
+283,440 Mn in the previous quarter. 
+ 
+Consolidated Net finance costs for the quarter were Rs 50,576 Mn 
+as compared to Rs 44,278 Mn  in the corresponding quarter last 
+year (up 14.2%YoY) and Rs 52,634 Mn in the previous quarter 
+(down 3.9% QoQ). 
+ 
+The resultant consolidated profit before tax and exceptional items 
+for the quarter ended September 30, 2026 was Rs 156,082 Mn as 
+compared to profit of Rs 123,223 Mn in the corresponding quarter 
+last year and a profit of Rs 141,262 Mn in the previous quarter. 
+The consolidated income tax expense for the quarter ended 
+September 30, 2026 was Rs 47,245 Mn as compared to Rs 36,716 
+Mn in the corresponding quarter last year and Rs 41,510 Mn in the 
+previous quarter. 
+Consolidated net income before exceptional items for the quarter 
+ended September 30, 2026 was Rs 90,151 Mn as compared to 
+profit of Rs 67,916 Mn in the corresponding quarter last year and 
+profit of Rs 80,572 Mn in the previous quarter. Net income for the 
+quarter ended September 30, 2026 came in at Rs 88,875 Mn, 
+compared to a  profit of Rs 67,916 Mn in the corresponding quarter 
+last year and profit of Rs 81,674 Mn in the previous quarter. 
+Consolidated capex stood at Rs  124,668 Mn. In addition, Rs 
+28,258 Mn has been invested in a strategic land parcel for data 
+center expansion in India.  
+ 
+Consolidated net debt excluding lease obligations for the company 
+stands at Rs  882,771 Mn as on September 30, 2026 compared to 
+Rs  1,266,513 Mn as on September 30, 2025. The Net Debt-
+EBITDA ratio (annualized) excluding the impact of leases for the 
+quarter September 30, 2026 was at  0.70 times as compared to  
+1.19 times in the corresponding quarter last year. 
+5.5.2 Exceptional Items 
+ 
+During the quarter ended September 30, 2026, the Group has 
+recognized exceptional charge of Rs 1,802 Mn on account of 
+provision for expenses towards initial public offer in one of the 
+Group’s subsidiary in Africa. The net tax benefit corresponding to 
+this is Rs 70 Mn. The net charge allocated to non-controlling 
+interests is Rs 458 Mn. 
+ 
+5.5.3 B2C Services – India 
+ 
+5.5.3.1 Mobile Services 
+ 
+The company had 377.2 Mn customers as on September 30, 2026, 
+compared to 364.2 Mn in the corresponding quarter last year, an 
+increase of 3.6% YoY. Voice traffic on the network grew 2.5% YoY 
+to 1,280 Bn Minutes during the quarter as compared to 1,249 Bn 
+Minutes in the corresponding quarter last year. 
