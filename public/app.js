@@ -40,7 +40,8 @@ state.watchedNow = () => state.watched.map((w) => {
   return { ...w, id: th?.id, title: th?.title || w.title, now: th?.verdict, actual: th?.actual, was: w.seen, changed: !!th && th.verdict !== w.seen };
 });
 // Empty list = follow all 18. Works without an account; signing in only syncs it.
-state.isFollowed = (t) => state.extra.includes(t) || !state.followed.length || state.followed.includes(t);
+// "Show all" on Today is a view for this visit only: the saved list is untouched.
+state.isFollowed = (t) => state.showAll || state.extra.includes(t) || !state.followed.length || state.followed.includes(t);
 state.nameOf = (t) => (state.meta?.portfolio?.find((c) => c.t === t)?.name || state.meta?.extra?.find((c) => c.t === t)?.name
   || state.dossiers[t]?.name || t).replace(/\s+(Ltd\.?|Limited)$/i, "");
 const seenAtBoot = state.lastSeen;
@@ -465,7 +466,9 @@ document.addEventListener("click", (ev) => {
     case "resetSeen": store.set("lastSeen", Date.now()); location.reload(); return;
     case "follow": { const t = a.dataset.t; state.followed = state.followed.includes(t) ? state.followed.filter((x) => x !== t) : [...state.followed, t];
       store.set("followed", state.followed); renderSheet(); render(); return; }
-    case "followAll": state.followed = []; store.set("followed", []); renderSheet(); render(); return;
+    case "followAll": state.followed = []; state.showAll = false; store.set("followed", []); renderSheet(); render(); return;  // Settings: clears the saved list
+    case "viewAll": state.showAll = true; render(); return;    // Today: temporary, nothing saved or synced
+    case "viewMine": state.showAll = false; render(); return;
     case "watch": {
       const d = state.dossiers[a.dataset.t]; const th = d?.threads?.find((x) => x.id === a.dataset.id); if (!th) return;
       const k = wkey(th);

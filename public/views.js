@@ -48,12 +48,19 @@ export function windowLabel(state, win) {
 }
 
 // How many stocks the person follows when they've narrowed the list (0 = all of them).
-export const nFollow = (state) => (state.followed?.length ? state.followed.length + (state.extra?.length || 0) : 0);
+// Stocks in the saved list (0 = all holdings, nothing narrowed).
+export const savedFollow = (state) => (state.followed?.length ? state.followed.length + (state.extra?.length || 0) : 0);
+// Stocks the current view is narrowed to (0 while "Show all" is on, or nothing is narrowed).
+export const nFollow = (state) => (state.showAll ? 0 : savedFollow(state));
 
 function followNote(state) {
-  const n = nFollow(state);
-  if (!n) return "";
-  return html`<div class="tiny" style="margin-top:4px;color:var(--ink-2)">Showing the ${n} stock${n === 1 ? "" : "s"} you follow · <button style="color:var(--link)" data-act="followAll">Show all ${(state.meta?.portfolio?.length || 18) + (state.extra?.length || 0)}</button></div>`;
+  const saved = savedFollow(state);
+  if (!saved) return "";
+  const all = (state.meta?.portfolio?.length || 18) + (state.extra?.length || 0);
+  const s = saved === 1 ? "" : "s";
+  return state.showAll
+    ? html`<div class="tiny" style="margin-top:4px;color:var(--ink-2)">Showing all ${all} · <button style="color:var(--link)" data-act="viewMine">Show only my ${saved} stock${s}</button></div>`
+    : html`<div class="tiny" style="margin-top:4px;color:var(--ink-2)">Showing the ${saved} stock${s} you follow · <button style="color:var(--link)" data-act="viewAll">Show all ${all}</button></div>`;
 }
 
 export function followedPrices(state) {
