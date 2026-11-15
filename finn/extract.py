@@ -270,4 +270,8 @@ def business_from_text(text, ticker=""):
         o["quote_verified"] = quote_in_text(o.get("quote", ""), text)
         o["segments"] = (o.get("segments") or [])[:6]
         return o
-    return llm.ask("extract", BUSINESS_SYS, text[:40000], ticker=ticker, validate=validate, max_out=900)
+    try:
+        return llm.ask("extract", BUSINESS_SYS, text[:40000], ticker=ticker, validate=validate, max_out=900)
+    except llm.LLMError:
+        # fallback providers can't take 40k chars at once; the opening remarks are enough
+        return llm.ask("extract_chunk", BUSINESS_SYS, text[:14000], ticker=ticker, validate=validate, max_out=900)

@@ -16,8 +16,8 @@
  },
  "screener": {
   "ok": true,
-  "at": "2026-11-15T18:55:26+05:30",
-  "note": "22/22"
+  "at": "2026-11-15T20:15:09+05:30",
+  "note": "23/23"
  },
  "symbols": {
   "ok": true,
@@ -26,8 +26,8 @@
  },
  "transcripts": {
   "ok": true,
-  "at": "2026-11-15T18:58:49+05:30",
-  "note": "DIXON:4 ASIANPAINT:4 HCLTECH:4 PERSISTENT:4 HDFCBANK:4 ICICIBANK:4 BAJFINANCE:4 CDSL:4 TITAN:4 TRENT:0 ETERNAL:4 LT:4 RELIANCE:4 BHARTIARTL:4 SUNPHARMA:4 MARUTI:1 INDIGO:4 INFY:4 KPITTECH:4 POLYCAB:4 TATAPOWER:4 DMART:4"
+  "at": "2026-11-15T20:15:23+05:30",
+  "note": "TCS:4"
  },
  "backfill": {
   "ok": true,
@@ -36,7 +36,7 @@
  },
  "research": {
   "ok": true,
-  "at": "2026-11-15T19:09:19+05:30",
-  "note": "built 22 (DIXON,ASIANPAINT,HCLTECH,PERSISTENT,HDFCBANK,ICICIBANK,BAJFINANCE,CDSL,TITAN,TRENT,ETERNAL,LT,RELIANCE,BHARTIARTL,SUNPHARMA,MARUTI,INDIGO,INFY,KPITTECH,POLYCAB,TATAPOWER,DMART); unchanged 0"
+  "at": "2026-11-15T20:18:08+05:30",
+  "note": "built 1 (TCS); unchanged 0"
  }
 }
