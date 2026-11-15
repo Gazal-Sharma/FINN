@@ -1,7 +1,8 @@
 {
   "outputDirectory": "public",
   "functions": {
-    "api/research.py": { "maxDuration": 300, "includeFiles": "finn/**" }
+    "api/research.py": { "maxDuration": 300, "includeFiles": "finn/**" },
+    "api/ask.py": { "maxDuration": 30, "includeFiles": "finn/**" }
   },
   "headers": [
     { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }

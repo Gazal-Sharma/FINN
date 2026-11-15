@@ -19,7 +19,8 @@ FINN is a phone-first app with one point of view: **an investor's scarce resourc
   - The one "strong model" call sees only verified records. Every number it writes must exist in its input, and every sentence must cite a record, or that sentence is removed.
 - **Honest comparisons.** Infosys guides in constant currency; we only have INR numbers, so those verdicts carry a "≈". Lenders have no EBITDA, so their card shows financing profit instead. Guided years still in progress are *on/off track*, not kept/missed.
 - **Alerts are calibrated, not just configured.** Sliders show how many alerts you *would have had* over the last 60 sessions. The default mode measures moves against each stock's own volatility: ±3% is noise for DIXON and news for HDFCBANK.
-- **Listen.** A 60-second spoken brief using the phone's own speech engine. It costs nothing and is assembled from the ranked events by code, not written by a model.
+- **Learn, for beginners.** A plain-language page explaining how filings, results, alerts and research connect, a glossary in which each term says where it appears in FINN, and verified beginner reading (Zerodha Varsity first). A floating **Ask** button on every screen answers from the glossary instantly and for free, and calls the cheapest Gemini model only when the glossary doesn't cover the question. It's told what screen you're on and never gives buy or sell advice.
+- **Listen.** A 60-second spoken brief using the phone's own speech engine. It costs nothing and is assembled from the ranked events by code, not written by a model. The script is written for the ear: "(s)" becomes a plural, "Q2 FY27" becomes "the September 2026 quarter", "₹" and "%" are spoken in words, and legal filing subjects are replaced with a plain description.
 
 ## Architecture and cost
 

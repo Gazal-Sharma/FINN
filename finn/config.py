@@ -59,7 +59,8 @@ TASK_CHAINS = {
     "classify":  ["flash-lite", "flash"],
     "summarize": ["flash-lite", "flash"],
     "extract":   ["flash", "flash-lite"],
-    "synthesis": ["pro", "flash", "flash-lite"],  # every number is checked, so lite is a safe last resort
+    "synthesis": ["pro", "flash", "flash-lite"],
+    "explain": ["flash-lite", "flash"],  # the Ask helper: short plain-language answers  # every number is checked, so lite is a safe last resort
 }
 
 # Approximate paid list prices (USD per 1M tokens, input/output) used only to
