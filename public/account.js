@@ -1,6 +1,7 @@
 // Optional sign-in. Everything works without it; signing in only syncs your
 // preferences (stocks you follow, alert thresholds, appearance, voice) across devices.
-// Sign-in is a 6-digit code sent by email (more reliable on phones than a magic link).
+// Sign-in is Supabase's default email magic link: the link returns to this same
+// site (live or branch preview), where the session is picked up from the URL.
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config.js";
 
 export const enabled = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
@@ -13,7 +14,10 @@ async function sb() {
   if (!enabled) return null;
   if (!client) {
     const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-    client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
+    // implicit flow: the link carries the session itself, so it still works if the
+    // email app opens it in a different browser tab than the one that asked for it
+    client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY,
+      { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "implicit" } });
   }
   return client;
 }
@@ -60,15 +64,10 @@ export function save(prefs) {
   saveTimer = setTimeout(() => push(prefs), 800);
 }
 
-export async function sendCode(email) {
+export async function sendLink(email) {
   const c = await sb();
-  const { error } = await c.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
-  if (error) throw new Error(error.message);
-}
-
-export async function verifyCode(email, token) {
-  const c = await sb();
-  const { error } = await c.auth.verifyOtp({ email, token, type: "email" });
+  const back = location.origin + location.pathname;  // return to whichever site you're on
+  const { error } = await c.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: back } });
   if (error) throw new Error(error.message);
 }
 

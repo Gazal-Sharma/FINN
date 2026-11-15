@@ -214,9 +214,9 @@ function accountGroup() {
   return html`<div class="grp"><span>Account (optional)</span>
     <div class="hint" style="margin:0 0 10px">Everything works without one. Sign in to sync your stocks, alerts and settings across devices.</div>
     ${a.step === "email"
-      ? html`<form class="askform" data-form="email" style="margin:0"><input name="email" type="email" required placeholder="you@example.com" value="${a.email}" autocomplete="email"><button>Send code</button></form>`
-      : html`<form class="askform" data-form="code" style="margin:0"><input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required placeholder="6-digit code" autocomplete="one-time-code"><button>Sign in</button></form>
-        <div class="hint">Code sent to ${a.email}. <button style="color:var(--link)" data-act="acctBack">Use a different email</button></div>`}
+      ? html`<form class="askform" data-form="email" style="margin:0"><input name="email" type="email" required placeholder="you@example.com" value="${a.email}" autocomplete="email"><button>Email me a link</button></form>`
+      : html`<div class="small ink2">We've sent a sign-in link to <b>${a.email}</b>. Open it on this device and you'll come straight back here, signed in.</div>
+        <div class="hint"><button style="color:var(--link)" data-act="acctBack">Use a different email</button></div>`}
     ${a.msg ? html`<div class="hint">${a.msg}</div>` : ""}</div>`;
 }
 
@@ -446,22 +446,16 @@ document.addEventListener("input", (ev) => {
 });
 
 document.addEventListener("submit", async (ev) => {
-  const af = ev.target.closest("[data-form=email], [data-form=code]");
+  const af = ev.target.closest("[data-form=email]");
   if (af) {
     ev.preventDefault();
     const a = state.acct;
     try {
-      if (af.dataset.form === "email") {
-        a.email = new FormData(af).get("email").toString().trim();
-        a.msg = "Sending…"; renderSheet();
-        await Acc.sendCode(a.email);
-        Object.assign(a, { step: "code", msg: "Check your inbox (and spam) for a 6-digit code." });
-      } else {
-        a.msg = "Checking…"; renderSheet();
-        await Acc.verifyCode(a.email, new FormData(af).get("code").toString().trim());
-        Object.assign(a, { step: "email", msg: "" });
-      }
-    } catch (e) { a.msg = e.message.includes("rate") ? "Too many emails sent just now. Try again in a few minutes." : e.message; }
+      a.email = new FormData(af).get("email").toString().trim();
+      a.msg = "Sending…"; renderSheet();
+      await Acc.sendLink(a.email);
+      Object.assign(a, { step: "sent", msg: "Not there? Check spam. The free email service sends only a few links an hour." });
+    } catch (e) { a.msg = /rate|seconds/i.test(e.message) ? "Too many sign-in emails just now. Try again in a few minutes." : e.message; }
     renderSheet();
     return;
   }
@@ -493,5 +487,8 @@ Acc.init({
     state.followed = store.get("followed", []);
     applyTheme(); render();
   },
-  changed: () => { if (state.sheet === "settings") renderSheet(); },
-});
+  changed: () => {
+    if (state.sheet === "settings") renderSheet();
+    if (Acc.currentUser() && /access_token|type=magiclink/.test(location.hash)) history.replaceState(null, "", location.pathname + "#/today");
+  },
+}).catch((e) => console.warn("accounts unavailable:", e.message));  // sign-in failing never breaks the app
