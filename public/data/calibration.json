@@ -44,17 +44,6 @@
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   },
-  "transcript": {
-   "label": "Concall transcript out (feeds the promise ledger)",
-   "tier": "know",
-   "n": 63,
-   "big_rate": 0.063,
-   "lift": 1.29,
-   "median_z": 0.66,
-   "median_volx": 0.78,
-   "decision": "keep",
-   "why": ""
-  },
   "newspaper": {
    "label": "Newspaper ad copy",
    "tier": "hidden",
@@ -63,6 +52,17 @@
    "lift": 0.95,
    "median_z": 0.6,
    "median_volx": 0.81,
+   "decision": "keep",
+   "why": ""
+  },
+  "transcript": {
+   "label": "Concall transcript out (feeds the promise ledger)",
+   "tier": "know",
+   "n": 63,
+   "big_rate": 0.063,
+   "lift": 1.29,
+   "median_z": 0.66,
+   "median_volx": 0.78,
    "decision": "keep",
    "why": ""
   },
@@ -135,9 +135,9 @@
   "agm_egm": {
    "label": "AGM / EGM paperwork",
    "tier": "hidden",
-   "n": 97,
-   "big_rate": 0.041,
-   "lift": 0.84,
+   "n": 96,
+   "big_rate": 0.042,
+   "lift": 0.85,
    "median_z": 0.59,
    "median_volx": 0.93,
    "decision": "keep",
@@ -297,16 +297,16 @@
    "decision": "demote",
    "why": "moved the stock ≥2× usual 0% of the time vs 5% on an ordinary day"
   },
-  "mgmt_top_join": {
-   "label": "New top executive",
-   "tier": "act",
-   "n": 11,
-   "big_rate": 0.091,
-   "lift": 1.84,
-   "median_z": 0.82,
-   "median_volx": 0.99,
+  "mgmt_reappoint": {
+   "label": "Re-appointment (continuity)",
+   "tier": "know",
+   "n": 6,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.57,
+   "median_volx": 0.74,
    "decision": "keep",
-   "why": "only 11 past examples; kept by judgment"
+   "why": "only 6 past examples; kept by judgment"
   },
   "ai:management_change": {
    "label": "AI-judged management_change",
@@ -318,6 +318,17 @@
    "median_volx": 1.31,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
+  },
+  "mgmt_top_join": {
+   "label": "New top executive",
+   "tier": "act",
+   "n": 8,
+   "big_rate": 0.125,
+   "lift": 2.54,
+   "median_z": 0.81,
+   "median_volx": 1.07,
+   "decision": "keep",
+   "why": "only 8 past examples; kept by judgment"
   },
   "mgmt_top_exit": {
    "label": "Top executive leaving",

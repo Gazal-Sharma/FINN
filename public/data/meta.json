@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T16:45:31+05:30",
+ "generated_at": "2026-11-15T16:48:23+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
@@ -206,8 +206,8 @@
   "DMART"
  ],
  "counts": {
-  "act": 38,
-  "know": 66,
+  "act": 37,
+  "know": 67,
   "hidden": 101
  }
 }
