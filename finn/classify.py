@@ -327,22 +327,31 @@ def calibrate(filings, raw_prices):
         if s in pos:
             by_session[(f["ticker"], s)].append(f)
 
-    samples = defaultdict(set)
+    rules_by = {}
     for key, fs in by_session.items():
-        if key not in z_by:
-            continue
         rules = []
         for f in fs:
             v = rule_verdict(f) or ({**cached[f["id"]], "rule": f"ai:{cached[f['id']]['category']}"} if f["id"] in cached else None)
             if v:
                 rules.append(v["rule"])
-        results_day = "results_outcome" in rules
-        for r in set(rules):
-            if results_day and r != "results_outcome":
-                continue  # the results move would be wrongly credited to this filing
+        rules_by[key] = set(rules)
+    # Results moves spill into the session after; filings in that window would be
+    # credited with a move they didn't cause, so they're left out (both sides).
+    results_window = set()
+    for (t, d), rs in rules_by.items():
+        if "results_outcome" in rs:
+            i = pos[d]
+            results_window.update({(t, d), (t, dates[i + 1]) if i + 1 < len(dates) else (t, d)})
+    samples = defaultdict(set)
+    for key, rs in rules_by.items():
+        if key not in z_by:
+            continue
+        for r in rs:
+            if key in results_window and r != "results_outcome":
+                continue
             samples[r].add(key)
 
-    filing_days = set(by_session)
+    filing_days = set(by_session) | results_window
     base = [z for k, (z, _) in z_by.items() if k not in filing_days]
     base_big = sum(1 for z in base if z >= BIG) / len(base) if base else 0.05
     out = {"window": [dates[61], dates[-1]], "big": BIG, "min_n": MIN_N,

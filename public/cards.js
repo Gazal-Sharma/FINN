@@ -107,7 +107,7 @@ export function rankingSheet(c) {
     <table class="res"><thead><tr><th>Filing type</th><th>n</th><th>Big move</th><th>vs normal</th><th></th></tr></thead><tbody>
     ${rows.map(([, r]) => html`<tr><td>${r.label} <span class="tiny muted">${r.tier === "ai" ? "" : r.tier}</span></td><td>${r.n}</td><td>${Math.round(r.big_rate * 100)}%</td>
       <td class="${r.lift >= 1.5 ? "up" : r.lift < 1 ? "muted" : ""}">${r.lift == null ? "—" : `${r.lift.toFixed(1)}×`}</td><td class="tiny">${dec[r.decision]}</td></tr>`)}</tbody></table>
-    <p class="tiny muted">Window ${c.window[0]} → ${c.window[1]}; ${c.baseline.n} ordinary stock-days as the baseline. Filings on a results day are excluded from their own type so the results move isn't credited to them.</p>`;
+    <p class="tiny muted">Window ${c.window[0]} → ${c.window[1]}; ${c.baseline.n} ordinary stock-days as the baseline. Filings on a results day or the session after are excluded from their own type, so the results move isn't credited to them.</p>`;
 }
 
 export { VLABEL, raw };
