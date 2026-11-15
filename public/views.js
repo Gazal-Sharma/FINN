@@ -203,6 +203,8 @@ export function researchHome(state) {
   </form>
   <datalist id="syms">${(state.symbols || []).slice(0, 3000).map(([s, n]) => html`<option value="${s}">${n}</option>`)}</datalist>
   <p class="small ink2">FINN reads the last four earnings-call transcripts, pulls out every promise management made, checks each quote word-for-word against the transcript, then scores it against the reported numbers. No news, no broker notes, no model memory.</p>
+  ${(state.extra || []).length ? html`<div class="sec"><h2>Your stocks</h2><span class="tiny muted">added by you</span></div>
+  <div class="tiles">${state.extra.map((t) => html`<a href="#/research/${t}"><b>${t}</b><span class="tiny muted">${(state.symbols || []).find(([s2]) => s2 === t)?.[1] || (ready.includes(t) ? "ready" : "built live, ~1 min")}</span></a>`)}</div>` : ""}
   <div class="sec"><h2>Ready to read</h2><span class="tiny muted">pre-built</span></div>
   <div class="tiles">${ready.map((t) => html`<a href="#/research/${t}"><b>${t}</b><span class="tiny muted">${state.nameOf(t)}</span></a>`)}</div>
   <div class="sec"><h2>Your portfolio</h2><span class="tiny muted">built live, ~1 min</span></div>
