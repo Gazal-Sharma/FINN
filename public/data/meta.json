@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T16:38:09+05:30",
+ "generated_at": "2026-11-15T16:38:35+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
@@ -196,7 +196,7 @@
  ],
  "counts": {
   "act": 38,
-  "know": 72,
-  "hidden": 95
+  "know": 74,
+  "hidden": 93
  }
 }

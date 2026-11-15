@@ -1,14 +1,14 @@
 {
  "window": [
-  "2024-11-07",
+  "2026-07-08",
   "2026-11-13"
  ],
  "big": 2.0,
  "min_n": 12,
  "baseline": {
-  "n": 7153,
-  "big_rate": 0.049,
-  "median_z": 0.54
+  "n": 1458,
+  "big_rate": 0.045,
+  "median_z": 0.56
  },
  "rules": {
   "ai:press_release": {
@@ -25,11 +25,11 @@
   "investor_meet": {
    "label": "Investor meeting",
    "tier": "hidden",
-   "n": 378,
-   "big_rate": 0.074,
-   "lift": 1.51,
-   "median_z": 0.56,
-   "median_volx": 0.81,
+   "n": 26,
+   "big_rate": 0.038,
+   "lift": 0.85,
+   "median_z": 0.6,
+   "median_volx": 0.95,
    "decision": "keep",
    "why": ""
   },
@@ -38,53 +38,53 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.32,
+   "lift": 22.09,
    "median_z": 2.0,
    "median_volx": 0.77,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   },
-  "transcript": {
-   "label": "Concall transcript out (feeds the promise ledger)",
-   "tier": "know",
-   "n": 63,
-   "big_rate": 0.063,
-   "lift": 1.29,
-   "median_z": 0.66,
-   "median_volx": 0.78,
-   "decision": "keep",
-   "why": ""
-  },
   "newspaper": {
    "label": "Newspaper ad copy",
    "tier": "hidden",
-   "n": 176,
-   "big_rate": 0.062,
-   "lift": 1.27,
-   "median_z": 0.59,
-   "median_volx": 0.89,
+   "n": 13,
+   "big_rate": 0.077,
+   "lift": 1.7,
+   "median_z": 0.56,
+   "median_volx": 0.99,
+   "decision": "keep",
+   "why": ""
+  },
+  "transcript": {
+   "label": "Concall transcript out (feeds the promise ledger)",
+   "tier": "know",
+   "n": 14,
+   "big_rate": 0.071,
+   "lift": 1.58,
+   "median_z": 0.93,
+   "median_volx": 0.76,
    "decision": "keep",
    "why": ""
   },
   "results_outcome": {
    "label": "Quarterly results filed",
    "tier": "act",
-   "n": 88,
-   "big_rate": 0.273,
-   "lift": 5.54,
-   "median_z": 1.3,
-   "median_volx": 2.04,
+   "n": 16,
+   "big_rate": 0.375,
+   "lift": 8.28,
+   "median_z": 1.72,
+   "median_volx": 2.45,
    "decision": "keep",
    "why": ""
   },
   "press_release": {
    "label": "Press release",
    "tier": "know",
-   "n": 212,
-   "big_rate": 0.09,
-   "lift": 1.82,
-   "median_z": 0.62,
-   "median_volx": 0.87,
+   "n": 12,
+   "big_rate": 0.167,
+   "lift": 3.68,
+   "median_z": 0.8,
+   "median_volx": 0.94,
    "decision": "keep",
    "why": ""
   },
@@ -99,135 +99,36 @@
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   },
-  "certificates": {
-   "label": "Compliance certificate",
-   "tier": "hidden",
-   "n": 56,
-   "big_rate": 0.107,
-   "lift": 2.18,
-   "median_z": 0.71,
-   "median_volx": 1.01,
-   "decision": "promote",
-   "why": "moved the stock ≥2× usual 11% of the time vs 5% on an ordinary day"
-  },
-  "esop": {
-   "label": "ESOP / RSU allotment",
-   "tier": "hidden",
-   "n": 171,
-   "big_rate": 0.082,
-   "lift": 1.66,
-   "median_z": 0.65,
-   "median_volx": 0.96,
-   "decision": "keep",
-   "why": ""
-  },
-  "mgmt_other": {
-   "label": "Board / KMP change",
-   "tier": "know",
-   "n": 52,
-   "big_rate": 0.096,
-   "lift": 1.95,
-   "median_z": 0.64,
-   "median_volx": 0.79,
-   "decision": "keep",
-   "why": ""
-  },
-  "agm_egm": {
-   "label": "AGM / EGM paperwork",
-   "tier": "hidden",
-   "n": 103,
-   "big_rate": 0.058,
-   "lift": 1.18,
-   "median_z": 0.59,
-   "median_volx": 0.93,
-   "decision": "keep",
-   "why": ""
-  },
-  "insider": {
-   "label": "Promoter / insider dealing",
-   "tier": "know",
-   "n": 24,
-   "big_rate": 0.083,
-   "lift": 1.69,
-   "median_z": 0.59,
-   "median_volx": 0.78,
-   "decision": "keep",
-   "why": "risk signal; kept regardless of price reaction"
-  },
-  "esg": {
-   "label": "ESG / sustainability report",
-   "tier": "hidden",
-   "n": 31,
-   "big_rate": 0.065,
-   "lift": 1.31,
-   "median_z": 0.77,
-   "median_volx": 0.81,
-   "decision": "keep",
-   "why": ""
-  },
   "mna": {
    "label": "Acquisition / merger / JV",
    "tier": "act",
-   "n": 70,
-   "big_rate": 0.057,
-   "lift": 1.16,
-   "median_z": 0.62,
-   "median_volx": 0.93,
+   "n": 4,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.28,
+   "median_volx": 0.82,
    "decision": "keep",
-   "why": ""
-  },
-  "clarification": {
-   "label": "Clarification on news / volume",
-   "tier": "know",
-   "n": 31,
-   "big_rate": 0.29,
-   "lift": 5.9,
-   "median_z": 1.21,
-   "median_volx": 2.06,
-   "decision": "keep",
-   "why": ""
-  },
-  "fund_raise_equity": {
-   "label": "Equity raise or buyback",
-   "tier": "act",
-   "n": 5,
-   "big_rate": 0.4,
-   "lift": 8.13,
-   "median_z": 0.98,
-   "median_volx": 1.2,
-   "decision": "keep",
-   "why": "only 5 past examples; kept by judgment"
+   "why": "only 4 past examples; kept by judgment"
   },
   "litigation": {
    "label": "Legal / regulatory action",
    "tier": "know",
-   "n": 17,
-   "big_rate": 0.118,
-   "lift": 2.39,
-   "median_z": 0.79,
-   "median_volx": 1.01,
+   "n": 1,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 1.99,
+   "median_volx": 0.94,
    "decision": "keep",
-   "why": "risk signal; kept regardless of price reaction"
+   "why": "only 1 past examples; kept by judgment"
   },
-  "trading_window": {
-   "label": "Trading window notice",
+  "esop": {
+   "label": "ESOP / RSU allotment",
    "tier": "hidden",
-   "n": 64,
-   "big_rate": 0.062,
-   "lift": 1.27,
-   "median_z": 0.53,
-   "median_volx": 1.0,
-   "decision": "keep",
-   "why": ""
-  },
-  "order_win": {
-   "label": "Order win / contract",
-   "tier": "know",
-   "n": 46,
-   "big_rate": 0.087,
-   "lift": 1.77,
-   "median_z": 0.53,
-   "median_volx": 0.96,
+   "n": 13,
+   "big_rate": 0.077,
+   "lift": 1.7,
+   "median_z": 0.9,
+   "median_volx": 0.95,
    "decision": "keep",
    "why": ""
   },
@@ -245,20 +146,20 @@
   "fund_raise_debt": {
    "label": "Debt raise",
    "tier": "know",
-   "n": 33,
-   "big_rate": 0.03,
-   "lift": 0.62,
-   "median_z": 0.58,
-   "median_volx": 0.86,
-   "decision": "demote",
-   "why": "moved the stock ≥2× usual 3% of the time vs 5% on an ordinary day"
+   "n": 6,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.62,
+   "median_volx": 0.81,
+   "decision": "keep",
+   "why": "only 6 past examples; kept by judgment"
   },
   "ai:unclassified": {
    "label": "AI-judged unclassified",
    "tier": "ai",
    "n": 11,
    "big_rate": 0.091,
-   "lift": 1.85,
+   "lift": 2.01,
    "median_z": 0.22,
    "median_volx": 1.11,
    "decision": "keep",
@@ -267,46 +168,46 @@
   "rating_other": {
    "label": "Credit rating reaffirmed / assigned",
    "tier": "hidden",
-   "n": 56,
-   "big_rate": 0.054,
-   "lift": 1.09,
-   "median_z": 0.74,
-   "median_volx": 0.91,
-   "decision": "keep",
-   "why": ""
-  },
-  "investor_presentation": {
-   "label": "Investor / analyst presentation",
-   "tier": "know",
-   "n": 19,
-   "big_rate": 0.158,
-   "lift": 3.21,
-   "median_z": 0.91,
-   "median_volx": 1.46,
-   "decision": "keep",
-   "why": ""
-  },
-  "dividend": {
-   "label": "Dividend / record date",
-   "tier": "know",
-   "n": 19,
+   "n": 4,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.53,
-   "median_volx": 0.68,
-   "decision": "demote",
-   "why": "moved the stock ≥2× usual 0% of the time vs 5% on an ordinary day"
+   "median_z": 1.11,
+   "median_volx": 1.06,
+   "decision": "keep",
+   "why": "only 4 past examples; kept by judgment"
   },
   "mgmt_top_join": {
    "label": "New top executive",
    "tier": "act",
-   "n": 11,
-   "big_rate": 0.091,
-   "lift": 1.85,
-   "median_z": 0.82,
+   "n": 1,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.37,
+   "median_volx": 0.59,
+   "decision": "keep",
+   "why": "only 1 past examples; kept by judgment"
+  },
+  "agm_egm": {
+   "label": "AGM / EGM paperwork",
+   "tier": "hidden",
+   "n": 5,
+   "big_rate": 0.2,
+   "lift": 4.42,
+   "median_z": 1.1,
    "median_volx": 0.99,
    "decision": "keep",
-   "why": "only 11 past examples; kept by judgment"
+   "why": "only 5 past examples; kept by judgment"
+  },
+  "mgmt_other": {
+   "label": "Board / KMP change",
+   "tier": "know",
+   "n": 5,
+   "big_rate": 0.2,
+   "lift": 4.42,
+   "median_z": 1.16,
+   "median_volx": 0.71,
+   "decision": "keep",
+   "why": "only 5 past examples; kept by judgment"
   },
   "ai:management_change": {
    "label": "AI-judged management_change",
@@ -318,17 +219,6 @@
    "median_volx": 1.31,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
-  },
-  "mgmt_top_exit": {
-   "label": "Top executive leaving",
-   "tier": "act",
-   "n": 4,
-   "big_rate": 0.25,
-   "lift": 5.08,
-   "median_z": 0.68,
-   "median_volx": 1.24,
-   "decision": "keep",
-   "why": "only 4 past examples; kept by judgment"
   },
   "ai:investor_meetings": {
    "label": "AI-judged investor_meetings",
@@ -346,11 +236,22 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.32,
+   "lift": 22.09,
    "median_z": 2.51,
    "median_volx": 0.72,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
+  },
+  "fund_raise_equity": {
+   "label": "Equity raise or buyback",
+   "tier": "act",
+   "n": 2,
+   "big_rate": 0.5,
+   "lift": 11.05,
+   "median_z": 1.25,
+   "median_volx": 1.09,
+   "decision": "keep",
+   "why": "only 2 past examples; kept by judgment"
   },
   "ai:results": {
    "label": "AI-judged results",
@@ -366,46 +267,46 @@
   "concall": {
    "label": "Earnings-call notice / recording",
    "tier": "hidden",
-   "n": 16,
-   "big_rate": 0.188,
-   "lift": 3.81,
-   "median_z": 1.25,
-   "median_volx": 1.05,
-   "decision": "promote",
-   "why": "moved the stock ≥2× usual 19% of the time vs 5% on an ordinary day"
-  },
-  "auditor_subj": {
-   "label": "Auditor change",
-   "tier": "hidden",
-   "n": 2,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 1.02,
-   "median_volx": 1.27,
+   "n": 4,
+   "big_rate": 0.25,
+   "lift": 5.52,
+   "median_z": 0.95,
+   "median_volx": 1.37,
    "decision": "keep",
-   "why": "only 2 past examples; kept by judgment"
-  },
-  "bonus_split": {
-   "label": "Bonus issue / stock split",
-   "tier": "know",
-   "n": 3,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 0.13,
-   "median_volx": 0.5,
-   "decision": "keep",
-   "why": "only 3 past examples; kept by judgment"
+   "why": "only 4 past examples; kept by judgment"
   },
   "monitoring": {
    "label": "Monitoring-agency report",
    "tier": "hidden",
-   "n": 4,
+   "n": 1,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 1.15,
-   "median_volx": 3.64,
+   "median_z": 1.42,
+   "median_volx": 3.91,
    "decision": "keep",
-   "why": "only 4 past examples; kept by judgment"
+   "why": "only 1 past examples; kept by judgment"
+  },
+  "investor_presentation": {
+   "label": "Investor / analyst presentation",
+   "tier": "know",
+   "n": 2,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 1.34,
+   "median_volx": 1.69,
+   "decision": "keep",
+   "why": "only 2 past examples; kept by judgment"
+  },
+  "order_win": {
+   "label": "Order win / contract",
+   "tier": "know",
+   "n": 5,
+   "big_rate": 0.2,
+   "lift": 4.42,
+   "median_z": 0.48,
+   "median_volx": 1.07,
+   "decision": "keep",
+   "why": "only 5 past examples; kept by judgment"
   },
   "rta": {
    "label": "Registrar / share-transfer change",
@@ -432,44 +333,55 @@
   "insolvency": {
    "label": "Insolvency / restructuring",
    "tier": "act",
-   "n": 11,
+   "n": 3,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.48,
-   "median_volx": 0.9,
+   "median_z": 0.15,
+   "median_volx": 0.75,
    "decision": "keep",
-   "why": "only 11 past examples; kept by judgment"
+   "why": "only 3 past examples; kept by judgment"
+  },
+  "certificates": {
+   "label": "Compliance certificate",
+   "tier": "hidden",
+   "n": 2,
+   "big_rate": 0.5,
+   "lift": 11.05,
+   "median_z": 1.31,
+   "median_volx": 1.07,
+   "decision": "keep",
+   "why": "only 2 past examples; kept by judgment"
   },
   "orders_passed": {
    "label": "Regulatory / tax order",
    "tier": "know",
-   "n": 89,
-   "big_rate": 0.09,
-   "lift": 1.83,
+   "n": 3,
+   "big_rate": 0.333,
+   "lift": 7.36,
    "median_z": 0.64,
-   "median_volx": 0.84,
+   "median_volx": 0.76,
    "decision": "keep",
-   "why": ""
+   "why": "only 3 past examples; kept by judgment"
+  },
+  "clarification": {
+   "label": "Clarification on news / volume",
+   "tier": "know",
+   "n": 3,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 1.46,
+   "median_volx": 2.12,
+   "decision": "keep",
+   "why": "only 3 past examples; kept by judgment"
   },
   "postal_ballot": {
    "label": "Postal ballot",
    "tier": "hidden",
-   "n": 5,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 1.54,
-   "median_volx": 0.56,
-   "decision": "keep",
-   "why": "only 5 past examples; kept by judgment"
-  },
-  "capex": {
-   "label": "Capacity / capex",
-   "tier": "know",
    "n": 1,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.85,
-   "median_volx": 1.09,
+   "median_z": 1.99,
+   "median_volx": 2.12,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   }
