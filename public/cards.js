@@ -80,7 +80,7 @@ const VLABEL = { kept: "Kept", missed: "Missed", on_track: "On track", off_track
 const rng = (h) => (h.low == null && h.high == null ? "" : h.low === h.high || h.high == null ? `${h.low}${h.unit === "%" ? "%" : ` ${h.unit || ""}`}` :
   h.low == null ? `≤${h.high}${h.unit === "%" ? "%" : ` ${h.unit || ""}`}` : `${h.low}–${h.high}${h.unit === "%" ? "%" : ` ${h.unit || ""}`}`);
 
-export function threadRow(t, calls, open) {
+export function threadRow(t, calls, open, watch = null) {
   const last = t.history[t.history.length - 1];
   const byCall = new Map(t.history.map((h) => [h.call_idx, h]));
   const cells = calls.map((c, i) => {
@@ -97,6 +97,7 @@ export function threadRow(t, calls, open) {
         ${a ? html` · Actual <b>${a.unit === "%" ? `${(+a.value).toFixed(1)}%` : `₹${fmtCr(a.value)} cr`}</b> <span class="muted">${a.label}, ${a.period}${t.approx ? " ≈" : ""}</span>` : ""}</div>
       ${t.note ? html`<div class="tiny muted">${t.note}</div>` : ""}
     </button>
+    ${watch ? html`<button class="watch ${watch.on ? "on" : ""}" data-act="watch" data-t="${watch.ticker}" data-id="${t.id}">${watch.on ? "★ Watching" : "☆ Watch this promise"}</button>` : ""}
     ${open ? html`${t.history.map((h) => html`<div class="quote">“${h.quote}”</div>
       <div class="tiny muted">${h.speaker ? `${h.speaker}, ` : ""}${h.call} call · <a href="${h.src_url}" target="_blank" rel="noopener">transcript ›</a> · quote verified in source</div>`)}` : ""}
   </div>`;

@@ -77,3 +77,9 @@ export async function signOut() {
   user = null;
   onChange();
 }
+
+export async function token() {
+  const c = await sb();
+  const { data } = (await c?.auth.getSession()) || {};
+  return data?.session?.access_token || null;
+}

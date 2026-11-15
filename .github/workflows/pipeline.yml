@@ -37,6 +37,9 @@ env:
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
   GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
   FINN_ONLY_FAMILIES: ${{ github.event.inputs.only_models }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+  BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+  BRIEF_FROM_EMAIL: ${{ secrets.BRIEF_FROM_EMAIL }}
 
 jobs:
   run:
@@ -57,14 +60,15 @@ jobs:
           S="${{ github.event.inputs.stage || 'all' }}"
           if [ "${{ github.event_name }}" = "schedule" ]; then
             # evening run also refreshes transcripts; research rebuilds only companies with a new one
-            if [ "$(date -u +%H)" -ge 10 ]; then S="prices,filings,screener,transcripts,build,research"; else S="prices,filings,build"; fi
+            if [ "$(date -u +%H)" -ge 10 ]; then S="users,prices,filings,screener,transcripts,build,research"; else S="users,prices,filings,build,brief"; fi
           fi
           if [ "$S" = "all" ]; then S="smoke,prices,filings,screener,symbols,transcripts,build,research"; fi
           has() { case ",$S," in *",$1,"*) echo true;; *) echo false;; esac; }
-          FETCH=$(echo "$S" | tr ',' '\n' | grep -vE '^(build|research)$' | paste -sd, -)
+          FETCH=$(echo "$S" | tr ',' '\n' | grep -vE '^(build|research|brief)$' | paste -sd, -)
           echo "fetch=$FETCH" >> $GITHUB_OUTPUT
           echo "build=$(has build)" >> $GITHUB_OUTPUT
           echo "research=$(has research)" >> $GITHUB_OUTPUT
+          echo "brief=$(has brief)" >> $GITHUB_OUTPUT
 
       - name: 1 · Fetch (raw data)
         if: steps.s.outputs.fetch != ''
@@ -88,3 +92,8 @@ jobs:
       - name: Commit research
         if: always()
         run: pipeline/commit.sh "research"
+
+      - name: 4 · Morning brief emails
+        if: steps.s.outputs.brief == 'true'
+        continue-on-error: true
+        run: python pipeline/run.py --stage brief

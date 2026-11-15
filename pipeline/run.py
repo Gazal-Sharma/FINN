@@ -68,7 +68,7 @@ def stage_smoke(args):
 
 # ---------------------------------------------------------------- fetch: prices
 def stage_prices(args, days=150):
-    tickers = args.tickers or list(config.PORTFOLIO)
+    tickers = args.tickers or config.tracked()
     syms = [f"{t}.NS" for t in tickers] + [config.INDEX_YF]
     data = sources.fetch_prices(syms, days=days)
     old = read_json(RAW / "prices.json", {})
@@ -85,7 +85,7 @@ def stage_prices(args, days=150):
 
 # --------------------------------------------------------------- fetch: filings
 def stage_filings(args):
-    tickers = args.tickers or list(config.PORTFOLIO)
+    tickers = args.tickers or config.tracked()
     end = now_ist()
     start = end - timedelta(days=args.days)
     nse = sources.NSE()
@@ -111,7 +111,7 @@ def stage_filings(args):
 def stage_docs(args, nse=None):
     """PDF text only for filings that need it: results, management change, unmatched."""
     nse = nse or sources.NSE()
-    tickers = args.tickers or list(config.PORTFOLIO)
+    tickers = args.tickers or config.tracked()
     cutoff = (now_ist() - timedelta(days=args.days)).isoformat()
     ai = read_json(config.CACHE / "verdicts.json", {})  # AI-judged filings count too
     cutoff_mgmt = (now_ist() - timedelta(days=120)).isoformat()
@@ -170,7 +170,7 @@ def stage_backfill(args):
 
 # -------------------------------------------------------------- fetch: screener
 def stage_screener(args):
-    tickers = args.tickers or sorted(set(config.PORTFOLIO) | set(config.RESEARCH_SET) | set(args.research or []))
+    tickers = args.tickers or sorted(set(config.tracked()) | set(config.RESEARCH_SET) | set(args.research or []))
     ok, bad = 0, []
     for t in tickers:
         try:
@@ -241,6 +241,43 @@ def stage_transcripts(args):
     record("transcripts", True, " ".join(summary))
 
 
+# ------------------------------------------------------------ accounts stages
+def stage_users(args):
+    """Collect every signed-in user's added stocks (tickers only; no personal data
+    is written to the repo) so the daily job fetches filings and prices for them."""
+    import os
+    from finn import brief
+    if not os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
+        record("users", True, "no service key; skipped")
+        return
+    prefs = brief.all_prefs()
+    extra = sorted({t.upper() for p in prefs.values() for t in (p.get("extra") or []) if re.fullmatch(r"[A-Z0-9&-]{1,20}", t.upper())})
+    extra = [t for t in extra if t not in config.PORTFOLIO][:40]  # cap: keeps the free-tier job small
+    write_json(RAW / "extra_tickers.json", extra)
+    record("users", True, f"{len(prefs)} accounts; {len(extra)} added stocks: {','.join(extra) or '-'}")
+
+
+def stage_brief(args):
+    """Email the morning brief to every user who turned it on."""
+    import os
+    from finn import brief
+    if not (os.environ.get("SUPABASE_SERVICE_ROLE_KEY") and os.environ.get("BREVO_API_KEY")):
+        record("brief", True, "email not set up; skipped")
+        return
+    prefs, sent, failed = brief.all_prefs(), 0, 0
+    for uid, email in brief.all_users():
+        p = prefs.get(uid)
+        if not p or not p.get("brief"):
+            continue
+        try:
+            brief.send(email, *brief.compose(p))
+            sent += 1
+        except Exception as e:
+            failed += 1
+            print("brief failed for a user:", str(e)[:120], flush=True)  # no emails in logs
+    record("brief", failed == 0, f"sent {sent}" + (f", failed {failed}" if failed else ""))
+
+
 # ------------------------------------------------------------------ build stages
 def stage_build(args):
     """raw/ -> public/data (prices.json, events.json, meta.json). No network."""
@@ -252,7 +289,7 @@ def stage_research(args):
     """Pre-build dossiers in PREBUILD order. Skips any whose transcripts haven't changed.
     Stops cleanly when the free daily quota runs out; the next run carries on."""
     from finn import research, llm
-    tickers = args.research or config.PREBUILD
+    tickers = args.research or (config.PREBUILD + [t for t in config.extra_tickers() if t not in config.PREBUILD])
     built, skipped, failed, left = [], [], [], []
     for i, t in enumerate(tickers):
         out = config.PUBLIC_DATA / "research" / f"{t}.json"
@@ -295,6 +332,7 @@ STAGES = {
     "smoke": stage_smoke, "prices": stage_prices, "filings": stage_filings, "docs": stage_docs,
     "screener": stage_screener, "symbols": stage_symbols, "transcripts": stage_transcripts,
     "build": stage_build, "research": stage_research, "backfill": stage_backfill,
+    "users": stage_users, "brief": stage_brief,
 }
 ALL = ["prices", "filings", "screener", "symbols", "transcripts", "build", "research"]
 

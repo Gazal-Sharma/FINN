@@ -376,3 +376,6 @@ table.res td:first-child { font-size: 15.5px; }
 .thread { padding: 18px 0; }
 .pa { font-size: 15.5px; }
 .cred { font-size: 19px; }
+.watch { margin-top: 8px; font: 500 13.5px var(--sans); color: var(--link); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px; }
+.watch.on { background: var(--hl); color: var(--hl-ink); border-color: transparent; font-weight: 600; }
+.row .t { overflow-wrap: anywhere; hyphens: auto; }
