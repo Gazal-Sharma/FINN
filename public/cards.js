@@ -41,6 +41,7 @@ export function eventCard(e, ctx) {
     <div class="when">${fmtWhen(e.ts)}</div>
     <div class="headline">${c?.type === "results" ? `Results · ${c.period || ""}` : e.oneliner || e.title}</div>
     ${c?.type === "results" ? resultsBody(c, true) : c?.type === "mgmt" ? mgmtBody(c) : ""}
+    ${e.archive && (e.category === "results" || e.category === "management_change") ? html`<div class="tiny muted">Older than 30 days: results tables and profiles are shown for the last 30 days only. The filings are linked below.</div>` : ""}
     ${e.undergraded ? html`<div class="flag">FINN ranked this low, but the stock moved. Flagged for rule review.</div>` : ""}
     <div class="why">${reactionChip(e.reaction)}
       <span>Why: ${e.why.join(" · ")}</span>

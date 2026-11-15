@@ -25,7 +25,14 @@ export function windowEnd(state, win) {
 export function dataRange(state) {
   const ts = (state.events || []).map((e) => e.ts).filter(Boolean).sort();
   const day = (iso) => new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
-  return ts.length ? [day(ts[0]), day(ts.at(-1))] : [null, null];
+  if (!ts.length) return [null, null];
+  return [state.meta?.archive?.from || day(ts[0]), day(ts.at(-1))];
+}
+
+// Filings older than the 30-day feed live in a separate archive, fetched only on demand.
+export function recentFrom(state) {
+  const ts = (state.events || []).map((e) => e.ts).filter(Boolean).sort();
+  return ts.length ? new Date(ts[0]).toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" }) : null;
 }
 
 export function windowLabel(state, win) {
@@ -44,7 +51,8 @@ export function followedPrices(state) {
 }
 
 export function todayEvents(state) {
-  const all = (state.events || []).filter((e) => !state.isFollowed || state.isFollowed(e.ticker));
+  const useArchive = (state.viewWindow || state.settings.window) === "custom" && state.archive;
+  const all = [...(state.events || []), ...(useArchive ? state.archive : [])].filter((e) => !state.isFollowed || state.isFollowed(e.ticker));
   let win = state.viewWindow || state.settings.window, note = "";
   const pick = (w) => all.filter((e) => { const t = new Date(e.ts).getTime(); return t >= windowStart(state, w) && t <= windowEnd(state, w); });
   let evs = pick(win);
@@ -83,12 +91,13 @@ export function today(state, ctx) {
   <div class="chips">${["24h", "session", "7d", "30d", "custom"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${{ session: "Last session", custom: "Custom" }[w] || w}</button>`)}</div>
   ${win === "custom" ? html`<div class="range"><label>From <input type="date" data-range="from" min="${lo}" max="${hi}" value="${state.customFrom || lo}"></label>
      <label>To <input type="date" data-range="to" min="${lo}" max="${hi}" value="${state.customTo || hi}"></label>
-     <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}.</div></div>` : ""}
+     <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}. Older than 30 days (before ${fmtDay(recentFrom(state))}): ranked by the same rules and evidence, without results tables or profiles.</div>
+     ${state.archiveLoading ? html`<div class="tiny"><b>Loading older filings…</b></div>` : ""}</div>` : ""}
   ${note ? html`<div class="note">${note}</div>` : ""}
 
   ${watchedSection(state)}
   ${pendingNote(state)}
-  ${moves.length ? html`<a class="note" href="#/alerts" style="display:block;color:inherit;text-decoration:none">
+  ${moves.length && windowEnd(state, win) >= new Date((state.prices?.dates?.at(-1) || "2000-01-01") + "T09:15:00+05:30").getTime() ? html`<a class="note" href="#/alerts" style="display:block;color:inherit;text-decoration:none">
      <b>Unusual moves, ${fmtDay(state.prices.dates.at(-1))}:</b> ${moves.slice(0, 4).map((m, i) => html`${i ? " · " : ""}${m.t} ${m.price ? fmtPct(m.ret) : ""}${m.vol ? ` ${m.volx.toFixed(1)}× vol` : ""}`)}${moves.length > 4 ? ` +${moves.length - 4} more` : ""} ›</a>` : ""}
 
   ${!act.length && !know.length ? html`<div class="allclear"><div class="big">Nothing needs you.</div>
