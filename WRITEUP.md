@@ -38,7 +38,13 @@ The look follows the same idea: an accountant's ledger rather than a trading ter
   - A segment target (e.g. Polycab's BharatNet ₹800–1,000 cr) is never compared with company revenue.
   - "Quietly dropped" applies only to promises still in the future; a promise whose date has passed is due, not dropped.
   - Years still in progress are *on/off track*, not kept/missed.
-- **Login is optional.** Everything works without an account. Signing in (an emailed link, via Supabase) syncs the stocks you follow, alert thresholds and settings across devices. Each user can only read their own row (enforced by the database), so the public key is safe to ship. If sign-in is unavailable, the app carries on without it.
+- **Login is optional, and earns its place.** Everything works without an account. Signing in (an emailed link, via Supabase) adds things that need the server to know who you are:
+  - **Your settings sync** across devices: the stocks you follow, alert thresholds, appearance, voice.
+  - **Watch a promise.** Tap ☆ on any promise in Research. Today then shows "Promises you watch" and highlights any change, e.g. *KPIT: FY27 growth, on track → off track*.
+  - **Your own stocks.** Add any NSE symbol. Research works straight away, and the nightly job starts fetching that stock's filings and prices on its next run; the app says so.
+  - **A morning brief by email** at 8:45 am, built from your stocks, your alert thresholds and your watched promises, or simply "Nothing needs you". A **Send me a test brief now** button lets reviewers see it straight away.
+
+  Each user can only read their own row (enforced by the database), so the public key is safe to ship. The all-access service key lives only in GitHub secrets, for the nightly job; the test-brief button uses the signed-in user's own token. If sign-in is unavailable, the app carries on without it.
 - **For beginners.**
   - A Learn page explains how filings, results, alerts and research connect, with 51 terms in plain language, each saying where it appears in FINN.
   - A **?** Ask helper on every screen answers from that glossary first (instant, free) and calls the cheapest model only when needed. It never gives buy or sell advice.
@@ -64,14 +70,16 @@ GitHub Actions (evening + morning, or on demand)
 Vercel: static app (vanilla JS, no build step) + 2 Python functions
   /api/research  live dossier for any ticker (numbers first, then promises)
   /api/ask       the Ask helper
+  /api/brief     "send me a test brief now" (uses the caller's own sign-in token)
 Supabase (optional): sign-in + one row per user, protected by row-level security
+Brevo: sends the morning brief (sign-in emails also go through it, avoiding Supabase's 2-an-hour limit)
 ```
 
 - **Model routing (Gemini, Groq as fallback):**
   - triage and one-liners: Flash-Lite
   - extraction: Flash → Flash-Lite
   - synthesis: Pro → Flash
-  - Groq takes over when Gemini's free daily quota runs out. Its free tier can't take a whole transcript at once, so it reads transcripts in overlapping pieces of about 5k tokens, with the same checks.
+  - Groq takes over when Gemini's free daily quota runs out. Its free tier can't take a whole transcript at once, so it reads transcripts in overlapping pieces of about 5k tokens, with the same checks. **Tested for real:** TCS was researched with Gemini switched off. Groq found 40 promises, the checks dropped 7 (4 quotes not in the transcript, 3 numbers not in their quotes), and the dossier took 148 seconds, including waits for rate limits.
 - **Rate limits:** each model is paced below its free-tier limit. A rate limit means *wait and retry*; a used-up daily quota stops cleanly, and the next run resumes.
 - **Never pay twice:** every answer is cached (verdicts per filing ID; extractions by prompt and input), and the cache is committed with the data. Research is rebuilt only when a company files a **new transcript**.
 - **Cost:** 336 model calls; 35% answered from cache; 1.69M tokens in, 72k out.
@@ -90,16 +98,15 @@ Supabase (optional): sign-in + one row per user, protected by row-level security
 - **Transcript gaps:** TRENT has no transcripts we could find, CDSL's calls contain no measurable promises, and MARUTI has only one transcript. Each dossier says so plainly rather than guessing.
 - **Where the numbers come from:** standardised tables on screener.in, which are derived from company filings. Annual reports are linked as sources but not read in full; reading 300-page PDFs live would blow the time budget.
 - **Prices are end-of-day** (Yahoo), so reactions are per session, not intraday.
-- **Groq fallback:** tested offline, but tonight's run didn't need it, so it hasn't run against the real API.
-- **Supabase's free email sender** allows only a few sign-in links an hour. Fine for a demo; a real launch needs its own email service.
+- **Email:** the brief comes from a verified Gmail address through Brevo's free plan (300 a day), so some inboxes may file it as spam. A real launch needs its own domain. Added stocks are capped at 10 per user and 40 overall, to keep the free nightly job small.
 
 ## Next
 
-1. Read NSE's XBRL results files directly, so results cards are ready the minute results land.
-2. Let signed-in users add their own stocks to the daily job, not just choose among the 18.
-3. Phone push notifications for alerts.
-4. A management credibility history across years.
-5. Tone drift between calls.
+1. **Measure what extraction misses.** The quote check proves nothing is made up, but not that nothing is missed. Hand-label promises for a few companies and report the share FINN finds.
+2. Read NSE's XBRL results files directly, so results cards are ready the minute results land.
+3. Annual reports' management discussion in the research view.
+4. Phone push notifications alongside the email brief.
+5. A management credibility history across years, and tone drift between calls.
 6. Per-stock alert overrides.
 
 ## How it was built

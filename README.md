@@ -21,6 +21,8 @@ public/            static app (vanilla ES modules, no build step), served by Ver
   data/            built by the pipeline: meta, prices, events, research/<T>.json, symbols
 api/research.py    Vercel function: live dossier for a ticker not in the snapshot (numbers first)
 api/ask.py         Vercel function: the ? helper (glossary first, AI only if needed)
+api/brief.py       Vercel function: "send me a test brief now" (caller's own sign-in token)
+finn/brief.py      the morning brief: composed from public data per user, sent via Brevo
 docs/supabase.sql  optional accounts: one table + row-level security
 finn/              shared Python core
   sources.py       NSE (cookie warm-up) → BSE fallback, yfinance, screener, PDF text
@@ -34,7 +36,7 @@ pipeline/run.py    scheduled job in stages: fetch → raw/, build → public/dat
 raw/  cache/  logs/  committed: what was fetched, cached LLM answers, token usage
 ```
 
-**Keys:** `GEMINI_API_KEY` and optional `GROQ_API_KEY` (GitHub secrets + Vercel). Supabase URL and publishable key in `public/config.js` (public by design).
+**Keys:** `GEMINI_API_KEY`, `GROQ_API_KEY`, `BREVO_API_KEY`, `BRIEF_FROM_EMAIL` (GitHub secrets + Vercel); `SUPABASE_SERVICE_ROLE_KEY` (GitHub secrets only, for the nightly job). Supabase URL and publishable key in `public/config.js` (public by design).
 
 **Run locally:** `pip install -r requirements-pipeline.txt`, set `GEMINI_API_KEY`, run `python pipeline/run.py` (or `--stage build`, `--stage research --research INFY`). Then serve `public/` with any static server.
 
