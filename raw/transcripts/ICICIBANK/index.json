@@ -1,0 +1,26 @@
+[
+ {
+  "when": "Jul 2026",
+  "url": "https://www.icici.bank.in/content/dam/icicibank/india/managed-assets/docs/about-us/2027/transcript-for-earnings-call-held-on-july-18-2026.pdf",
+  "file": "Jul_2026.txt",
+  "chars": 36802
+ },
+ {
+  "when": "Apr 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=50d0e36c-8e96-4fde-9d2e-d33a9443ec34.pdf",
+  "file": "Apr_2026.txt",
+  "chars": 85831
+ },
+ {
+  "when": "Jan 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=2941b192-7144-4566-874a-a0d4124a003f.pdf",
+  "file": "Jan_2026.txt",
+  "chars": 85639
+ },
+ {
+  "when": "Jan 2026",
+  "url": "https://www.icici.bank.in/content/dam/icicibank/india/managed-assets/docs/about-us/2026/transcript-earnings-call-jan2026.pdf",
+  "file": "Jan_2026.txt",
+  "chars": 42240
+ }
+]

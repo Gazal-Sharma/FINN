@@ -1,0 +1,26 @@
+[
+ {
+  "when": "Oct 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=524eadda-3966-4f4f-8888-bfaf2cb0d69e.pdf",
+  "file": "Oct_2026.txt",
+  "chars": 60481
+ },
+ {
+  "when": "Aug 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=b1c49752-0908-4750-9177-398a60654630.pdf",
+  "file": "Aug_2026.txt",
+  "chars": 71400
+ },
+ {
+  "when": "Apr 2026",
+  "url": "https://www.persistent.com/wp-content/uploads/2026/04/Analyst-Call-Transcript-Q4FY26.pdf",
+  "file": "Apr_2026.txt",
+  "chars": 57578
+ },
+ {
+  "when": "Jan 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=b68ef2b0-b285-4696-8c08-e3bb58039b0e.pdf",
+  "file": "Jan_2026.txt",
+  "chars": 59221
+ }
+]

@@ -1,0 +1,26 @@
+[
+ {
+  "when": "Nov 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=995a3a71-4a1e-4c1f-a29a-6c6747e4ca10.pdf",
+  "file": "Nov_2026.txt",
+  "chars": 64495
+ },
+ {
+  "when": "Aug 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=7ce2ca16-3043-48f4-97f9-a62a6a086c2f.pdf",
+  "file": "Aug_2026.txt",
+  "chars": 58425
+ },
+ {
+  "when": "May 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=38b72f07-55a6-4503-91fd-ed3b2c209e96.pdf",
+  "file": "May_2026.txt",
+  "chars": 54581
+ },
+ {
+  "when": "Feb 2026",
+  "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=ad6e72f1-b5f8-4a75-8e45-f2e88c7525e0.pdf",
+  "file": "Feb_2026.txt",
+  "chars": 57305
+ }
+]
