@@ -1,18 +1,18 @@
 {
  "prices": {
   "ok": true,
-  "at": "2026-11-15T16:32:11+05:30",
-  "note": "19/19 symbols"
+  "at": "2026-11-15T20:45:01+05:30",
+  "note": "20/20 symbols"
  },
  "filings": {
   "ok": true,
-  "at": "2026-11-15T15:46:42+05:30",
-  "note": "256 filings; sources {'nse': 18}"
+  "at": "2026-11-15T20:45:26+05:30",
+  "note": "261 filings; sources {'nse': 19}"
  },
  "docs": {
   "ok": true,
-  "at": "2026-11-15T19:30:47+05:30",
-  "note": "26/30 PDFs extracted (30 wanted)"
+  "at": "2026-11-15T20:45:27+05:30",
+  "note": "0/0 PDFs extracted (0 wanted)"
  },
  "screener": {
   "ok": true,
@@ -41,7 +41,7 @@
  },
  "users": {
   "ok": true,
-  "at": "2026-11-15T20:29:15+05:30",
-  "note": "1 accounts; 0 added stocks: -"
+  "at": "2026-11-15T20:44:59+05:30",
+  "note": "1 accounts; 1 added stocks: TCS"
  }
 }

@@ -1,23 +1,23 @@
 {
- "generated_at": "2026-11-15T19:30:54+05:30",
+ "generated_at": "2026-11-15T20:45:29+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
  "status": {
   "prices": {
    "ok": true,
-   "at": "2026-11-15T16:32:11+05:30",
-   "note": "19/19 symbols"
+   "at": "2026-11-15T20:45:01+05:30",
+   "note": "20/20 symbols"
   },
   "filings": {
    "ok": true,
-   "at": "2026-11-15T15:46:42+05:30",
-   "note": "256 filings; sources {'nse': 18}"
+   "at": "2026-11-15T20:45:26+05:30",
+   "note": "261 filings; sources {'nse': 19}"
   },
   "docs": {
    "ok": true,
-   "at": "2026-11-15T19:30:47+05:30",
-   "note": "26/30 PDFs extracted (30 wanted)"
+   "at": "2026-11-15T20:45:27+05:30",
+   "note": "0/0 PDFs extracted (0 wanted)"
   },
   "screener": {
    "ok": true,
@@ -43,6 +43,11 @@
    "ok": true,
    "at": "2026-11-15T20:18:08+05:30",
    "note": "built 1 (TCS); unchanged 0"
+  },
+  "users": {
+   "ok": true,
+   "at": "2026-11-15T20:44:59+05:30",
+   "note": "1 accounts; 1 added stocks: TCS"
   }
  },
  "portfolio": [
@@ -191,6 +196,16 @@
    "bse": "539448"
   }
  ],
+ "extra": [
+  {
+   "t": "TCS",
+   "name": "Tata Consultancy Services Limited",
+   "spoken": "TCS",
+   "sector": "",
+   "lender": false,
+   "bse": null
+  }
+ ],
  "research_ready": [
   "ASIANPAINT",
   "BAJFINANCE",
@@ -227,7 +242,7 @@
  ],
  "counts": {
   "act": 32,
-  "know": 62,
-  "hidden": 100
+  "know": 64,
+  "hidden": 102
  }
 }

@@ -77,17 +77,6 @@
    "decision": "keep",
    "why": ""
   },
-  "ai:earnings_call": {
-   "label": "AI-judged earnings_call",
-   "tier": "ai",
-   "n": 1,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 1.94,
-   "median_volx": 1.48,
-   "decision": "keep",
-   "why": "only 1 past examples; kept by judgment"
-  },
   "press_release": {
    "label": "Press release",
    "tier": "know",
@@ -98,6 +87,17 @@
    "median_volx": 0.87,
    "decision": "keep",
    "why": ""
+  },
+  "ai:earnings_call": {
+   "label": "AI-judged earnings_call",
+   "tier": "ai",
+   "n": 1,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 1.94,
+   "median_volx": 1.48,
+   "decision": "keep",
+   "why": "only 1 past examples; kept by judgment"
   },
   "certificates": {
    "label": "Compliance certificate",
