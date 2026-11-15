@@ -37,7 +37,8 @@ export function recentFrom(state) {
 
 export function windowLabel(state, win) {
   if (win === "custom") {
-    const f = (d) => d ? new Date(d + "T12:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" }) : "…";
+    const yrs = (state.customFrom || "").slice(0, 4) !== (state.customTo || "").slice(0, 4);  // show years when the range crosses one
+    const f = (d) => d ? new Date(d + "T12:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", ...(yrs ? { year: "numeric" } : {}), timeZone: "Asia/Kolkata" }) : "…";
     return `${f(state.customFrom)} – ${f(state.customTo)}`;
   }
   if (win === "session") { const d = state.prices?.dates || []; return `Since ${fmtDay(d[d.length - 2])} close`; }
@@ -92,6 +93,7 @@ export function today(state, ctx) {
   ${win === "custom" ? html`<div class="range"><label>From <input type="date" data-range="from" min="${lo}" max="${hi}" value="${state.customFrom || lo}"></label>
      <label>To <input type="date" data-range="to" min="${lo}" max="${hi}" value="${state.customTo || hi}"></label>
      <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}. Older than 30 days (before ${fmtDay(recentFrom(state))}): ranked by the same rules and evidence, without results tables or profiles.</div>
+     ${state.rangeMsg ? html`<div class="tiny"><b>${state.rangeMsg}</b></div>` : ""}
      ${state.archiveLoading ? html`<div class="tiny"><b>Loading older filings…</b></div>` : ""}</div>` : ""}
   ${note ? html`<div class="note">${note}</div>` : ""}
 

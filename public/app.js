@@ -428,7 +428,12 @@ function captions(text, i, n) {
 function alertLine(msg) { captions(msg, 1, 1); setTimeout(() => captions(null), 2500); }
 document.addEventListener("change", (ev) => {
   if (ev.target.matches("[data-range]")) {
-    const v = ev.target.value;
+    // iPhone Safari ignores min/max on date inputs, so keep the range inside the data we have
+    const [lo, hi] = V.dataRange(state);
+    let v = ev.target.value || (ev.target.dataset.range === "from" ? lo : hi);
+    state.rangeMsg = "";
+    if (lo && v < lo) { v = lo; state.rangeMsg = `FINN has filings from ${fmtDay(lo)}, so the range starts there.`; }
+    if (hi && v > hi) { v = hi; state.rangeMsg = `The latest filings are from ${fmtDay(hi)}.`; }
     if (ev.target.dataset.range === "from") state.customFrom = v; else state.customTo = v;
     if (state.customFrom && state.customTo && state.customFrom > state.customTo) [state.customFrom, state.customTo] = [state.customTo, state.customFrom];
     render(); return;
