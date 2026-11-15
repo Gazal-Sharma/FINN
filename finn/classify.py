@@ -250,8 +250,49 @@ def group_events(filings, verdicts, sessions):
                 "card": None,
                 "reaction": None,
             })
+    events = merge_stories(events, sessions)
     events.sort(key=lambda e: (e["ts"] or ""), reverse=True)
     return events
+
+
+# One corporate action often arrives as several filings over a few days (a QIP:
+# committee approval, pricing, allotment). Like results day, show it once.
+STORY_CATS = {"fund_raise", "M&A", "management_change", "pledging", "credit_rating", "litigation"}
+STORY_SESSIONS = 3
+
+
+def merge_stories(events, sessions):
+    pos = {d: i for i, d in enumerate(sessions)}
+
+    def gap(a, b):
+        if a in pos and b in pos:
+            return abs(pos[a] - pos[b])
+        da, db = datetime.fromisoformat(a), datetime.fromisoformat(b)
+        return abs((da - db).days)
+    out, used = [], set()
+    evs = sorted(events, key=lambda e: e["ts"] or "")
+    for i, e in enumerate(evs):
+        if id(e) in used:
+            continue
+        if e["category"] in STORY_CATS and e["tier"] != "hidden" and e["session"]:
+            group = [e]
+            for f in evs[i + 1:]:
+                if (id(f) not in used and f["ticker"] == e["ticker"] and f["category"] == e["category"]
+                        and f["tier"] != "hidden" and f["session"] and gap(group[-1]["session"], f["session"]) <= STORY_SESSIONS):
+                    group.append(f)
+                    used.add(id(f))
+            if len(group) > 1:
+                lead = max(group, key=lambda x: (x["score"], x["ts"] or ""))
+                files = sorted({fl["id"]: fl for g in group for fl in g["filings"]}.values(), key=lambda fl: fl["ts"] or "")
+                days = (datetime.fromisoformat(group[-1]["ts"]) - datetime.fromisoformat(group[0]["ts"])).days
+                lead = {**lead, "filings": files, "ts": group[-1]["ts"], "session": group[-1]["session"],
+                        "tier": "act" if any(g["tier"] == "act" for g in group) else lead["tier"],
+                        "why": [w for w in lead["why"] if "grouped" not in w] + [f"{len(files)} related filings over {max(days, 1)} day{'s' if days > 1 else ''} grouped"],
+                        "card": next((g["card"] for g in group if g.get("card")), None)}
+                out.append(lead)
+                continue
+        out.append(e)
+    return out
 
 
 def reaction(ticker, session, prices):

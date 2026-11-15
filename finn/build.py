@@ -151,6 +151,8 @@ def mgmt_card(ticker, event):
             uniq.append(p)
     if not uniq:
         return None
+    order = {"appointed": 0, "redesignated": 1}  # the incoming person leads the card
+    uniq.sort(key=lambda p: order.get(p.get("change"), 2))
     return {"type": "mgmt", "people": uniq, "source": "the company's filing (Reg 30 'brief profile')"}
 
 

@@ -58,14 +58,14 @@ function route() {
   return { tab, t: t ? decodeURIComponent(t).toUpperCase() : null, th };
 }
 
+// Freshness lives at the bottom of Today and in Settings; up here only when something's wrong.
 function freshness() {
   const st = state.meta?.status || {};
   const bad = Object.entries(st).filter(([, v]) => !v.ok).map(([k]) => k);
   const p = state.prices?.dates;
+  if (!bad.length && !(state.loadError && !p)) return "";
   return html`<div class="fresh">
-    ${p?.length ? html`<span>Prices: ${fmtDay(p.at(-1))} close</span>` : ""}
-    ${st.filings ? html`<span>· Filings ${ago(st.filings.at)}</span>` : ""}
-    ${bad.length ? html`<span class="bad">· ${bad.join(", ")} failed last run, showing last good data</span>` : ""}
+    ${bad.length ? html`<span class="bad">${bad.join(", ")} failed on the last run, so you're seeing the last good data.</span>` : ""}
     ${state.loadError && !p ? html`<span class="bad">Data not built yet. The pipeline hasn't run.</span>` : ""}
   </div>`;
 }
@@ -80,8 +80,8 @@ function render() {
   const d = new Date();
   const nAct = (state.events || []).filter((e) => e.tier === "act" && ctx.isNew(e)).length;
   $("#app").innerHTML = html`
-    <header class="mast"><h1><small>Portfolio ledger</small>FINN</h1>
-      <div style="display:flex;align-items:center;gap:12px"><div class="dateline">${d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" })}<br>${state.meta?.portfolio?.length || 18} holdings · NSE</div>
+    <header class="mast"><h1>FINN</h1>
+      <div class="mast-actions"><button class="gear" data-act="ask" aria-label="Ask about anything on this screen"><span class="qmark">?</span></button>
       <button class="gear" data-act="settings" aria-label="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></button></div></header>
     <div class="mast-rule"></div>
     ${freshness()}
@@ -116,10 +116,6 @@ const SUGGEST = {
   learn: ["What is a filing?", "What's the difference between QoQ and YoY?", "What is a promoter pledge?"],
 };
 function renderAsk() {
-  let fab = $("#askfab");
-  if (!fab) { fab = document.createElement("button"); fab.id = "askfab"; fab.className = "askfab"; fab.dataset.act = "ask";
-    fab.innerHTML = '<span class="q">?</span>Ask'; fab.setAttribute("aria-label", "Ask about anything on this screen"); document.body.appendChild(fab); }
-  fab.style.display = state.ask.open || state.sheet ? "none" : "";
   let el = $("#ask");
   if (!state.ask.open) { el?.remove(); if (!state.sheet) document.body.style.overflow = ""; return; }
   if (!el) { el = document.createElement("div"); el.id = "ask"; document.body.appendChild(el); }
@@ -183,7 +179,12 @@ function settingsSheet() {
       <div class="hint">Voices come from your phone or browser, so the list differs by device.</div></div>
     <div class="grp"><span>Today opens on</span><div class="opts">${["24h", "session", "7d", "30d"].map((w) => opt("setWindow", w, state.settings.window, w === "session" ? "Last session" : w))}</div>
       <div class="hint">With 24h, a quiet day (like a weekend) widens to the last trading session automatically.</div></div>
-    <div class="grp" style="border-bottom:0"><span>"New" markers</span><button class="chip" data-act="resetSeen">Mark everything as seen</button></div>
+    <div class="grp"><span>"New" markers</span><button class="chip" data-act="resetSeen">Mark everything as seen</button></div>
+    <div class="grp" style="border-bottom:0"><span>Data</span><div class="small ink2" style="line-height:1.7">
+      ${state.meta?.portfolio?.length || 18} holdings on NSE<br>
+      ${state.prices?.dates?.length ? html`Prices as of ${fmtDay(state.prices.dates.at(-1))} close<br>` : ""}
+      ${state.meta?.status?.filings ? html`Filings checked ${ago(state.meta.status.filings.at)}<br>` : ""}
+      ${state.meta?.generated_at ? html`Feed built ${ago(state.meta.generated_at)}` : ""}</div></div>
   </div>`;
 }
 
@@ -339,6 +340,12 @@ function captions(text, i, n) {
 }
 function alertLine(msg) { captions(msg, 1, 1); setTimeout(() => captions(null), 2500); }
 document.addEventListener("change", (ev) => {
+  if (ev.target.matches("[data-range]")) {
+    const v = ev.target.value;
+    if (ev.target.dataset.range === "from") state.customFrom = v; else state.customTo = v;
+    if (state.customFrom && state.customTo && state.customFrom > state.customTo) [state.customFrom, state.customTo] = [state.customTo, state.customFrom];
+    render(); return;
+  }
   if (ev.target.matches("[data-voice]")) { store.set("voice", ev.target.value); if (state.speaking) { speechSynthesis.cancel(); state.speaking = false; captions(null); } renderSheet(); }
 });
 
@@ -349,7 +356,10 @@ document.addEventListener("click", (ev) => {
   if ((a.dataset.act === "closeSheet" || a.dataset.act === "askClose") && ev.target.closest("[data-stop]") && !ev.target.closest(".close")) return;
   const s = state.settings;
   switch (a.dataset.act) {
-    case "win": state.viewWindow = a.dataset.w; state.windowTouched = true; render(); return;  // this visit only
+    case "win": state.viewWindow = a.dataset.w; state.windowTouched = true;  // this visit only
+      if (a.dataset.w === "custom" && !state.customFrom) { const [lo, hi] = V.dataRange(state); state.customTo = hi;
+        const d = new Date(hi + "T12:00:00+05:30"); d.setDate(d.getDate() - 6); const f = d.toLocaleDateString("en-CA"); state.customFrom = f < lo ? lo : f; }
+      render(); return;
     case "event": state.sheet = a.dataset.id; renderSheet(); return;
     case "closeSheet": state.sheet = null; renderSheet(); return;
     case "ranking": state.sheet = "ranking"; renderSheet(); return;

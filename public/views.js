@@ -9,6 +9,7 @@ export const CATS = [["results", "Results"], ["management_change", "Mgmt change"
 // ------------------------------------------------------------------- Today
 export function windowStart(state, win) {
   const now = Date.now();
+  if (win === "custom" && state.customFrom) return new Date(state.customFrom + "T00:00:00+05:30").getTime();
   if (win === "24h") return now - 864e5;
   if (win === "7d") return now - 7 * 864e5;
   if (win === "30d") return now - 30 * 864e5;
@@ -17,7 +18,21 @@ export function windowStart(state, win) {
   return prev ? new Date(prev + "T15:30:00+05:30").getTime() : now - 3 * 864e5;
 }
 
+export function windowEnd(state, win) {
+  return win === "custom" && state.customTo ? new Date(state.customTo + "T23:59:59+05:30").getTime() : Infinity;
+}
+
+export function dataRange(state) {
+  const ts = (state.events || []).map((e) => e.ts).filter(Boolean).sort();
+  const day = (iso) => new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+  return ts.length ? [day(ts[0]), day(ts.at(-1))] : [null, null];
+}
+
 export function windowLabel(state, win) {
+  if (win === "custom") {
+    const f = (d) => d ? new Date(d + "T12:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" }) : "…";
+    return `${f(state.customFrom)} – ${f(state.customTo)}`;
+  }
   if (win === "session") { const d = state.prices?.dates || []; return `Since ${fmtDay(d[d.length - 2])} close`; }
   return { "24h": "Last 24 hours", "7d": "Last 7 days", "30d": "Last 30 days" }[win];
 }
@@ -25,7 +40,7 @@ export function windowLabel(state, win) {
 export function todayEvents(state) {
   const all = state.events || [];
   let win = state.viewWindow || state.settings.window, note = "";
-  const pick = (w) => all.filter((e) => new Date(e.ts).getTime() >= windowStart(state, w));
+  const pick = (w) => all.filter((e) => { const t = new Date(e.ts).getTime(); return t >= windowStart(state, w) && t <= windowEnd(state, w); });
   let evs = pick(win);
   if (!evs.some((e) => e.tier !== "hidden") && win === "24h" && !state.windowTouched) {
     for (const w of ["session", "7d"]) {
@@ -52,12 +67,17 @@ export function today(state, ctx) {
   const moves = state.prices ? scanAlerts(state.prices, state.settings, state.prices.dates.length - 1) : [];
   const firstOld = know.findIndex((e) => !ctx.isNew(e));
 
+  const [lo, hi] = dataRange(state);
   return html`
   <div class="strip">
-    <div class="lede">${windowLabel(state, win)}<br><span class="small" style="color:var(--ink-2)">${nFilings} filings · ${act.length ? html`<mark>${act.length} need${act.length === 1 ? "s" : ""} you</mark>` : html`<b>0 need you</b>`} · ${know.length} worth knowing</span></div>
+    <div class="lede">${windowLabel(state, win)}
+      <div class="counts">${act.length ? html`<mark>${act.length} need${act.length === 1 ? "s" : ""} you</mark>` : html`<b>Nothing needs you</b>`} · ${know.length} worth knowing</div></div>
     <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
   </div>
-  <div class="chips">${["24h", "session", "7d", "30d"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${w === "session" ? "Last session" : w}</button>`)}</div>
+  <div class="chips">${["24h", "session", "7d", "30d", "custom"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${{ session: "Last session", custom: "Custom" }[w] || w}</button>`)}</div>
+  ${win === "custom" ? html`<div class="range"><label>From <input type="date" data-range="from" min="${lo}" max="${hi}" value="${state.customFrom || lo}"></label>
+     <label>To <input type="date" data-range="to" min="${lo}" max="${hi}" value="${state.customTo || hi}"></label>
+     <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}.</div></div>` : ""}
   ${note ? html`<div class="note">${note}</div>` : ""}
 
   ${moves.length ? html`<a class="note" href="#/alerts" style="display:block;color:inherit;text-decoration:none">
@@ -66,15 +86,16 @@ export function today(state, ctx) {
   ${!act.length && !know.length ? html`<div class="allclear"><div class="big">Nothing needs you.</div>
      <p class="small muted">${hidFilings} routine filing${hidFilings === 1 ? "" : "s"} filed and hidden. FINN will tell you when something matters.</p></div>` : ""}
 
-  ${act.length ? html`<div class="sec"><h2 class="act">Act</h2><span class="tiny muted">could move the stock</span></div>${act.map((e) => eventCard(e, ctx))}` : ""}
-  ${know.length ? html`<div class="sec"><h2>Know</h2><span class="tiny muted">worth a line</span></div>
+  ${act.length ? html`<div class="sec"><h2 class="act">Act</h2></div>${act.map((e) => eventCard(e, ctx))}` : ""}
+  ${know.length ? html`<div class="sec"><h2>Know</h2></div>
      <div class="ruled">${know.map((e, i) => html`${i === firstOld && firstOld > 0 ? html`<div class="newline">seen before</div>` : ""}${knowRow(e, ctx)}`)}</div>` : ""}
 
   ${hid.length ? html`<button class="hiddenbar" data-act="toggleHidden" aria-expanded="${state.showHidden ? "true" : "false"}"><b>Drawer · ${hidFilings} routine filing${hidFilings === 1 ? "" : "s"} ${state.showHidden ? "▴" : "▾"}</b>${Object.entries(hidByCat).sort((a, b) => b[1] - a[1]).map(([c, n]) => `${n} ${c.replace(/_/g, " ").replace("unclassified", "other")}`).join(", ")}</button>
      ${state.showHidden ? html`<div class="drawer-open">${hid.map((e) => knowRow(e, ctx))}</div>` : ""}` : ""}
-  <p class="tiny muted" style="margin-top:8px">Tiers are rules checked against how the stocks actually reacted. <button style="color:var(--link)" data-act="ranking">How FINN ranks ›</button></p>
+  <p class="small muted" style="margin-top:12px">Tiers are rules checked against how the stocks actually reacted. <button style="color:var(--link)" data-act="ranking">How FINN ranks ›</button></p>
 
-  ${pulse(state)}`;
+  ${pulse(state)}
+  <p class="foot">${nFilings} filings in this window${state.prices?.dates?.length ? ` · prices as of ${fmtDay(state.prices.dates.at(-1))} close` : ""}${state.meta?.status?.filings ? ` · filings checked ${ago(state.meta.status.filings.at)}` : ""}</p>`;
 }
 
 function pulse(state) {

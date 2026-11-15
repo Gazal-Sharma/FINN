@@ -337,3 +337,42 @@ input[type=range] { accent-color: var(--head); }
 .settings .opts { display: flex; flex-wrap: wrap; gap: 8px; }
 .settings select { font: 15px var(--sans); color: var(--head); background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; width: 100%; }
 .settings .hint { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+
+/* ===== calmer, roomier (phone feedback) ===== */
+body { font-size: 17px; line-height: 1.65; }
+.small { font-size: 15px; } .tiny { font-size: 13px; }
+#app { padding-left: 20px; padding-right: 20px; padding-bottom: calc(var(--tab-h) + 40px + env(safe-area-inset-bottom)); }
+.mast { padding: 18px 0 0; }
+.mast h1 { font-size: 30px; }
+.mast-actions { display: flex; gap: 10px; }
+.qmark { font: 700 17px var(--sans); }
+.mast-rule { margin-top: 14px; }
+.fresh { padding-top: 10px; font-size: 13.5px; }
+.strip { padding: 22px 0 12px; align-items: flex-start; }
+.strip .lede { font-size: 23px; }
+.strip .lede .counts { font: 400 16px/1.5 var(--sans); color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+.chips { padding-bottom: 14px; }
+.range { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 0 0 14px; }
+.range label { font-size: 14px; color: var(--ink-2); display: flex; flex-direction: column; gap: 4px; }
+.range input { font: 16px var(--sans); color: var(--head); background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; }
+.sec { margin-top: 36px; }
+.card { padding: 20px; margin: 16px 0; }
+.card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.card .co, button.co { text-align: left; display: block; font-size: 20px; line-height: 1.3; }
+.card .when { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+.headline { font-size: 16.5px; line-height: 1.55; margin: 10px 0 12px; }
+.why { font-size: 14px; margin-top: 14px; gap: 8px 14px; }
+.why button, .why a { font-size: 14px; }
+.react { font-size: 13.5px; padding: 3px 9px; }
+table.res { font-size: 15.5px; }
+table.res td { padding: 9px 0; font-size: 14.5px; }
+table.res td:first-child { font-size: 15.5px; }
+.ruled .row { padding-top: 15px; padding-bottom: 15px; }
+.row .l { font-size: 16px; line-height: 1.55; }
+.row .t { font-size: 15.5px; }
+.row .w { font-size: 13.5px; margin-top: 5px; }
+.hiddenbar { font-size: 15px; padding: 16px 18px; }
+.foot { font-size: 13.5px; color: var(--muted); margin: 26px 0 0; padding-top: 14px; border-top: 1px solid var(--rule); }
+.thread { padding: 18px 0; }
+.pa { font-size: 15.5px; }
+.cred { font-size: 19px; }

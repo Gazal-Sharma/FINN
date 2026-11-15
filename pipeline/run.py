@@ -113,6 +113,7 @@ def stage_docs(args, nse=None):
     nse = nse or sources.NSE()
     tickers = args.tickers or list(config.PORTFOLIO)
     cutoff = (now_ist() - timedelta(days=args.days)).isoformat()
+    ai = read_json(config.CACHE / "verdicts.json", {})  # AI-judged filings count too
     todo = []
     for t in tickers:
         for f in read_json(RAW / "filings" / f"{t}.json", {}).values():
@@ -120,10 +121,13 @@ def stage_docs(args, nse=None):
                 continue
             if (RAW / "docs" / f"{safe(f['id'])}.txt").exists():
                 continue
-            v = classify.rule_verdict(f)
-            if v is None or v["rule"] in ("results_outcome", "mgmt_top_exit", "mgmt_top_join", "mgmt_other"):
+            v = classify.rule_verdict(f) or ai.get(f["id"])
+            if v is None or v.get("category") in ("management_change", "results") or v.get("rule") in (
+                    "results_outcome", "mgmt_top_exit", "mgmt_top_join", "mgmt_other"):
                 todo.append(f)
-    todo.sort(key=lambda f: f["ts"] or "", reverse=True)
+    # management changes first (their cards need the PDF's profile), then newest first
+    todo.sort(key=lambda f: ((classify.rule_verdict(f) or ai.get(f["id"]) or {}).get("category") == "management_change",
+                             f["ts"] or ""), reverse=True)
     got = 0
     for f in todo[: args.max_docs]:
         txt = sources.pdf_text(f["url"], nse=nse, max_pages=25)
@@ -296,7 +300,7 @@ def main():
     ap.add_argument("--tickers", default="", help="comma list (default: portfolio)")
     ap.add_argument("--research", default="", help="comma list (default: research set)")
     ap.add_argument("--days", type=int, default=30, help="filings look-back window")
-    ap.add_argument("--max-docs", type=int, default=60)
+    ap.add_argument("--max-docs", type=int, default=150)
     ap.add_argument("--force", action="store_true", help="rebuild research even if unchanged")
     args = ap.parse_args()
     args.tickers = [x.strip().upper() for x in args.tickers.split(",") if x.strip()]

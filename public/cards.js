@@ -34,9 +34,10 @@ export function eventCard(e, ctx) {
   const c = e.card;
   return html`<article class="card act">
     <div class="top">
-      <button class="co" data-act="co" data-t="${e.ticker}">${ctx.nameOf(e.ticker)}<small>${e.ticker}</small></button>
-      <span class="tiny muted">${ctx.isNew(e) ? html`<span class="pill new">New</span> ` : ""}${fmtWhen(e.ts)}</span>
+      <button class="co" data-act="co" data-t="${e.ticker}">${ctx.nameOf(e.ticker)} <small>${e.ticker}</small></button>
+      ${ctx.isNew(e) ? html`<span class="pill new">New</span>` : ""}
     </div>
+    <div class="when">${fmtWhen(e.ts)}</div>
     <div class="headline">${c?.type === "results" ? `Results · ${c.period || ""}` : e.oneliner || e.title}</div>
     ${c?.type === "results" ? resultsBody(c, true) : c?.type === "mgmt" ? mgmtBody(c) : ""}
     ${e.undergraded ? html`<div class="flag">FINN ranked this low, but the stock moved. Flagged for rule review.</div>` : ""}
