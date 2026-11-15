@@ -222,6 +222,11 @@ def stage_research(args):
             traceback.print_exc()
             print("research failed", t, e)
     record("research", bool(done), f"built {','.join(done) or 'none'} of {','.join(tickers)}")
+    meta = read_json(config.PUBLIC_DATA / "meta.json")
+    if meta:  # let the app know which dossiers exist without a full rebuild
+        meta["research_ready"] = sorted(p.stem for p in (config.PUBLIC_DATA / "research").glob("*.json"))
+        meta["status"] = read_json(STATUS, {})
+        write_json(config.PUBLIC_DATA / "meta.json", meta, indent=1)
 
 
 STAGES = {
