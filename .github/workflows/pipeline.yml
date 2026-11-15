@@ -1,0 +1,64 @@
+name: pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stages (all, or comma list: smoke,prices,filings,docs,screener,symbols,transcripts,build,research)"
+        default: "all"
+      tickers:
+        description: "Portfolio tickers override (comma list, blank = all)"
+        default: ""
+      research:
+        description: "Research tickers override (comma list, blank = research set)"
+        default: ""
+      days:
+        description: "Filings look-back in days"
+        default: "30"
+  schedule:
+    - cron: "45 11 * * 1-5"   # 17:15 IST, after market close: prices + filings + build
+    - cron: "15 3 * * *"      # 08:45 IST daily: overnight filings + build
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-pipeline.txt
+      - run: pip install -r requirements-pipeline.txt
+      - name: Smoke check (which sources are reachable)
+        run: python pipeline/run.py --stage smoke
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Run pipeline
+        run: |
+          STAGE="${{ github.event.inputs.stage || 'all' }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then STAGE="prices,filings,build"; fi
+          python pipeline/run.py --stage "$STAGE" \
+            --tickers "${{ github.event.inputs.tickers }}" \
+            --research "${{ github.event.inputs.research }}" \
+            --days "${{ github.event.inputs.days || '30' }}"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Commit data
+        if: always()
+        run: |
+          git config user.name "finn-bot"
+          git config user.email "finn-bot@users.noreply.github.com"
+          git add raw public/data cache logs 2>/dev/null || true
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: pipeline run $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
