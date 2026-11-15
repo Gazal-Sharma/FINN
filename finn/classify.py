@@ -123,7 +123,10 @@ def _ai_batch(batch, docs_text):
 
     def validate(o):
         got = {}
-        for v in o.get("verdicts", []) if isinstance(o, dict) else []:
+        o = o if isinstance(o, dict) else {"verdicts": o if isinstance(o, list) else []}
+        for v in o.get("verdicts", []):
+            if not isinstance(v, dict):
+                continue
             i = v.get("i")
             if isinstance(i, int) and 0 <= i < len(batch) and v.get("category") in CATEGORIES \
                     and v.get("tier") in ("act", "know", "hidden"):

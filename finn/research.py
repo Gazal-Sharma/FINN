@@ -308,6 +308,8 @@ def synthesise(ticker, threads, snap):
         return n <= 31 or any(abs(n - a) <= max(0.15, abs(a) * 0.005) for a in allowed) or n in (2024, 2025, 2026, 2027, 2028)
 
     def validate(o):
+        if isinstance(o, list) and o and isinstance(o[0], dict):
+            o = o[0]
         clean = {"headline": str(o.get("headline", ""))[:160]}
         bad = [n for n in extract.numbers_in(clean["headline"]) if not ok_num(n)]
         if bad:
@@ -352,7 +354,11 @@ def build(ticker, offline_raw=False):
     t0 = time.time()
 
     def run(c):
-        r = extract.guidance_from_transcript(c["text"], c["when"], ticker=ticker)
+        try:
+            r = extract.guidance_from_transcript(c["text"], c["when"], ticker=ticker)
+        except Exception as e:
+            print(f"[research {ticker}] {c['when']}: extraction failed ({str(e)[:100]})", flush=True)
+            return [], {"found": 0, "dropped_quote": 0, "dropped_number": 0}
         print(f"[research {ticker}] {c['when']}: {r[1]['found']} promises found, {len(r[0])} verified "
               f"({time.time() - t0:.0f}s)", flush=True)
         return r

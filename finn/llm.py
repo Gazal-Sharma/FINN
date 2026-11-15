@@ -33,6 +33,7 @@ class RateLimited(LLMError):
 
 
 _cooldown = {}  # model -> time until which we skip it (circuit breaker)
+_no_thinking_cfg = set()  # models that reject thinkingConfig
 
 
 def _key():
@@ -120,14 +121,15 @@ def _call(model, system, prompt, max_out):
         "generationConfig": {"temperature": 0, "responseMimeType": "application/json",
                              "maxOutputTokens": max_out},
     }
-    if "pro" not in model:
+    if "pro" not in model and model not in _no_thinking_cfg:
         body["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
     url = f"{API}/models/{model}:generateContent"
     for attempt in range(3):
         _last_call[model] = time.time()
-        r = requests.post(url, params={"key": _key()}, json=body, timeout=120)
-        if r.status_code == 400 and "thinking" in r.text.lower() and "thinkingConfig" in body["generationConfig"]:
-            body["generationConfig"].pop("thinkingConfig")
+        r = requests.post(url, params={"key": _key()}, json=body, timeout=180)
+        if r.status_code == 400 and "thinkingConfig" in body["generationConfig"]:
+            body["generationConfig"].pop("thinkingConfig")  # newer models reject thinkingBudget
+            _no_thinking_cfg.add(model)
             continue
         if r.status_code == 429:
             # Don't sit out the retry delay: another model in the chain is usually free.
@@ -208,7 +210,8 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
                 errors.append(str(e))
                 print(f"    llm {model}: rate-limited, skipping it for 60s", flush=True)
                 continue
-            except (LLMError, ValueError, json.JSONDecodeError, requests.RequestException) as e:
+            except (LLMError, ValueError, json.JSONDecodeError, requests.RequestException,
+                    AttributeError, TypeError, KeyError, IndexError) as e:  # odd shapes = failed answer
                 errors.append(f"{model}: {str(e)[:160]}")
                 print(f"    llm {task} {model} failed: {str(e)[:120]}", flush=True)
                 continue

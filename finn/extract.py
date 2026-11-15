@@ -41,6 +41,13 @@ def quote_in_text(quote, text, min_ratio=0.88):
     return False
 
 
+def as_obj(o, key):
+    """Models sometimes return a bare list where we asked for {key: [...]}."""
+    if isinstance(o, list):
+        return {key: o}
+    return o if isinstance(o, dict) else {key: []}
+
+
 def numbers_in(s):
     return {float(x.replace(",", "")) for x in re.findall(r"\d[\d,]*\.?\d*", s or "") if x.replace(",", "").replace(".", "")}
 
@@ -59,6 +66,8 @@ RESULTS_SYS = (
 
 def results_from_text(text, ticker=""):
     def validate(o):
+        if isinstance(o, list) and o and isinstance(o[0], dict):
+            o = o[0]
         rows = o.get("rows") or {}
         need = ["revenue_from_operations", "profit_before_tax", "profit_after_tax"]
         for k in need:
@@ -98,8 +107,11 @@ MGMT_SYS = (
 
 def mgmt_from_text(text, ticker=""):
     def validate(o):
+        o = as_obj(o, "people")
         ppl = []
         for p in o.get("people", []):
+            if not isinstance(p, dict):
+                continue
             name = (p.get("name") or "").strip()
             if not name or norm(name) not in norm(text):
                 continue  # name must literally appear in the filing
@@ -118,6 +130,8 @@ LINE_SYS = ("Summarise this stock-exchange filing for an investor in ONE line of
 
 def one_line(subject, text, ticker=""):
     def validate(o):
+        if isinstance(o, list) and o:
+            o = o[0] if isinstance(o[0], dict) else {"line": str(o[0])}
         line = str(o.get("line", "")).strip()
         if not line or len(line) > 220:
             raise ValueError("bad line")
@@ -154,8 +168,10 @@ def guidance_from_transcript(text, call_label, ticker=""):
     stats = {"found": 0, "dropped_quote": 0, "dropped_number": 0}
 
     def validate(o):
+        o = as_obj(o, "items")
         if not isinstance(o.get("items"), list):
             raise ValueError("no items list")
+        o["items"] = [x for x in o["items"] if isinstance(x, dict)]
         return o
     o = llm.ask("extract", GUIDE_SYS, f"Call: {call_label}\n\nTRANSCRIPT:\n{text[:180000]}", ticker=ticker,
                 validate=validate, max_out=6000)
@@ -190,9 +206,12 @@ def thread_items(items, ticker=""):
                         f"{it.get('low')}-{it.get('high')} {it.get('unit') or ''}" for i, it in enumerate(items))
 
     def validate(o):
+        o = as_obj(o, "threads")
         seen = set()
         out = []
         for th in o.get("threads", []):
+            if not isinstance(th, dict):
+                continue
             ids = [i for i in th.get("items", []) if isinstance(i, int) and 0 <= i < len(items) and i not in seen]
             seen.update(ids)
             if ids:
@@ -215,6 +234,8 @@ BUSINESS_SYS = (
 
 def business_from_text(text, ticker=""):
     def validate(o):
+        if isinstance(o, list) and o and isinstance(o[0], dict):
+            o = o[0]
         if not o.get("what"):
             raise ValueError("no what")
         o["quote_verified"] = quote_in_text(o.get("quote", ""), text)
