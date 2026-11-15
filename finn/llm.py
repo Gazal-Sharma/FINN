@@ -28,6 +28,13 @@ class LLMError(RuntimeError):
     pass
 
 
+class RateLimited(LLMError):
+    pass
+
+
+_cooldown = {}  # model -> time until which we skip it (circuit breaker)
+
+
 def _key():
     k = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not k:
@@ -122,13 +129,15 @@ def _call(model, system, prompt, max_out):
         if r.status_code == 400 and "thinking" in r.text.lower() and "thinkingConfig" in body["generationConfig"]:
             body["generationConfig"].pop("thinkingConfig")
             continue
-        if r.status_code in (429, 500, 503) and attempt < 2:
-            m = re.search(r'"retryDelay":\s*"(\d+)', r.text)
-            delay = min(int(m.group(1)) if m else 8, 30)
-            if r.status_code == 429 and delay > 25:
-                break  # daily quota exhausted -> next model in chain
-            print(f"    llm {model}: {r.status_code}, waiting {delay}s", flush=True)
-            time.sleep(delay)
+        if r.status_code == 429:
+            # Don't sit out the retry delay: another model in the chain is usually free.
+            raise RateLimited(f"{model} 429")
+        if r.status_code == 404:
+            _cooldown[model] = time.time() + 10 ** 9
+            raise LLMError(f"{model} not available")
+        if r.status_code in (500, 503) and attempt < 2:
+            print(f"    llm {model}: {r.status_code}, retrying in 3s", flush=True)
+            time.sleep(3)
             continue
         if r.status_code != 200:
             raise LLMError(f"{model} {r.status_code}: {r.text[:300]}")
@@ -169,8 +178,22 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
 
     errors = []
     models = resolve_models()
-    for family in config.TASK_CHAINS[task]:
-        for model in models.get(family, []):
+    chain = [m for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])]
+    fam_of = {m: fam for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])}
+    limited = False
+    for rnd in range(2):
+        if rnd and not limited:
+            break  # second round only helps when the first was rate limits
+        live = [m for m in chain if _cooldown.get(m, 0) < time.time()]
+        if not live:  # everything cooling down: wait for the soonest, once
+            wait = min(_cooldown.get(m, 0) for m in chain) - time.time()
+            if rnd or wait > 90:
+                break
+            print(f"    llm {task}: all models rate-limited, waiting {wait:.0f}s", flush=True)
+            time.sleep(max(1, wait))
+            live = chain
+        for model in live:
+            family = fam_of[model]
             try:
                 t0 = time.time()
                 text, usage = _call(model, system, prompt, max_out)
@@ -179,6 +202,12 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
                 obj = parse_json(text)
                 if validate:
                     obj = validate(obj)
+            except RateLimited as e:
+                _cooldown[model] = time.time() + 60
+                limited = True
+                errors.append(str(e))
+                print(f"    llm {model}: rate-limited, skipping it for 60s", flush=True)
+                continue
             except (LLMError, ValueError, json.JSONDecodeError, requests.RequestException) as e:
                 errors.append(f"{model}: {str(e)[:160]}")
                 print(f"    llm {task} {model} failed: {str(e)[:120]}", flush=True)
@@ -195,5 +224,4 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
             with open(_cache_path(), "a", encoding="utf-8") as f:
                 f.write(json.dumps(row, ensure_ascii=False) + "\n")
             return obj
-            # (unreachable)
     raise LLMError(f"all models failed for {task}: " + " | ".join(errors[-4:]))

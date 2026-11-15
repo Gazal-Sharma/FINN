@@ -22,9 +22,11 @@ RULES = [
     ("newspaper", "unclassified", "hidden", "Newspaper ad copy", r"newspaper|publication of (financial )?results"),
     ("trading_window", "unclassified", "hidden", "Trading window notice", r"trading window"),
     ("certificates", "unclassified", "hidden", "Compliance certificate", r"certificate under|reg(ulation)?\.? ?74 ?\(5\)|loss of share|duplicate share|compliance certificate|regulation 40\(9\)|74\(5\)"),
-    ("esop", "unclassified", "hidden", "ESOP allotment", r"esop|esos|esps|employee stock|stock option"),
+    ("esop", "unclassified", "hidden", "ESOP / RSU allotment", r"esop|esos|esps|employee stock|stock option|restricted stock|\brsus?\b"),
+    ("monitoring", "unclassified", "hidden", "Monitoring-agency report", r"monitoring agency"),
     ("esg", "unclassified", "hidden", "ESG / sustainability report", r"\besg\b|brsr|business responsibility|sustainability report"),
     ("xbrl", "unclassified", "hidden", "XBRL / format filing", r"xbrl|integrated filing \(governance\)"),
+    ("auditor_subj", "unclassified", "hidden", "Auditor change", r"^change in auditors?"),
     ("auditor", "unclassified", "hidden", "Auditor appointment", r"T:(appointment|re-?appointment) of (statutory |secretarial |internal |cost )?auditor"),
     ("rta", "unclassified", "hidden", "Registrar / share-transfer change", r"T:share transfer agent|registrar and transfer"),
 
@@ -34,7 +36,7 @@ RULES = [
     ("results_outcome", "results", "act", "Quarterly results filed",
      r"(outcome of board meeting|financial result).*(financial results|results for the (quarter|period|year))|^financial result updates|audited financial results|unaudited financial results|results for the quarter"),
     ("results_clarification", "results", "know", "Clarification on results", r"clarification.*financial results"),
-    ("investor_presentation", "results", "know", "Investor presentation", r"investor presentation"),
+    ("investor_presentation", "results", "know", "Investor / analyst presentation", r"investor presentation|analyst presentation|shareholders'? letter"),
 
     # --- management change
     ("mgmt_top_exit", "management_change", "act", "Top executive leaving",
@@ -42,7 +44,7 @@ RULES = [
     ("mgmt_top_join", "management_change", "act", "New top executive",
      TOP_ROLES + r".{0,120}(appoint|elevat|designat|successor)|(appoint|elevat|designat|successor).{0,120}" + TOP_ROLES),
     ("mgmt_other", "management_change", "know", "Board / KMP change",
-     r"change in directors|key managerial|change in management|resignation|appointment of (an? )?(independent |additional |non-executive )?director|company secretary|compliance officer|senior management"),
+     r"change in directors?|change in director\(s\)|^retirement|key managerial|change in management|resignation|appointment of (an? )?(independent |additional |non-executive )?director|company secretary|compliance officer|senior management"),
 
     # --- corporate events
     ("insider", "insider_trading", "know", "Promoter / insider dealing",
@@ -100,54 +102,60 @@ def rule_verdict(f):
 
 AI_SYSTEM = (
     "You triage Indian stock-exchange filings for a busy investor. Use only the text given. "
-    "Return JSON: {\"category\": one of " + ", ".join(CATEGORIES) +
-    ", \"tier\": \"act\"|\"know\"|\"hidden\", \"why\": \"<=8 words\"}. "
-    "act = could move the stock or change the thesis; know = worth a line; hidden = routine paperwork."
+    "For EACH numbered filing return one verdict. category: one of " + ", ".join(CATEGORIES) + ". "
+    "tier: act = could move the stock or change the investment thesis; know = worth one line; "
+    "hidden = routine paperwork. why: <=8 words. "
+    "Return JSON {\"verdicts\":[{\"i\":number,\"category\":...,\"tier\":...,\"why\":...}]}"
 )
+BATCH = 20
 
 
-def _validate_ai(obj):
-    if not isinstance(obj, dict) or obj.get("category") not in CATEGORIES or obj.get("tier") not in ("act", "know", "hidden"):
-        raise ValueError("bad verdict shape")
-    obj["why"] = str(obj.get("why", ""))[:80]
-    return obj
+def _ai_batch(batch, docs_text):
+    """One model call for up to BATCH filings. Returns {filing_id: verdict}."""
+    from . import llm
+    lines = []
+    for i, f in enumerate(batch):
+        body = (f.get("text") or "")[:400]
+        if docs_text and docs_text.get(f["id"]):
+            body += " || " + re.sub(r"\s+", " ", docs_text[f["id"]][:700])
+        lines.append(f"{i}. [{f['ticker']}] {f.get('subject', '')}: {body}")
+
+    def validate(o):
+        got = {}
+        for v in o.get("verdicts", []) if isinstance(o, dict) else []:
+            i = v.get("i")
+            if isinstance(i, int) and 0 <= i < len(batch) and v.get("category") in CATEGORIES \
+                    and v.get("tier") in ("act", "know", "hidden"):
+                got[i] = {"category": v["category"], "tier": v["tier"], "why": str(v.get("why", ""))[:80]}
+        if len(got) < len(batch) * 0.8:
+            raise ValueError(f"only {len(got)}/{len(batch)} verdicts")
+        return {str(k): v for k, v in got.items()}
+    res = llm.ask("classify", AI_SYSTEM, "\n".join(lines), ticker="batch", validate=validate, max_out=120 * len(batch))
+    return {batch[int(k)]["id"]: {**v, "rule": "ai", "source": "ai"} for k, v in res.items()}
 
 
 def classify(filings, docs_text=None, use_ai=True):
-    """Return {filing_id: verdict}. AI verdicts are cached in cache/verdicts.json."""
-    from . import llm
+    """Return {filing_id: verdict}. Rules first; the rest go to the cheapest model
+    in batches of 20, and each verdict is cached per filing id (cache/verdicts.json)."""
     cache_path = config.CACHE / "verdicts.json"
     cached = read_json(cache_path, {})
-    out, dirty = {}, False
-    need_ai = [f["id"] for f in filings if rule_verdict(f) is None and f["id"] not in cached]
-    print(f"[build] classify: {len(filings)} filings, {len(filings) - len(need_ai)} decided by rules/cache, "
-          f"{len(need_ai)} need AI{'' if use_ai else ' (no key: skipped)'}", flush=True)
-    done_ai = 0
+    rule_v = {f["id"]: rule_verdict(f) for f in filings}
+    need = [f for f in filings if rule_v[f["id"]] is None and f["id"] not in cached]
+    print(f"[build] classify: {len(filings)} filings, {len(filings) - len(need)} decided by rules/cache, "
+          f"{len(need)} need AI{'' if use_ai else ' (no key: skipped)'}", flush=True)
+    if use_ai:
+        for b in range(0, len(need), BATCH):
+            batch = need[b:b + BATCH]
+            print(f"[build] AI triage batch {b // BATCH + 1}/{-(-len(need) // BATCH)} ({len(batch)} filings)", flush=True)
+            try:
+                cached.update(_ai_batch(batch, docs_text))
+                write_json(cache_path, cached, indent=1)  # save as we go
+            except Exception as e:
+                print("ai classify batch failed", e)
+    out = {}
     for f in filings:
-        v = rule_verdict(f)
-        if v is None:
-            c = cached.get(f["id"])
-            if c:
-                v = c
-            elif use_ai:
-                done_ai += 1
-                print(f"[build] AI triage {done_ai}/{len(need_ai)}: {f['ticker']} {f.get('subject', '')[:50]}", flush=True)
-                body = (f.get("text") or "")[:600]
-                if docs_text and docs_text.get(f["id"]):
-                    body += "\n" + docs_text[f["id"]][:1500]
-                try:
-                    a = llm.ask("classify", AI_SYSTEM, f"Subject: {f.get('subject')}\nText: {body}",
-                                ticker=f["ticker"], validate=_validate_ai, max_out=200)
-                    v = {**a, "rule": "ai", "source": "ai"}
-                    cached[f["id"]] = v
-                    dirty = True
-                    if done_ai % 10 == 0:  # save as we go, so a timeout never loses paid work
-                        write_json(cache_path, cached, indent=1)
-                except Exception as e:
-                    print("ai classify failed", f["id"], e)
-            if v is None:
-                v = {"category": "unclassified", "tier": "know", "why": "Unrecognised filing type",
-                     "rule": "fallback", "source": "rule"}
+        v = rule_v[f["id"]] or cached.get(f["id"]) or {
+            "category": "unclassified", "tier": "know", "why": "Unrecognised filing type", "rule": "fallback", "source": "rule"}
         blob = f"{f.get('subject', '')} {f.get('text', '')[:700]}"
         score, reasons = config.TIER_BASE[v["tier"]], []
         if v["tier"] != "hidden":
@@ -156,8 +164,6 @@ def classify(filings, docs_text=None, use_ai=True):
                     score += delta
                     reasons.append(reason)
         out[f["id"]] = {**v, "score": score, "mods": reasons}
-    if dirty:
-        write_json(cache_path, cached, indent=1)
     return out
 
 
