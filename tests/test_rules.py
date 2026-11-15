@@ -42,6 +42,8 @@ CASES = [
     ("Updates", "Update on pledge of promoter shares", "pledging", "act"),
     ("Litigation / Dispute / Regulatory Action", "receipt of show cause notice from GST authority", "litigation", "know"),
     ("Press Release", "launch of new product range", "press_release", "know"),
+    ("Action(s) taken or orders passed", "Action(s) taken or orders passed", "litigation", "know"),
+    ("Allotment of Securities", "Allotment of 700000 securities pursuant to Non Convertible Securities", "fund_raise", "know"),
 ]
 
 

@@ -54,10 +54,11 @@ RULES = [
     ("fund_raise_equity", "fund_raise", "act", "Equity raise or buyback",
      r"qualified institutional|\bqip\b|rights issue|preferential (issue|allotment)|buy ?back|further public offer"),
     ("fund_raise_debt", "fund_raise", "know", "Debt raise",
-     r"commercial paper|non-convertible debenture|\bncd|bond issue|raising of funds|fund raising|allotment of (secured|unsecured)"),
+     r"commercial paper|non[- ]?convertible|\bncd|debenture|bond issue|raising of funds|fund raising|allotment of (secured|unsecured)"),
     ("pledge", "pledging", "act", "Promoter pledge change", r"pledge|encumbrance"),
     ("rating_down", "credit_rating", "act", "Credit rating downgraded", r"(credit )?rating.{0,80}(downgrad|negative|watch)|downgrad.{0,40}rating"),
     ("rating_other", "credit_rating", "hidden", "Credit rating reaffirmed / assigned", r"credit rating|rating agency|\bcrisil\b|\bicra\b|care ratings|india ratings"),
+    ("orders_passed", "litigation", "know", "Regulatory / tax order", r"^action\(s\) taken or orders passed"),
     ("insolvency", "litigation", "act", "Insolvency / restructuring", r"insolvency|\bnclt\b|\bibc\b|winding up|corporate debtor"),
     ("litigation", "litigation", "know", "Legal / regulatory action",
      r"litigation|dispute|regulatory action|penalty|show cause|demand order|tax demand|\border\b.{0,40}(sebi|court|tribunal|authority)|fine|warning letter|import alert|\busfda\b|form 483|search and seizure"),
@@ -236,6 +237,7 @@ def group_events(filings, verdicts, sessions):
                 "score": v["score"],
                 "rule": v["rule"],
                 "why": why,
+                "evidence": v.get("evidence"),
                 "title": lead["subject"] or v["category"],
                 "oneliner": clean_text(lead.get("text", ""))[:220],
                 "filings": [{"id": f["id"], "subject": f["subject"], "text": clean_text(f.get("text", ""))[:200],
@@ -266,3 +268,128 @@ def reaction(ticker, session, prices):
     vol_x = (v[i] / (sum(prior) / len(prior))) if prior and v[i] else None
     return {"status": "ok", "ret": round(ret, 2), "abn": round(ret - nret, 2),
             "vol_x": round(vol_x, 2) if vol_x else None}
+
+
+# --------------------------------------------------------------- calibration
+# Evidence for the tiers: how often does each filing type coincide with a big
+# move in the stock (>= 2x its usual daily move, net of Nifty) on the session it
+# could first affect, compared with an ordinary day with no filings at all?
+BIG = 2.0
+MIN_N = 12
+DEMOTE_BELOW = 1.25   # Know -> Hidden if lift is below this
+PROMOTE_ABOVE = 2.0   # Hidden -> Know if lift is at least this
+PROTECTED = {"litigation", "insider", "pledge", "insolvency", "rating_down"}  # risk signals: never demoted
+LABELS = {rid: why for rid, _, _, why, _ in RULES}
+
+
+def _series(rows):
+    return {d: (c, v) for d, c, v in rows}
+
+
+def calibrate(filings, raw_prices):
+    """Return {"baseline":..., "rules": {rule_id: stats + decision}} using rules
+    (and cached AI verdicts) only: no new AI calls, no network."""
+    import statistics
+    nifty = raw_prices.get(config.INDEX_YF) or []
+    dates = [d for d, _, _ in nifty]
+    if len(dates) < 80:
+        return None
+    pos = {d: i for i, d in enumerate(dates)}
+    nc = [c for _, c, _ in nifty]
+    cached = read_json(config.CACHE / "verdicts.json", {})
+
+    z_by = {}  # (ticker, date) -> (z, volx)
+    for t in config.PORTFOLIO:
+        m = _series(raw_prices.get(f"{t}.NS") or [])
+        c = [m.get(d, (None, None))[0] for d in dates]
+        v = [m.get(d, (None, None))[1] for d in dates]
+        ab = [None] + [((c[i] / c[i - 1] - 1) - (nc[i] / nc[i - 1] - 1)) * 100
+                       if c[i] and c[i - 1] and nc[i] and nc[i - 1] else None for i in range(1, len(dates))]
+        for i in range(61, len(dates)):
+            if ab[i] is None:
+                continue
+            prior = [x for x in ab[i - 60:i] if x is not None]
+            if len(prior) < 30:
+                continue
+            sd = statistics.pstdev(prior)
+            vols = [x for x in v[i - 20:i] if x]
+            volx = v[i] / (sum(vols) / len(vols)) if vols and v[i] else None
+            z_by[(t, dates[i])] = (abs(ab[i]) / sd if sd else 0, volx)
+
+    by_session = defaultdict(list)
+    for f in filings:
+        if f["ticker"] not in config.PORTFOLIO:
+            continue
+        s = reaction_session(f["ts"], dates)
+        if s in pos:
+            by_session[(f["ticker"], s)].append(f)
+
+    samples = defaultdict(set)
+    for key, fs in by_session.items():
+        if key not in z_by:
+            continue
+        rules = []
+        for f in fs:
+            v = rule_verdict(f) or ({**cached[f["id"]], "rule": f"ai:{cached[f['id']]['category']}"} if f["id"] in cached else None)
+            if v:
+                rules.append(v["rule"])
+        results_day = "results_outcome" in rules
+        for r in set(rules):
+            if results_day and r != "results_outcome":
+                continue  # the results move would be wrongly credited to this filing
+            samples[r].add(key)
+
+    filing_days = set(by_session)
+    base = [z for k, (z, _) in z_by.items() if k not in filing_days]
+    base_big = sum(1 for z in base if z >= BIG) / len(base) if base else 0.05
+    out = {"window": [dates[61], dates[-1]], "big": BIG, "min_n": MIN_N,
+           "baseline": {"n": len(base), "big_rate": round(base_big, 3),
+                        "median_z": round(statistics.median(base), 2) if base else None},
+           "rules": {}}
+    tier_of = {rid: tier for rid, _, tier, _, _ in RULES}
+    for r, keys in samples.items():
+        zs = [z_by[k][0] for k in keys]
+        vx = [z_by[k][1] for k in keys if z_by[k][1]]
+        big = sum(1 for z in zs if z >= BIG) / len(zs)
+        lift = big / base_big if base_big else None
+        tier = tier_of.get(r, "ai")
+        decision, why = "keep", ""
+        if len(zs) < MIN_N:
+            decision, why = "keep", f"only {len(zs)} past examples; kept by judgment"
+        elif r in PROTECTED:
+            why = "risk signal; kept regardless of price reaction"
+        elif tier in ("know", "ai") and lift is not None and lift < DEMOTE_BELOW:
+            decision = "demote"
+            why = f"moved the stock ≥{BIG:g}× usual {big:.0%} of the time vs {base_big:.0%} on an ordinary day"
+        elif tier == "hidden" and lift is not None and lift >= PROMOTE_ABOVE and round(big * len(zs)) >= 3:
+            decision = "promote"
+            why = f"moved the stock ≥{BIG:g}× usual {big:.0%} of the time vs {base_big:.0%} on an ordinary day"
+        out["rules"][r] = {"label": LABELS.get(r, r.replace("ai:", "AI-judged ")), "tier": tier, "n": len(zs),
+                           "big_rate": round(big, 3), "lift": round(lift, 2) if lift is not None else None,
+                           "median_z": round(statistics.median(zs), 2),
+                           "median_volx": round(statistics.median(vx), 2) if vx else None,
+                           "decision": decision, "why": why}
+    return out
+
+
+def apply_calibration(verdicts, calib):
+    """Move tiers where the evidence says so, and attach the evidence to every verdict."""
+    if not calib:
+        return verdicts
+    rules = calib["rules"]
+    for v in verdicts.values():
+        key = v["rule"] if v["rule"] != "ai" else f"ai:{v['category']}"
+        c = rules.get(key)
+        if not c:
+            continue
+        v["evidence"] = {k: c[k] for k in ("n", "big_rate", "lift", "decision")}
+        if c["decision"] == "demote" and v["tier"] == "know":
+            v["tier"], v["score"] = "hidden", 0
+            v["mods"] = ["evidence: " + c["why"]]
+        elif c["decision"] == "demote" and v["tier"] == "act" and v["rule"] == "ai":
+            v["tier"], v["score"] = "know", config.TIER_BASE["know"]  # AI said act; history disagrees
+            v["mods"] = ["evidence: " + c["why"]]
+        elif c["decision"] == "promote" and v["tier"] == "hidden":
+            v["tier"], v["score"] = "know", config.TIER_BASE["know"]
+            v["mods"] = ["evidence: " + c["why"]]
+    return verdicts

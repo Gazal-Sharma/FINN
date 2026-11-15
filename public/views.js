@@ -72,6 +72,7 @@ export function today(state, ctx) {
 
   ${hid.length ? html`<button class="hiddenbar" data-act="toggleHidden"><b>${hidFilings} routine filings hidden</b> · ${Object.entries(hidByCat).sort((a, b) => b[1] - a[1]).map(([c, n]) => `${n} ${c.replace("_", " ")}`).join(", ")} ${state.showHidden ? "▴" : "▾"}</button>
      ${state.showHidden ? hid.map((e) => knowRow(e, ctx)) : ""}` : ""}
+  <p class="tiny muted" style="margin-top:8px">Tiers are rules checked against how the stocks actually reacted. <button style="color:var(--link)" data-act="ranking">How FINN ranks ›</button></p>
 
   ${pulse(state)}`;
 }

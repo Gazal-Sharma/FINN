@@ -62,6 +62,7 @@ export function eventSheet(e, ctx) {
     ${e.card?.type === "results" ? resultsBody(e.card) : e.card?.type === "mgmt" ? mgmtBody(e.card) : ""}
     <h3 class="caps" style="margin-top:16px">Why FINN ranked it ${e.tier}</h3>
     <p class="small">${e.why.join(" · ")} <span class="muted">(${e.rule === "ai" ? "AI triage, cached" : `rule: ${e.rule}`}${e.oneliner_ai ? "; one-line summary by AI" : ""})</span></p>
+    ${e.evidence ? html`<p class="small ink2">Evidence: past filings of this type moved the stock ≥2× its usual move <b>${Math.round(e.evidence.big_rate * 100)}%</b> of the time (n=${e.evidence.n})${e.evidence.lift != null ? html`, ${e.evidence.lift.toFixed(1)}× an ordinary day` : ""}. <button class="why" style="display:inline;color:var(--link)" data-act="ranking">How FINN ranks ›</button></p>` : ""}
     <p>${reactionChip(e.reaction)}</p>
     <h3 class="caps" style="margin-top:16px">${e.filings.length} filing${e.filings.length > 1 ? "s" : ""}</h3>
     <ul class="flist">${fl}</ul>
@@ -95,6 +96,18 @@ export function threadRow(t, calls, open) {
     ${open ? html`${t.history.map((h) => html`<div class="quote">“${h.quote}”</div>
       <div class="tiny muted">${h.speaker ? `${h.speaker}, ` : ""}${h.call} call · <a href="${h.src_url}" target="_blank" rel="noopener">transcript ›</a> · quote verified in source</div>`)}` : ""}
   </div>`;
+}
+
+export function rankingSheet(c) {
+  if (!c) return html`<p>Ranking evidence isn't built yet.</p>`;
+  const rows = Object.entries(c.rules).sort((a, b) => b[1].n - a[1].n);
+  const dec = { keep: "", demote: "↓ demoted", promote: "↑ promoted" };
+  return html`<div class="co">How FINN ranks</div>
+    <p class="small ink2">Rules sort filings into Act / Know / Hidden. Then FINN checks them against history: on the session each past filing could first affect, did the stock move at least ${c.big}× its usual daily move (net of Nifty)? On an ordinary day with no filing that happens <b>${Math.round(c.baseline.big_rate * 100)}%</b> of the time. A Know type that isn't more likely than that is hidden; a Hidden type that is ${"≥"}2× as likely is promoted. Types with fewer than ${c.min_n} examples keep their judged tier. Risk signals (litigation, insider dealing, pledges) are never demoted, because end-of-day prices react to them slowly.</p>
+    <table class="res"><thead><tr><th>Filing type</th><th>n</th><th>Big move</th><th>vs normal</th><th></th></tr></thead><tbody>
+    ${rows.map(([, r]) => html`<tr><td>${r.label} <span class="tiny muted">${r.tier === "ai" ? "" : r.tier}</span></td><td>${r.n}</td><td>${Math.round(r.big_rate * 100)}%</td>
+      <td class="${r.lift >= 1.5 ? "up" : r.lift < 1 ? "muted" : ""}">${r.lift == null ? "—" : `${r.lift.toFixed(1)}×`}</td><td class="tiny">${dec[r.decision]}</td></tr>`)}</tbody></table>
+    <p class="tiny muted">Window ${c.window[0]} → ${c.window[1]}; ${c.baseline.n} ordinary stock-days as the baseline. Filings on a results day are excluded from their own type so the results move isn't credited to them.</p>`;
 }
 
 export { VLABEL, raw };

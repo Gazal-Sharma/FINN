@@ -167,6 +167,15 @@ def build_all(args=None):
                 filings.append(f)
     docs = {f["id"]: _doc(f["id"]) for f in filings}
     verdicts = classify.classify(filings, docs_text=docs, use_ai=use_ai)
+    # Evidence: past price reactions per filing type (all stored history, rules only)
+    every = [f for t in config.PORTFOLIO for f in read_json(RAW / "filings" / f"{t}.json", {}).values()]
+    calib = classify.calibrate(every, read_json(RAW / "prices.json", {}))
+    if calib:
+        write_json(OUT / "calibration.json", calib, indent=1)
+        moved = sum(1 for r in calib["rules"].values() if r["decision"] != "keep")
+        print(f"[build] calibration: {len(every)} filings, {len(calib['rules'])} types, baseline big-move rate "
+              f"{calib['baseline']['big_rate']:.1%}, {moved} types re-tiered", flush=True)
+        verdicts = classify.apply_calibration(verdicts, calib)
     events = classify.group_events(filings, verdicts, sessions)
 
     for e in events:

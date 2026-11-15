@@ -67,12 +67,16 @@ def stage_smoke(args):
 
 
 # ---------------------------------------------------------------- fetch: prices
-def stage_prices(args):
+def stage_prices(args, days=150):
     tickers = args.tickers or list(config.PORTFOLIO)
     syms = [f"{t}.NS" for t in tickers] + [config.INDEX_YF]
-    data = sources.fetch_prices(syms, days=150)
+    data = sources.fetch_prices(syms, days=days)
     old = read_json(RAW / "prices.json", {})
-    old.update({k: v for k, v in data.items() if v})
+    for k, rows in data.items():  # merge by date so short refreshes never erase backfilled history
+        if rows:
+            m = {r[0]: r for r in old.get(k, [])}
+            m.update({r[0]: r for r in rows})
+            old[k] = [m[d] for d in sorted(m)]
     write_json(RAW / "prices.json", old)
     missing = [s for s in syms if s not in data]
     record("prices", not missing or len(missing) < len(syms), f"{len(data)}/{len(syms)} symbols" +
@@ -127,6 +131,32 @@ def stage_docs(args, nse=None):
         got += bool(txt)
         time.sleep(0.5)
     record("docs", True, f"{got}/{min(len(todo), args.max_docs)} PDFs extracted ({len(todo)} wanted)")
+
+
+def stage_backfill(args):
+    """One-off: ~12 months of filings + ~18 months of prices, for ranking evidence.
+    No PDFs and no AI: old filings are judged by rules only."""
+    stage_prices(args, days=560)
+    tickers = args.tickers or list(config.PORTFOLIO)
+    nse = sources.NSE()
+    end = now_ist()
+    total, errs = 0, []
+    for t in tickers:
+        path = RAW / "filings" / f"{t}.json"
+        store = read_json(path, {})
+        for k in range(6):  # six ~2-month chunks
+            e = end - timedelta(days=61 * k)
+            s_ = e - timedelta(days=61)
+            rows, src, err = sources.fetch_filings(t, config.company(t)["bse"], s_, e, nse=nse)
+            if err:
+                errs.append(f"{t}: {err[:80]}")
+            for f in rows:
+                store.setdefault(f["id"], f)
+            total += len(rows)
+            time.sleep(0.7)
+        write_json(path, store)
+        print(f"[backfill] {t}: {len(store)} filings stored", flush=True)
+    record("backfill", total > 0, f"{total} filings fetched over 12 months" + (f"; {len(errs)} chunk errors" if errs else ""))
 
 
 # -------------------------------------------------------------- fetch: screener
@@ -232,7 +262,7 @@ def stage_research(args):
 STAGES = {
     "smoke": stage_smoke, "prices": stage_prices, "filings": stage_filings, "docs": stage_docs,
     "screener": stage_screener, "symbols": stage_symbols, "transcripts": stage_transcripts,
-    "build": stage_build, "research": stage_research,
+    "build": stage_build, "research": stage_research, "backfill": stage_backfill,
 }
 ALL = ["prices", "filings", "screener", "symbols", "transcripts", "build", "research"]
 

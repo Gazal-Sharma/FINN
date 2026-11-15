@@ -1,6 +1,6 @@
 // Boot, hash router, one delegated click handler, settings in localStorage.
 import { html, fmtDay, ago, scanAlerts } from "./lib.js";
-import { eventSheet } from "./cards.js";
+import { eventSheet, rankingSheet } from "./cards.js";
 import * as V from "./views.js";
 
 const DEFAULTS = { window: "24h", relative: true, sigma: 2.5, pricePct: 3, volX: 2,
@@ -34,6 +34,7 @@ async function load() {
   state.prices = pr.value || null;
   state.loadError = [meta, ev, pr].some((x) => x.status === "rejected");
   render();
+  getJSON("data/calibration.json").then((c) => (state.calibration = c)).catch(() => {});
   getJSON("data/symbols.json").then((s) => { state.symbols = s; if (route().tab === "research" && !route().t) render(); }).catch(() => {});
 }
 
@@ -80,8 +81,9 @@ function renderSheet() {
   if (!state.sheet) { if (el) el.remove(); document.body.style.overflow = ""; return; }
   if (!el) { el = document.createElement("div"); el.id = "sheet"; document.body.appendChild(el); }
   const e = (state.events || []).find((x) => x.id === state.sheet);
-  el.innerHTML = e ? html`<div class="scrim" data-act="closeSheet"><div class="sheet" data-stop="1"><div class="grab"></div>
-    <button class="close" data-act="closeSheet">Close</button>${eventSheet(e, ctx)}</div></div>`.toString() : "";
+  const body = state.sheet === "ranking" ? rankingSheet(state.calibration) : e ? eventSheet(e, ctx) : null;
+  el.innerHTML = body ? html`<div class="scrim" data-act="closeSheet"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <button class="close" data-act="closeSheet">Close</button>${body}</div></div>`.toString() : "";
   document.body.style.overflow = "hidden";
 }
 
@@ -185,6 +187,7 @@ document.addEventListener("click", (ev) => {
     case "win": s.window = a.dataset.w; state.windowTouched = true; break;
     case "event": state.sheet = a.dataset.id; renderSheet(); return;
     case "closeSheet": state.sheet = null; renderSheet(); return;
+    case "ranking": state.sheet = "ranking"; renderSheet(); return;
     case "co": state.sheet = null; location.hash = `#/research/${a.dataset.t}`; return;
     case "toggleHidden": state.showHidden = !state.showHidden; break;
     case "listen": toggleListen(); return;
