@@ -86,6 +86,8 @@ export function today(state, ctx) {
      <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}.</div></div>` : ""}
   ${note ? html`<div class="note">${note}</div>` : ""}
 
+  ${watchedSection(state)}
+  ${pendingNote(state)}
   ${moves.length ? html`<a class="note" href="#/alerts" style="display:block;color:inherit;text-decoration:none">
      <b>Unusual moves, ${fmtDay(state.prices.dates.at(-1))}:</b> ${moves.slice(0, 4).map((m, i) => html`${i ? " · " : ""}${m.t} ${m.price ? fmtPct(m.ret) : ""}${m.vol ? ` ${m.volx.toFixed(1)}× vol` : ""}`)}${moves.length > 4 ? ` +${moves.length - 4} more` : ""} ›</a>` : ""}
 
@@ -102,6 +104,25 @@ export function today(state, ctx) {
 
   ${pulse(state)}
   <p class="foot">${nFilings} filings in this window${state.prices?.dates?.length ? ` · prices as of ${fmtDay(state.prices.dates.at(-1))} close` : ""}${state.meta?.status?.filings ? ` · filings checked ${ago(state.meta.status.filings.at)}` : ""}</p>`;
+}
+
+const VL = { kept: "Kept", missed: "Missed", on_track: "On track", off_track: "Off track", dropped: "Quietly dropped", pending: "Pending", unverifiable: "Can't verify" };
+
+function watchedSection(state) {
+  const w = state.watchedNow?.() || [];
+  if (!w.length) return "";
+  const changed = w.filter((x) => x.changed).length;
+  return html`<div class="sec"><h2>Promises you watch</h2>${changed ? html`<span class="tiny"><mark>${changed} changed</mark></span>` : ""}</div>
+    <div class="ruled">${w.map((x) => html`<a class="row" href="#/research/${x.t}/${x.id || ""}" data-act="seenWatch" data-k="${x.key}" style="text-decoration:none;color:inherit">
+      <div><div class="t">${state.nameOf(x.t)}</div></div>
+      <div><div class="l">${x.title}</div>
+        <div class="w">${x.changed ? html`<mark>${VL[x.was] || x.was} → ${VL[x.now] || x.now}</mark>` : html`${VL[x.now] || x.now || "Loading…"}`}${x.actual ? ` · ${x.actual.label} ${x.actual.unit === "%" ? `${(+x.actual.value).toFixed(1)}%` : `₹${x.actual.value} cr`}` : ""}</div></div></a>`)}</div>`;
+}
+
+function pendingNote(state) {
+  const p = (state.extra || []).filter((t) => !state.prices?.t?.[t]);
+  if (!p.length) return "";
+  return html`<div class="note">Filings and prices for <b>${p.join(", ")}</b> start with the next nightly run (around 5:15 pm or 8:45 am IST). Research works now: ${p.map((t, i) => html`${i ? ", " : ""}<a href="#/research/${t}">${t} ›</a>`)}</div>`;
 }
 
 function pulse(state) {
@@ -182,6 +203,8 @@ export function researchHome(state) {
   </form>
   <datalist id="syms">${(state.symbols || []).slice(0, 3000).map(([s, n]) => html`<option value="${s}">${n}</option>`)}</datalist>
   <p class="small ink2">FINN reads the last four earnings-call transcripts, pulls out every promise management made, checks each quote word-for-word against the transcript, then scores it against the reported numbers. No news, no broker notes, no model memory.</p>
+  ${(state.extra || []).length ? html`<div class="sec"><h2>Your stocks</h2><span class="tiny muted">added by you</span></div>
+  <div class="tiles">${state.extra.map((t) => html`<a href="#/research/${t}"><b>${t}</b><span class="tiny muted">${(state.symbols || []).find(([s2]) => s2 === t)?.[1] || (ready.includes(t) ? "ready" : "built live, ~1 min")}</span></a>`)}</div>` : ""}
   <div class="sec"><h2>Ready to read</h2><span class="tiny muted">pre-built</span></div>
   <div class="tiles">${ready.map((t) => html`<a href="#/research/${t}"><b>${t}</b><span class="tiny muted">${state.nameOf(t)}</span></a>`)}</div>
   <div class="sec"><h2>Your portfolio</h2><span class="tiny muted">built live, ~1 min</span></div>
@@ -247,7 +270,7 @@ export function dossier(d, state) {
    <span class="verified">✓ ${st.verified} quotes verified in source · ${st.dropped_quote + st.dropped_number} dropped</span>
    ${syn ? html`<p class="serif" style="font-size:17px;margin:12px 0 4px">${syn.headline}</p>
      <div class="pts">${syn.points.map((p) => html`<p>${p.text}${p.refs.map((r) => html`<a class="ref" href="#/research/${d.ticker}/${r}">${r}</a>`)}</p>`)}</div>` : ""}
-   <div class="ledgerbox">${threads.map((t) => threadRow(t, d.calls, state.openThread === t.id))}</div>
+   <div class="ledgerbox">${threads.map((t) => threadRow(t, d.calls, state.openThread === t.id, { ticker: d.ticker, on: state.isWatched(d.ticker, t) }))}</div>
    <p class="tiny muted">Tap a promise for the exact quote. Actuals are computed from reported numbers in code. ≈ means guidance was in constant currency or USD and we checked against INR.</p>`}
 
   ${syn && (syn.bull?.length || syn.bear?.length) ? html`<div class="sec"><h2>Bull vs bear</h2></div>

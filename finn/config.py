@@ -55,6 +55,28 @@ RESEARCH_VERSION = "2026-11-15.2"  # bump when scoring changes, to rebuild every
 PREBUILD = ["DIXON", "ASIANPAINT"] + [t for t in PORTFOLIO if t not in ("INFY", "POLYCAB", "DIXON")] + \
     ["INFY", "KPITTECH", "POLYCAB", "TATAPOWER", "DMART"]
 
+# Optional accounts (Supabase). URL + publishable key are public by design; the
+# service-role key (GitHub secret only) is used by the nightly job to read every
+# user's choices (their own stocks, the morning brief) and never reaches the app.
+SUPABASE_URL = "https://qwjhovkyvisvlfqaegqn.supabase.co"
+SUPABASE_PUBLISHABLE = "sb_publishable_cwvii1CEUYC4DWHL_Sok2g_hbT-ZQtg"
+APP_URL = "https://finn-jet-eight.vercel.app"
+
+
+def extra_tickers():
+    """Stocks signed-in users added beyond the portfolio (written by the 'users' stage)."""
+    import json
+    try:
+        return [t for t in json.loads((RAW / "extra_tickers.json").read_text()) if t not in PORTFOLIO]
+    except Exception:
+        return []
+
+
+def tracked():
+    """Everything the daily job collects filings and prices for."""
+    return list(PORTFOLIO) + extra_tickers()
+
+
 LENDER_HINTS = ("BANK", "FIN", "HDFC", "LIC", "CHOLA", "SHRIRAM", "MUTHOOT", "PFC", "RECLTD", "IRFC")
 
 INDEX_YF = "^NSEI"

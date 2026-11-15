@@ -25,7 +25,7 @@ def build_prices(sessions_n=120):
     dates = [d for d, _, _ in idx][-sessions_n:]
     nmap = {d: c for d, c, _ in idx}
     out = {"dates": dates, "nifty": [nmap.get(d) for d in dates], "t": {}}
-    for t in config.PORTFOLIO:
+    for t in config.tracked():
         rows = raw.get(f"{t}.NS") or []
         m = {d: (c, v) for d, c, v in rows}
         out["t"][t] = {"c": [m.get(d, (None, None))[0] for d in dates],
@@ -195,7 +195,7 @@ def build_all(args=None):
     sessions = prices["dates"]
     cutoff = (now_ist() - timedelta(days=getattr(args, "days", 30) or 30)).isoformat()
     filings = []
-    for t in config.PORTFOLIO:
+    for t in config.tracked():
         for f in read_json(RAW / "filings" / f"{t}.json", {}).values():
             if (f.get("ts") or "") >= cutoff:
                 filings.append(f)
@@ -250,6 +250,7 @@ def _write_events(events):
 
 
 def write_meta(events, sessions):
+    names = {s: n for s, n in (read_json(OUT / "symbols.json", []) or [])}
     research = sorted(p.stem for p in (OUT / "research").glob("*.json")) if (OUT / "research").exists() else []
     status = read_json(RAW / "status.json", {})
     meta = {
@@ -259,6 +260,7 @@ def write_meta(events, sessions):
         "rules_version": config.RULES_VERSION,
         "status": status,
         "portfolio": [config.company(t) for t in config.PORTFOLIO],
+        "extra": [{**config.company(t), "name": names.get(t, t)} for t in config.extra_tickers()],
         "research_ready": research,
         "research_set": list(config.RESEARCH_SET),
         "counts": {k: sum(1 for e in events if e["tier"] == k) for k in ("act", "know", "hidden")},

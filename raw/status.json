@@ -38,5 +38,10 @@
   "ok": true,
   "at": "2026-11-15T20:18:08+05:30",
   "note": "built 1 (TCS); unchanged 0"
+ },
+ "users": {
+  "ok": true,
+  "at": "2026-11-15T20:29:15+05:30",
+  "note": "1 accounts; 0 added stocks: -"
  }
 }

@@ -7,7 +7,7 @@ import * as Acc from "./account.js";
 
 const DEFAULTS = { window: "24h", relative: true, sigma: 2.5, pricePct: 3, volX: 2,
   cats: ["results", "management_change", "M&A", "fund_raise", "litigation", "pledging", "credit_rating"] };
-const SYNCED = ["settings", "theme", "textSize", "voice", "voiceRate", "followed"];
+const SYNCED = ["settings", "theme", "textSize", "voice", "voiceRate", "followed", "watched", "extra", "brief"];
 const store = {
   get(k, d) { try { const v = localStorage.getItem("finn." + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
   set(k, v) {
@@ -29,10 +29,20 @@ const state = {
   dossiers: {}, research: {}, showHidden: false, speaking: false, openThread: null, sheet: null, windowTouched: false,
   theme: store.get("theme", "auto"), glossQ: "", ask: { open: false, q: "", items: [] },
   followed: store.get("followed", []), acct: { step: "email", email: "", msg: "" },
+  watched: store.get("watched", []), extra: store.get("extra", []), briefMsg: "",
 };
+// Watched promises are matched by their earliest quote (thread numbers change on rebuild).
+const wkey = (th) => (th.history?.[0]?.quote || th.title || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().slice(0, 60);
+state.isWatched = (t, th) => state.watched.some((w) => w.t === t && w.key === wkey(th));
+state.watchedNow = () => state.watched.map((w) => {
+  const d = state.dossiers[w.t];
+  const th = d?.threads?.find((x) => wkey(x) === w.key) || d?.threads?.find((x) => x.title === w.title);
+  return { ...w, id: th?.id, title: th?.title || w.title, now: th?.verdict, actual: th?.actual, was: w.seen, changed: !!th && th.verdict !== w.seen };
+});
 // Empty list = follow all 18. Works without an account; signing in only syncs it.
-state.isFollowed = (t) => !state.followed.length || state.followed.includes(t);
-state.nameOf = (t) => state.meta?.portfolio?.find((c) => c.t === t)?.name || state.dossiers[t]?.name || t;
+state.isFollowed = (t) => state.extra.includes(t) || !state.followed.length || state.followed.includes(t);
+state.nameOf = (t) => (state.meta?.portfolio?.find((c) => c.t === t)?.name || state.meta?.extra?.find((c) => c.t === t)?.name
+  || state.dossiers[t]?.name || t).replace(/\s+(Ltd\.?|Limited)$/i, "");
 const seenAtBoot = state.lastSeen;
 const ctx = {
   nameOf: state.nameOf,
@@ -63,7 +73,17 @@ async function load() {
   state.loadError = [meta, ev, pr].some((x) => x.status === "rejected");
   render();
   getJSON("data/calibration.json").then((c) => (state.calibration = c)).catch(() => {});
+  loadWatched();
   getJSON("data/symbols.json").then((s) => { state.symbols = s; if (route().tab === "research" && !route().t) render(); }).catch(() => {});
+}
+
+async function loadWatched() {
+  const ts = [...new Set(state.watched.map((w) => w.t))].filter((t) => !state.dossiers[t]);
+  await Promise.all(ts.map(async (t) => {
+    const d = (state.meta?.research_ready || []).includes(t) ? await getJSON(`data/research/${t}.json`).catch(() => null) : store.get("r." + t, null);
+    if (d) state.dossiers[t] = d;
+  }));
+  if (ts.length && route().tab === "today") render();
 }
 
 // ------------------------------------------------------------------ routing
@@ -184,6 +204,12 @@ function settingsSheet() {
   const size = store.get("textSize", "standard");
   return html`<div class="settings"><h3>Settings</h3><div class="small muted">Saved on this device. No account needed.</div>
     ${accountGroup()}
+    ${Acc.enabled ? html`<div class="grp"><span>Your own stocks</span>
+      ${Acc.currentUser() ? html`<form class="askform" data-form="addstock" style="margin:0"><input name="t" list="syms-all" placeholder="Any NSE symbol, e.g. TCS" autocapitalize="characters" autocomplete="off"><button>Add</button></form>
+        <datalist id="syms-all">${(state.symbols || []).slice(0, 3000).map(([s2, n]) => html`<option value="${s2}">${n}</option>`)}</datalist>
+        ${state.extra.length ? html`<div class="opts" style="margin-top:10px">${state.extra.map((t) => html`<button class="chip on" data-act="unextra" data-t="${t}" aria-label="Remove ${t}">${t} ✕</button>`)}</div>` : ""}
+        <div class="hint">Research works straight away. Filings, prices and alerts for added stocks start with the next nightly run (around 5:15 pm or 8:45 am IST).${state.extraMsg ? html` <b>${state.extraMsg}</b>` : ""}</div>`
+      : html`<div class="hint">Sign in (below) to add any NSE stock beyond these 18.</div>`}</div>` : ""}
     <div class="grp"><span>Stocks you follow</span>
       <div class="opts">${(state.meta?.portfolio || []).map((c) => html`<button class="chip ${state.followed.includes(c.t) ? "on" : ""}" data-act="follow" data-t="${c.t}">${c.t}</button>`)}</div>
       <div class="hint">${state.followed.length ? html`Today, Alerts and Listen show ${state.followed.length} of ${state.meta?.portfolio?.length || 18}. <button style="color:var(--link)" data-act="followAll">Follow all</button>` : "Following all holdings. Tap stocks to show only those."}</div></div>
@@ -206,11 +232,28 @@ function settingsSheet() {
   </div>`;
 }
 
+async function sendTestBrief() {
+  state.briefMsg = "Sending…"; renderSheet();
+  try {
+    await new Promise((r) => setTimeout(r, 900));  // let the latest settings sync first
+    const tok = await Acc.token();
+    const res = await fetch("api/brief", { method: "POST", headers: { Authorization: `Bearer ${tok}` } });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(j.error || `error ${res.status}`);
+    state.briefMsg = `Sent to ${j.to}: "${j.subject}". Check your inbox (and spam).`;
+  } catch (e) { state.briefMsg = `Couldn't send: ${e.message}`; }
+  renderSheet();
+}
+
 function accountGroup() {
   if (!Acc.enabled) return "";
   const u = Acc.currentUser(), a = state.acct;
-  if (u) return html`<div class="grp"><span>Account</span><div class="small ink2">Signed in as <b>${u.email}</b>. Your followed stocks, alert thresholds and settings sync across devices.</div>
-    <button class="chip" style="margin-top:10px" data-act="signOut">Sign out</button></div>`;
+  if (u) return html`<div class="grp"><span>Account</span><div class="small ink2">Signed in as <b>${u.email}</b>. Your stocks, watched promises, alert thresholds and settings sync across devices.</div>
+    <button class="chip" style="margin-top:10px" data-act="signOut">Sign out</button></div>
+    <div class="grp"><span>Morning brief by email</span>
+      <div class="opts"><button class="chip ${store.get("brief", false) ? "on" : ""}" data-act="brief" data-v="1">On, 8:45 am</button><button class="chip ${store.get("brief", false) ? "" : "on"}" data-act="brief" data-v="0">Off</button>
+        <button class="chip" data-act="testBrief">✉ Send me a test brief now</button></div>
+      <div class="hint">Your stocks' Act items, your triggered alerts and any change in a promise you watch, or simply "Nothing needs you".${state.briefMsg ? html` <b>${state.briefMsg}</b>` : ""}</div></div>`;
   return html`<div class="grp"><span>Account (optional)</span>
     <div class="hint" style="margin:0 0 10px">Everything works without one. Sign in to sync your stocks, alerts and settings across devices.</div>
     ${a.step === "email"
@@ -402,7 +445,9 @@ document.addEventListener("click", (ev) => {
     case "cat": s.cats = s.cats.includes(a.dataset.c) ? s.cats.filter((c) => c !== a.dataset.c) : [...s.cats, a.dataset.c]; break;
     case "thread": state.openThread = state.openThread === a.dataset.id ? null : a.dataset.id; break;
     case "retry": delete state.research[a.dataset.t]; if (state.dossiers[a.dataset.t]?.partial) delete state.dossiers[a.dataset.t]; break;
-    case "settings": state.sheet = "settings"; renderSheet(); return;
+    case "settings": state.sheet = "settings"; renderSheet();
+      if (!state.symbols) getJSON("data/symbols.json").then((x) => { state.symbols = x; renderSheet(); }).catch(() => {});
+      return;
     case "setTheme": state.theme = a.dataset.v; store.set("theme", state.theme); applyTheme(); renderSheet(); return;
     case "setSize": store.set("textSize", a.dataset.v); applyTheme(); renderSheet(); return;
     case "setRate": store.set("voiceRate", +a.dataset.v); renderSheet(); return;
@@ -412,6 +457,18 @@ document.addEventListener("click", (ev) => {
     case "follow": { const t = a.dataset.t; state.followed = state.followed.includes(t) ? state.followed.filter((x) => x !== t) : [...state.followed, t];
       store.set("followed", state.followed); renderSheet(); render(); return; }
     case "followAll": state.followed = []; store.set("followed", []); renderSheet(); render(); return;
+    case "watch": {
+      const d = state.dossiers[a.dataset.t]; const th = d?.threads?.find((x) => x.id === a.dataset.id); if (!th) return;
+      const k = wkey(th);
+      state.watched = state.isWatched(a.dataset.t, th) ? state.watched.filter((w) => !(w.t === a.dataset.t && w.key === k))
+        : [...state.watched, { t: a.dataset.t, key: k, title: th.title, verdict: th.verdict, seen: th.verdict, at: new Date().toISOString() }];
+      store.set("watched", state.watched); break; }
+    case "seenWatch": state.watched = state.watched.map((w) => {
+      if (w.key !== a.dataset.k) return w; const now = state.watchedNow().find((x) => x.key === w.key)?.now; return now ? { ...w, seen: now } : w; });
+      store.set("watched", state.watched); return;  // the link itself navigates
+    case "unextra": state.extra = state.extra.filter((t) => t !== a.dataset.t); store.set("extra", state.extra); renderSheet(); render(); return;
+    case "brief": store.set("brief", a.dataset.v === "1"); state.briefMsg = a.dataset.v === "1" ? "Saved: your first brief arrives tomorrow at 8:45 am." : ""; renderSheet(); return;
+    case "testBrief": sendTestBrief(); return;
     case "signOut": Acc.signOut(); return;
     case "acctBack": state.acct = { step: "email", email: state.acct.email, msg: "" }; renderSheet(); return;
     case "ask": state.ask.open = true; renderAsk(); setTimeout(() => document.querySelector(".askform input")?.focus(), 50); return;
@@ -446,6 +503,15 @@ document.addEventListener("input", (ev) => {
 });
 
 document.addEventListener("submit", async (ev) => {
+  const sf = ev.target.closest("[data-form=addstock]");
+  if (sf) {
+    ev.preventDefault();
+    const t = new FormData(sf).get("t").toString().trim().toUpperCase().replace(/\.NS$/, "");
+    const known = !state.symbols || state.symbols.some(([s2]) => s2 === t);
+    state.extraMsg = !t ? "" : !known ? `${t} isn't an NSE equity symbol.` : (state.meta?.portfolio || []).some((c) => c.t === t) ? `${t} is already one of the 18.` : state.extra.includes(t) ? "" : `Added ${t}.`;
+    if (t && known && !state.extra.includes(t) && !(state.meta?.portfolio || []).some((c) => c.t === t)) { state.extra = [...state.extra, t].slice(0, 10); store.set("extra", state.extra); }
+    renderSheet(); render(); return;
+  }
   const af = ev.target.closest("[data-form=email]");
   if (af) {
     ev.preventDefault();
@@ -485,7 +551,8 @@ Acc.init({
     state.settings = { ...DEFAULTS, ...store.get("settings", {}) };
     state.theme = store.get("theme", "auto");
     state.followed = store.get("followed", []);
-    applyTheme(); render();
+    state.watched = store.get("watched", []); state.extra = store.get("extra", []);
+    applyTheme(); loadWatched(); render();
   },
   changed: () => {
     if (state.sheet === "settings") renderSheet();
