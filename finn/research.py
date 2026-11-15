@@ -384,6 +384,33 @@ def template_synthesis(threads):
 
 
 # -------------------------------------------------------------------- build
+def sources_key(calls):
+    """Fingerprint of the transcripts a dossier was built from: a new one changes it."""
+    return "|".join(sorted(c["url"] for c in calls))
+
+
+def needs_rebuild(existing, ticker):
+    """Rebuild only if there's no dossier, scoring changed, or a new transcript arrived."""
+    if not existing or existing.get("version") != config.RESEARCH_VERSION:
+        return True
+    idx = read_json(RAW / "transcripts" / ticker / "index.json", [])
+    calls = sorted(idx, key=lambda c: _when_key(c["when"]))[-4:]
+    return sources_key(calls) != existing.get("sources_key")
+
+
+def build_basic(ticker):
+    """Fast first step for the page: reported numbers and documents, no AI (~2 s)."""
+    ticker = ticker.upper().strip()
+    co = config.company(ticker)
+    sc = sources.fetch_screener(ticker)
+    fin = Fin(sc, co["lender"])
+    return {"ticker": ticker, "name": sc.get("name") or co["name"], "lender": co["lender"], "partial": True,
+            "generated_at": now_ist().isoformat(timespec="seconds"), "numbers": fin.snapshot(),
+            "calls": [c["when"] for c in sc.get("concalls", []) if c.get("transcript")][:4][::-1],
+            "docs": {"transcripts": [{"call": c["when"], "url": c["transcript"]} for c in sc.get("concalls", []) if c.get("transcript")][:4],
+                     "annual_reports": sc.get("annual_reports", [])[:3], "screener": sc.get("url")}}
+
+
 def build(ticker, offline_raw=False):
     ticker = ticker.upper().strip()
     co = config.company(ticker)
@@ -403,13 +430,15 @@ def build(ticker, offline_raw=False):
     def run(c):
         try:
             r = extract.guidance_from_transcript(c["text"], c["when"], ticker=ticker)
+        except llm.QuotaExhausted:
+            raise  # out of free quota: stop this ticker cleanly rather than publish a half-empty ledger
         except Exception as e:
             print(f"[research {ticker}] {c['when']}: extraction failed ({str(e)[:100]})", flush=True)
             return [], {"found": 0, "dropped_quote": 0, "dropped_number": 0}
         print(f"[research {ticker}] {c['when']}: {r[1]['found']} promises found, {len(r[0])} verified "
               f"({time.time() - t0:.0f}s)", flush=True)
         return r
-    with ThreadPoolExecutor(2) as ex:
+    with ThreadPoolExecutor(4) as ex:  # llm paces each model, so 4 at once slows down rather than fails
         results = list(ex.map(run, calls))
     for c, (kept, st) in zip(calls, results):
         for k in ("found", "dropped_quote", "dropped_number"):
@@ -472,6 +501,7 @@ def build(ticker, offline_raw=False):
 
     return {
         "ticker": ticker, "name": co["name"], "lender": co["lender"],
+        "version": config.RESEARCH_VERSION, "sources_key": sources_key(calls),
         "generated_at": now_ist().isoformat(timespec="seconds"),
         "calls": call_labels, "stats": stats,
         "credibility": {**cnt, "resolved": resolved,

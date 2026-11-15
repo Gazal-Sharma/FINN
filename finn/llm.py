@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import re
+import threading
 import time
 
 import requests
@@ -29,11 +30,22 @@ class LLMError(RuntimeError):
 
 
 class RateLimited(LLMError):
+    def __init__(self, msg, wait=30.0, daily=False):
+        super().__init__(msg)
+        self.wait, self.daily = wait, daily
+
+
+class QuotaExhausted(LLMError):
     pass
 
 
 _cooldown = {}  # model -> time until which we skip it (circuit breaker)
 _no_thinking_cfg = set()  # models that reject thinkingConfig
+_exhausted = set()        # models whose free daily quota is used up
+_lock = threading.Lock()  # cache file + shared dicts (research reads transcripts in parallel)
+_model_locks = {}         # one request at a time per model, paced below the free-tier RPM
+# Wait the pipeline accepts before giving up on rate limits; the API answers a person, so it's short.
+MAX_WAIT = float(os.environ.get("FINN_LLM_MAX_WAIT", "20" if config.RUNTIME == "api" else "900"))
 
 
 def _key():
@@ -106,15 +118,19 @@ def _load_cache():
 
 def _log(row):
     config.LOGS.mkdir(parents=True, exist_ok=True)
-    with open(config.LOGS / "usage.jsonl", "a", encoding="utf-8") as f:
+    with _lock, open(config.LOGS / "usage.jsonl", "a", encoding="utf-8") as f:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
 def _call(model, system, prompt, max_out):
-    gap = 4.5 if "pro" in model else 2.2  # stay under free-tier RPM
-    wait = _last_call.get(model, 0) + gap - time.time()
-    if wait > 0:
-        time.sleep(wait)
+    gap = 12.0 if "pro" in model else 4.5  # ~5 / ~13 requests a minute: under free-tier limits
+    with _lock:
+        lk = _model_locks.setdefault(model, threading.Lock())
+    with lk:  # requests to one model go one after another, spaced by `gap`
+        wait = _last_call.get(model, 0) + gap - time.time()
+        if wait > 0:
+            time.sleep(wait)
+        _last_call[model] = time.time()
     body = {
         "systemInstruction": {"parts": [{"text": system}]},
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
@@ -125,21 +141,21 @@ def _call(model, system, prompt, max_out):
         body["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
     url = f"{API}/models/{model}:generateContent"
     for attempt in range(3):
-        _last_call[model] = time.time()
         r = requests.post(url, params={"key": _key()}, json=body, timeout=180)
         if r.status_code == 400 and "thinkingConfig" in body["generationConfig"]:
             body["generationConfig"].pop("thinkingConfig")  # newer models reject thinkingBudget
             _no_thinking_cfg.add(model)
             continue
         if r.status_code == 429:
-            # Don't sit out the retry delay: another model in the chain is usually free.
-            raise RateLimited(f"{model} 429")
+            m = re.search(r'"retryDelay":\s*"([\d.]+)s?"', r.text)
+            daily = "PerDay" in r.text or "per day" in r.text.lower()
+            raise RateLimited(f"{model} 429", wait=float(m.group(1)) if m else 30.0, daily=daily)
         if r.status_code == 404:
             _cooldown[model] = time.time() + 10 ** 9
             raise LLMError(f"{model} not available")
         if r.status_code in (500, 503) and attempt < 2:
-            print(f"    llm {model}: {r.status_code}, retrying in 3s", flush=True)
-            time.sleep(3)
+            print(f"    llm {model}: {r.status_code}, retrying in {5 * (attempt + 1)}s", flush=True)
+            time.sleep(5 * (attempt + 1))
             continue
         if r.status_code != 200:
             raise LLMError(f"{model} {r.status_code}: {r.text[:300]}")
@@ -149,7 +165,7 @@ def _call(model, system, prompt, max_out):
         except (KeyError, IndexError):
             raise LLMError(f"{model}: empty response {str(data)[:200]}")
         return text, data.get("usageMetadata", {})
-    raise LLMError(f"{model}: rate limited")
+    raise LLMError(f"{model}: server errors")
 
 
 def parse_json(text):
@@ -182,18 +198,24 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
     models = resolve_models()
     chain = [m for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])]
     fam_of = {m: fam for fam in config.TASK_CHAINS[task] for m in models.get(fam, [])}
-    limited = False
-    for rnd in range(2):
-        if rnd and not limited:
-            break  # second round only helps when the first was rate limits
-        live = [m for m in chain if _cooldown.get(m, 0) < time.time()]
-        if not live:  # everything cooling down: wait for the soonest, once
-            wait = min(_cooldown.get(m, 0) for m in chain) - time.time()
-            if rnd or wait > 90:
+    tried_ok = set()          # models that answered but failed validation: don't ask them again
+    waited = 0.0
+    while True:
+        live = [m for m in chain if m not in _exhausted and m not in tried_ok and _cooldown.get(m, 0) <= time.time()]
+        if not live:
+            pending = [m for m in chain if m not in _exhausted and m not in tried_ok]
+            if not pending:
+                if all(m in _exhausted for m in chain):
+                    raise QuotaExhausted(f"free daily quota used up for {task} ({', '.join(chain)})")
                 break
-            print(f"    llm {task}: all models rate-limited, waiting {wait:.0f}s", flush=True)
-            time.sleep(max(1, wait))
-            live = chain
+            # Rate-limited, not out of quota: slow down and try again rather than fail.
+            wait = max(1.0, min(_cooldown.get(m, 0) for m in pending) - time.time())
+            if waited + wait > MAX_WAIT:
+                break
+            print(f"    llm {task}: rate limit, slowing down {wait:.0f}s", flush=True)
+            time.sleep(wait)
+            waited += wait
+            continue
         for model in live:
             family = fam_of[model]
             try:
@@ -205,13 +227,17 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
                 if validate:
                     obj = validate(obj)
             except RateLimited as e:
-                _cooldown[model] = time.time() + 60
-                limited = True
+                if e.daily and e.wait > 120:
+                    _exhausted.add(model)
+                    print(f"    llm {model}: free daily quota used up", flush=True)
+                else:
+                    _cooldown[model] = time.time() + min(max(e.wait, 5.0), 120.0) + 1
+                    print(f"    llm {model}: rate-limited, pausing it {e.wait:.0f}s", flush=True)
                 errors.append(str(e))
-                print(f"    llm {model}: rate-limited, skipping it for 60s", flush=True)
                 continue
             except (LLMError, ValueError, json.JSONDecodeError, requests.RequestException,
                     AttributeError, TypeError, KeyError, IndexError) as e:  # odd shapes = failed answer
+                tried_ok.add(model)
                 errors.append(f"{model}: {str(e)[:160]}")
                 print(f"    llm {task} {model} failed: {str(e)[:120]}", flush=True)
                 continue
@@ -222,9 +248,10 @@ def ask(task, system, prompt, *, ticker="", validate=None, max_out=4096):
                   "family": family, "in": tin, "out": tout, "cache_hit": False,
                   "list_usd": round(tin / 1e6 * pin + tout / 1e6 * pout, 6)})
             row = {"k": key, "task": task, "model": model, "family": family, "obj": obj}
-            cache[key] = row
-            config.CACHE.mkdir(parents=True, exist_ok=True)
-            with open(_cache_path(), "a", encoding="utf-8") as f:
-                f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            with _lock:
+                cache[key] = row
+                config.CACHE.mkdir(parents=True, exist_ok=True)
+                with open(_cache_path(), "a", encoding="utf-8") as f:
+                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
             return obj
     raise LLMError(f"all models failed for {task}: " + " | ".join(errors[-4:]))

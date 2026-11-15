@@ -47,7 +47,10 @@ jobs:
         id: s
         run: |
           S="${{ github.event.inputs.stage || 'all' }}"
-          if [ "${{ github.event_name }}" = "schedule" ]; then S="prices,filings,build"; fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            # evening run also refreshes transcripts; research rebuilds only companies with a new one
+            if [ "$(date -u +%H)" -ge 10 ]; then S="prices,filings,screener,transcripts,build,research"; else S="prices,filings,build"; fi
+          fi
           if [ "$S" = "all" ]; then S="smoke,prices,filings,screener,symbols,transcripts,build,research"; fi
           has() { case ",$S," in *",$1,"*) echo true;; *) echo false;; esac; }
           FETCH=$(echo "$S" | tr ',' '\n' | grep -vE '^(build|research)$' | paste -sd, -)

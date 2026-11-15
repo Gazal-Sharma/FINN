@@ -161,7 +161,7 @@ def stage_backfill(args):
 
 # -------------------------------------------------------------- fetch: screener
 def stage_screener(args):
-    tickers = args.tickers or sorted(set(config.PORTFOLIO) | set(config.RESEARCH_SET))
+    tickers = args.tickers or sorted(set(config.PORTFOLIO) | set(config.RESEARCH_SET) | set(args.research or []))
     ok, bad = 0, []
     for t in tickers:
         try:
@@ -221,7 +221,7 @@ def fetch_transcripts(t, nse=None, n=4):
 
 def stage_transcripts(args):
     nse = sources.NSE()
-    tickers = args.research or list(config.RESEARCH_SET)
+    tickers = args.research or config.PREBUILD
     summary = []
     for t in tickers:
         try:
@@ -240,18 +240,41 @@ def stage_build(args):
 
 
 def stage_research(args):
-    from finn import research
-    tickers = args.research or list(config.RESEARCH_SET)
-    done = []
-    for t in tickers:
+    """Pre-build dossiers in PREBUILD order. Skips any whose transcripts haven't changed.
+    Stops cleanly when the free daily quota runs out; the next run carries on."""
+    from finn import research, llm
+    tickers = args.research or config.PREBUILD
+    built, skipped, failed, left = [], [], [], []
+    for i, t in enumerate(tickers):
+        out = config.PUBLIC_DATA / "research" / f"{t}.json"
+        if not args.force and not research.needs_rebuild(read_json(out), t):
+            skipped.append(t)
+            continue
+        if not (RAW / "transcripts" / t / "index.json").exists():
+            try:
+                if not (RAW / "screener" / f"{t}.json").exists():
+                    write_json(RAW / "screener" / f"{t}.json", sources.fetch_screener(t))
+                fetch_transcripts(t)
+            except Exception as e:
+                print(f"[research {t}] couldn't fetch inputs: {e}", flush=True)
         try:
             d = research.build(t, offline_raw=True)
-            write_json(config.PUBLIC_DATA / "research" / f"{t}.json", d)
-            done.append(t)
+            write_json(out, d)
+            built.append(t)
+            print(f"[research] done {t} ({len(built)} built, {len(tickers) - i - 1} to go)", flush=True)
+        except llm.QuotaExhausted as e:
+            print(f"[research] stopping: {e}", flush=True)
+            left = tickers[i:]
+            break
         except Exception as e:
             traceback.print_exc()
-            print("research failed", t, e)
-    record("research", bool(done), f"built {','.join(done) or 'none'} of {','.join(tickers)}")
+            failed.append(t)
+    note = f"built {len(built)} ({','.join(built) or '-'}); unchanged {len(skipped)}"
+    if failed:
+        note += f"; failed {','.join(failed)}"
+    if left:
+        note += f"; quota ran out before {','.join(left)}"
+    record("research", bool(built or skipped), note)
     meta = read_json(config.PUBLIC_DATA / "meta.json")
     if meta:  # let the app know which dossiers exist without a full rebuild
         meta["research_ready"] = sorted(p.stem for p in (config.PUBLIC_DATA / "research").glob("*.json"))
@@ -274,6 +297,7 @@ def main():
     ap.add_argument("--research", default="", help="comma list (default: research set)")
     ap.add_argument("--days", type=int, default=30, help="filings look-back window")
     ap.add_argument("--max-docs", type=int, default=60)
+    ap.add_argument("--force", action="store_true", help="rebuild research even if unchanged")
     args = ap.parse_args()
     args.tickers = [x.strip().upper() for x in args.tickers.split(",") if x.strip()]
     args.research = [x.strip().upper() for x in args.research.split(",") if x.strip()]

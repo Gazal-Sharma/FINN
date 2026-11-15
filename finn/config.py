@@ -40,12 +40,20 @@ PORTFOLIO = {
 }
 
 RESEARCH_SET = {
+    "DIXON":     ("Dixon Technologies", "Dixon", "Electronics mfg", False, "540699"),
+    "ASIANPAINT": ("Asian Paints", "Asian Paints", "Paints", False, "500820"),
     "INFY":      ("Infosys", "Infosys", "IT services", False, "500209"),
     "KPITTECH":  ("KPIT Technologies", "K P I T", "Auto software", False, "542651"),
     "POLYCAB":   ("Polycab India", "Polycab", "Cables & wires", False, "542652"),
     "TATAPOWER": ("Tata Power", "Tata Power", "Power", False, "500400"),
     "DMART":     ("Avenue Supermarts", "D Mart", "Retail", False, "540376"),
 }
+
+# Pre-built research, in this order: the demo set first, then the rest of the portfolio.
+RESEARCH_VERSION = "2026-11-15.2"  # bump when scoring changes, to rebuild everything once
+# (the five already built go last: they only need a cheap refresh)
+PREBUILD = ["DIXON", "ASIANPAINT"] + [t for t in PORTFOLIO if t not in ("INFY", "POLYCAB", "DIXON")] + \
+    ["INFY", "KPITTECH", "POLYCAB", "TATAPOWER", "DMART"]
 
 LENDER_HINTS = ("BANK", "FIN", "HDFC", "LIC", "CHOLA", "SHRIRAM", "MUTHOOT", "PFC", "RECLTD", "IRFC")
 
