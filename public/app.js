@@ -427,17 +427,7 @@ function captions(text, i, n) {
 }
 function alertLine(msg) { captions(msg, 1, 1); setTimeout(() => captions(null), 2500); }
 document.addEventListener("change", (ev) => {
-  if (ev.target.matches("[data-range]")) {
-    // iPhone Safari ignores min/max on date inputs, so keep the range inside the data we have
-    const [lo, hi] = V.dataRange(state);
-    let v = ev.target.value || (ev.target.dataset.range === "from" ? lo : hi);
-    state.rangeMsg = "";
-    if (lo && v < lo) { v = lo; state.rangeMsg = `FINN has filings from ${fmtDay(lo)}, so the range starts there.`; }
-    if (hi && v > hi) { v = hi; state.rangeMsg = `The latest filings are from ${fmtDay(hi)}.`; }
-    if (ev.target.dataset.range === "from") state.customFrom = v; else state.customTo = v;
-    if (state.customFrom && state.customTo && state.customFrom > state.customTo) [state.customFrom, state.customTo] = [state.customTo, state.customFrom];
-    render(); return;
-  }
+
   if (ev.target.matches("[data-voice]")) { store.set("voice", ev.target.value); if (state.speaking) { speechSynthesis.cancel(); state.speaking = false; captions(null); } renderSheet(); }
 });
 
@@ -520,6 +510,21 @@ document.addEventListener("input", (ev) => {
 });
 
 document.addEventListener("submit", async (ev) => {
+  const rf = ev.target.closest("[data-form=range]");
+  if (rf) {
+    // Read both dates only when the person taps Show: iPhone fires change events while
+    // the wheels are still spinning, and re-drawing then would reset their choice.
+    ev.preventDefault();
+    const [lo, hi] = V.dataRange(state);
+    const fd = new FormData(rf);
+    const clamp = (v, dflt) => (!v ? dflt : lo && v < lo ? lo : hi && v > hi ? hi : v);
+    let from = clamp(fd.get("from"), lo), to = clamp(fd.get("to"), hi);
+    const snapped = from !== fd.get("from") || to !== fd.get("to");
+    if (from > to) [from, to] = [to, from];
+    state.customFrom = from; state.customTo = to;
+    state.rangeMsg = snapped ? `Adjusted to the dates FINN has data for (${V.fmtYear(lo)} – ${V.fmtYear(hi)}).` : "";
+    render(); return;
+  }
   const sf = ev.target.closest("[data-form=addstock]");
   if (sf) {
     ev.preventDefault();

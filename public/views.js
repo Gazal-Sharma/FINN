@@ -22,6 +22,8 @@ export function windowEnd(state, win) {
   return win === "custom" && state.customTo ? new Date(state.customTo + "T23:59:59+05:30").getTime() : Infinity;
 }
 
+export const fmtYear = (d) => (d ? new Date(d + "T12:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }) : "…");
+
 export function dataRange(state) {
   const ts = (state.events || []).map((e) => e.ts).filter(Boolean).sort();
   const day = (iso) => new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
@@ -90,11 +92,13 @@ export function today(state, ctx) {
     <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
   </div>
   <div class="chips">${["24h", "session", "7d", "30d", "custom"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${{ session: "Last session", custom: "Custom" }[w] || w}</button>`)}</div>
-  ${win === "custom" ? html`<div class="range"><label>From <input type="date" data-range="from" min="${lo}" max="${hi}" value="${state.customFrom || lo}"></label>
-     <label>To <input type="date" data-range="to" min="${lo}" max="${hi}" value="${state.customTo || hi}"></label>
-     <div class="tiny muted">Filings are available from ${fmtDay(lo)} to ${fmtDay(hi)}. Older than 30 days (before ${fmtDay(recentFrom(state))}): ranked by the same rules and evidence, without results tables or profiles.</div>
-     ${state.rangeMsg ? html`<div class="tiny"><b>${state.rangeMsg}</b></div>` : ""}
-     ${state.archiveLoading ? html`<div class="tiny"><b>Loading older filings…</b></div>` : ""}</div>` : ""}
+  ${win === "custom" ? html`<form class="range" data-form="range" novalidate>
+     <label>From <input type="date" name="from" min="${lo}" max="${hi}" value="${state.customFrom || lo}"></label>
+     <label>To <input type="date" name="to" min="${lo}" max="${hi}" value="${state.customTo || hi}"></label>
+     <button class="chip on" style="align-self:flex-end">Show</button>
+     <div class="tiny muted" style="flex-basis:100%">Data: ${fmtYear(lo)} – ${fmtYear(hi)}. Over 30 days old: no results tables.</div>
+     ${state.rangeMsg ? html`<div class="tiny" style="flex-basis:100%"><b>${state.rangeMsg}</b></div>` : ""}
+     ${state.archiveLoading ? html`<div class="tiny" style="flex-basis:100%"><b>Loading older filings…</b></div>` : ""}</form>` : ""}
   ${note ? html`<div class="note">${note}</div>` : ""}
 
   ${watchedSection(state)}
