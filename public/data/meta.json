@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T16:48:23+05:30",
+ "generated_at": "2026-11-15T19:30:54+05:30",
  "sample": false,
  "last_session": "2026-11-13",
  "rules_version": "2026-11-15.1",
@@ -16,8 +16,8 @@
   },
   "docs": {
    "ok": true,
-   "at": "2026-11-15T15:48:11+05:30",
-   "note": "60/60 PDFs extracted (99 wanted)"
+   "at": "2026-11-15T19:30:47+05:30",
+   "note": "26/30 PDFs extracted (30 wanted)"
   },
   "screener": {
    "ok": true,
@@ -216,6 +216,8 @@
   "TRENT"
  ],
  "research_set": [
+  "DIXON",
+  "ASIANPAINT",
   "INFY",
   "KPITTECH",
   "POLYCAB",
@@ -223,8 +225,8 @@
   "DMART"
  ],
  "counts": {
-  "act": 37,
-  "know": 67,
-  "hidden": 101
+  "act": 32,
+  "know": 62,
+  "hidden": 100
  }
 }

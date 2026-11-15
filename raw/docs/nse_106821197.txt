@@ -1,0 +1,402 @@
+
+[[page 1]]
+ 
+ 
+ 
+ 
+October 17, 2026 
+ 
+BSE Limited 
+Listing Department 
+Phiroze Jeejeebhoy Towers 
+Dalal Street 
+Mumbai 400 001 
+   National Stock Exchange of India Limited 
+   Listing Department 
+   Exchange Plaza, 5th floor 
+   Plot No. C/1, G Block 
+   Bandra-Kurla Complex 
+   Bandra (East) 
+   Mumbai 400 051 
+Dear Sir/Madam, 
+ 
+Sub: Investor Presentation 
+ 
+Please find attached the investor presentation which will be referred during the earnings 
+call with analysts and investors for the financial results of the Bank for the quarter and 
+six months ended September 30, 2026. 
+ 
+The said presentation is being uploaded on the website of the Bank and can be accessed 
+at https://www.icici.bank.in/about-us/qfr 
+ 
+This is for your information and records.  
+ 
+Yours sincerely,  
+    For ICICI Bank Limited 
+ 
+ 
+ 
+ 
+Vivek Ranjan 
+Leadership Team 
+ 
+Encl. : as above. 
+ 
+ 
+Copy to:   
+(i) New York Stock Exchange (ii) SIX Swiss Exchange Limited 
+(iii) Singapore Stock Exchange (iv) Japan  Securities Dealers Association    
+ 
+[[page 2]]
+Q2-2027: 
+Performance review
+October 17, 2026
+[[page 3]]
+2
+Certain definitions in this release relating to a future period of time (including inter alia concerning our 
+future business plans or growth prospects) are forward-looking statements intended to qualify for the 'safe 
+harbor' under applicable securities laws including the US Private Securities Litigation Reform Act of 1995. 
+Such forward-looking statements involve a number of risks and uncertainties that could cause actual 
+results to differ materially from those in such forward-looking statements. These risks and uncertainties 
+include, but are not limited to statutory and regulatory changes, international economic and business 
+conditions; political or economic instability in the jurisdictions where we have operations or which affect 
+global or Indian economic conditions, increase in non-performing loans, unanticipated changes in interest 
+rates, foreign exchange rates, equity prices or other rates or prices, our growth and expansion in business, 
+the adequacy of our allowance for credit losses, the actual growth in demand for banking products and 
+services, investment income, cash flow projections, our exposure to market risks, changes in India’s 
+sovereign rating, as well as other risks detailed in the reports filed by us with the United States Securities 
+and Exchange Commission. Any forward-looking statements contained herein are based on assumptions 
+that we believe to be reasonable as of the date of this release. ICICI Bank undertakes no obligation to 
+update forward-looking statements to reflect events or circumstances after the date thereof. Additional 
+risks that could affect our future operating results are more fully described in our filings with the United 
+States Securities and Exchange Commission. These filings are available at www.sec.gov.
+[[page 4]]
+Highlights for Q2-2027
+3
+[[page 5]]
+4
+Key highlights for Q2-2027 (1/2)
+• Profit before tax excluding treasury grew by 23.4% y-o-y and 5.2% q-o-q to 
+₹ 199.54 bn in Q2-2027
+• Core operating profit grew by 21.8% y-o-y and 2.8% q-o-q to ₹ 208.05 bn
+• Core operating profit excluding dividend from subsidiaries grew by 25.0% 
+y-o-y and 6.4% q-o-q to ₹ 203.42 bn
+• Profit after tax grew by 20.1% y-o-y to ₹ 148.43 bn in Q2-2027
+Earnings
+• Net NPA ratio was 0.30% at Sep 30, 2026 (Jun 30, 2026: 0.35%)
+• Net additions of ₹ 12.13 bn to gross NPAs in Q2-2027 (Q2-2026: ₹ 13.86 bn)
+• Provision coverage ratio was 75.0% at Sep 30, 2026 (Jun 30, 2026: 74.7%)
+• Standard, contingency and other provisions of ₹ 238.15 bn (1.3% of advances)
+• Contingency provisions of ₹ 131.00 bn at Sep 30, 2026
+• Excludes additional standard asset provision of ₹ 12.83 billion in respect of 
+agricultural priority sector portfolio
+Asset 
+quality
+• Common Equity Tier 1 ratio of 16.01%1 (Jun 30, 2026: 16.19%1)
+• Total capital adequacy ratio of 16.68%1
+Capital
+1. Including profits for the period
+[[page 6]]
+5
+Key highlights for Q2-2027 (2/2)
+• Total loans grew by 30.0% y-o-y and 12.3% q-o-q
+• Excluding loans provided by international branches of the Bank against 
+FCNR (B) deposits, total loans grew by 24.1% y-o-y and 7.3% q-o-q
+• Retail and rural loans grew by 14.8% y-o-y and 3.2% q-o-q
+• Business banking1 portfolio grew by 33.8% y-o-y and 11.1% q-o-q
+• Domestic corporate portfolio grew by 30.6% y-o-y and 10.4% q-o-q
+Advances 
+• Period-end total deposits grew by 27.1% y-o-y and 11.8% q-o-q at Sep 30, 
+2026
+• Excluding FCNR (B) deposits, period end total deposits grew by 17.0% y-o-
+y and 3.1% q-o-q at Sep 30, 2026
+• Average deposits grew by 21.2% y-o-y and 8.0% q-o-q in Q2-2027
+• Average current and savings account deposits grew by 10.7% y-o-y and 
+1.4% q-o-q in Q2-2027
+Deposits
+1. This portfolio comprises borrowers with turnover of upto ₹ 7.50 bn
+[[page 7]]
+Financial performance
+6
+[[page 8]]
+1. Includes interest on tax refund of ₹ 0.14 bn in Q2-2027 (FY2026: ₹ 7.11 bn, Q1-2027: ₹ 4.65 bn, Q2-2026: 0.08 bn)
+Profit & loss statement
+(₹ billion) FY2026 Q2- 2026 H1- 2026 Q1- 2027 Q2- 2027 H1- 2027 Q2-o-Q2 (%)
+Net interest income1 880.75 215.29 431.64 243.84 253.39 497.23 17.7%
+Non-interest income 295.60 73.56 146.20 84.25 82.77 167.02 12.5%
+- Fee income 257.42 64.91 123.91 72.86 77.95 150.81 20.1%
+- Dividend income  from 
+subsidiaries 34.58 8.10 21.46 11.10 4.63 15.73 (42.9)%
+- Others 3.60 0.55 0.83 0.29 0.19 0.48 (64.4)%
+Core operating income 1,176.35 288.85 577.84 328.09 336.16 664.25 16.4%
+Operating expenses 472.34 118.07 232.01 125.74 128.11 253.85 8.5%
+- Employee expenses 179.75 43.42 90.85 50.05 49.28 99.33 13.5%
+- Non-employee expenses 292.59 74.65 141.16 75.69 78.83 154.52 5.6%
+Core operating profit 704.01 170.78 345.83 202.35 208.05 410.40 21.8%
+Core operating profit 
+excluding dividend income 669.43 162.68 324.37 191.25 203.42 394.67 25.0%
+7
+[[page 9]]
+Profit & loss statement
+₹ in billion FY2026 Q2- 2026 H1- 2026 Q1- 2027 Q2- 2027 H1- 2027 Q2-o-Q2 (%)
+Core operating profit 704.01 170.78 345.83 202.35 208.05 410.40 21.8%
+Provisions 53.801 9.14 27.29 12.60 8.51 21.11 (7.0)%
+Profit before tax 
+excluding treasury 650.21 161.64 318.54 189.75 199.54 389.29 23.4%
+Treasury income 11.98 2.20 14.61 1.51 (2.30) (0.79) -
+Profit before tax 662.19 163.84 333.15 191.26 197.24 388.50 20.4%
+Tax 160.72 40.25 81.88 43.21 48.81 92.02 21.3%
+Profit after tax 501.47 123.59 251.27 148.05 148.43 296.48 20.1%
+8
+1. Includes additional standard asset provision of ₹ 12.83 bn made pursuant to Reserve Bank of India’s annual 
+supervisory review
+[[page 10]]
+Consolidated P&L and ratios: slide 45-47
+Percent FY2026 Q2- 2026 H1- 2026 Q1- 2027 Q2- 2027 H1- 2027
+Net interest margin1,2 4.32 4.30 4.32 4.36 4.18 4.27
+Cost of deposits 4.62 4.64 4.75 4.41 4.50 4.45
+Cost-to-income 39.7 40.6 39.2 38.1 38.4 38.3
+Core operating profit/average assets 3.26 3.22 3.28 3.40 3.17 3.28
+Provisions/core operating profit 7.6 5.4 7.9 6.2 4.1 5.1
+Provisions/average advances 0.38 0.26 0.40 0.32 0.20 0.25
+Return on average assets 2.32 2.33 2.38 2.49 2.26 2.37
+Standalone return on equity 16.0 16.0 16.6 17.1 16.6 16.9
+Weighted average EPS (₹) 70.2 69.2 70.4 82.6 82.7 82.7
+Book value (₹) 471.2 436.0 436.0 492.8 502.3 502.3
+Key ratios
+Yield, cost and margin: slide 44
+9
+1. Annualised on the basis of ‘number of months’
+2. Impact of interest on tax refund was negligible in Q2-2027 (3 bps in FY2026, 8 bps in Q1-2027 and negligible in Q2-2026)
+[[page 11]]
+Standalone segment-wise PBT
+Profit before tax 
+(₹ billion) FY2026 Q2-2026 H1-2026 Q1-2027 Q2-2027 H1-2027
+Retail 232.44 63.18 110.53 62.39 77.17 139.56
+Wholesale 244.89 57.60 111.47 74.79 79.11 153.90
+Treasury 172.30 41.42 104.03 48.22 40.15 88.38
+Others 12.56 1.64 7.12 5.86 0.81 6.66
+Total 662.19 163.84 333.15 191.26 197.24 388.50
+10
+[[page 12]]
+Balance sheet growth
+11
+[[page 13]]
+Outstanding deposits
+(₹ billion) Sep 30, 
+2025
+Jun 30, 
+2026
+Sep 30, 
+2026
+Y-o-Y 
+growth
+Q-o-Q 
+growth
+% share at 
+Sep 30, 2026
+CASA 6,588.71 7,242.56 7,408.51 12.4% 2.3% 36.1%
+- Current 2,067.47 2,478.86 2,652.47 28.3% 7.0% 12.9%
+- Savings 4,521.24 4,763.70 4,756.04 5.2% (0.2%) 23.2%
+Term 9,539.54 11,093.30 13,090.23 37.2% 18.0% 63.9%
+Total deposits 16,128.25 18,335.86 20,498.74 27.1% 11.8% 100.0%
+Balance sheet-liabilities: slide 48-49
+Consolidated balance sheet: slide 50 Extensive franchise: slide 51
+• Excluding FCNR (B) deposits, period end total deposits grew by 17.0% y-o-y and 3.1% q-o-q 
+at Sep 30, 2026
+12
+[[page 14]]
+Average deposits
+(₹ billion) Q2-2026 Q1-2027 Q2-2027 Y-o-Y growth Q-o-Q growth
+CASA 6,101.04 6,657.75 6,752.48 10.7% 1.4%
+Term 9,473.45 10,822.53 12,129.71 28.0% 12.1%
+Total deposits 15,574.49 17,480.28 18,882.19 21.2% 8.0%
+Average CASA ratio 39.2% 38.1% 35.8%
+13
+[[page 15]]
+1. Proportions are gross of BRDS/IBPC
+Loan portfolio
+• Excluding loans provided by international branches of the Bank against FCNR (B) deposits, total loans grew by 24.1% y-o-y and 7.3% q-o-q
+• Including non-fund based outstanding, the share of retail and rural portfolio was 43.0% of the total portfolio at Sep 30, 2026
+• Of the total domestic loan book, about 57% has interest rate linked to repo rate and other external benchmarks, 29% has fixed interest rate 
+and 14% has interest rate linked to MCLR and other older benchmarks
+Balance sheet-assets: slides 52-53
+Portfolio composition: slide 54
+14
+(₹ billion) Sep 30, 2025 Jun 30, 2026 Sep 30, 2026 Y-o-Y growth Q-o-Q growth % share at Sep 30, 20261
+Retail and rural banking 8,240.22 9,165.12 9,456.87 14.8% 3.2% 51.6%
+Business banking 2,909.21 3,501.55 3,891.68 33.8% 11.1% 21.2%
+Domestic corporate 2,715.68 3,213.16 3,547.71 30.6% 10.4% 19.4%
+Total domestic book 
+(gross of BRDS/IBPC) 13,865.10 15,879.84 16,896.26 21.9% 6.4% 92.2%
+BRDS/IBPC (112.50) (69.99) (10.00) (91.1%) (85.7%) -
+Total domestic book (net 
+of BRDS/IBPC) 13,752.60 15,809.85 16,886.26 22.8% 6.8% 92.2%
+Overseas book 331.96 502.75 1,429.54 - - 7.8%
+Total advances 14,084.56 16,312.60 18,315.80 30.0% 12.3% 100.0%
+Trend of loan portfolio: slide 64
+[[page 16]]
+Retail and rural portfolio 
+15
+(₹ billion) Sep 30, 
+2025
+Jun 30, 
+2026
+Sep 30, 
+2026
+Y-o-Y 
+growth
+Q-o-Q 
+growth
+% share at 
+Sep 30, 
+2026
+Mortgages 4,606.14 5,133.47 5,310.88 15.3% 3.5% 56.2%
+Vehicle loans 962.66 1,022.74 1,037.39 7.8% 1.4% 11.0%
+- Auto finance 615.55 637.69 645.07 4.8% 1.2% 6.8%
+- Commercial vehicle and    
+equipment 341.96 383.57 391.43 14.5% 2.0% 4.1%
+Personal loans 1,216.55 1,355.20 1,419.05 16.6% 4.7% 15.0%
+Credit cards 588.00 532.06 530.91 (9.7)% (0.2)% 5.6%
+Jewel loans 311.03 534.01 557.94 79.4% 4.5% 5.9%
+Farmer finance 311.88 317.99 323.33 3.7% 1.7% 3.4%
+Others 243.95 269.65 277.37 13.7% 2.9% 2.9%
+Total Retail and Rural 8,240.22 9,165.12 9,456.87 14.8% 3.2% 100.0%
+Trend of retail and rural portfolio: slide 65
+[[page 17]]
+Asset quality trends
+16
+[[page 18]]
+NPA trends
+(₹ billion) Sep 30, 
+2025
+Jun 30, 
+2026
+Sep 30, 
+2026
+Gross NPAs1 238.50 238.47 233.35
+Less: cumulative provisions 180.23 179.39 176.29
+Net NPAs1 58.27 59.08 57.06
+Gross NPA ratio1 1.58% 1.38% 1.20%
+Net NPA ratio1 0.39% 0.35% 0.30%
+Provision coverage ratio 75.0% 74.7% 75.0%
+171. Based on customer assets
+Retail and rural NPAs: slide 55
+[[page 19]]
+NPA movement1
+18
+1. Based on customer assets
+2. Includes additions of ₹ 7.06 bn from kisan credit card portfolio
+₹ billion FY2026 Q2-2026 Q1-2027 Q2-2027
+Opening gross NPA 241.66 247.33 230.52 238.47
+Add: gross additions (1) 191.47 50.34 55.52 48.33
+- Retail and rural 155.16 40.49 43.312 37.09
+- Corporate and business banking 36.31 9.85 12.21 11.24
+Less: recoveries, upgrades and others (2) 114.92 36.48 28.45 36.20
+- Retail and rural 87.66 26.10 22.10 26.04
+- Corporate and business banking 27.26 10.38 6.35 10.16
+Net additions (1)-(2) 76.55 13.86 27.07 12.13
+Less: write-offs 84.24 22.63 16.73 15.92
+: sale of NPAs 3.45 0.06 2.39 1.33
+Closing gross NPAs 230.52 238.50 238.47 233.35
+[[page 20]]
+19
+1. Includes standard borrowers under resolution as per various RBI frameworks
+2. Fund-based and non-fund based outstanding. Excludes banks, investments and fund and non-fund based 
+outstanding to NPAs 
+3. Upgrade of certain borrowers having non-fund outstanding from non-performing to performing status
+(₹ billion) Sep 30, 2025 Jun 30, 2026 Sep 30, 2026
+1 Resolution under RBI frameworks: Total fund based o/s1 16.24 13.63 11.85
+2 Corporate: BB and below outstanding2
+- Borrowers with o/s greater than ₹ 1.00 bn 31.64 30.90 31.66
+- Borrowers with o/s less than ₹ 1.00 bn 4.97 3.95 3.81
+Total 36.613 34.85 35.47
+3 Non-fund o/s to NPAs 23.22
+3
+22.07 22.51
+Other portfolios
+[[page 21]]
+Standard assets and other provisions1,2
+20
+(₹ billion) Sep 30, 
+2025
+Jun 30, 
+2026
+Sep 30, 
+2026
+Total provisions 226.20 229.63
+3
+238.15
+3
+-- of which contingency provisions 131.00 131.00 131.00
+Total as a % of net advances 1.6% 1.4% 1.3%
+1. Excludes specific provisions on fund-based outstanding to borrowers classified as non-performing
+2. Includes general provision on standard assets, contingency provisions, provisions held for non fund 
+based outstanding to borrowers classified as non-performing, fund and non-fund based 
+outstanding to standard borrowers under resolution, performing BB and below corporate portfolio 
+3. Excludes additional standard asset provision of ₹ 12.83 billion made in Q3-2026 pursuant to RBI’s 
+annual supervisory review
+[[page 22]]
+Loan portfolio information
+21
+[[page 23]]
+Diversified and granular loan book
+22
+1. Proportions are gross of BRDS/IBPC
+2. This portfolio comprises borrowers with turnover of upto ₹ 7.50 bn
+3. Including non-fund based outstanding, the share of retail and rural portfolio was 43.0% of the total portfolio at 
+Sep 30, 2026
+51.6% of total loans are retail and 
+rural3
+Breakup of loan portfolio1 at Sep 30, 2026
+2
+
+[[page 24]]
+Mortgage, personal loan and credit card portfolio
+23
+Mortgage Personal loans and credit cards
+~ 70% Portfolio to existing customers
+~ 85% Portfolio of salaried individuals
+~90%
+Mortgage customers have 
+existing relationship with 
+the Bank
+~ ₹ 4.2 mn
+Average ticket 
+size of home loan
+~60%
+Average loan-to-
+value ratio of 
+home loan
+~40%
+Average loan-to-value 
+ratio of loan against 
+property
+Mortgage portfolio includes home loans ~63%, top-up 
+loans given to existing home loan customers ~7%, non-
+residential loans ~7% and loan against property ~18% 
+iLens, an integrated, end-to-end, retail lending solution, covering all facets of loan lifecycle from 
+sourcing till disbursement. Single interface for employees, third-party agencies and sourcing channels
+Growth in retail credit card spends 
+driven by 
+▪ Collaboration with leading brands
+▪ Extending convenient and rewarding 
+payment option through UPI on credit card
+▪ Increasing EMI campaigns to drive 
+affordability
+[[page 25]]
+Business banking portfolio
+24
+~65% of the portfolio by value 
+having ticket size < ₹ 10 crore 
+Focus on parameterised and programme based lending
+, 
+granularity, collateral and robust monitoring; well diversified 
+portfolio across sectors and geographies
+Growth driven by leveraging branch network and digital 
+platforms such as, InstaBIZ, Merchant STACK and Trade 
+Online, end to end digital onboarding platform DigiEase, 
+and efforts towards process decongestion such as e-signing 
+of disbursement documents through EazySign
+Primary collateral in the business banking portfolio in the form of charge on 
+current assets and backed by immovable property

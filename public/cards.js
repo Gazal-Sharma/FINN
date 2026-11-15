@@ -22,7 +22,8 @@ function mgmtBody(c) {
   const ppl = c.people.map((p) => html`<div class="person">
     <div class="nm">${p.name} <span class="pill know">${p.change || ""}</span></div>
     <div class="small ink2">${p.role || ""}${p.effective ? html` · from ${p.effective}` : ""}${p.reason ? html` · ${p.reason}` : ""}</div>
-    ${p.profile ? html`<div class="small" style="margin-top:4px">${p.profile}</div>` : ""}
+    ${p.profile ? html`<div class="small" style="margin-top:6px">${p.profile}</div>` : ""}
+    ${p.profile_source ? html`<div class="tiny muted" style="margin-top:4px">Profile from the company's earlier filing of ${p.profile_source.date}${p.profile_source.url ? html` · <a href="${p.profile_source.url}" target="_blank" rel="noopener">PDF ›</a>` : ""}</div>` : ""}
     ${p.background?.length ? html`<div class="bg">${p.background.map((b) => html`<span>${b}</span>`)}</div>` : ""}
   </div>`);
   return html`${ppl}<div class="tiny muted" style="margin-top:6px">Profile from ${c.source}.</div>`;
