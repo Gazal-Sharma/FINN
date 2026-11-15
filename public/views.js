@@ -55,7 +55,10 @@ export function today(state, ctx) {
   return html`
   <div class="strip">
     <div class="lede">${windowLabel(state, win)}<br><span class="small muted">${nFilings} filings · <b style="color:${act.length ? "var(--act)" : "inherit"}">${act.length} need you</b> · ${know.length} worth knowing</span></div>
-    <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+      <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
+      ${(() => { const vs = window.__finnVoices?.() || []; return vs.length > 1 ? html`<label class="tiny muted">Voice <select data-voice class="voicepick">${vs.map((v) => html`<option value="${v.name}" ${v.on ? raw("selected") : ""}>${v.label}</option>`)}</select></label>` : ""; })()}
+    </div>
   </div>
   <div class="chips">${["24h", "session", "7d", "30d"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${w === "session" ? "Last session" : w}</button>`)}</div>
   ${note ? html`<div class="note">${note}</div>` : ""}

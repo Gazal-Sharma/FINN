@@ -221,7 +221,7 @@ const CHANGE = { appointed: "has been appointed", resigned: "has resigned", reti
 
 function briefScript() {
   const { win, evs } = V.todayEvents(state);
-  const spoken = (t) => state.meta?.portfolio?.find((c) => c.t === t)?.spoken || state.nameOf(t);
+  const spoken = (t) => `§${t}§`;  // placeholder: written name on screen, spoken name in the voice
   const pct = (v) => (v == null ? "" : `${v < 0 ? "down" : "up"} ${Math.abs(v).toFixed(1)} percent`);
   const crore = (v) => `${Math.round(v).toLocaleString("en-IN")} crore rupees`;
   const act = evs.filter((e) => e.tier === "act").sort((a, b) => b.score - a.score);
@@ -251,22 +251,46 @@ function briefScript() {
     if (moves.length) lines.push(`Unusual moves in the last session. ${moves.slice(0, 3).map((x) => `${spoken(x.t)} ${x.price ? `moved ${pct(x.ret)}` : "traded"}${x.vol ? ` on ${x.volx.toFixed(1)} times its normal volume` : ""}`).join(". ")}.`);
   }
   lines.push(`${hidden ? `${hidden} routine filings were tucked away. ` : ""}That's your brief.`);
-  return lines.map(speakable).map((l) => l.replace(/\.\./g, ".")).filter(Boolean);
+  const name = (t) => state.meta?.portfolio?.find((c) => c.t === t)?.name || state.nameOf(t);
+  const voiceName = (t) => state.meta?.portfolio?.find((c) => c.t === t)?.spoken || state.nameOf(t);
+  return lines.map(speakable).map((l) => l.replace(/\.\./g, ".")).filter(Boolean).map((l) => ({
+    show: l.replace(/§([A-Z0-9&-]+)§/g, (_, t) => name(t)),
+    say: l.replace(/§([A-Z0-9&-]+)§/g, (_, t) => voiceName(t)),
+  }));
 }
+
+// Chrome loads its voice list late; picking before it arrives grabbed whatever
+// voice came first. Wait for it, keep the earlier default, and let people choose.
+let VOICES = [];
+function loadVoices() {
+  const v = window.speechSynthesis?.getVoices() || [];
+  VOICES = v.filter((x) => x.lang?.toLowerCase().startsWith("en"));
+  if (VOICES.length && route().tab === "today") render();
+}
+if (window.speechSynthesis) { loadVoices(); speechSynthesis.addEventListener?.("voiceschanged", loadVoices); }
+function pickVoice() {
+  const want = store.get("voice", null);
+  return VOICES.find((v) => v.name === want) || VOICES.find((v) => v.lang === "en-IN") ||
+    VOICES.find((v) => v.lang?.startsWith("en-GB")) || VOICES[0] || null;
+}
+export function voiceOptions() {
+  const cur = pickVoice()?.name;
+  return VOICES.map((v) => ({ name: v.name, label: `${v.name.replace(/^(Microsoft|Google)\s+/, "").replace(/\s+Online.*$/, "")} (${v.lang})`, on: v.name === cur }));
+}
+window.__finnVoices = voiceOptions;
 
 function toggleListen() {
   const synth = window.speechSynthesis;
   if (!synth) { alertLine("Your browser can't read aloud."); return; }
   if (state.speaking) { synth.cancel(); state.speaking = false; captions(null); render(); return; }
   const lines = briefScript();
-  const voices = synth.getVoices();
-  const voice = voices.find((v) => v.lang === "en-IN") || voices.find((v) => v.lang?.startsWith("en-GB")) || voices.find((v) => v.lang?.startsWith("en"));
+  const voice = pickVoice();
   state.speaking = true; render();
-  lines.forEach((text, i) => {
-    const u = new SpeechSynthesisUtterance(text);
-    if (voice) u.voice = voice;
-    u.rate = 1.02;
-    u.onstart = () => captions(text, i + 1, lines.length);
+  lines.forEach((line, i) => {
+    const u = new SpeechSynthesisUtterance(line.say);
+    if (voice) { u.voice = voice; u.lang = voice.lang; }
+    u.rate = 1.0;
+    u.onstart = () => captions(line.show, i + 1, lines.length);
     if (i === lines.length - 1) u.onend = () => { state.speaking = false; captions(null); render(); };
     synth.speak(u);
   });
@@ -278,6 +302,9 @@ function captions(text, i, n) {
   el.innerHTML = html`<div>${text}<div class="tiny">${i} of ${n} · tap Stop to end</div></div>`.toString();
 }
 function alertLine(msg) { captions(msg, 1, 1); setTimeout(() => captions(null), 2500); }
+document.addEventListener("change", (ev) => {
+  if (ev.target.matches("[data-voice]")) { store.set("voice", ev.target.value); if (state.speaking) { speechSynthesis.cancel(); state.speaking = false; captions(null); } render(); }
+});
 
 // ----------------------------------------------------------------- events
 document.addEventListener("click", (ev) => {
