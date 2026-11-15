@@ -78,3 +78,14 @@
 {"at": "2026-11-15T16:19:27.733144+05:30", "ticker": "HDFCBANK", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 85, "out": 24, "cache_hit": false, "list_usd": 1.8e-05}
 {"at": "2026-11-15T16:19:36.052483+05:30", "ticker": "TRENT", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 95, "out": 34, "cache_hit": false, "list_usd": 2.3e-05}
 {"at": "2026-11-15T16:23:53.530603+05:30", "ticker": "ICICIBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 143, "out": 83, "cache_hit": false, "list_usd": 4.8e-05}
+{"at": "2026-11-15T16:24:15.658386+05:30", "ticker": "INFY", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 36911, "out": 287, "cache_hit": false, "list_usd": 0.003806}
+{"at": "2026-11-15T16:24:19.145487+05:30", "ticker": "INFY", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 26237, "out": 553, "cache_hit": false, "list_usd": 0.002845}
+{"at": "2026-11-15T16:26:19.882035+05:30", "ticker": "INFY", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 25494, "out": 417, "cache_hit": false, "list_usd": 0.002716}
+{"at": "2026-11-15T16:26:24.612976+05:30", "ticker": "KPITTECH", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 31781, "out": 702, "cache_hit": false, "list_usd": 0.003459}
+{"at": "2026-11-15T16:26:33.022065+05:30", "ticker": "KPITTECH", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 13261, "out": 643, "cache_hit": false, "list_usd": 0.001583}
+{"at": "2026-11-15T16:28:32.629235+05:30", "ticker": "POLYCAB", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 13800, "out": 643, "cache_hit": false, "list_usd": 0.001637}
+{"at": "2026-11-15T16:28:36.166990+05:30", "ticker": "POLYCAB", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 14451, "out": 1254, "cache_hit": false, "list_usd": 0.001947}
+{"at": "2026-11-15T16:29:26.357218+05:30", "ticker": "POLYCAB", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 14122, "out": 896, "cache_hit": false, "list_usd": 0.001771}
+{"at": "2026-11-15T16:29:36.767527+05:30", "ticker": "TATAPOWER", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 12172, "out": 718, "cache_hit": false, "list_usd": 0.001504}
+{"at": "2026-11-15T16:31:02.703642+05:30", "ticker": "DMART", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 34762, "out": 479, "cache_hit": false, "list_usd": 0.003668}
+{"at": "2026-11-15T16:31:42.649262+05:30", "ticker": "DMART", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 29491, "out": 594, "cache_hit": false, "list_usd": 0.003187}
