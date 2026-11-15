@@ -104,7 +104,19 @@ function freshness() {
   </div>`;
 }
 
+function maybeLoadArchive() {
+  if (state.archive || state.archiveLoading) return;
+  const win = state.viewWindow || state.settings.window;
+  const recent = V.recentFrom(state);
+  if (win !== "custom" || !state.customFrom || !recent || state.customFrom >= recent) return;
+  state.archiveLoading = true;
+  getJSON("data/events-archive.json").then((a) => { state.archive = a.events || []; })
+    .catch(() => { state.archive = []; })
+    .finally(() => { state.archiveLoading = false; render(); });
+}
+
 function render() {
+  maybeLoadArchive();
   const r = route();
   let body;
   if (r.tab === "alerts") body = V.alerts(state);
@@ -134,7 +146,7 @@ function renderSheet() {
   let el = $("#sheet");
   if (!state.sheet) { if (el) el.remove(); document.body.style.overflow = ""; return; }
   if (!el) { el = document.createElement("div"); el.id = "sheet"; document.body.appendChild(el); }
-  const e = (state.events || []).find((x) => x.id === state.sheet);
+  const e = [...(state.events || []), ...(state.archive || [])].find((x) => x.id === state.sheet);
   const body = state.sheet === "ranking" ? rankingSheet(state.calibration) : state.sheet === "settings" ? settingsSheet() : e ? eventSheet(e, ctx) : null;
   el.innerHTML = body ? html`<div class="scrim" data-act="closeSheet"><div class="sheet" data-stop="1"><div class="grab"></div>
     <button class="close" data-act="closeSheet">Close</button>${body}</div></div>`.toString() : "";

@@ -139,7 +139,7 @@ def _ai_batch(batch, docs_text):
     return {batch[int(k)]["id"]: {**v, "rule": "ai", "source": "ai"} for k, v in res.items()}
 
 
-def classify(filings, docs_text=None, use_ai=True):
+def classify(filings, docs_text=None, use_ai=True, fallback=None):
     """Return {filing_id: verdict}. Rules first; the rest go to the cheapest model
     in batches of 20, and each verdict is cached per filing id (cache/verdicts.json)."""
     cache_path = config.CACHE / "verdicts.json"
@@ -147,7 +147,7 @@ def classify(filings, docs_text=None, use_ai=True):
     rule_v = {f["id"]: rule_verdict(f) for f in filings}
     need = [f for f in filings if rule_v[f["id"]] is None and f["id"] not in cached]
     print(f"[build] classify: {len(filings)} filings, {len(filings) - len(need)} decided by rules/cache, "
-          f"{len(need)} need AI{'' if use_ai else ' (no key: skipped)'}", flush=True)
+          f"{len(need)} need AI{'' if use_ai else ' (not sent to AI)'}", flush=True)
     if use_ai:
         for b in range(0, len(need), BATCH):
             batch = need[b:b + BATCH]
@@ -159,7 +159,7 @@ def classify(filings, docs_text=None, use_ai=True):
                 print("ai classify batch failed", e)
     out = {}
     for f in filings:
-        v = rule_v[f["id"]] or cached.get(f["id"]) or {
+        v = rule_v[f["id"]] or cached.get(f["id"]) or fallback or {
             "category": "unclassified", "tier": "know", "why": "Unrecognised filing type", "rule": "fallback", "source": "rule"}
         blob = f"{f.get('subject', '')} {f.get('text', '')[:700]}"
         score, reasons = config.TIER_BASE[v["tier"]], []

@@ -19,7 +19,7 @@ def safe(name):
 
 
 # --------------------------------------------------------------------- prices
-def build_prices(sessions_n=120):
+def build_prices(sessions_n=260):  # ~a year, so archive items get market-reaction chips
     raw = read_json(RAW / "prices.json", {})
     idx = raw.get(config.INDEX_YF) or []
     dates = [d for d, _, _ in idx][-sessions_n:]
@@ -242,7 +242,35 @@ def build_all(args=None):
         if n % 5 == 0:
             _write_events(events)
     _write_events(events)
+    build_archive(prices, calib, cutoff)
     write_meta(events, sessions)
+
+
+ARCHIVE_DAYS = 365
+
+
+def build_archive(prices, calib, cutoff):
+    """Filings from 31 days to 12 months back, for custom date ranges. Loaded by the
+    app only when someone picks an older date. Ranked by the same rules and
+    evidence, reusing cached AI verdicts; no new AI calls, no results cards."""
+    lo = (now_ist() - timedelta(days=ARCHIVE_DAYS)).isoformat()
+    old = [f for t in config.tracked() for f in read_json(RAW / "filings" / f"{t}.json", {}).values()
+           if lo <= (f.get("ts") or "") < cutoff]
+    v = classify.classify(old, use_ai=False, fallback={
+        "category": "unclassified", "tier": "hidden", "why": "Not reviewed (older than 30 days)", "rule": "archive", "source": "rule"})
+    if calib:
+        v = classify.apply_calibration(v, calib)
+    evs = classify.group_events(old, v, prices["dates"])
+    for e in evs:
+        e["reaction"] = classify.reaction(e["ticker"], e["session"], prices)
+        e["archive"] = True
+        e["oneliner"] = (e.get("oneliner") or "")[:200]
+        for f in e["filings"]:
+            f["text"] = (f.get("text") or "")[:140]
+    days = sorted(e["ts"][:10] for e in evs if e.get("ts"))
+    write_json(OUT / "events-archive.json", {"generated_at": now_ist().isoformat(timespec="seconds"),
+                                             "from": days[0] if days else None, "to": days[-1] if days else None, "events": evs})
+    print(f"[build] archive: {len(old)} older filings -> {len(evs)} events", flush=True)
 
 
 def _write_events(events):
@@ -264,6 +292,7 @@ def write_meta(events, sessions):
         "research_ready": research,
         "research_set": list(config.RESEARCH_SET),
         "counts": {k: sum(1 for e in events if e["tier"] == k) for k in ("act", "know", "hidden")},
+        "archive": {k: (read_json(OUT / "events-archive.json", {}) or {}).get(k) for k in ("from", "to")},
     }
     write_json(OUT / "meta.json", meta, indent=1)
     print(f"[build] meta: {len(events)} events; tiers {meta['counts']}", flush=True)
