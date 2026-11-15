@@ -1,4 +1,7 @@
-"""Vercel function: GET /api/research?t=TICKER -> dossier JSON.
+"""Vercel function: GET /api/research?t=TICKER[&part=basic] -> dossier JSON.
+
+part=basic returns the reported numbers in ~2 s so the page can show them at
+once; the full call (promises, verdicts) follows.
 
 Uses the same finn.research.build() as the scheduled job, so any NSE ticker
 works the same way as the pre-built ones. ?ping=1 is a health check.
@@ -33,8 +36,13 @@ class handler(BaseHTTPRequestHandler):
         if not re.fullmatch(r"[A-Z0-9&\-]{1,20}", t):
             return self._send(400, {"error": "Give an NSE symbol, e.g. ?t=INFY"})
         started = time.time()
+        part = (q.get("part") or ["full"])[0]
         try:
             from finn import research
+            if part == "basic":  # step 1: reported numbers only, no AI, ~2 s
+                d = research.build_basic(t)
+                d["seconds"] = round(time.time() - started, 1)
+                return self._send(200, d)
             d = research.build(t, offline_raw=False)
             d["live"] = True
             d["seconds"] = round(time.time() - started, 1)

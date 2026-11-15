@@ -6,9 +6,10 @@ export function reactionChip(r) {
   return html`<span class="react">Market <b class="${tone(r.abn)}">${fmtPct(r.abn)}</b> vs Nifty${r.vol_x ? html` · ${r.vol_x.toFixed(1)}× vol` : ""}</span>`;
 }
 
-function resultsBody(c) {
+function resultsBody(c, mark = false) {
+  // Highlighter: only PAT year-on-year, the single number that matters most on the card.
   const rows = c.rows.map((r) => html`<tr><td>${r.k}</td><td>${fmtCr(r.v)}</td>
-    <td class="${tone(r.qoq)}">${fmtPct(r.qoq)}</td><td class="${tone(r.yoy)}">${fmtPct(r.yoy)}</td></tr>`);
+    <td class="${tone(r.qoq)}">${fmtPct(r.qoq)}</td><td class="${tone(r.yoy)}">${mark && r.k === "PAT" && r.yoy != null ? html`<mark>${fmtPct(r.yoy)}</mark>` : fmtPct(r.yoy)}</td></tr>`);
   const m = c.margin;
   return html`
     <table class="res"><thead><tr><th>${c.period || "This quarter"}</th><th>${c.unit}</th><th>QoQ</th><th>YoY</th></tr></thead>
@@ -34,11 +35,10 @@ export function eventCard(e, ctx) {
   return html`<article class="card act">
     <div class="top">
       <button class="co" data-act="co" data-t="${e.ticker}">${ctx.nameOf(e.ticker)}<small>${e.ticker}</small></button>
-      <span>${ctx.isNew(e) ? html`<span class="pill new">New</span> ` : ""}<span class="pill act">Act</span></span>
+      <span class="tiny muted">${ctx.isNew(e) ? html`<span class="pill new">New</span> ` : ""}${fmtWhen(e.ts)}</span>
     </div>
-    <div class="tiny muted">${fmtWhen(e.ts)}</div>
     <div class="headline">${c?.type === "results" ? `Results · ${c.period || ""}` : e.oneliner || e.title}</div>
-    ${c?.type === "results" ? resultsBody(c) : c?.type === "mgmt" ? mgmtBody(c) : ""}
+    ${c?.type === "results" ? resultsBody(c, true) : c?.type === "mgmt" ? mgmtBody(c) : ""}
     ${e.undergraded ? html`<div class="flag">FINN ranked this low, but the stock moved. Flagged for rule review.</div>` : ""}
     <div class="why">${reactionChip(e.reaction)}
       <span>Why: ${e.why.join(" · ")}</span>

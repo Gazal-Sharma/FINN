@@ -1,5 +1,5 @@
 // Boot, hash router, one delegated click handler, settings in localStorage.
-import { html, fmtDay, ago, scanAlerts } from "./lib.js";
+import { html, raw, fmtDay, ago, scanAlerts } from "./lib.js";
 import { eventSheet, rankingSheet } from "./cards.js";
 import * as V from "./views.js";
 import { learn, searchGlossary } from "./learn.js";
@@ -34,7 +34,8 @@ function applyTheme() {
   const root = document.documentElement;
   if (state.theme === "auto") delete root.dataset.theme; else root.dataset.theme = state.theme;
   const dark = state.theme === "dark" || (state.theme === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", dark ? "#1F1D1A" : "#F6F1E7"));
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", dark ? "#161C1B" : "#E3E9E2"));
+  if (store.get("textSize", "standard") === "large") root.dataset.size = "large"; else delete root.dataset.size;
 }
 applyTheme();
 matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", applyTheme);
@@ -79,8 +80,10 @@ function render() {
   const d = new Date();
   const nAct = (state.events || []).filter((e) => e.tier === "act" && ctx.isNew(e)).length;
   $("#app").innerHTML = html`
-    <header class="mast"><h1>FINN</h1><div class="dateline">${d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" })}<br>${state.meta?.portfolio?.length || 18} holdings · NSE<br>
-      <button class="theme" data-act="theme" aria-label="Change colour theme">Theme: ${{ auto: "Auto", light: "Light", dark: "Dark" }[state.theme]}</button></div></header>
+    <header class="mast"><h1><small>Portfolio ledger</small>FINN</h1>
+      <div style="display:flex;align-items:center;gap:12px"><div class="dateline">${d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" })}<br>${state.meta?.portfolio?.length || 18} holdings · NSE</div>
+      <button class="gear" data-act="settings" aria-label="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></button></div></header>
+    <div class="mast-rule"></div>
     ${freshness()}
     <main>${body}</main>`.toString();
   $("#tabs").innerHTML = html`<nav>
@@ -98,7 +101,7 @@ function renderSheet() {
   if (!state.sheet) { if (el) el.remove(); document.body.style.overflow = ""; return; }
   if (!el) { el = document.createElement("div"); el.id = "sheet"; document.body.appendChild(el); }
   const e = (state.events || []).find((x) => x.id === state.sheet);
-  const body = state.sheet === "ranking" ? rankingSheet(state.calibration) : e ? eventSheet(e, ctx) : null;
+  const body = state.sheet === "ranking" ? rankingSheet(state.calibration) : state.sheet === "settings" ? settingsSheet() : e ? eventSheet(e, ctx) : null;
   el.innerHTML = body ? html`<div class="scrim" data-act="closeSheet"><div class="sheet" data-stop="1"><div class="grab"></div>
     <button class="close" data-act="closeSheet">Close</button>${body}</div></div>`.toString() : "";
   document.body.style.overflow = "hidden";
@@ -162,9 +165,32 @@ async function askAI(item) {
   item.loading = false; renderAsk();
 }
 
+// ---------------------------------------------------------------- settings
+// Everything that's a preference lives here, saved on this device only.
+function settingsSheet() {
+  const opt = (act, val, cur, label) => html`<button class="chip ${val === cur ? "on" : ""}" data-act="${act}" data-v="${val}">${label}</button>`;
+  const vs = voiceOptions();
+  const rate = store.get("voiceRate", 1);
+  const size = store.get("textSize", "standard");
+  return html`<div class="settings"><h3>Settings</h3><div class="small muted">Saved on this device. No account needed.</div>
+    <div class="grp"><span>Appearance</span><div class="opts">${opt("setTheme", "auto", state.theme, "Match my phone")}${opt("setTheme", "light", state.theme, "Day")}${opt("setTheme", "dark", state.theme, "Night")}</div></div>
+    <div class="grp"><span>Text size</span><div class="opts">${opt("setSize", "standard", size, "Standard")}${opt("setSize", "large", size, "Larger")}</div></div>
+    <div class="grp"><span>Listen: voice</span>
+      ${vs.length ? html`<select data-voice aria-label="Voice">${vs.map((v) => html`<option value="${v.name}" ${v.on ? raw("selected") : ""}>${v.label}</option>`)}</select>`
+        : html`<div class="hint">Your browser hasn't listed its voices yet. Open this again in a moment.</div>`}
+      <div class="opts" style="margin-top:10px">${opt("setRate", "0.9", String(rate), "Slower")}${opt("setRate", "1", String(rate), "Normal")}${opt("setRate", "1.15", String(rate), "Faster")}
+        <button class="chip" data-act="testVoice">▶ Try it</button></div>
+      <div class="hint">Voices come from your phone or browser, so the list differs by device.</div></div>
+    <div class="grp"><span>Today opens on</span><div class="opts">${["24h", "session", "7d", "30d"].map((w) => opt("setWindow", w, state.settings.window, w === "session" ? "Last session" : w))}</div>
+      <div class="hint">With 24h, a quiet day (like a weekend) widens to the last trading session automatically.</div></div>
+    <div class="grp" style="border-bottom:0"><span>"New" markers</span><button class="chip" data-act="resetSeen">Mark everything as seen</button></div>
+  </div>`;
+}
+
 // ----------------------------------------------------------------- research
 function researchView(t) {
   if (state.dossiers[t]) return V.dossier(state.dossiers[t], state);
+  if (state.research[t]?.running && !state.research[t]?.error) return V.researchLoading(t, state.research[t], state);
   const r = state.research[t];
   if (!r) { startResearch(t); return V.researchLoading(t, { started: Date.now() }, state); }
   if (r.error) return html`<div class="dossier-h"><div class="co">${state.nameOf(t)}<small>${t}</small></div></div>${V.recentFor(t, state)}
@@ -176,25 +202,36 @@ async function startResearch(t) {
   if (state.research[t]?.running) return;
   state.research[t] = { running: true, started: Date.now() };
   const cached = store.get("r." + t, null);
+  const tick = setInterval(() => route().t === t && render(), 1000);
+  const done = () => { clearInterval(tick); if (route().t === t) render(); };
+  // 1) Pre-built or recently cached: instant.
+  let d = null;
+  if ((state.meta?.research_ready || []).includes(t)) d = await getJSON(`data/research/${t}.json`).catch(() => null);
+  if (!d && cached && Date.now() - new Date(cached.generated_at) < 3 * 864e5) d = cached;
+  if (d) { state.dossiers[t] = d; state.research[t] = {}; return done(); }
+  // 2) Live: show reported numbers first (~2 s), then fill in the promises.
+  const call = (part) => fetch(`api/research?t=${encodeURIComponent(t)}${part ? `&part=${part}` : ""}`)
+    .then(async (res) => { const j = await res.json().catch(() => ({ error: `Server error ${res.status}` })); if (!res.ok || j.error) throw new Error(j.error || `Server error ${res.status}`); return j; });
+  const full = call("");
   try {
-    let d = null;
-    if ((state.meta?.research_ready || []).includes(t)) d = await getJSON(`data/research/${t}.json`).catch(() => null);
-    if (!d && cached && Date.now() - new Date(cached.generated_at) < 3 * 864e5) d = cached;
-    if (!d) {
-      const tick = setInterval(() => route().t === t && !state.dossiers[t] && render(), 1000);
-      try {
-        const res = await fetch(`api/research?t=${encodeURIComponent(t)}`);
-        const j = await res.json().catch(() => ({ error: `Server error ${res.status}` }));
-        if (!res.ok || j.error) throw new Error(j.error || `Server error ${res.status}`);
-        d = j;
-        store.set("r." + t, d);
-      } finally { clearInterval(tick); }
-    }
-    state.dossiers[t] = d;
+    const basic = await call("basic");
+    if (!state.dossiers[t]) { state.dossiers[t] = basic; render(); }
   } catch (e) {
-    state.research[t] = { error: `Couldn't build research for ${t}: ${e.message}. Check the symbol, or try again in a minute.` };
+    state.research[t] = { ...state.research[t], basicError: e.message };
   }
-  if (route().t === t) render();
+  try {
+    const f = await full;
+    state.dossiers[t] = f;
+    store.set("r." + t, f);
+    state.research[t] = {};
+  } catch (e) {
+    const msg = /quota/i.test(e.message)
+      ? "The free AI quota for today is used up, so the promises can't be read right now. The numbers above are complete; try again tomorrow."
+      : `Couldn't read ${t}'s earnings calls just now (${e.message}).`;
+    if (state.dossiers[t]) state.research[t] = { fullError: msg };
+    else state.research[t] = { error: `Couldn't build research for ${t}: ${e.message}. Check the symbol, or try again in a minute.` };
+  }
+  done();
 }
 
 // ------------------------------------------------------------------- listen
@@ -265,7 +302,7 @@ let VOICES = [];
 function loadVoices() {
   const v = window.speechSynthesis?.getVoices() || [];
   VOICES = v.filter((x) => x.lang?.toLowerCase().startsWith("en"));
-  if (VOICES.length && route().tab === "today") render();
+  if (VOICES.length && state.sheet === "settings") renderSheet();
 }
 if (window.speechSynthesis) { loadVoices(); speechSynthesis.addEventListener?.("voiceschanged", loadVoices); }
 function pickVoice() {
@@ -273,11 +310,10 @@ function pickVoice() {
   return VOICES.find((v) => v.name === want) || VOICES.find((v) => v.lang === "en-IN") ||
     VOICES.find((v) => v.lang?.startsWith("en-GB")) || VOICES[0] || null;
 }
-export function voiceOptions() {
+function voiceOptions() {
   const cur = pickVoice()?.name;
   return VOICES.map((v) => ({ name: v.name, label: `${v.name.replace(/^(Microsoft|Google)\s+/, "").replace(/\s+Online.*$/, "")} (${v.lang})`, on: v.name === cur }));
 }
-window.__finnVoices = voiceOptions;
 
 function toggleListen() {
   const synth = window.speechSynthesis;
@@ -289,7 +325,7 @@ function toggleListen() {
   lines.forEach((line, i) => {
     const u = new SpeechSynthesisUtterance(line.say);
     if (voice) { u.voice = voice; u.lang = voice.lang; }
-    u.rate = 1.0;
+    u.rate = +store.get("voiceRate", 1) || 1;
     u.onstart = () => captions(line.show, i + 1, lines.length);
     if (i === lines.length - 1) u.onend = () => { state.speaking = false; captions(null); render(); };
     synth.speak(u);
@@ -303,7 +339,7 @@ function captions(text, i, n) {
 }
 function alertLine(msg) { captions(msg, 1, 1); setTimeout(() => captions(null), 2500); }
 document.addEventListener("change", (ev) => {
-  if (ev.target.matches("[data-voice]")) { store.set("voice", ev.target.value); if (state.speaking) { speechSynthesis.cancel(); state.speaking = false; captions(null); } render(); }
+  if (ev.target.matches("[data-voice]")) { store.set("voice", ev.target.value); if (state.speaking) { speechSynthesis.cancel(); state.speaking = false; captions(null); } renderSheet(); }
 });
 
 // ----------------------------------------------------------------- events
@@ -313,7 +349,7 @@ document.addEventListener("click", (ev) => {
   if ((a.dataset.act === "closeSheet" || a.dataset.act === "askClose") && ev.target.closest("[data-stop]") && !ev.target.closest(".close")) return;
   const s = state.settings;
   switch (a.dataset.act) {
-    case "win": s.window = a.dataset.w; state.windowTouched = true; break;
+    case "win": state.viewWindow = a.dataset.w; state.windowTouched = true; render(); return;  // this visit only
     case "event": state.sheet = a.dataset.id; renderSheet(); return;
     case "closeSheet": state.sheet = null; renderSheet(); return;
     case "ranking": state.sheet = "ranking"; renderSheet(); return;
@@ -323,8 +359,14 @@ document.addEventListener("click", (ev) => {
     case "mode": s.relative = a.dataset.v === "1"; break;
     case "cat": s.cats = s.cats.includes(a.dataset.c) ? s.cats.filter((c) => c !== a.dataset.c) : [...s.cats, a.dataset.c]; break;
     case "thread": state.openThread = state.openThread === a.dataset.id ? null : a.dataset.id; break;
-    case "retry": delete state.research[a.dataset.t]; break;
-    case "theme": state.theme = THEMES[(THEMES.indexOf(state.theme) + 1) % 3]; store.set("theme", state.theme); applyTheme(); break;
+    case "retry": delete state.research[a.dataset.t]; if (state.dossiers[a.dataset.t]?.partial) delete state.dossiers[a.dataset.t]; break;
+    case "settings": state.sheet = "settings"; renderSheet(); return;
+    case "setTheme": state.theme = a.dataset.v; store.set("theme", state.theme); applyTheme(); renderSheet(); return;
+    case "setSize": store.set("textSize", a.dataset.v); applyTheme(); renderSheet(); return;
+    case "setRate": store.set("voiceRate", +a.dataset.v); renderSheet(); return;
+    case "setWindow": s.window = a.dataset.v; state.viewWindow = null; state.windowTouched = false; store.set("settings", s); renderSheet(); render(); return;
+    case "testVoice": { const v = pickVoice(); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance("This is how your brief will sound."); if (v) { u.voice = v; u.lang = v.lang; } u.rate = +store.get("voiceRate", 1) || 1; speechSynthesis.speak(u); return; }
+    case "resetSeen": store.set("lastSeen", Date.now()); location.reload(); return;
     case "ask": state.ask.open = true; renderAsk(); setTimeout(() => document.querySelector(".askform input")?.focus(), 50); return;
     case "askClose": state.ask.open = false; renderAsk(); return;
     case "askSuggest": askQuestion(a.dataset.q); return;

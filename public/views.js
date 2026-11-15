@@ -24,7 +24,7 @@ export function windowLabel(state, win) {
 
 export function todayEvents(state) {
   const all = state.events || [];
-  let win = state.settings.window, note = "";
+  let win = state.viewWindow || state.settings.window, note = "";
   const pick = (w) => all.filter((e) => new Date(e.ts).getTime() >= windowStart(state, w));
   let evs = pick(win);
   if (!evs.some((e) => e.tier !== "hidden") && win === "24h" && !state.windowTouched) {
@@ -54,11 +54,8 @@ export function today(state, ctx) {
 
   return html`
   <div class="strip">
-    <div class="lede">${windowLabel(state, win)}<br><span class="small muted">${nFilings} filings · <b style="color:${act.length ? "var(--act)" : "inherit"}">${act.length} need you</b> · ${know.length} worth knowing</span></div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-      <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
-      ${(() => { const vs = window.__finnVoices?.() || []; return vs.length > 1 ? html`<label class="tiny muted">Voice <select data-voice class="voicepick">${vs.map((v) => html`<option value="${v.name}" ${v.on ? raw("selected") : ""}>${v.label}</option>`)}</select></label>` : ""; })()}
-    </div>
+    <div class="lede">${windowLabel(state, win)}<br><span class="small" style="color:var(--ink-2)">${nFilings} filings · ${act.length ? html`<mark>${act.length} need${act.length === 1 ? "s" : ""} you</mark>` : html`<b>0 need you</b>`} · ${know.length} worth knowing</span></div>
+    <button class="listen ${state.speaking ? "on" : ""}" data-act="listen">${state.speaking ? "■ Stop" : "▶ Listen"}</button>
   </div>
   <div class="chips">${["24h", "session", "7d", "30d"].map((w) => html`<button class="chip ${w === win ? "on" : ""}" data-act="win" data-w="${w}">${w === "session" ? "Last session" : w}</button>`)}</div>
   ${note ? html`<div class="note">${note}</div>` : ""}
@@ -71,10 +68,10 @@ export function today(state, ctx) {
 
   ${act.length ? html`<div class="sec"><h2 class="act">Act</h2><span class="tiny muted">could move the stock</span></div>${act.map((e) => eventCard(e, ctx))}` : ""}
   ${know.length ? html`<div class="sec"><h2>Know</h2><span class="tiny muted">worth a line</span></div>
-     ${know.map((e, i) => html`${i === firstOld && firstOld > 0 ? html`<div class="newline">seen before</div>` : ""}${knowRow(e, ctx)}`)}` : ""}
+     <div class="ruled">${know.map((e, i) => html`${i === firstOld && firstOld > 0 ? html`<div class="newline">seen before</div>` : ""}${knowRow(e, ctx)}`)}</div>` : ""}
 
-  ${hid.length ? html`<button class="hiddenbar" data-act="toggleHidden"><b>${hidFilings} routine filings hidden</b> · ${Object.entries(hidByCat).sort((a, b) => b[1] - a[1]).map(([c, n]) => `${n} ${c.replace("_", " ")}`).join(", ")} ${state.showHidden ? "▴" : "▾"}</button>
-     ${state.showHidden ? hid.map((e) => knowRow(e, ctx)) : ""}` : ""}
+  ${hid.length ? html`<button class="hiddenbar" data-act="toggleHidden" aria-expanded="${state.showHidden ? "true" : "false"}"><b>Drawer · ${hidFilings} routine filing${hidFilings === 1 ? "" : "s"} ${state.showHidden ? "▴" : "▾"}</b>${Object.entries(hidByCat).sort((a, b) => b[1] - a[1]).map(([c, n]) => `${n} ${c.replace(/_/g, " ").replace("unclassified", "other")}`).join(", ")}</button>
+     ${state.showHidden ? html`<div class="drawer-open">${hid.map((e) => knowRow(e, ctx))}</div>` : ""}` : ""}
   <p class="tiny muted" style="margin-top:8px">Tiers are rules checked against how the stocks actually reacted. <button style="color:var(--link)" data-act="ranking">How FINN ranks ›</button></p>
 
   ${pulse(state)}`;
@@ -197,6 +194,15 @@ function credLine(cr) {
   return bits.length ? html`${bits.map((b, i) => html`${i ? " · " : ""}${b}`)}` : "No measurable promises in these calls.";
 }
 
+function promisesWaiting(d, state) {
+  const r = state.research[d.ticker] || {};
+  if (r.fullError) return html`<div class="note">${r.fullError}</div><button class="listen" data-act="retry" data-t="${d.ticker}">Try again</button>`;
+  const secs = r.started ? Math.round((Date.now() - r.started) / 1000) : 0;
+  return html`<div class="waiting"><b style="color:var(--head)">Reading ${d.calls?.length || 4} earnings calls…</b>
+    <div class="small ink2" style="margin-top:4px">Pulling out every promise, checking each quote word for word, then scoring it against the numbers below. Usually under a minute${secs ? ` · ${secs}s` : ""}.</div>
+    <div class="bar"><i></i></div></div>`;
+}
+
 export function dossier(d, state) {
   const cr = d.credibility, st = d.stats, syn = d.synthesis, nb = d.numbers;
   const threads = d.threads || [];
@@ -204,17 +210,17 @@ export function dossier(d, state) {
   return html`
   <div class="dossier-h">
     <div class="co">${d.name}<small>${d.ticker}${d.live ? " · built live" : ""}</small></div>
-    <div class="tiny muted">${d.calls.length ? `Calls: ${d.calls.join(", ")}` : ""} · built ${ago(d.generated_at)}</div>
+    <div class="tiny muted">${d.calls?.length ? `Calls: ${d.calls.join(", ")} · ` : ""}${d.partial ? "numbers ready" : `built ${ago(d.generated_at)}`}</div>
   </div>
   ${recentFor(d.ticker, state)}
 
-  <div class="sec"><h2>Promised vs delivered</h2><span class="tiny muted">last ${d.calls.length} calls</span></div>
-  ${d.no_transcripts ? html`<div class="note">No earnings-call transcripts found for ${d.ticker} in the last year. Without management's own words FINN won't guess what they promised. The numbers below are still real.</div>` : html`
+  <div class="sec"><h2>Promised vs delivered</h2><span class="tiny muted">last ${d.calls?.length || 4} calls</span></div>
+  ${d.partial ? promisesWaiting(d, state) : d.no_transcripts ? html`<div class="note">No earnings-call transcripts found for ${d.ticker} in the last year. Without management's own words FINN won't guess what they promised. The numbers below are still real.</div>` : html`
    <div class="cred">${credLine(cr)}</div>
    <span class="verified">✓ ${st.verified} quotes verified in source · ${st.dropped_quote + st.dropped_number} dropped</span>
    ${syn ? html`<p class="serif" style="font-size:17px;margin:12px 0 4px">${syn.headline}</p>
      <div class="pts">${syn.points.map((p) => html`<p>${p.text}${p.refs.map((r) => html`<a class="ref" href="#/research/${d.ticker}/${r}">${r}</a>`)}</p>`)}</div>` : ""}
-   ${threads.map((t) => threadRow(t, d.calls, state.openThread === t.id))}
+   <div class="ledgerbox">${threads.map((t) => threadRow(t, d.calls, state.openThread === t.id))}</div>
    <p class="tiny muted">Tap a promise for the exact quote. Actuals are computed from reported numbers in code. ≈ means guidance was in constant currency or USD and we checked against INR.</p>`}
 
   ${syn && (syn.bull?.length || syn.bear?.length) ? html`<div class="sec"><h2>Bull vs bear</h2></div>
@@ -241,7 +247,7 @@ export function dossier(d, state) {
    ${d.business.quote && d.business.quote_verified ? html`<div class="quote">“${d.business.quote}”</div>` : ""}` : ""}
 
   <div class="sec"><h2>Sources</h2><span class="tiny muted">primary only</span></div>
-  <ul class="small">${d.docs.transcripts.map((x) => html`<li><a href="${x.url}" target="_blank" rel="noopener">${x.call} earnings-call transcript</a></li>`)}
-   ${(d.docs.annual_reports || []).map((x) => html`<li><a href="${x.url}" target="_blank" rel="noopener">${x.label}</a></li>`)}
-   ${d.docs.screener ? html`<li><a href="${d.docs.screener}" target="_blank" rel="noopener">Reported financials (screener.in tables)</a></li>` : ""}</ul>`;
+  <ul class="small">${(d.docs?.transcripts || []).map((x) => html`<li><a href="${x.url}" target="_blank" rel="noopener">${x.call} earnings-call transcript</a></li>`)}
+   ${(d.docs?.annual_reports || []).map((x) => html`<li><a href="${x.url}" target="_blank" rel="noopener">${x.label}</a></li>`)}
+   ${d.docs?.screener ? html`<li><a href="${d.docs.screener}" target="_blank" rel="noopener">Reported financials (screener.in tables)</a></li>` : ""}</ul>`;
 }
