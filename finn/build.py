@@ -133,6 +133,33 @@ def _doc(fid):
     return p.read_text(encoding="utf-8") if p.exists() else ""
 
 
+def earlier_profile(ticker, name, before_ts, days=120):
+    """Find this person's profile in the company's earlier management-change filings."""
+    from datetime import datetime, timedelta
+    surname = extract.norm(name).split()[-1] if name else ""
+    if len(surname) < 3:
+        return None
+    lo = (datetime.fromisoformat(before_ts) - timedelta(days=days)).isoformat()
+    cands = [f for f in read_json(RAW / "filings" / f"{ticker}.json", {}).values()
+             if lo <= (f.get("ts") or "") < before_ts]
+    cands.sort(key=lambda f: f["ts"], reverse=True)
+    for f in cands:
+        text = _doc(f["id"])
+        if len(text) < 300 or surname not in extract.norm(text) or "profile" not in text.lower():
+            continue
+        try:
+            people = extract.mgmt_from_text(text, ticker=ticker)["people"]
+        except Exception as e:
+            print("earlier profile extract failed", ticker, e)
+            continue
+        for q in people:
+            if surname in extract.norm(q["name"]) and q.get("profile"):
+                when = (f.get("ts") or "")[:10]
+                return {"profile": q["profile"], "background": q.get("background") or [],
+                        "profile_source": {"date": when, "url": f.get("url")}}
+    return None
+
+
 def mgmt_card(ticker, event):
     people = []
     for f in event["filings"]:
@@ -151,6 +178,11 @@ def mgmt_card(ticker, event):
             uniq.append(p)
     if not uniq:
         return None
+    for p in uniq:  # profile "already provided in an earlier intimation"? go and get it
+        if p.get("change") in ("appointed", "redesignated") and not p.get("profile"):
+            found = earlier_profile(ticker, p["name"], event["ts"])
+            if found:
+                p.update(found)
     order = {"appointed": 0, "redesignated": 1}  # the incoming person leads the card
     uniq.sort(key=lambda p: order.get(p.get("change"), 2))
     return {"type": "mgmt", "people": uniq, "source": "the company's filing (Reg 30 'brief profile')"}

@@ -114,10 +114,15 @@ def stage_docs(args, nse=None):
     tickers = args.tickers or list(config.PORTFOLIO)
     cutoff = (now_ist() - timedelta(days=args.days)).isoformat()
     ai = read_json(config.CACHE / "verdicts.json", {})  # AI-judged filings count too
+    cutoff_mgmt = (now_ist() - timedelta(days=120)).isoformat()
     todo = []
     for t in tickers:
         for f in read_json(RAW / "filings" / f"{t}.json", {}).values():
-            if not f.get("url") or (f.get("ts") or "") < cutoff:
+            v0 = classify.rule_verdict(f) or ai.get(f["id"]) or {}
+            # management changes reach back 120 days: a start-date notice often says
+            # "profile already provided in our earlier intimation", so we need that one too
+            limit = cutoff_mgmt if v0.get("category") == "management_change" else cutoff
+            if not f.get("url") or (f.get("ts") or "") < limit:
                 continue
             if (RAW / "docs" / f"{safe(f['id'])}.txt").exists():
                 continue
