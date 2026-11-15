@@ -29,10 +29,10 @@ RULES = [
     ("rta", "unclassified", "hidden", "Registrar / share-transfer change", r"T:share transfer agent|registrar and transfer"),
 
     # --- results family
-    ("results_outcome", "results", "act", "Quarterly results filed",
-     r"(outcome of board meeting|financial result).*(financial results|results for the (quarter|period|year))|^financial result updates|audited financial results|unaudited financial results|results for the quarter"),
     ("results_intimation", "results", "know", "Results date announced",
      r"board meeting intimation|intimation of board meeting|prior intimation.*(results|financial)"),
+    ("results_outcome", "results", "act", "Quarterly results filed",
+     r"(outcome of board meeting|financial result).*(financial results|results for the (quarter|period|year))|^financial result updates|audited financial results|unaudited financial results|results for the quarter"),
     ("results_clarification", "results", "know", "Clarification on results", r"clarification.*financial results"),
     ("investor_presentation", "results", "know", "Investor presentation", r"investor presentation"),
 
@@ -45,6 +45,8 @@ RULES = [
      r"change in directors|key managerial|change in management|resignation|appointment of (an? )?(independent |additional |non-executive )?director|company secretary|compliance officer|senior management"),
 
     # --- corporate events
+    ("insider", "insider_trading", "know", "Promoter / insider dealing",
+     r"insider trading|\bsast\b|regulation 29|regulation 31|reg\.? 7\(2\)|disclosure under sebi takeover"),
     ("mna", "M&A", "act", "Acquisition / merger / JV",
      r"acquisition|amalgamation|merger|demerger|scheme of arrangement|joint venture|takeover|stake (sale|purchase)|divest|slump sale"),
     ("fund_raise_equity", "fund_raise", "act", "Equity raise or buyback",
@@ -57,15 +59,13 @@ RULES = [
     ("insolvency", "litigation", "act", "Insolvency / restructuring", r"insolvency|\bnclt\b|\bibc\b|winding up|corporate debtor"),
     ("litigation", "litigation", "know", "Legal / regulatory action",
      r"litigation|dispute|regulatory action|penalty|show cause|demand order|tax demand|\border\b.{0,40}(sebi|court|tribunal|authority)|fine|warning letter|import alert|\busfda\b|form 483|search and seizure"),
-    ("insider", "insider_trading", "know", "Promoter / insider dealing",
-     r"insider trading|\bsast\b|regulation 29|regulation 31|reg\.? 7\(2\)|disclosure under sebi takeover"),
     ("bonus_split", "bonus_split", "know", "Bonus issue / stock split", r"\bbonus\b|sub-?division|stock split|split of"),
     ("dividend", "dividend", "know", "Dividend / record date", r"dividend|record date|book closure"),
     ("capex", "capex", "know", "Capacity / capex",
      r"capex|capital expenditure|capacity expansion|new (plant|facility|factory|unit)|commission(ing|ed) of|greenfield|brownfield"),
     ("transcript", "earnings_call", "know", "Concall transcript out (feeds the promise ledger)", r"transcript"),
     ("concall", "earnings_call", "hidden", "Earnings-call notice / recording",
-     r"earnings call|conference call|con\. call|concall|audio recording|video recording|analysts?/institutional investor meet.*(call|recording)"),
+     r"T:earnings call|conference call|con\. call|concall|audio recording|video recording"),
     ("investor_meet", "investor_meetings", "hidden", "Investor meeting",
      r"analysts?/institutional investor meet|investor meet|investor conference|analyst meet|schedule of (analyst|investor)"),
     ("agm_egm", "agm_egm", "hidden", "AGM / EGM paperwork", r"\bagm\b|\begm\b|general meeting|shareholders meeting|scrutini[sz]er"),
