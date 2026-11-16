@@ -1,27 +1,27 @@
 {
- "generated_at": "2026-11-16T16:36:54+05:30",
+ "generated_at": "2026-11-17T02:48:51+05:30",
  "sample": false,
  "last_session": "2026-11-16",
  "rules_version": "2026-11-15.1",
  "status": {
   "prices": {
    "ok": true,
-   "at": "2026-11-16T16:34:19+05:30",
+   "at": "2026-11-17T02:46:03+05:30",
    "note": "20/20 symbols"
   },
   "filings": {
    "ok": true,
-   "at": "2026-11-16T16:34:42+05:30",
-   "note": "252 filings; sources {'nse': 19}"
+   "at": "2026-11-17T02:46:27+05:30",
+   "note": "251 filings; sources {'nse': 19}"
   },
   "docs": {
    "ok": true,
-   "at": "2026-11-16T16:34:44+05:30",
-   "note": "1/1 PDFs extracted (1 wanted)"
+   "at": "2026-11-17T02:46:30+05:30",
+   "note": "3/3 PDFs extracted (3 wanted)"
   },
   "screener": {
    "ok": true,
-   "at": "2026-11-16T16:36:05+05:30",
+   "at": "2026-11-17T02:47:49+05:30",
    "note": "23/23"
   },
   "symbols": {
@@ -31,7 +31,7 @@
   },
   "transcripts": {
    "ok": true,
-   "at": "2026-11-16T16:36:51+05:30",
+   "at": "2026-11-17T02:48:36+05:30",
    "note": "DIXON:4 ASIANPAINT:4 HCLTECH:4 PERSISTENT:4 HDFCBANK:4 ICICIBANK:4 BAJFINANCE:4 CDSL:4 TITAN:4 TRENT:0 ETERNAL:4 LT:4 RELIANCE:4 BHARTIARTL:4 SUNPHARMA:4 MARUTI:1 INDIGO:4 INFY:4 KPITTECH:4 POLYCAB:4 TATAPOWER:4 DMART:4"
   },
   "backfill": {
@@ -46,7 +46,7 @@
   },
   "users": {
    "ok": true,
-   "at": "2026-11-16T16:34:17+05:30",
+   "at": "2026-11-17T02:46:01+05:30",
    "note": "1 accounts; 1 added stocks: TCS"
   }
  },
@@ -241,9 +241,9 @@
   "DMART"
  ],
  "counts": {
-  "act": 30,
+  "act": 32,
   "know": 65,
-  "hidden": 103
+  "hidden": 105
  },
  "archive": {
   "from": "2025-11-17",

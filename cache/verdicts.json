@@ -460,5 +460,26 @@
   "why": "Analyst or investor meet notification",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106862564": {
+  "category": "investor_meetings",
+  "tier": "hidden",
+  "why": "Analyst or investor meeting intimation.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106862868": {
+  "category": "M&A",
+  "tier": "act",
+  "why": "Asset purchase agreement executed.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106862826": {
+  "category": "investor_meetings",
+  "tier": "hidden",
+  "why": "Institutional investors meeting participation update.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
