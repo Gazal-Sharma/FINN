@@ -453,5 +453,12 @@
   "why": "Monthly production volume data for Maruti Suzuki.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106861876": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Analyst or investor meet notification",
+  "rule": "ai",
+  "source": "ai"
  }
 }
