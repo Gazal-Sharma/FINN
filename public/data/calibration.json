@@ -1,12 +1,12 @@
 {
  "window": [
   "2024-11-07",
-  "2026-11-16"
+  "2026-11-17"
  ],
  "big": 2.0,
  "min_n": 12,
  "baseline": {
-  "n": 7132,
+  "n": 7141,
   "big_rate": 0.049,
   "median_z": 0.54
  },
@@ -14,19 +14,19 @@
   "ai:press_release": {
    "label": "AI-judged press_release",
    "tier": "ai",
-   "n": 7,
+   "n": 8,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.56,
+   "median_z": 0.59,
    "median_volx": 0.84,
    "decision": "keep",
-   "why": "only 7 past examples; kept by judgment"
+   "why": "only 8 past examples; kept by judgment"
   },
   "investor_meet": {
    "label": "Investor meeting",
    "tier": "hidden",
-   "n": 361,
-   "big_rate": 0.064,
+   "n": 363,
+   "big_rate": 0.063,
    "lift": 1.29,
    "median_z": 0.55,
    "median_volx": 0.79,
@@ -38,7 +38,7 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.26,
+   "lift": 20.29,
    "median_z": 2.0,
    "median_volx": 0.77,
    "decision": "keep",
@@ -113,9 +113,9 @@
   "esop": {
    "label": "ESOP / RSU allotment",
    "tier": "hidden",
-   "n": 165,
-   "big_rate": 0.085,
-   "lift": 1.72,
+   "n": 166,
+   "big_rate": 0.084,
+   "lift": 1.71,
    "median_z": 0.63,
    "median_volx": 0.95,
    "decision": "keep",
@@ -137,7 +137,7 @@
    "tier": "hidden",
    "n": 96,
    "big_rate": 0.042,
-   "lift": 0.84,
+   "lift": 0.85,
    "median_z": 0.59,
    "median_volx": 0.93,
    "decision": "keep",
@@ -181,7 +181,7 @@
    "tier": "know",
    "n": 30,
    "big_rate": 0.3,
-   "lift": 6.08,
+   "lift": 6.09,
    "median_z": 1.19,
    "median_volx": 1.99,
    "decision": "keep",
@@ -190,20 +190,20 @@
   "fund_raise_equity": {
    "label": "Equity raise or buyback",
    "tier": "act",
-   "n": 5,
-   "big_rate": 0.4,
-   "lift": 8.1,
-   "median_z": 0.98,
-   "median_volx": 1.2,
+   "n": 6,
+   "big_rate": 0.333,
+   "lift": 6.76,
+   "median_z": 0.71,
+   "median_volx": 1.08,
    "decision": "keep",
-   "why": "only 5 past examples; kept by judgment"
+   "why": "only 6 past examples; kept by judgment"
   },
   "litigation": {
    "label": "Legal / regulatory action",
    "tier": "know",
    "n": 17,
    "big_rate": 0.118,
-   "lift": 2.38,
+   "lift": 2.39,
    "median_z": 0.79,
    "median_volx": 1.01,
    "decision": "keep",
@@ -234,13 +234,13 @@
   "ai:fund_raise": {
    "label": "AI-judged fund_raise",
    "tier": "ai",
-   "n": 6,
+   "n": 7,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.49,
-   "median_volx": 0.81,
+   "median_z": 0.41,
+   "median_volx": 0.66,
    "decision": "keep",
-   "why": "only 6 past examples; kept by judgment"
+   "why": "only 7 past examples; kept by judgment"
   },
   "fund_raise_debt": {
    "label": "Debt raise",
@@ -267,11 +267,11 @@
   "rating_other": {
    "label": "Credit rating reaffirmed / assigned",
    "tier": "hidden",
-   "n": 55,
-   "big_rate": 0.055,
-   "lift": 1.11,
-   "median_z": 0.77,
-   "median_volx": 0.92,
+   "n": 56,
+   "big_rate": 0.054,
+   "lift": 1.09,
+   "median_z": 0.74,
+   "median_volx": 0.91,
    "decision": "keep",
    "why": ""
   },
@@ -280,7 +280,7 @@
    "tier": "know",
    "n": 16,
    "big_rate": 0.125,
-   "lift": 2.53,
+   "lift": 2.54,
    "median_z": 0.86,
    "median_volx": 1.44,
    "decision": "keep",
@@ -324,7 +324,7 @@
    "tier": "act",
    "n": 8,
    "big_rate": 0.125,
-   "lift": 2.53,
+   "lift": 2.54,
    "median_z": 0.81,
    "median_volx": 1.07,
    "decision": "keep",
@@ -344,20 +344,20 @@
   "ai:investor_meetings": {
    "label": "AI-judged investor_meetings",
    "tier": "ai",
-   "n": 8,
+   "n": 10,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.24,
-   "median_volx": 0.61,
+   "median_z": 0.54,
+   "median_volx": 0.62,
    "decision": "keep",
-   "why": "only 8 past examples; kept by judgment"
+   "why": "only 10 past examples; kept by judgment"
   },
   "ai:litigation": {
    "label": "AI-judged litigation",
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.26,
+   "lift": 20.29,
    "median_z": 2.51,
    "median_volx": 0.72,
    "decision": "keep",
@@ -377,13 +377,13 @@
   "concall": {
    "label": "Earnings-call notice / recording",
    "tier": "hidden",
-   "n": 9,
+   "n": 10,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.75,
-   "median_volx": 0.77,
+   "median_z": 0.74,
+   "median_volx": 0.83,
    "decision": "keep",
-   "why": "only 9 past examples; kept by judgment"
+   "why": "only 10 past examples; kept by judgment"
   },
   "auditor_subj": {
    "label": "Auditor change",
@@ -432,13 +432,13 @@
   "ai:M&A": {
    "label": "AI-judged M&A",
    "tier": "ai",
-   "n": 1,
+   "n": 2,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.08,
-   "median_volx": 0.98,
+   "median_z": 0.3,
+   "median_volx": 0.97,
    "decision": "keep",
-   "why": "only 1 past examples; kept by judgment"
+   "why": "only 2 past examples; kept by judgment"
   },
   "insolvency": {
    "label": "Insolvency / restructuring",
@@ -454,10 +454,10 @@
   "orders_passed": {
    "label": "Regulatory / tax order",
    "tier": "know",
-   "n": 88,
-   "big_rate": 0.091,
-   "lift": 1.84,
-   "median_z": 0.63,
+   "n": 89,
+   "big_rate": 0.09,
+   "lift": 1.82,
+   "median_z": 0.64,
    "median_volx": 0.83,
    "decision": "keep",
    "why": ""

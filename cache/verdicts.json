@@ -481,5 +481,26 @@
   "why": "Institutional investors meeting participation update.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106863621": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine press release about Gartner ranking.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106863775": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine partnership press release.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106863135": {
+  "category": "fund_raise",
+  "tier": "act",
+  "why": "QIP allotment of 11.4 crore shares.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
