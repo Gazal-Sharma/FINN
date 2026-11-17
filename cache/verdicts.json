@@ -502,5 +502,12 @@
   "why": "QIP allotment of 11.4 crore shares.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106864030": {
+  "category": "investor_meetings",
+  "tier": "hidden",
+  "why": "Routine investor meeting disclosure.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
