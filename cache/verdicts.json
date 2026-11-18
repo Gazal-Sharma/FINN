@@ -509,5 +509,12 @@
   "why": "Routine investor meeting disclosure.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106865419": {
+  "category": "M&A",
+  "tier": "act",
+  "why": "Subsidiary entering joint venture agreement with NTT DOCOMO.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
