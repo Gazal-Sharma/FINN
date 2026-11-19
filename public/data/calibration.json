@@ -1,13 +1,13 @@
 {
  "window": [
   "2024-11-07",
-  "2026-11-18"
+  "2026-11-19"
  ],
  "big": 2.0,
  "min_n": 12,
  "baseline": {
-  "n": 7154,
-  "big_rate": 0.049,
+  "n": 7169,
+  "big_rate": 0.05,
   "median_z": 0.54
  },
  "rules": {
@@ -25,11 +25,11 @@
   "investor_meet": {
    "label": "Investor meeting",
    "tier": "hidden",
-   "n": 364,
+   "n": 365,
    "big_rate": 0.063,
-   "lift": 1.28,
+   "lift": 1.27,
    "median_z": 0.55,
-   "median_volx": 0.79,
+   "median_volx": 0.8,
    "decision": "keep",
    "why": ""
   },
@@ -38,22 +38,11 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.21,
+   "lift": 20.19,
    "median_z": 2.0,
    "median_volx": 0.77,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
-  },
-  "newspaper": {
-   "label": "Newspaper ad copy",
-   "tier": "hidden",
-   "n": 151,
-   "big_rate": 0.046,
-   "lift": 0.94,
-   "median_z": 0.6,
-   "median_volx": 0.81,
-   "decision": "keep",
-   "why": ""
   },
   "transcript": {
    "label": "Concall transcript out (feeds the promise ledger)",
@@ -63,6 +52,17 @@
    "lift": 1.28,
    "median_z": 0.66,
    "median_volx": 0.78,
+   "decision": "keep",
+   "why": ""
+  },
+  "newspaper": {
+   "label": "Newspaper ad copy",
+   "tier": "hidden",
+   "n": 152,
+   "big_rate": 0.046,
+   "lift": 0.93,
+   "median_z": 0.59,
+   "median_volx": 0.81,
    "decision": "keep",
    "why": ""
   },
@@ -192,11 +192,33 @@
    "tier": "act",
    "n": 6,
    "big_rate": 0.333,
-   "lift": 6.74,
+   "lift": 6.73,
    "median_z": 0.71,
    "median_volx": 1.08,
    "decision": "keep",
    "why": "only 6 past examples; kept by judgment"
+  },
+  "ai:M&A": {
+   "label": "AI-judged M&A",
+   "tier": "ai",
+   "n": 3,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.51,
+   "median_volx": 0.97,
+   "decision": "keep",
+   "why": "only 3 past examples; kept by judgment"
+  },
+  "rta": {
+   "label": "Registrar / share-transfer change",
+   "tier": "hidden",
+   "n": 2,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.82,
+   "median_volx": 1.34,
+   "decision": "keep",
+   "why": "only 2 past examples; kept by judgment"
   },
   "litigation": {
    "label": "Legal / regulatory action",
@@ -280,7 +302,7 @@
    "tier": "know",
    "n": 16,
    "big_rate": 0.125,
-   "lift": 2.53,
+   "lift": 2.52,
    "median_z": 0.86,
    "median_volx": 1.44,
    "decision": "keep",
@@ -324,7 +346,7 @@
    "tier": "act",
    "n": 8,
    "big_rate": 0.125,
-   "lift": 2.53,
+   "lift": 2.52,
    "median_z": 0.81,
    "median_volx": 1.07,
    "decision": "keep",
@@ -357,7 +379,7 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.21,
+   "lift": 20.19,
    "median_z": 2.51,
    "median_volx": 0.72,
    "decision": "keep",
@@ -417,28 +439,6 @@
    "median_volx": 3.64,
    "decision": "keep",
    "why": "only 4 past examples; kept by judgment"
-  },
-  "rta": {
-   "label": "Registrar / share-transfer change",
-   "tier": "hidden",
-   "n": 1,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 0.29,
-   "median_volx": 1.82,
-   "decision": "keep",
-   "why": "only 1 past examples; kept by judgment"
-  },
-  "ai:M&A": {
-   "label": "AI-judged M&A",
-   "tier": "ai",
-   "n": 2,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 0.3,
-   "median_volx": 0.97,
-   "decision": "keep",
-   "why": "only 2 past examples; kept by judgment"
   },
   "insolvency": {
    "label": "Insolvency / restructuring",
