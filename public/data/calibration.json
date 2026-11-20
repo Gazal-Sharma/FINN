@@ -1,12 +1,12 @@
 {
  "window": [
   "2024-11-07",
-  "2026-11-19"
+  "2026-11-20"
  ],
  "big": 2.0,
  "min_n": 12,
  "baseline": {
-  "n": 7169,
+  "n": 7183,
   "big_rate": 0.05,
   "median_z": 0.54
  },
@@ -25,9 +25,9 @@
   "investor_meet": {
    "label": "Investor meeting",
    "tier": "hidden",
-   "n": 365,
+   "n": 367,
    "big_rate": 0.063,
-   "lift": 1.27,
+   "lift": 1.26,
    "median_z": 0.55,
    "median_volx": 0.8,
    "decision": "keep",
@@ -38,7 +38,7 @@
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.19,
+   "lift": 20.18,
    "median_z": 2.0,
    "median_volx": 0.77,
    "decision": "keep",
@@ -71,20 +71,9 @@
    "tier": "act",
    "n": 88,
    "big_rate": 0.273,
-   "lift": 5.51,
+   "lift": 5.5,
    "median_z": 1.3,
    "median_volx": 2.04,
-   "decision": "keep",
-   "why": ""
-  },
-  "press_release": {
-   "label": "Press release",
-   "tier": "know",
-   "n": 210,
-   "big_rate": 0.086,
-   "lift": 1.73,
-   "median_z": 0.62,
-   "median_volx": 0.87,
    "decision": "keep",
    "why": ""
   },
@@ -98,6 +87,17 @@
    "median_volx": 1.48,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
+  },
+  "press_release": {
+   "label": "Press release",
+   "tier": "know",
+   "n": 210,
+   "big_rate": 0.086,
+   "lift": 1.73,
+   "median_z": 0.62,
+   "median_volx": 0.87,
+   "decision": "keep",
+   "why": ""
   },
   "certificates": {
    "label": "Compliance certificate",
@@ -113,9 +113,9 @@
   "esop": {
    "label": "ESOP / RSU allotment",
    "tier": "hidden",
-   "n": 168,
+   "n": 169,
    "big_rate": 0.083,
-   "lift": 1.68,
+   "lift": 1.67,
    "median_z": 0.63,
    "median_volx": 0.95,
    "decision": "keep",
@@ -126,7 +126,7 @@
    "tier": "know",
    "n": 53,
    "big_rate": 0.094,
-   "lift": 1.91,
+   "lift": 1.9,
    "median_z": 0.65,
    "median_volx": 0.79,
    "decision": "keep",
@@ -181,7 +181,7 @@
    "tier": "know",
    "n": 30,
    "big_rate": 0.3,
-   "lift": 6.06,
+   "lift": 6.05,
    "median_z": 1.19,
    "median_volx": 1.99,
    "decision": "keep",
@@ -198,17 +198,6 @@
    "decision": "keep",
    "why": "only 6 past examples; kept by judgment"
   },
-  "ai:M&A": {
-   "label": "AI-judged M&A",
-   "tier": "ai",
-   "n": 3,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 0.51,
-   "median_volx": 0.97,
-   "decision": "keep",
-   "why": "only 3 past examples; kept by judgment"
-  },
   "rta": {
    "label": "Registrar / share-transfer change",
    "tier": "hidden",
@@ -220,12 +209,23 @@
    "decision": "keep",
    "why": "only 2 past examples; kept by judgment"
   },
+  "ai:M&A": {
+   "label": "AI-judged M&A",
+   "tier": "ai",
+   "n": 3,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.51,
+   "median_volx": 0.97,
+   "decision": "keep",
+   "why": "only 3 past examples; kept by judgment"
+  },
   "litigation": {
    "label": "Legal / regulatory action",
    "tier": "know",
    "n": 17,
    "big_rate": 0.118,
-   "lift": 2.38,
+   "lift": 2.37,
    "median_z": 0.79,
    "median_volx": 1.01,
    "decision": "keep",
@@ -247,7 +247,7 @@
    "tier": "know",
    "n": 45,
    "big_rate": 0.089,
-   "lift": 1.8,
+   "lift": 1.79,
    "median_z": 0.57,
    "median_volx": 0.96,
    "decision": "keep",
@@ -289,11 +289,11 @@
   "rating_other": {
    "label": "Credit rating reaffirmed / assigned",
    "tier": "hidden",
-   "n": 56,
-   "big_rate": 0.054,
-   "lift": 1.08,
-   "median_z": 0.74,
-   "median_volx": 0.91,
+   "n": 57,
+   "big_rate": 0.053,
+   "lift": 1.06,
+   "median_z": 0.72,
+   "median_volx": 0.92,
    "decision": "keep",
    "why": ""
   },
@@ -357,7 +357,7 @@
    "tier": "act",
    "n": 4,
    "big_rate": 0.25,
-   "lift": 5.05,
+   "lift": 5.04,
    "median_z": 0.68,
    "median_volx": 1.24,
    "decision": "keep",
@@ -366,20 +366,20 @@
   "ai:investor_meetings": {
    "label": "AI-judged investor_meetings",
    "tier": "ai",
-   "n": 11,
+   "n": 12,
    "big_rate": 0.0,
    "lift": 0.0,
-   "median_z": 0.3,
+   "median_z": 0.45,
    "median_volx": 0.63,
-   "decision": "keep",
-   "why": "only 11 past examples; kept by judgment"
+   "decision": "demote",
+   "why": "moved the stock ≥2× usual 0% of the time vs 5% on an ordinary day"
   },
   "ai:litigation": {
    "label": "AI-judged litigation",
    "tier": "ai",
    "n": 1,
    "big_rate": 1.0,
-   "lift": 20.19,
+   "lift": 20.18,
    "median_z": 2.51,
    "median_volx": 0.72,
    "decision": "keep",
@@ -456,7 +456,7 @@
    "tier": "know",
    "n": 89,
    "big_rate": 0.09,
-   "lift": 1.82,
+   "lift": 1.81,
    "median_z": 0.64,
    "median_volx": 0.83,
    "decision": "keep",
