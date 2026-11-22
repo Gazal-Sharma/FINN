@@ -523,5 +523,19 @@
   "why": "Routine investor meeting disclosure.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106868327": {
+  "category": "M&A",
+  "tier": "act",
+  "why": "Asset purchase agreement update.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106868345": {
+  "category": "press_release",
+  "tier": "act",
+  "why": "Price increase on select models.",
+  "rule": "ai",
+  "source": "ai"
  }
 }

@@ -44,17 +44,6 @@
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
   },
-  "newspaper": {
-   "label": "Newspaper ad copy",
-   "tier": "hidden",
-   "n": 152,
-   "big_rate": 0.046,
-   "lift": 0.93,
-   "median_z": 0.59,
-   "median_volx": 0.81,
-   "decision": "keep",
-   "why": ""
-  },
   "transcript": {
    "label": "Concall transcript out (feeds the promise ledger)",
    "tier": "know",
@@ -63,6 +52,17 @@
    "lift": 1.28,
    "median_z": 0.66,
    "median_volx": 0.78,
+   "decision": "keep",
+   "why": ""
+  },
+  "newspaper": {
+   "label": "Newspaper ad copy",
+   "tier": "hidden",
+   "n": 152,
+   "big_rate": 0.046,
+   "lift": 0.93,
+   "median_z": 0.59,
+   "median_volx": 0.81,
    "decision": "keep",
    "why": ""
   },
@@ -77,17 +77,6 @@
    "decision": "keep",
    "why": ""
   },
-  "press_release": {
-   "label": "Press release",
-   "tier": "know",
-   "n": 210,
-   "big_rate": 0.086,
-   "lift": 1.73,
-   "median_z": 0.62,
-   "median_volx": 0.87,
-   "decision": "keep",
-   "why": ""
-  },
   "ai:earnings_call": {
    "label": "AI-judged earnings_call",
    "tier": "ai",
@@ -98,6 +87,17 @@
    "median_volx": 1.48,
    "decision": "keep",
    "why": "only 1 past examples; kept by judgment"
+  },
+  "press_release": {
+   "label": "Press release",
+   "tier": "know",
+   "n": 210,
+   "big_rate": 0.086,
+   "lift": 1.73,
+   "median_z": 0.62,
+   "median_volx": 0.87,
+   "decision": "keep",
+   "why": ""
   },
   "certificates": {
    "label": "Compliance certificate",
