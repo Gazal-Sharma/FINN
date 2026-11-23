@@ -537,5 +537,12 @@
   "why": "Price increase on select models.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106868408": {
+  "category": "press_release",
+  "tier": "hidden",
+  "why": "Routine company statement update.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
