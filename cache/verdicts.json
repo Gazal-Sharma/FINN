@@ -544,5 +544,19 @@
   "why": "Routine company statement update.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106869480": {
+  "category": "investor_meetings",
+  "tier": "know",
+  "why": "Analyst or investor meeting scheduled.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106869612": {
+  "category": "management_change",
+  "tier": "know",
+  "why": "New director appointment disclosed.",
+  "rule": "ai",
+  "source": "ai"
  }
 }

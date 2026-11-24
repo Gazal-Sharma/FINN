@@ -198,17 +198,6 @@
    "decision": "keep",
    "why": "only 6 past examples; kept by judgment"
   },
-  "ai:M&A": {
-   "label": "AI-judged M&A",
-   "tier": "ai",
-   "n": 4,
-   "big_rate": 0.0,
-   "lift": 0.0,
-   "median_z": 0.93,
-   "median_volx": 0.97,
-   "decision": "keep",
-   "why": "only 4 past examples; kept by judgment"
-  },
   "rta": {
    "label": "Registrar / share-transfer change",
    "tier": "hidden",
@@ -219,6 +208,17 @@
    "median_volx": 1.34,
    "decision": "keep",
    "why": "only 2 past examples; kept by judgment"
+  },
+  "ai:M&A": {
+   "label": "AI-judged M&A",
+   "tier": "ai",
+   "n": 4,
+   "big_rate": 0.0,
+   "lift": 0.0,
+   "median_z": 0.93,
+   "median_volx": 0.97,
+   "decision": "keep",
+   "why": "only 4 past examples; kept by judgment"
   },
   "litigation": {
    "label": "Legal / regulatory action",
