@@ -558,5 +558,19 @@
   "why": "New director appointment disclosed.",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106870398": {
+  "category": "press_release",
+  "tier": "know",
+  "why": "Achieved CMMI AI Maturity Level 5",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106870358": {
+  "category": "investor_meetings",
+  "tier": "hidden",
+  "why": "Routine schedule of investor meet disclosure",
+  "rule": "ai",
+  "source": "ai"
  }
 }
