@@ -1,22 +1,22 @@
 {
  "prices": {
   "ok": true,
-  "at": "2026-11-26T17:50:33+05:30",
+  "at": "2026-11-27T02:04:12+05:30",
   "note": "20/20 symbols"
  },
  "filings": {
   "ok": true,
-  "at": "2026-11-26T17:50:56+05:30",
-  "note": "237 filings; sources {'nse': 19}"
+  "at": "2026-11-27T02:04:38+05:30",
+  "note": "219 filings; sources {'nse': 19}"
  },
  "docs": {
   "ok": true,
-  "at": "2026-11-26T17:50:57+05:30",
-  "note": "0/0 PDFs extracted (0 wanted)"
+  "at": "2026-11-27T02:04:40+05:30",
+  "note": "1/1 PDFs extracted (1 wanted)"
  },
  "screener": {
   "ok": true,
-  "at": "2026-11-26T17:52:19+05:30",
+  "at": "2026-11-27T02:06:02+05:30",
   "note": "23/23"
  },
  "symbols": {
@@ -26,7 +26,7 @@
  },
  "transcripts": {
   "ok": true,
-  "at": "2026-11-26T17:53:11+05:30",
+  "at": "2026-11-27T02:06:52+05:30",
   "note": "DIXON:4 ASIANPAINT:4 HCLTECH:4 PERSISTENT:4 HDFCBANK:4 ICICIBANK:4 BAJFINANCE:4 CDSL:4 TITAN:4 TRENT:0 ETERNAL:4 LT:4 RELIANCE:4 BHARTIARTL:4 SUNPHARMA:4 MARUTI:1 INDIGO:4 INFY:4 KPITTECH:4 POLYCAB:4 TATAPOWER:4 DMART:4"
  },
  "backfill": {
@@ -41,7 +41,7 @@
  },
  "users": {
   "ok": true,
-  "at": "2026-11-26T17:50:30+05:30",
+  "at": "2026-11-27T02:04:10+05:30",
   "note": "1 accounts; 1 added stocks: TCS"
  }
 }
