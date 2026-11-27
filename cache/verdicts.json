@@ -572,5 +572,19 @@
   "why": "Routine schedule of investor meet disclosure",
   "rule": "ai",
   "source": "ai"
+ },
+ "nse:106872720": {
+  "category": "unclassified",
+  "tier": "hidden",
+  "why": "General update on secondary market purchase.",
+  "rule": "ai",
+  "source": "ai"
+ },
+ "nse:106872569": {
+  "category": "litigation",
+  "tier": "know",
+  "why": "GST order in appeal received.",
+  "rule": "ai",
+  "source": "ai"
  }
 }
