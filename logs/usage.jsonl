@@ -777,3 +777,14 @@
 {"at": "2026-11-28T01:53:41.639699+05:30", "ticker": "TRENT", "task": "extract", "model": "gemini-3.5-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
 {"at": "2026-11-28T01:53:41.639817+05:30", "ticker": "TRENT", "task": "extract", "model": "gemini-3.5-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
 {"at": "2026-11-28T01:53:41.639920+05:30", "ticker": "TRENT", "task": "extract", "model": "gemini-3.5-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.218796+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.8-flash", "family": "flash", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.223637+05:30", "ticker": "DIXON", "task": "extract", "model": "gemini-3.6-flash", "family": "flash", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.231907+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.232002+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.238162+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.242771+05:30", "ticker": "TITAN", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.246998+05:30", "ticker": "SUNPHARMA", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.251291+05:30", "ticker": "SUNPHARMA", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.260089+05:30", "ticker": "HDFCBANK", "task": "extract", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.260487+05:30", "ticker": "LT", "task": "summarize", "model": "gemini-3.1-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
+{"at": "2026-11-28T17:11:30.264899+05:30", "ticker": "DIXON", "task": "extract", "model": "gemini-3.5-flash-lite", "family": "flash-lite", "in": 0, "out": 0, "cache_hit": true, "list_usd": 0}
